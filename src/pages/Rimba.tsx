@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home, Leaf, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
 import CheckoutModal from '../components/CheckoutModal';
+import { ParallaxElements } from '../components/ParallaxElements';
 
 export const Rimba = () => {
   const navigate = useNavigate();
@@ -14,18 +15,9 @@ export const Rimba = () => {
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rimba');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const handleAddToCart = (item: MenuItem) => {
@@ -93,36 +85,9 @@ export const Rimba = () => {
     specialRequest: ''
   });
 
-  const floatingIcons = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    Icon: i % 3 === 0 ? Leaf : Sparkles,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    delay: Math.random() * 5,
-    duration: 15 + Math.random() * 10,
-  }));
-
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {floatingIcons.map(({ id, Icon, x, y, delay, duration }) => (
-        <motion.div
-          key={id}
-          className="fixed pointer-events-none z-0"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-            x: `calc(${x}vw + ${(mousePosition.x - window.innerWidth / 2) * -0.02}px)`,
-            y: `calc(${y}vh + ${(mousePosition.y - window.innerHeight / 2) * -0.02}px)`,
-          }}
-          transition={{
-            opacity: { duration, repeat: Infinity, delay },
-            x: { type: 'spring', stiffness: 50 },
-            y: { type: 'spring', stiffness: 50 },
-          }}
-        >
-          <Icon size={24} className="text-[#D4AF37]" />
-        </motion.div>
-      ))}
+      <ParallaxElements />
 
       <motion.nav
         initial={{ y: -100 }}
