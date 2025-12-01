@@ -259,28 +259,35 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-teal-900/45" />
+        <div className="absolute inset-0 bg-teal-900/60" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-4 drop-shadow-xl">Gallery</h2>
-            <p className="text-xl text-white drop-shadow-lg">Glimpses of our culinary artistry</p>
+            <p className="text-xl text-white drop-shadow-lg">Glimpses of our royal heritage and culinary artistry</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { src: '/images/veda/veda-hero.png', label: 'Royal Ambiance' },
-              { src: '/images/veda/butter-chicken.png', label: 'Butter Chicken' },
-              { src: '/images/veda/lamb-biryani.png', label: 'Lamb Biryani' }
+              { src: '/images/veda/veda-hero.png', label: 'Royal Dining Hall' },
+              { src: '/images/veda/veda-gallery-arch.png', label: 'Mughal Archway' },
+              { src: '/images/veda/veda-gallery-brass.png', label: 'Brass Artifacts' },
+              { src: '/images/veda/butter-chicken.png', label: 'Signature Butter Chicken' },
+              { src: '/images/veda/lamb-biryani.png', label: 'Royal Lamb Biryani' }
             ].map((item, i) => (
               <div
                 key={i}
-                className="aspect-square bg-purple-900/40 rounded-2xl overflow-hidden border-2 border-amber-500/40 hover:border-amber-400 transition-all shadow-2xl hover:shadow-amber-500/30 hover:-translate-y-2 group"
+                className={`bg-purple-900/40 rounded-2xl overflow-hidden border-2 border-amber-500/40 hover:border-amber-400 transition-all shadow-2xl hover:shadow-amber-500/30 hover:-translate-y-2 group ${
+                  i < 3 ? 'aspect-square' : 'aspect-[4/3]'
+                }`}
               >
                 <img
                   src={item.src}
                   alt={item.label}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <h3 className="text-xl font-bold text-yellow-400 drop-shadow-lg">{item.label}</h3>
+                </div>
               </div>
             ))}
           </div>
