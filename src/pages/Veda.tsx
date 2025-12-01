@@ -216,7 +216,7 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-purple-900/45 to-purple-900/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-purple-900/40 to-purple-900/60" />
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <h1 className="text-6xl md:text-8xl font-bold text-yellow-400 mb-4 drop-shadow-2xl">
@@ -253,7 +253,7 @@ export const Veda = () => {
           backgroundAttachment: 'fixed'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/65 via-purple-900/60 to-purple-900/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/55 via-purple-900/50 to-purple-900/55" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
