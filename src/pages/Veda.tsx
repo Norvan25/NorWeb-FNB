@@ -169,10 +169,7 @@ export const Veda = () => {
   const total = subtotal + sst + deliveryFee;
 
   const bodyBackgroundStyle = {
-    backgroundImage: 'linear-gradient(rgba(91, 33, 182, 0.75), rgba(76, 29, 149, 0.85)), url(/images/veda/veda-pattern.png)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed'
+    background: 'linear-gradient(180deg, #5b21b6 0%, #4c1d95 50%, #3b0764 100%)'
   };
 
   return (
@@ -246,11 +243,22 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-purple-800">
-        <div className="max-w-7xl mx-auto">
+      <section
+        className="relative py-16 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/veda/veda-pattern_1.png')",
+          backgroundSize: '500px',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/85 via-purple-900/80 to-purple-900/85" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4">Royal Menu</h2>
-            <p className="text-lg text-white">
+            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Royal Menu</h2>
+            <p className="text-lg text-white drop-shadow-md">
               Crafted with centuries-old recipes and the finest spices
             </p>
           </div>
