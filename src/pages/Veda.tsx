@@ -1,10 +1,133 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, Home } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
 import CheckoutModal from '../components/CheckoutModal';
+import { FloatingMandala } from '../components/Veda/FloatingMandala';
+
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  spiceLevel?: number;
+  image: string;
+}
+
+const vedaMenu: MenuItem[] = [
+  {
+    id: 'veda-1',
+    name: 'Royal Butter Chicken',
+    description: 'Tender chicken in a rich, creamy tomato-based sauce with aromatic spices',
+    price: 35.00,
+    category: 'Mains',
+    spiceLevel: 2,
+    image: '/images/veda/butter-chicken.png'
+  },
+  {
+    id: 'veda-2',
+    name: 'Mutton Biryani',
+    description: 'Fragrant basmati rice layered with saffron, spiced mutton, and caramelized onions',
+    price: 48.00,
+    category: 'Mains',
+    spiceLevel: 3,
+    image: '/images/veda/lamb-biryani.png'
+  },
+  {
+    id: 'veda-3',
+    name: 'Tandoori Prawns',
+    description: 'Succulent prawns marinated in yogurt and spices, cooked in a clay tandoor',
+    price: 55.00,
+    category: 'Tandoor',
+    spiceLevel: 3,
+    image: 'https://images.pexels.com/photos/1510682/pexels-photo-1510682.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-4',
+    name: 'Aloo Tikki Chaat',
+    description: 'Crispy potato patties topped with yogurt, chutneys, and aromatic spices',
+    price: 22.00,
+    category: 'Appetizers',
+    spiceLevel: 2,
+    image: 'https://images.pexels.com/photos/6135418/pexels-photo-6135418.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-5',
+    name: 'Gulab Jamun',
+    description: 'Soft milk dumplings soaked in cardamom-rose syrup, served warm',
+    price: 18.00,
+    category: 'Desserts',
+    spiceLevel: 0,
+    image: 'https://images.pexels.com/photos/14737/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-6',
+    name: 'Palak Paneer',
+    description: 'Cottage cheese cubes in a creamy spinach curry with garlic and ginger',
+    price: 32.00,
+    category: 'Vegetarian',
+    spiceLevel: 2,
+    image: 'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-7',
+    name: 'Garlic Naan',
+    description: 'Fresh-baked flatbread infused with roasted garlic and brushed with ghee',
+    price: 10.00,
+    category: 'Breads',
+    spiceLevel: 0,
+    image: 'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-8',
+    name: 'Lassi (Mango or Rose)',
+    description: 'Creamy yogurt drink blended with fresh mango pulp or rose essence',
+    price: 15.00,
+    category: 'Beverages',
+    spiceLevel: 0,
+    image: 'https://images.pexels.com/photos/6802983/pexels-photo-6802983.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-9',
+    name: 'Lamb Rogan Josh',
+    description: 'Slow-cooked lamb in a fragrant curry with cardamom, cloves, and Kashmiri chilies',
+    price: 45.00,
+    category: 'Mains',
+    spiceLevel: 3,
+    image: '/images/veda/lamb-biryani.png'
+  },
+  {
+    id: 'veda-10',
+    name: 'Samosa Platter',
+    description: 'Crispy pastries filled with spiced potatoes, peas, and aromatic herbs',
+    price: 20.00,
+    category: 'Appetizers',
+    spiceLevel: 2,
+    image: 'https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-11',
+    name: 'Malai Kofta',
+    description: 'Cottage cheese and potato dumplings in a rich cashew and cream gravy',
+    price: 36.00,
+    category: 'Vegetarian',
+    spiceLevel: 1,
+    image: 'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id: 'veda-12',
+    name: 'Masala Chai',
+    description: 'Traditional spiced tea brewed with cardamom, ginger, cinnamon, and milk',
+    price: 12.00,
+    category: 'Beverages',
+    spiceLevel: 0,
+    image: 'https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800'
+  }
+];
+
+const categories = ['All', 'Mains', 'Tandoor', 'Vegetarian', 'Breads', 'Appetizers', 'Desserts', 'Beverages'];
 
 export const Veda = () => {
   const navigate = useNavigate();
@@ -46,12 +169,28 @@ export const Veda = () => {
   const deliveryFee = subtotal > 150 ? 0 : 8;
   const total = subtotal + sst + deliveryFee;
 
+  const heroBackgroundStyle = {
+    backgroundImage: 'linear-gradient(rgba(59, 7, 100, 0.7), rgba(24, 7, 40, 0.85)), url(/images/veda/veda-hero.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
+  };
+
+  const menuBackgroundStyle = {
+    backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(/images/veda/veda-pattern.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
+  };
+
   return (
-    <div className="min-h-screen bg-purple-900 text-white">
+    <div className="min-h-screen bg-purple-950 text-white relative">
+      <FloatingMandala />
+
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-40 bg-purple-800/90 backdrop-blur-xl border-b border-amber-500/20 shadow-2xl"
+        className="fixed top-0 left-0 right-0 z-40 bg-purple-900/80 backdrop-blur-xl border-b border-amber-500/20 shadow-2xl"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -59,9 +198,9 @@ export const Veda = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors"
+              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors group"
             >
-              <Home size={28} />
+              <Home size={28} className="group-hover:scale-110 transition-transform" />
               <span className="text-sm font-semibold tracking-wider hidden sm:block">HUB</span>
             </motion.button>
 
@@ -94,8 +233,11 @@ export const Veda = () => {
         </div>
       </motion.header>
 
-      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-950">
-        <div className="text-center max-w-4xl relative z-10 pt-20">
+      <section
+        className="relative min-h-screen flex items-center justify-center px-6"
+        style={heroBackgroundStyle}
+      >
+        <div className="text-center max-w-4xl relative z-10">
           <motion.h1
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -103,7 +245,7 @@ export const Veda = () => {
             className="text-7xl md:text-9xl font-bold mb-6"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 drop-shadow-2xl">
               VEDA
             </span>
           </motion.h1>
@@ -132,9 +274,20 @@ export const Veda = () => {
             Journey through ancient culinary traditions where aromatic spices dance with mystical flavors
           </motion.p>
         </div>
+
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
+        >
+          <ChevronDown className="text-amber-400 drop-shadow-lg" size={40} />
+        </motion.div>
       </section>
 
-      <section className="relative py-24 px-6 min-h-screen bg-purple-950">
+      <section
+        className="relative py-24 px-6 min-h-screen"
+        style={menuBackgroundStyle}
+      >
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -193,22 +346,20 @@ export const Veda = () => {
                   whileHover={{ y: -8, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                   className="relative bg-teal-900 rounded-lg overflow-hidden border-2 border-amber-500/40 group-hover:border-amber-400 shadow-2xl transition-all"
+                  style={{ transform: `rotate(${index % 2 === 0 ? -1 : 1}deg)` }}
                 >
                   <div className="aspect-[4/5] overflow-hidden bg-teal-950">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800';
-                      }}
                     />
                   </div>
 
                   <div className="p-6 bg-gradient-to-b from-teal-900 to-teal-950">
                     <div className="flex items-start justify-between mb-3">
                       <h3
-                        className="text-xl font-bold text-amber-300 leading-tight flex-1"
+                        className="text-xl font-bold text-yellow-500 leading-tight flex-1"
                         style={{ fontFamily: "'Playfair Display', serif" }}
                       >
                         {item.name}
@@ -231,7 +382,7 @@ export const Veda = () => {
                         className="text-3xl font-bold text-amber-400"
                         style={{ fontFamily: "'Playfair Display', serif" }}
                       >
-                        RM {item.price}
+                        RM {item.price.toFixed(2)}
                       </span>
 
                       <motion.button
