@@ -4,129 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { FloatingMandala } from '../components/Veda/FloatingMandala';
-
-interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  spiceLevel?: number;
-  image: string;
-}
-
-const vedaMenu: MenuItem[] = [
-  {
-    id: 'veda-1',
-    name: 'Royal Butter Chicken',
-    description: 'Tender chicken in a rich, creamy tomato-based sauce with aromatic spices',
-    price: 35.00,
-    category: 'Mains',
-    spiceLevel: 2,
-    image: '/images/veda/butter-chicken.png'
-  },
-  {
-    id: 'veda-2',
-    name: 'Mutton Biryani',
-    description: 'Fragrant basmati rice layered with saffron, spiced mutton, and caramelized onions',
-    price: 48.00,
-    category: 'Mains',
-    spiceLevel: 3,
-    image: '/images/veda/lamb-biryani.png'
-  },
-  {
-    id: 'veda-3',
-    name: 'Tandoori Prawns',
-    description: 'Succulent prawns marinated in yogurt and spices, cooked in a clay tandoor',
-    price: 55.00,
-    category: 'Tandoor',
-    spiceLevel: 3,
-    image: 'https://images.pexels.com/photos/1510682/pexels-photo-1510682.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-4',
-    name: 'Aloo Tikki Chaat',
-    description: 'Crispy potato patties topped with yogurt, chutneys, and aromatic spices',
-    price: 22.00,
-    category: 'Appetizers',
-    spiceLevel: 2,
-    image: 'https://images.pexels.com/photos/6135418/pexels-photo-6135418.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-5',
-    name: 'Gulab Jamun',
-    description: 'Soft milk dumplings soaked in cardamom-rose syrup, served warm',
-    price: 18.00,
-    category: 'Desserts',
-    spiceLevel: 0,
-    image: 'https://images.pexels.com/photos/14737/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-6',
-    name: 'Palak Paneer',
-    description: 'Cottage cheese cubes in a creamy spinach curry with garlic and ginger',
-    price: 32.00,
-    category: 'Vegetarian',
-    spiceLevel: 2,
-    image: 'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-7',
-    name: 'Garlic Naan',
-    description: 'Fresh-baked flatbread infused with roasted garlic and brushed with ghee',
-    price: 10.00,
-    category: 'Breads',
-    spiceLevel: 0,
-    image: 'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-8',
-    name: 'Lassi (Mango or Rose)',
-    description: 'Creamy yogurt drink blended with fresh mango pulp or rose essence',
-    price: 15.00,
-    category: 'Beverages',
-    spiceLevel: 0,
-    image: 'https://images.pexels.com/photos/6802983/pexels-photo-6802983.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-9',
-    name: 'Lamb Rogan Josh',
-    description: 'Slow-cooked lamb in a fragrant curry with cardamom, cloves, and Kashmiri chilies',
-    price: 45.00,
-    category: 'Mains',
-    spiceLevel: 3,
-    image: '/images/veda/lamb-biryani.png'
-  },
-  {
-    id: 'veda-10',
-    name: 'Samosa Platter',
-    description: 'Crispy pastries filled with spiced potatoes, peas, and aromatic herbs',
-    price: 20.00,
-    category: 'Appetizers',
-    spiceLevel: 2,
-    image: 'https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-11',
-    name: 'Malai Kofta',
-    description: 'Cottage cheese and potato dumplings in a rich cashew and cream gravy',
-    price: 36.00,
-    category: 'Vegetarian',
-    spiceLevel: 1,
-    image: 'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 'veda-12',
-    name: 'Masala Chai',
-    description: 'Traditional spiced tea brewed with cardamom, ginger, cinnamon, and milk',
-    price: 12.00,
-    category: 'Beverages',
-    spiceLevel: 0,
-    image: 'https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800'
-  }
-];
-
-const categories = ['All', 'Mains', 'Tandoor', 'Vegetarian', 'Breads', 'Appetizers', 'Desserts', 'Beverages'];
+import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
 
 export const Veda = () => {
   const navigate = useNavigate();
@@ -177,38 +55,46 @@ export const Veda = () => {
   const deliveryFee = subtotal > 150 ? 0 : 8;
   const total = subtotal + sst + deliveryFee;
 
-  const bodyBackgroundStyle = {
-    background: 'linear-gradient(180deg, #5b21b6 0%, #4c1d95 50%, #3b0764 100%)'
-  };
-
   return (
-    <div className="min-h-screen text-white relative" style={bodyBackgroundStyle}>
+    <div
+      className="min-h-screen text-white relative"
+      style={{
+        backgroundImage: "url('/images/veda/veda-pattern_1.png')",
+        backgroundSize: '500px',
+        backgroundRepeat: 'repeat',
+        backgroundAttachment: 'fixed',
+        backgroundColor: '#4c1d95'
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-purple-900/50 to-purple-900/60" style={{ pointerEvents: 'none' }} />
+
       <FloatingMandala />
-      <header className="sticky top-0 z-40 bg-purple-800 border-b border-yellow-400">
+
+      <header className="sticky top-0 z-40 bg-purple-900/95 backdrop-blur-xl border-b-2 border-yellow-400/40 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-yellow-400 hover:text-yellow-300"
+              className="flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors"
             >
               <Home size={28} />
-              <span className="text-sm font-semibold">HUB</span>
+              <span className="text-sm font-semibold tracking-wider">HUB</span>
             </button>
 
             <div>
-              <h1 className="text-3xl font-bold text-yellow-400">VEDA</h1>
-              <p className="text-xs text-yellow-200">The Art of Spice</p>
+              <h1 className="text-4xl font-serif font-bold text-yellow-400 tracking-wide">VEDA</h1>
+              <p className="text-xs text-yellow-200 tracking-widest">The Art of Spice</p>
             </div>
           </div>
 
           <button
             onClick={() => setIsCartOpen(true)}
-            className="relative bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-3"
+            className="relative bg-amber-500 hover:bg-amber-600 text-purple-950 px-6 py-3 rounded-xl font-bold flex items-center gap-3 transition-all shadow-xl hover:shadow-amber-500/30"
           >
             <ShoppingCart size={24} />
             <span>CART</span>
             {cartItems.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
                 {cartItems.length}
               </span>
             )}
@@ -225,23 +111,23 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-purple-900/40 to-purple-900/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-purple-900/50 to-purple-900/70" />
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <h1 className="text-6xl md:text-8xl font-bold text-yellow-400 mb-4 drop-shadow-2xl">
+        <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
+          <h1 className="text-7xl md:text-9xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-2xl tracking-wider">
             VEDA
           </h1>
-          <p className="text-2xl md:text-3xl text-yellow-200 mb-6 drop-shadow-lg">
+          <p className="text-3xl md:text-4xl font-serif text-amber-300 mb-8 drop-shadow-xl tracking-wide">
             The Art of Spice
           </p>
-          <p className="text-lg md:text-xl text-white drop-shadow-lg max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-white drop-shadow-xl max-w-3xl mx-auto leading-relaxed">
             Journey through ancient culinary traditions where aromatic spices dance with mystical flavors
           </p>
         </div>
       </section>
 
       <section
-        className="relative py-16 px-6 overflow-hidden"
+        className="relative py-20 px-6 overflow-hidden"
         style={{
           backgroundImage: "url('/images/veda/veda-bg-about.png')",
           backgroundSize: 'cover',
@@ -249,21 +135,22 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-purple-950/55" />
+        <div className="absolute inset-0 bg-purple-950/40" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">About VEDA</h2>
-            <p className="text-lg text-white max-w-3xl mx-auto drop-shadow-md">
-              Experience authentic Indian cuisine crafted with traditional recipes and the finest spices.
-              Each dish tells a story of centuries-old culinary heritage.
+            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">About VEDA</h2>
+            <p className="text-xl text-white max-w-3xl mx-auto drop-shadow-lg leading-relaxed">
+              Experience authentic Indian cuisine crafted with traditional recipes passed down through generations.
+              Each dish tells a story of centuries-old culinary heritage, where every spice is carefully selected
+              to create a symphony of flavors that transport you to the royal courts of ancient India.
             </p>
           </div>
         </div>
       </section>
 
       <section
-        className="relative py-16 px-6 overflow-hidden"
+        className="relative py-20 px-6 overflow-hidden"
         style={{
           backgroundImage: "url('/images/veda/veda-pattern_1.png')",
           backgroundSize: '500px',
@@ -275,22 +162,22 @@ export const Veda = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/45 via-purple-900/40 to-purple-900/45" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Royal Menu</h2>
-            <p className="text-lg text-white drop-shadow-md">
+          <div className="text-center mb-16">
+            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">Royal Menu</h2>
+            <p className="text-xl text-white drop-shadow-lg">
               Crafted with centuries-old recipes and the finest spices
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-16">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-lg font-semibold ${
+                className={`px-7 py-3 rounded-xl font-bold text-sm tracking-wider transition-all shadow-lg ${
                   selectedCategory === category
-                    ? 'bg-amber-500 text-white'
-                    : 'bg-purple-700 text-white hover:bg-purple-600'
+                    ? 'bg-amber-500 text-purple-950 scale-105 shadow-amber-500/40'
+                    : 'bg-purple-800/80 text-yellow-200 hover:bg-purple-700 hover:scale-105'
                 }`}
               >
                 {category}
@@ -298,52 +185,58 @@ export const Veda = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredMenu.map((item, index) => (
               <div key={item.id} className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-amber-600/20 rounded-lg transform rotate-1 group-hover:rotate-2 transition-transform" />
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-amber-600/20 rounded-2xl transform group-hover:rotate-3 transition-all duration-300"
+                  style={{ transform: `rotate(${index % 2 === 0 ? 1 : -1}deg)` }}
+                />
 
                 <div
-                  className="relative bg-teal-900/80 backdrop-blur-sm rounded-lg overflow-hidden border-2 border-amber-500/40 group-hover:border-amber-400 shadow-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-amber-500/20"
-                  style={{ transform: `rotate(${index % 2 === 0 ? -0.5 : 0.5}deg)` }}
+                  className="relative bg-gradient-to-br from-teal-900/90 to-teal-950/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-amber-500/40 group-hover:border-amber-400 shadow-2xl transition-all duration-300 group-hover:-translate-y-3 group-hover:shadow-amber-500/30"
+                  style={{
+                    transform: `rotate(${index % 2 === 0 ? -0.5 : 0.5}deg)`,
+                  }}
                 >
-                  <div className="aspect-[4/3] bg-teal-950 overflow-hidden">
+                  <div className="aspect-[4/3] bg-teal-950 overflow-hidden relative">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-transparent to-transparent opacity-60" />
                   </div>
 
-                  <div className="p-6 bg-gradient-to-b from-teal-900 to-teal-950">
+                  <div className="p-6 bg-gradient-to-b from-teal-900/95 to-teal-950/95">
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-bold text-yellow-500 flex-1">
+                      <h3 className="text-xl font-bold text-yellow-400 flex-1 tracking-wide">
                         {item.name}
                       </h3>
-                    {item.spiceLevel && item.spiceLevel > 0 && (
-                      <div className="flex gap-1 ml-2">
-                        {[...Array(item.spiceLevel)].map((_, i) => (
-                          <Flame key={i} size={14} className="text-orange-500" />
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                      {item.spiceLevel && item.spiceLevel > 0 && (
+                        <div className="flex gap-1 ml-2">
+                          {[...Array(item.spiceLevel)].map((_, i) => (
+                            <Flame key={i} size={16} className="text-orange-500" />
+                          ))}
+                        </div>
+                      )}
+                    </div>
 
-                    <p className="text-purple-200 text-sm mb-4 leading-relaxed">
+                    <p className="text-purple-200 text-sm mb-5 leading-relaxed">
                       {item.description}
                     </p>
 
-                    <div className="flex items-center justify-between pt-3 border-t border-teal-700">
+                    <div className="flex items-center justify-between pt-4 border-t border-teal-800/50">
                       <span className="text-3xl font-bold text-amber-400">
                         RM {item.price.toFixed(2)}
                       </span>
 
                       <button
                         onClick={() => handleAddToCart(item)}
-                        className={`px-5 py-2 font-semibold rounded transition-all duration-300 ${
+                        className={`px-6 py-2.5 font-bold rounded-lg transition-all duration-300 ${
                           addedItems.has(item.id)
-                            ? 'bg-green-600 text-white border-2 border-green-600'
-                            : 'bg-gradient-to-r from-amber-500 to-amber-600 text-purple-900 hover:from-amber-400 hover:to-amber-500 shadow-lg'
+                            ? 'bg-green-600 text-white border-2 border-green-600 scale-105'
+                            : 'bg-gradient-to-r from-amber-500 to-amber-600 text-purple-950 hover:from-amber-400 hover:to-amber-500 shadow-lg hover:shadow-amber-500/30 hover:scale-105'
                         }`}
                       >
                         {addedItems.has(item.id) ? 'ADDED' : 'ADD'}
@@ -358,7 +251,7 @@ export const Veda = () => {
       </section>
 
       <section
-        className="relative py-16 px-6 overflow-hidden"
+        className="relative py-20 px-6 overflow-hidden"
         style={{
           backgroundImage: "url('/images/veda/veda-bg-gallery.png')",
           backgroundSize: 'cover',
@@ -369,37 +262,33 @@ export const Veda = () => {
         <div className="absolute inset-0 bg-teal-900/45" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Gallery</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-4 drop-shadow-xl">Gallery</h2>
+            <p className="text-xl text-white drop-shadow-lg">Glimpses of our culinary artistry</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="aspect-square bg-purple-700 rounded-lg overflow-hidden">
-              <img
-                src="/images/veda/veda-hero.png"
-                alt="VEDA Restaurant Interior"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="aspect-square bg-purple-700 rounded-lg overflow-hidden">
-              <img
-                src="/images/veda/butter-chicken.png"
-                alt="Butter Chicken"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="aspect-square bg-purple-700 rounded-lg overflow-hidden">
-              <img
-                src="/images/veda/lamb-biryani.png"
-                alt="Lamb Biryani"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { src: '/images/veda/veda-hero.png', label: 'Royal Ambiance' },
+              { src: '/images/veda/butter-chicken.png', label: 'Butter Chicken' },
+              { src: '/images/veda/lamb-biryani.png', label: 'Lamb Biryani' }
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="aspect-square bg-purple-900/40 rounded-2xl overflow-hidden border-2 border-amber-500/40 hover:border-amber-400 transition-all shadow-2xl hover:shadow-amber-500/30 hover:-translate-y-2 group"
+              >
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section
-        className="relative py-16 px-6 overflow-hidden"
+        className="relative py-20 px-6 overflow-hidden"
         style={{
           backgroundImage: "url('/images/veda/veda-bg-contact.png')",
           backgroundSize: 'cover',
@@ -407,94 +296,94 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-purple-900/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-purple-900/80" />
 
         <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">
+          <div className="text-center mb-16">
+            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">
               Reserve Your <span className="text-amber-400">Table</span>
             </h2>
-            <p className="text-white text-lg drop-shadow-md">
+            <p className="text-white text-xl drop-shadow-lg">
               Experience the luxury of ancient Indian culinary traditions
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-teal-900/40 to-purple-900/40 backdrop-blur-xl border-2 border-yellow-400/30 rounded-3xl p-10 shadow-2xl">
+          <div className="bg-gradient-to-br from-teal-900/50 to-purple-900/50 backdrop-blur-2xl border-2 border-yellow-400/40 rounded-3xl p-12 shadow-2xl">
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                     Full Name
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors"
+                    className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-all focus:shadow-lg focus:shadow-amber-500/20"
                     placeholder="Enter your name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                     Phone Number
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors"
+                    className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-all focus:shadow-lg focus:shadow-amber-500/20"
                     placeholder="+60 12-345 6789"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                   Email Address
                 </label>
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors"
+                  className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-all focus:shadow-lg focus:shadow-amber-500/20"
                   placeholder="your@email.com"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                     Date
                   </label>
                   <input
                     type="date"
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-colors"
+                    className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-all focus:shadow-lg focus:shadow-amber-500/20"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                     Time
                   </label>
                   <input
                     type="time"
                     value={formData.time}
                     onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-colors"
+                    className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-all focus:shadow-lg focus:shadow-amber-500/20"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                     Guests
                   </label>
                   <select
                     value={formData.guests}
                     onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-colors"
+                    className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-all focus:shadow-lg focus:shadow-amber-500/20"
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
                       <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
@@ -504,21 +393,21 @@ export const Veda = () => {
               </div>
 
               <div>
-                <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                <label className="block text-yellow-200 mb-2 font-bold text-sm tracking-wider">
                   Special Request
                 </label>
                 <textarea
                   value={formData.specialRequest}
                   onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
-                  rows={3}
-                  className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors resize-y"
+                  rows={4}
+                  className="w-full px-6 py-4 bg-purple-950/90 border-2 border-amber-600/40 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-all resize-y focus:shadow-lg focus:shadow-amber-500/20"
                   placeholder="Any allergies, dietary restrictions, or special occasion?"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-5 bg-amber-500 text-purple-950 font-bold text-lg rounded-xl hover:bg-amber-400 transition-colors shadow-xl"
+                className="w-full py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-purple-950 font-bold text-lg rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all shadow-2xl hover:shadow-amber-500/40 hover:scale-[1.02]"
               >
                 Confirm Reservation
               </button>
@@ -527,32 +416,32 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-purple-950">
+      <section className="py-20 px-6 bg-purple-950">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-yellow-400 mb-4">Contact Us</h2>
-          <div className="text-white space-y-2">
-            <p className="text-lg">123 Spice Street, Kuala Lumpur</p>
-            <p className="text-lg">Phone: +60 3-1234-5678</p>
-            <p className="text-lg">Email: info@veda.my</p>
-            <p className="text-lg">Hours: Daily 11AM - 11PM</p>
+          <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-8">Contact Us</h2>
+          <div className="text-white space-y-3 text-lg">
+            <p>123 Spice Street, Kuala Lumpur</p>
+            <p>Phone: +60 3-1234-5678</p>
+            <p>Email: info@veda.my</p>
+            <p>Hours: Daily 11AM - 11PM</p>
           </div>
         </div>
       </section>
 
       {isCartOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
           onClick={() => setIsCartOpen(false)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-purple-800 rounded-lg max-w-md w-full max-h-[80vh] overflow-hidden border-2 border-yellow-400"
+            className="bg-purple-900 rounded-2xl max-w-md w-full max-h-[80vh] overflow-hidden border-2 border-yellow-400 shadow-2xl"
           >
-            <div className="p-6 border-b border-purple-700 flex items-center justify-between">
+            <div className="p-6 border-b border-purple-800 flex items-center justify-between bg-purple-800">
               <h2 className="text-2xl font-bold text-yellow-400">Your Cart</h2>
               <button
                 onClick={() => setIsCartOpen(false)}
-                className="text-white hover:text-yellow-400"
+                className="text-white hover:text-yellow-400 transition-colors"
               >
                 <X size={28} />
               </button>
@@ -564,7 +453,7 @@ export const Veda = () => {
               ) : (
                 <div className="space-y-4">
                   {cartItems.map((item) => (
-                    <div key={item.id} className="bg-purple-700 rounded-lg p-4">
+                    <div key={item.id} className="bg-purple-800 rounded-xl p-4 border border-yellow-400/20">
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex-1">
                           <h3 className="font-bold text-yellow-400">{item.name}</h3>
@@ -572,23 +461,23 @@ export const Veda = () => {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="text-red-400 hover:text-red-300"
+                          className="text-red-400 hover:text-red-300 transition-colors"
                         >
                           <X size={20} />
                         </button>
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3 bg-purple-600 rounded-lg p-1">
+                        <div className="flex items-center gap-3 bg-purple-700 rounded-lg p-1">
                           <button
                             onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
-                            className="w-8 h-8 rounded bg-purple-500 hover:bg-purple-400 flex items-center justify-center"
+                            className="w-8 h-8 rounded bg-purple-600 hover:bg-purple-500 flex items-center justify-center transition-colors"
                           >
                             <Minus size={16} />
                           </button>
                           <span className="w-8 text-center font-bold text-yellow-400">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-8 h-8 rounded bg-purple-500 hover:bg-purple-400 flex items-center justify-center"
+                            className="w-8 h-8 rounded bg-purple-600 hover:bg-purple-500 flex items-center justify-center transition-colors"
                           >
                             <Plus size={16} />
                           </button>
@@ -604,7 +493,7 @@ export const Veda = () => {
             </div>
 
             {cartItems.length > 0 && (
-              <div className="p-6 border-t border-purple-700">
+              <div className="p-6 border-t border-purple-800 bg-purple-800">
                 <div className="space-y-2 mb-4 text-sm">
                   <div className="flex justify-between text-white">
                     <span>Subtotal</span>
@@ -628,7 +517,7 @@ export const Veda = () => {
                     setIsCartOpen(false);
                     setIsCheckoutOpen(true);
                   }}
-                  className="w-full bg-amber-500 hover:bg-amber-600 text-white py-4 rounded-lg font-bold text-lg"
+                  className="w-full bg-amber-500 hover:bg-amber-600 text-purple-950 py-4 rounded-xl font-bold text-lg transition-all shadow-xl hover:shadow-amber-500/40"
                 >
                   PROCEED TO CHECKOUT
                 </button>
