@@ -416,26 +416,35 @@ export const Rimba = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { src: '/images/rimba/rimba-gallery-hall.png', label: 'Main Dining Hall' },
+              { src: '/images/rimba/rimba-gallery-kitchen.png', label: 'Open Kitchen' },
+              { src: '/images/rimba/rimba-gallery-balcony.png', label: 'Private Balcony' }
+            ].map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-[#064e3b]/30 to-[#292524]/30 backdrop-blur-md border border-white/10 hover:border-[#D4AF37]/50 transition-all"
+                transition={{ delay: i * 0.15 }}
+                whileHover={{ scale: 1.03, y: -8 }}
+                className={`relative aspect-[16/10] overflow-hidden rounded-2xl bg-gradient-to-br from-[#064e3b]/30 to-[#292524]/30 backdrop-blur-md border-2 border-white/10 hover:border-[#D4AF37]/70 transition-all shadow-2xl ${
+                  i === 2 ? 'md:col-span-2 md:aspect-[21/9]' : ''
+                }`}
               >
                 <img
-                  src={`/images/rimba/gallery-${i}.png`}
-                  alt={`Gallery ${i}`}
+                  src={item.src}
+                  alt={item.label}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23064e3b'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='20' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3ERimba Interior ${i}%3C/text%3E%3C/svg%3E`;
+                    e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%23064e3b'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='28' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.label}%3C/text%3E%3C/svg%3E`;
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-2xl font-serif font-bold text-[#D4AF37]">{item.label}</h3>
+                </div>
               </motion.div>
             ))}
           </div>

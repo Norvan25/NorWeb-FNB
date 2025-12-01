@@ -272,43 +272,64 @@ export const Rouge = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="relative aspect-[4/3] overflow-hidden border border-amber-500/20 hover:border-amber-500 transition-all shadow-2xl shadow-black/50"
-              >
-                <img
-                  src={`/images/rouge/gallery-${i}.png`}
-                  alt={`Gallery ${i}`}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23991b1b'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='20' fill='%23fbbf24' text-anchor='middle' dominant-baseline='middle'%3ERouge Interior ${i}%3C/text%3E%3C/svg%3E`;
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </motion.div>
-            ))}
+          <div className="relative overflow-hidden">
+            <div className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              {[
+                { src: '/images/rouge/rouge-gallery-private.png', label: 'Private Dining Room', subtitle: '雅座 - Elegant Seating' },
+                { src: '/images/rouge/rouge-gallery-bar.png', label: 'Imperial Bar', subtitle: '酒吧 - Spirits & Cocktails' },
+                { src: '/images/rouge/rouge-gallery-setting.png', label: 'Table Setting', subtitle: '摆设 - Fine Details' }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 100 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.2 }}
+                  whileHover={{ scale: 1.02, y: -8 }}
+                  className="relative flex-shrink-0 w-[85vw] md:w-[70vw] lg:w-[50vw] aspect-[16/9] overflow-hidden border-4 border-amber-500/30 hover:border-amber-400 transition-all shadow-2xl shadow-black/60 snap-center"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.label}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='675'%3E%3Crect width='1200' height='675' fill='%23991b1b'/%3E%3Ctext x='50%25' y='45%25' font-family='serif' font-size='36' fill='%23fbbf24' text-anchor='middle' dominant-baseline='middle'%3E${item.label}%3C/text%3E%3Ctext x='50%25' y='55%25' font-family='serif' font-size='24' fill='%23fcd34d' text-anchor='middle' dominant-baseline='middle'%3E${item.subtitle}%3C/text%3E%3C/svg%3E`;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h3 className="text-3xl md:text-4xl font-bold text-amber-400 mb-2" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+                      {item.label}
+                    </h3>
+                    <p className="text-amber-200 text-lg" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+                      {item.subtitle}
+                    </p>
+                  </div>
+                  <div className="absolute top-6 right-6 bg-amber-500/20 backdrop-blur-sm border border-amber-400/50 px-4 py-2">
+                    <span className="text-amber-200 font-bold text-sm tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <div className="text-center mt-4 text-amber-200/60 text-sm tracking-wider">
+              ← Scroll to explore →
+            </div>
           </div>
         </div>
       </section>
 
       <div className="h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
 
-      <section
-        className="relative py-24 px-6 min-h-screen flex items-center justify-center"
-        style={{
-          backgroundImage: "url('/images/rouge/rouge-wall-1.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      >
+      <section className="relative py-24 px-6 min-h-screen flex items-center justify-center overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/images/rouge/rouge-wall-1.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            y: backgroundY
+          }}
+        />
         <div className="absolute inset-0 bg-black/70" />
 
         <div className="max-w-2xl mx-auto relative z-10 w-full">
