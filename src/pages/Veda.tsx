@@ -461,7 +461,17 @@ export const Veda = () => {
       <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
-        restaurantId="veda"
+        cartItems={cartItems.map(item => {
+          const menuItem = vedaMenu.find(m => m.id === item.id);
+          return {
+            ...item,
+            image: menuItem?.image
+          };
+        })}
+        onSuccess={() => {
+          setIsCheckoutOpen(false);
+          navigate('/');
+        }}
       />
     </div>
   );
