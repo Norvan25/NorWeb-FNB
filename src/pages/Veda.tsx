@@ -210,15 +210,25 @@ export const Veda = () => {
         </div>
       </header>
 
-      <section className="py-20 px-6 bg-purple-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-6xl md:text-8xl font-bold text-yellow-400 mb-4">
+      <section
+        className="relative h-screen flex items-center justify-center overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/veda/veda-hero_1.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-purple-900/60 to-purple-900/80" />
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
+          <h1 className="text-6xl md:text-8xl font-bold text-yellow-400 mb-4 drop-shadow-2xl">
             VEDA
           </h1>
-          <p className="text-2xl text-yellow-200 mb-6">
+          <p className="text-2xl md:text-3xl text-yellow-200 mb-6 drop-shadow-lg">
             The Art of Spice
           </p>
-          <p className="text-lg text-white">
+          <p className="text-lg md:text-xl text-white drop-shadow-lg max-w-2xl mx-auto">
             Journey through ancient culinary traditions where aromatic spices dance with mystical flavors
           </p>
         </div>
