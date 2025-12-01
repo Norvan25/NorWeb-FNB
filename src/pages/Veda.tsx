@@ -136,6 +136,15 @@ export const Veda = () => {
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('veda');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    date: '',
+    time: '',
+    guests: '2',
+    specialRequest: ''
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -240,7 +249,7 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-purple-950/70" />
+        <div className="absolute inset-0 bg-purple-950/55" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -263,7 +272,7 @@ export const Veda = () => {
           backgroundAttachment: 'fixed'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/55 via-purple-900/50 to-purple-900/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/45 via-purple-900/40 to-purple-900/45" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -357,7 +366,7 @@ export const Veda = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-teal-900/60" />
+        <div className="absolute inset-0 bg-teal-900/45" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -400,35 +409,132 @@ export const Veda = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-purple-900/70" />
 
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Book a Table</h2>
-          <p className="text-lg text-white mb-8 drop-shadow-md">
-            Reserve your table for an unforgettable dining experience
-          </p>
-          <button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl">
-            MAKE RESERVATION
-          </button>
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">
+              Reserve Your <span className="text-amber-400">Table</span>
+            </h2>
+            <p className="text-white text-lg drop-shadow-md">
+              Experience the luxury of ancient Indian culinary traditions
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-teal-900/40 to-purple-900/40 backdrop-blur-xl border-2 border-yellow-400/30 rounded-3xl p-10 shadow-2xl">
+            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors"
+                    placeholder="Enter your name"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors"
+                    placeholder="+60 12-345 6789"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                    Time
+                  </label>
+                  <input
+                    type="time"
+                    value={formData.time}
+                    onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                    Guests
+                  </label>
+                  <select
+                    value={formData.guests}
+                    onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                    className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 focus:border-amber-400 focus:outline-none transition-colors"
+                  >
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
+                      <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-yellow-200 mb-2 font-semibold text-sm tracking-wide">
+                  Special Request
+                </label>
+                <textarea
+                  value={formData.specialRequest}
+                  onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
+                  rows={3}
+                  className="w-full px-6 py-4 bg-purple-950/80 border-2 border-amber-600/30 rounded-xl text-yellow-100 placeholder-gray-400 focus:border-amber-400 focus:outline-none transition-colors resize-y"
+                  placeholder="Any allergies, dietary restrictions, or special occasion?"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-5 bg-amber-500 text-purple-950 font-bold text-lg rounded-xl hover:bg-amber-400 transition-colors shadow-xl"
+              >
+                Confirm Reservation
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
-      <section
-        className="relative py-16 px-6 overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/veda/veda-bg-contact.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/70 to-purple-950/80" />
-
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Contact Us</h2>
+      <section className="py-16 px-6 bg-purple-950">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-5xl font-bold text-yellow-400 mb-4">Contact Us</h2>
           <div className="text-white space-y-2">
-            <p className="text-lg drop-shadow-md">123 Spice Street, Kuala Lumpur</p>
-            <p className="text-lg drop-shadow-md">Phone: +60 3-1234-5678</p>
-            <p className="text-lg drop-shadow-md">Email: info@veda.my</p>
-            <p className="text-lg drop-shadow-md">Hours: Daily 11AM - 11PM</p>
+            <p className="text-lg">123 Spice Street, Kuala Lumpur</p>
+            <p className="text-lg">Phone: +60 3-1234-5678</p>
+            <p className="text-lg">Email: info@veda.my</p>
+            <p className="text-lg">Hours: Daily 11AM - 11PM</p>
           </div>
         </div>
       </section>
