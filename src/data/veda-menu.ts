@@ -64,6 +64,15 @@ export const vedaMenu: MenuItem[] = [
     image: '/images/veda/tandoori-prawns..png'
   },
   {
+    id: 'veda-18',
+    name: 'Tandoori Chicken Tikka',
+    description: 'Chicken marinated in yogurt and spices, cooked on skewers in a clay tandoor',
+    price: 45,
+    category: 'Tandoor',
+    spiceLevel: 3,
+    image: '/images/veda/chicken-tikka.png'
+  },
+  {
     id: 'veda-7',
     name: 'Samosa Platter',
     description: 'Crispy pastries filled with spiced potatoes, peas, and aromatic herbs',
