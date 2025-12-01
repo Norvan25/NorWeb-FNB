@@ -210,7 +210,7 @@ export const Veda = () => {
       <section
         className="relative h-screen flex items-center justify-center overflow-hidden"
         style={{
-          backgroundImage: "url('/images/veda/veda-hero_1.png')",
+          backgroundImage: "url('/images/veda/veda-hero.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -231,11 +231,21 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-purple-900">
-        <div className="max-w-7xl mx-auto">
+      <section
+        className="relative py-16 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/veda/veda-bg-about.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-purple-950/70" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4">About VEDA</h2>
-            <p className="text-lg text-white max-w-3xl mx-auto">
+            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">About VEDA</h2>
+            <p className="text-lg text-white max-w-3xl mx-auto drop-shadow-md">
               Experience authentic Indian cuisine crafted with traditional recipes and the finest spices.
               Each dish tells a story of centuries-old culinary heritage.
             </p>
@@ -338,10 +348,20 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-purple-900">
-        <div className="max-w-7xl mx-auto">
+      <section
+        className="relative py-16 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/veda/veda-bg-gallery.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-teal-900/60" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-yellow-400 mb-4">Gallery</h2>
+            <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Gallery</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="aspect-square bg-purple-700 rounded-lg overflow-hidden">
@@ -369,26 +389,46 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-purple-800">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-yellow-400 mb-4">Book a Table</h2>
-          <p className="text-lg text-white mb-8">
+      <section
+        className="relative py-16 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/veda/veda-bg-contact.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-purple-900/70" />
+
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Book a Table</h2>
+          <p className="text-lg text-white mb-8 drop-shadow-md">
             Reserve your table for an unforgettable dining experience
           </p>
-          <button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-bold text-lg">
+          <button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl">
             MAKE RESERVATION
           </button>
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-purple-900">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-yellow-400 mb-4">Contact Us</h2>
+      <section
+        className="relative py-16 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/veda/veda-bg-contact.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/70 to-purple-950/80" />
+
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">Contact Us</h2>
           <div className="text-white space-y-2">
-            <p className="text-lg">123 Spice Street, Kuala Lumpur</p>
-            <p className="text-lg">Phone: +60 3-1234-5678</p>
-            <p className="text-lg">Email: info@veda.my</p>
-            <p className="text-lg">Hours: Daily 11AM - 11PM</p>
+            <p className="text-lg drop-shadow-md">123 Spice Street, Kuala Lumpur</p>
+            <p className="text-lg drop-shadow-md">Phone: +60 3-1234-5678</p>
+            <p className="text-lg drop-shadow-md">Email: info@veda.my</p>
+            <p className="text-lg drop-shadow-md">Hours: Daily 11AM - 11PM</p>
           </div>
         </div>
       </section>
