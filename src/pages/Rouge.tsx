@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rougeMenu } from '../data/rouge-menu';
 import CheckoutModal from '../components/CheckoutModal';
+import { CherryBlossomFall } from '../components/Rouge/CherryBlossomFall';
 
 export const Rouge = () => {
   const navigate = useNavigate();
@@ -44,6 +45,8 @@ export const Rouge = () => {
 
   return (
     <div className="min-h-screen bg-stone-50">
+      <CherryBlossomFall />
+
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}

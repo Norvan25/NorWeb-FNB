@@ -26,3 +26,26 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes firefly-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(20px, -30px) scale(1.2);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-15px, 20px) scale(0.9);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(30px, 10px) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+.animate-firefly-drift {
+  animation: firefly-drift linear infinite;
+}

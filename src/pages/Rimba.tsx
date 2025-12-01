@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
 import CheckoutModal from '../components/CheckoutModal';
-import { ParallaxElements } from '../components/ParallaxElements';
+import { FireflyField } from '../components/Rimba/FireflyField';
 
 export const Rimba = () => {
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ export const Rimba = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      <ParallaxElements />
+      <FireflyField />
 
       <motion.nav
         initial={{ y: -100 }}
