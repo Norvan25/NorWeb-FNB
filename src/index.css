@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Playfair+Display:wght@400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -48,4 +48,27 @@
 
 .animate-firefly-drift {
   animation: firefly-drift linear infinite;
+}
+
+@keyframes mandala-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-40px) rotate(90deg) scale(1.1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-80px) rotate(180deg) scale(0.95);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-40px) rotate(270deg) scale(1.05);
+    opacity: 0.35;
+  }
+}
+
+.animate-mandala-float {
+  animation: mandala-float ease-in-out infinite;
 }
