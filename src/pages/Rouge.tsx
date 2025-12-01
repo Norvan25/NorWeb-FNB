@@ -84,13 +84,16 @@ export const Rouge = () => {
 
       <section className="h-screen relative flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0"
           style={{
             backgroundImage: "url('/images/rouge/rouge-exterior.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-radial from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
 
         <div className="relative z-10 text-center px-6">
           <motion.div
@@ -325,6 +328,76 @@ export const Rouge = () => {
 
       <div className="h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
 
+      <section
+        className="relative py-24 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/rouge/rouge-wall-3.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/75" />
+
+        <div className="max-w-4xl mx-auto relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-6xl md:text-7xl font-bold text-amber-400 mb-6" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+              About Rouge
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-8" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative z-20 space-y-6 text-amber-100 text-lg leading-relaxed"
+          >
+            <p className="text-xl md:text-2xl text-center font-light text-amber-200">
+              Where tradition meets contemporary excellence
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+              <div className="bg-black/40 backdrop-blur-sm border border-amber-500/30 p-8">
+                <h3 className="text-2xl font-bold text-amber-400 mb-4" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+                  Our Heritage
+                </h3>
+                <p className="text-amber-200/90 leading-relaxed">
+                  Rouge draws inspiration from imperial Chinese dining traditions, reimagined for the modern palate. Each dish is a harmonious balance of time-honored techniques and innovative culinary artistry.
+                </p>
+              </div>
+
+              <div className="bg-black/40 backdrop-blur-sm border border-amber-500/30 p-8">
+                <h3 className="text-2xl font-bold text-amber-400 mb-4" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+                  Our Philosophy
+                </h3>
+                <p className="text-amber-200/90 leading-relaxed">
+                  We believe in the power of exceptional ingredients, meticulous preparation, and the creation of memorable dining experiences that honor the rich tapestry of Chinese gastronomy.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-black/40 backdrop-blur-sm border border-amber-500/30 p-8 mt-8">
+              <h3 className="text-2xl font-bold text-amber-400 mb-4 text-center" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+                Award-Winning Excellence
+              </h3>
+              <p className="text-amber-200/90 leading-relaxed text-center">
+                Recognized with multiple culinary accolades, Rouge continues to set the standard for contemporary Chinese cuisine in Malaysia. Our commitment to quality and innovation has earned us a place among the nation's most celebrated dining destinations.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+
       <section className="relative py-24 px-6 min-h-screen flex items-center justify-center overflow-hidden">
         <motion.div
           className="absolute inset-0"
@@ -332,10 +405,11 @@ export const Rouge = () => {
             backgroundImage: "url('/images/rouge/rouge-wall-1.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
             y: backgroundY
           }}
         />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/70 to-black/75" />
 
         <div className="max-w-2xl mx-auto relative z-10 w-full">
           <motion.div
