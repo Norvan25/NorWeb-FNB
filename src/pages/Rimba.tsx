@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home, Leaf, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
@@ -14,6 +14,19 @@ export const Rimba = () => {
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rimba');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const handleAddToCart = (item: MenuItem) => {
     addToCart({
@@ -49,7 +62,7 @@ export const Rimba = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'menu', 'reservations', 'contact'];
+      const sections = ['home', 'menu', 'gallery', 'reservations', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -80,8 +93,37 @@ export const Rimba = () => {
     specialRequest: ''
   });
 
+  const floatingIcons = Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    Icon: i % 3 === 0 ? Leaf : Sparkles,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    delay: Math.random() * 5,
+    duration: 15 + Math.random() * 10,
+  }));
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {floatingIcons.map(({ id, Icon, x, y, delay, duration }) => (
+        <motion.div
+          key={id}
+          className="fixed pointer-events-none z-0"
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: [0.1, 0.3, 0.1],
+            x: `calc(${x}vw + ${(mousePosition.x - window.innerWidth / 2) * -0.02}px)`,
+            y: `calc(${y}vh + ${(mousePosition.y - window.innerHeight / 2) * -0.02}px)`,
+          }}
+          transition={{
+            opacity: { duration, repeat: Infinity, delay },
+            x: { type: 'spring', stiffness: 50 },
+            y: { type: 'spring', stiffness: 50 },
+          }}
+        >
+          <Icon size={24} className="text-[#D4AF37]" />
+        </motion.div>
+      ))}
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -115,6 +157,7 @@ export const Rimba = () => {
             {[
               { id: 'home', label: 'Home' },
               { id: 'menu', label: 'Menu' },
+              { id: 'gallery', label: 'Gallery' },
               { id: 'reservations', label: 'Reservations' },
               { id: 'contact', label: 'Contact' }
             ].map(item => (
@@ -218,10 +261,10 @@ export const Rimba = () => {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
           onClick={() => scrollToSection('menu')}
         >
-          <ChevronDown className="text-[#D4AF37]/50 cursor-pointer" size={32} />
+          <ChevronDown className="text-[#D4AF37] drop-shadow-lg" size={40} />
         </motion.div>
       </section>
 
@@ -348,6 +391,54 @@ export const Rimba = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      <section
+        id="gallery"
+        className="py-24 px-6 bg-fixed bg-cover relative"
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(5, 20, 10, 0.90)), url("/images/rimba/rimba-pattern.png")'
+        }}
+      >
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-6xl font-serif font-bold mb-4 text-amber-400">
+              The <span className="text-[#D4AF37]">Experience</span>
+            </h2>
+            <p className="text-gray-200 text-lg">
+              Immerse yourself in our jungle-inspired ambiance
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-[#064e3b]/30 to-[#292524]/30 backdrop-blur-md border border-white/10 hover:border-[#D4AF37]/50 transition-all"
+              >
+                <img
+                  src={`/images/rimba/gallery-${i}.png`}
+                  alt={`Gallery ${i}`}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23064e3b'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='20' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3ERimba Interior ${i}%3C/text%3E%3C/svg%3E`;
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

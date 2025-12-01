@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, X, Minus, Plus, Flame, ArrowLeft, MessageCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { ShoppingCart, X, Minus, Plus, Flame, ArrowLeft, MessageCircle, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rougeMenu } from '../data/rouge-menu';
@@ -13,6 +13,12 @@ export const Rouge = () => {
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rouge');
+  const { scrollY } = useScroll();
+  const backgroundY = useTransform(scrollY, [0, 1000], [0, -200]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleAddToCart = (item: typeof rougeMenu[0]) => {
     addToCart({
@@ -114,6 +120,14 @@ export const Rouge = () => {
             Contemporary Chinese Cuisine
           </motion.p>
         </div>
+
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
+        >
+          <ChevronDown className="text-amber-400 drop-shadow-lg" size={40} />
+        </motion.div>
       </section>
 
       <section
@@ -205,6 +219,79 @@ export const Rouge = () => {
                     </motion.button>
                   </div>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+
+      <section
+        className="relative py-24 px-6 overflow-hidden"
+        style={{
+          backgroundImage: "linear-gradient(rgba(20, 10, 0, 0.85), rgba(0, 0, 0, 0.90)), url('/images/rouge/rouge-wall-2.png')",
+          backgroundSize: '400px',
+          backgroundRepeat: 'repeat',
+          backgroundPosition: 'center'
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 0.15, x: 0 }}
+          viewport={{ once: true }}
+          className="absolute left-10 top-20 text-[200px] font-bold text-amber-500/10 pointer-events-none"
+          style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}
+        >
+          龍
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 0.15, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="absolute right-10 bottom-20 text-[200px] font-bold text-amber-500/10 pointer-events-none"
+          style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}
+        >
+          福
+        </motion.div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-6xl font-bold mb-4 text-amber-400" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
+              The <span className="text-amber-300">Gallery</span>
+            </h2>
+            <p className="text-amber-200/90 text-lg">
+              A glimpse into our imperial dining experience
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative aspect-[4/3] overflow-hidden border border-amber-500/20 hover:border-amber-500 transition-all shadow-2xl shadow-black/50"
+              >
+                <img
+                  src={`/images/rouge/gallery-${i}.png`}
+                  alt={`Gallery ${i}`}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23991b1b'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='20' fill='%23fbbf24' text-anchor='middle' dominant-baseline='middle'%3ERouge Interior ${i}%3C/text%3E%3C/svg%3E`;
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </motion.div>
             ))}
           </div>
