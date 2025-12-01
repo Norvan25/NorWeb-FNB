@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
 import CheckoutModal from '../components/CheckoutModal';
-import { FloatingMandala } from '../components/Veda/FloatingMandala';
 
 export const Veda = () => {
   const navigate = useNavigate();
@@ -48,13 +47,11 @@ export const Veda = () => {
   const total = subtotal + sst + deliveryFee;
 
   return (
-    <div className="min-h-screen bg-purple-950 text-white relative">
-      <FloatingMandala />
-
+    <div className="min-h-screen bg-purple-900 text-white">
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-40 bg-purple-900/80 backdrop-blur-xl border-b border-amber-500/20 shadow-2xl"
+        className="fixed top-0 left-0 right-0 z-40 bg-purple-800/90 backdrop-blur-xl border-b border-amber-500/20 shadow-2xl"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -62,9 +59,9 @@ export const Veda = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors group"
+              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors"
             >
-              <Home size={28} className="group-hover:scale-110 transition-transform" />
+              <Home size={28} />
               <span className="text-sm font-semibold tracking-wider hidden sm:block">HUB</span>
             </motion.button>
 
@@ -97,16 +94,8 @@ export const Veda = () => {
         </div>
       </motion.header>
 
-      <section
-        className="relative min-h-screen flex items-center justify-center px-6"
-        style={{
-          backgroundImage: "linear-gradient(rgba(59, 7, 100, 0.7), rgba(24, 7, 40, 0.85)), url('/images/veda/veda-hero.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      >
-        <div className="text-center max-w-4xl relative z-10">
+      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-950">
+        <div className="text-center max-w-4xl relative z-10 pt-20">
           <motion.h1
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -114,7 +103,7 @@ export const Veda = () => {
             className="text-7xl md:text-9xl font-bold mb-6"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 drop-shadow-2xl">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">
               VEDA
             </span>
           </motion.h1>
@@ -143,25 +132,9 @@ export const Veda = () => {
             Journey through ancient culinary traditions where aromatic spices dance with mystical flavors
           </motion.p>
         </div>
-
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
-        >
-          <ChevronDown className="text-amber-400 drop-shadow-lg" size={40} />
-        </motion.div>
       </section>
 
-      <section
-        className="relative py-24 px-6 min-h-screen"
-        style={{
-          backgroundImage: "linear-gradient(rgba(59, 7, 100, 0.85), rgba(24, 7, 40, 0.9)), url('/images/veda/veda-pattern.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      >
+      <section className="relative py-24 px-6 min-h-screen bg-purple-950">
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

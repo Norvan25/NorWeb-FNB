@@ -25,7 +25,7 @@ export const vedaMenu: MenuItem[] = [
     price: 45,
     category: 'Mains',
     spiceLevel: 3,
-    image: '/images/veda/lamb-rogan-josh.png'
+    image: '/images/veda/lamb-biryani.png'
   },
   {
     id: 'veda-3',
@@ -34,7 +34,7 @@ export const vedaMenu: MenuItem[] = [
     price: 32,
     category: 'Mains',
     spiceLevel: 2,
-    image: '/images/veda/paneer-tikka.png'
+    image: '/images/veda/butter-chicken.png'
   },
   {
     id: 'veda-4',
@@ -43,7 +43,7 @@ export const vedaMenu: MenuItem[] = [
     price: 42,
     category: 'Rice',
     spiceLevel: 2,
-    image: '/images/veda/biryani.png'
+    image: '/images/veda/lamb-biryani.png'
   },
   {
     id: 'veda-5',
@@ -52,7 +52,7 @@ export const vedaMenu: MenuItem[] = [
     price: 36,
     category: 'Tandoor',
     spiceLevel: 3,
-    image: '/images/veda/tandoori-chicken.png'
+    image: '/images/veda/butter-chicken.png'
   },
   {
     id: 'veda-6',
@@ -61,7 +61,7 @@ export const vedaMenu: MenuItem[] = [
     price: 28,
     category: 'Vegetarian',
     spiceLevel: 1,
-    image: '/images/veda/dal-makhani.png'
+    image: '/images/veda/lamb-biryani.png'
   },
   {
     id: 'veda-7',
@@ -70,7 +70,7 @@ export const vedaMenu: MenuItem[] = [
     price: 8,
     category: 'Breads',
     spiceLevel: 0,
-    image: '/images/veda/garlic-naan.png'
+    image: '/images/veda/butter-chicken.png'
   },
   {
     id: 'veda-8',
@@ -79,7 +79,7 @@ export const vedaMenu: MenuItem[] = [
     price: 18,
     category: 'Appetizers',
     spiceLevel: 2,
-    image: '/images/veda/samosa.png'
+    image: '/images/veda/lamb-biryani.png'
   },
   {
     id: 'veda-9',
@@ -88,7 +88,7 @@ export const vedaMenu: MenuItem[] = [
     price: 34,
     category: 'Vegetarian',
     spiceLevel: 1,
-    image: '/images/veda/malai-kofta.png'
+    image: '/images/veda/butter-chicken.png'
   },
   {
     id: 'veda-10',
@@ -97,7 +97,7 @@ export const vedaMenu: MenuItem[] = [
     price: 15,
     category: 'Desserts',
     spiceLevel: 0,
-    image: '/images/veda/gulab-jamun.png'
+    image: '/images/veda/lamb-biryani.png'
   },
   {
     id: 'veda-11',
@@ -106,7 +106,7 @@ export const vedaMenu: MenuItem[] = [
     price: 12,
     category: 'Beverages',
     spiceLevel: 0,
-    image: '/images/veda/mango-lassi.png'
+    image: '/images/veda/butter-chicken.png'
   },
   {
     id: 'veda-12',
@@ -115,7 +115,7 @@ export const vedaMenu: MenuItem[] = [
     price: 10,
     category: 'Beverages',
     spiceLevel: 0,
-    image: '/images/veda/masala-chai.png'
+    image: '/images/veda/lamb-biryani.png'
   }
 ];
 
