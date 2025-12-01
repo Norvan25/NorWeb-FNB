@@ -3,6 +3,7 @@ import { ShoppingCart, Flame, X, Minus, Plus, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
+import { FloatingMandala } from '../components/Veda/FloatingMandala';
 
 interface MenuItem {
   id: string;
@@ -167,8 +168,16 @@ export const Veda = () => {
   const deliveryFee = subtotal > 150 ? 0 : 8;
   const total = subtotal + sst + deliveryFee;
 
+  const bodyBackgroundStyle = {
+    backgroundImage: 'linear-gradient(rgba(91, 33, 182, 0.75), rgba(76, 29, 149, 0.85)), url(/images/veda/veda-pattern.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
+  };
+
   return (
-    <div className="min-h-screen bg-purple-900 text-white">
+    <div className="min-h-screen text-white relative" style={bodyBackgroundStyle}>
+      <FloatingMandala />
       <header className="sticky top-0 z-40 bg-purple-800 border-b border-yellow-400">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -252,22 +261,28 @@ export const Veda = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredMenu.map((item) => (
-              <div key={item.id} className="bg-purple-700 rounded-lg overflow-hidden border-2 border-yellow-400">
-                <div className="aspect-[4/3] bg-purple-600">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredMenu.map((item, index) => (
+              <div key={item.id} className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-amber-600/20 rounded-lg transform rotate-1 group-hover:rotate-2 transition-transform" />
 
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-yellow-400 flex-1">
-                      {item.name}
-                    </h3>
+                <div
+                  className="relative bg-teal-900/80 backdrop-blur-sm rounded-lg overflow-hidden border-2 border-amber-500/40 group-hover:border-amber-400 shadow-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-amber-500/20"
+                  style={{ transform: `rotate(${index % 2 === 0 ? -0.5 : 0.5}deg)` }}
+                >
+                  <div className="aspect-[4/3] bg-teal-950 overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="p-6 bg-gradient-to-b from-teal-900 to-teal-950">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-xl font-bold text-yellow-500 flex-1">
+                        {item.name}
+                      </h3>
                     {item.spiceLevel && item.spiceLevel > 0 && (
                       <div className="flex gap-1 ml-2">
                         {[...Array(item.spiceLevel)].map((_, i) => (
@@ -277,25 +292,26 @@ export const Veda = () => {
                     )}
                   </div>
 
-                  <p className="text-white text-sm mb-4">
-                    {item.description}
-                  </p>
+                    <p className="text-purple-200 text-sm mb-4 leading-relaxed">
+                      {item.description}
+                    </p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-yellow-400">
-                      RM {item.price.toFixed(2)}
-                    </span>
+                    <div className="flex items-center justify-between pt-3 border-t border-teal-700">
+                      <span className="text-3xl font-bold text-amber-400">
+                        RM {item.price.toFixed(2)}
+                      </span>
 
-                    <button
-                      onClick={() => handleAddToCart(item)}
-                      className={`px-5 py-2 font-semibold rounded ${
-                        addedItems.has(item.id)
-                          ? 'bg-green-600 text-white'
-                          : 'bg-amber-500 hover:bg-amber-600 text-white'
-                      }`}
-                    >
-                      {addedItems.has(item.id) ? 'ADDED' : 'ADD'}
-                    </button>
+                      <button
+                        onClick={() => handleAddToCart(item)}
+                        className={`px-5 py-2 font-semibold rounded transition-all duration-300 ${
+                          addedItems.has(item.id)
+                            ? 'bg-green-600 text-white border-2 border-green-600'
+                            : 'bg-gradient-to-r from-amber-500 to-amber-600 text-purple-900 hover:from-amber-400 hover:to-amber-500 shadow-lg'
+                        }`}
+                      >
+                        {addedItems.has(item.id) ? 'ADDED' : 'ADD'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
