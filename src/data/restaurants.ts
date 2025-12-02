@@ -58,18 +58,18 @@ export const restaurants: Restaurant[] = [
     icon: '🍝'
   },
   {
-    id: 'kanso',
-    name: 'KANSO',
+    id: 'zenkitcho',
+    name: 'ZEN KITCHO',
     cuisine: 'Japanese Cuisine',
-    tagline: 'The Art of Less',
-    description: 'Minimalist perfection where every element serves a purpose, celebrating the beauty of simplicity.',
+    tagline: 'Tranquil Precision',
+    description: 'Minimalist perfection where every element serves a purpose, celebrating the beauty of simplicity and discipline.',
     theme: {
-      primary: '#4a4a4a',
-      secondary: '#d4c5b9',
-      accent: '#8b7355',
-      gradient: 'from-stone-800 via-neutral-700 to-stone-600'
+      primary: '#2d2d2d',
+      secondary: '#f5f5f0',
+      accent: '#dc143c',
+      gradient: 'from-gray-900 via-gray-700 to-gray-600'
     },
-    icon: '⛩️'
+    icon: '🍣'
   },
   {
     id: 'dune',
