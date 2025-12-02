@@ -131,7 +131,16 @@ export const Gusto = () => {
         </div>
       </section>
 
-      <section className="relative py-24 px-6 bg-white/90">
+      <section
+        className="relative py-24 px-6"
+        style={{
+          backgroundImage: "url('/images/gusto/gusto-texture.png')",
+          backgroundRepeat: 'repeat',
+          backgroundPosition: 'top left',
+          backgroundSize: '400px',
+          backgroundColor: '#f9f6f1'
+        }}
+      >
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-6xl font-serif font-bold text-stone-700 mb-6">Our Menu</h2>
