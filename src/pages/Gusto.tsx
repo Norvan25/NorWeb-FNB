@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, X, Minus, Plus, Home } from 'lucide-react';
+import { ShoppingCart, X, Minus, Plus, Home, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
@@ -55,18 +55,7 @@ export const Gusto = () => {
   const total = subtotal + sst + deliveryFee;
 
   return (
-    <div
-      className="min-h-screen text-stone-800 relative"
-      style={{
-        backgroundImage: "url('/images/gusto/gusto-texture.png')",
-        backgroundSize: '400px',
-        backgroundRepeat: 'repeat',
-        backgroundAttachment: 'fixed',
-        backgroundColor: '#f5f5dc'
-      }}
-    >
-      <div className="absolute inset-0 bg-stone-50/70" style={{ pointerEvents: 'none' }} />
-
+    <div className="min-h-screen text-stone-800 bg-stone-50">
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-stone-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -108,7 +97,7 @@ export const Gusto = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
           <h1 className="text-8xl md:text-9xl font-serif font-bold text-white mb-6 drop-shadow-2xl tracking-wider">
@@ -118,12 +107,25 @@ export const Gusto = () => {
             La Dolce Vita
           </p>
         </div>
+
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <ChevronDown size={48} className="text-white drop-shadow-2xl" strokeWidth={2.5} />
+        </div>
       </section>
 
-      <section className="relative py-24 px-6 bg-stone-50/95">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-6xl font-serif font-bold text-stone-700 mb-8">About GUSTO</h2>
-          <p className="text-xl text-stone-600 leading-relaxed">
+      <section
+        className="relative py-24 px-6"
+        style={{
+          backgroundImage: "url('/images/gusto/gusto-bg-about.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-white/80" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-6xl font-serif font-bold text-stone-800 mb-8">About GUSTO</h2>
+          <p className="text-xl text-stone-700 leading-relaxed">
             At GUSTO, we celebrate the rustic elegance of authentic Italian cuisine. Each dish is crafted
             with passion, honoring centuries-old traditions while embracing the simple beauty of fresh,
             seasonal ingredients. Experience the warmth of Italian hospitality in every bite.
@@ -174,7 +176,7 @@ export const Gusto = () => {
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 12px 24px rgba(139, 69, 19, 0.15)';
+                  e.currentTarget.style.boxShadow = '0 12px 24px rgba(181, 101, 29, 0.2)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
@@ -223,7 +225,7 @@ export const Gusto = () => {
         </div>
       </section>
 
-      <section className="relative py-24 px-6 bg-stone-100/90">
+      <section className="relative py-24 px-6 bg-stone-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-6xl font-serif font-bold text-stone-700 mb-4">Gallery</h2>
@@ -231,9 +233,9 @@ export const Gusto = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { src: '/images/gusto/gusto-hero.png', label: 'Rustic Interior' },
-              { src: '/images/gusto/gusto-pizza.png', label: 'Margherita Pizza' },
-              { src: '/images/gusto/gusto-texture.png', label: 'Tuscan Details' }
+              { src: '/images/gusto/gusto-gallery-exterior.png', label: 'Tuscan Villa' },
+              { src: '/images/gusto/gusto-gallery-wine.png', label: 'Wine Cellar' },
+              { src: '/images/gusto/gusto-gallery-dining.png', label: 'Dining Hall' }
             ].map((item, i) => (
               <div
                 key={i}
@@ -250,18 +252,27 @@ export const Gusto = () => {
         </div>
       </section>
 
-      <section className="relative py-24 px-6 bg-white/90">
-        <div className="max-w-4xl mx-auto">
+      <section
+        className="relative py-24 px-6"
+        style={{
+          backgroundImage: "url('/images/gusto/gusto-bg-booking.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-stone-700 mb-6">
+            <h2 className="text-6xl font-serif font-bold text-white mb-6 drop-shadow-2xl">
               Reserve Your Table
             </h2>
-            <p className="text-stone-600 text-xl">
+            <p className="text-white text-xl drop-shadow-lg">
               Experience authentic Italian hospitality
             </p>
           </div>
 
-          <div className="bg-stone-50 border border-stone-200 rounded-2xl p-12 shadow-xl">
+          <div className="bg-white/95 backdrop-blur-sm border border-stone-200 rounded-2xl p-12 shadow-2xl">
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -272,7 +283,7 @@ export const Gusto = () => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-stone-600 focus:outline-none transition-all focus:shadow-md"
+                    className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-green-700 focus:outline-none transition-all"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -285,7 +296,7 @@ export const Gusto = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-stone-600 focus:outline-none transition-all focus:shadow-md"
+                    className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-green-700 focus:outline-none transition-all"
                     placeholder="+60 12-345 6789"
                   />
                 </div>
@@ -299,7 +310,7 @@ export const Gusto = () => {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-stone-600 focus:outline-none transition-all focus:shadow-md"
+                  className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-green-700 focus:outline-none transition-all"
                   placeholder="your@email.com"
                 />
               </div>
@@ -313,7 +324,7 @@ export const Gusto = () => {
                     type="date"
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 focus:border-stone-600 focus:outline-none transition-all focus:shadow-md"
+                    className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 focus:border-green-700 focus:outline-none transition-all"
                   />
                 </div>
 
@@ -325,7 +336,7 @@ export const Gusto = () => {
                     type="time"
                     value={formData.time}
                     onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                    className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 focus:border-stone-600 focus:outline-none transition-all focus:shadow-md"
+                    className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 focus:border-green-700 focus:outline-none transition-all"
                   />
                 </div>
 
@@ -336,7 +347,7 @@ export const Gusto = () => {
                   <select
                     value={formData.guests}
                     onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                    className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 focus:border-stone-600 focus:outline-none transition-all focus:shadow-md"
+                    className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 focus:border-green-700 focus:outline-none transition-all"
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
                       <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
@@ -353,14 +364,15 @@ export const Gusto = () => {
                   value={formData.specialRequest}
                   onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
                   rows={4}
-                  className="w-full px-6 py-4 bg-white border border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-stone-600 focus:outline-none transition-all resize-y focus:shadow-md"
+                  className="w-full px-6 py-4 bg-white border-2 border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:border-green-700 focus:outline-none transition-all resize-y"
                   placeholder="Any dietary preferences or special occasion?"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-5 bg-stone-700 text-white font-bold text-lg rounded-lg hover:bg-stone-800 transition-all shadow-lg hover:shadow-xl"
+                style={{ backgroundColor: '#55704a' }}
+                className="w-full py-5 text-white font-bold text-lg rounded-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
               >
                 Confirm Reservation
               </button>
@@ -369,7 +381,7 @@ export const Gusto = () => {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-stone-800 text-white">
+      <section style={{ backgroundColor: '#55704a' }} className="py-20 px-6 text-white">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-6xl font-serif font-bold mb-8">Contact Us</h2>
           <div className="space-y-3 text-lg">
