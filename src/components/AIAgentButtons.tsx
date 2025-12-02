@@ -7,6 +7,12 @@ interface AIAgentButtonsProps {
   themeColor: string;
 }
 
+const IconWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <span className={`inline-flex items-center justify-center ${className}`}>
+    {children}
+  </span>
+);
+
 export const AIAgentButtons = ({ waiterName, themeColor }: AIAgentButtonsProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -44,7 +50,9 @@ export const AIAgentButtons = ({ waiterName, themeColor }: AIAgentButtonsProps) 
               className={`${colors.bg} ${colors.hover} text-white px-6 py-4 rounded-full font-bold flex items-center gap-3 shadow-2xl border-2 ${colors.border} transition-all`}
               onClick={() => alert(`Initiating voice call with ${waiterName}...`)}
             >
-              <Mic size={24} strokeWidth={2.5} />
+              <IconWrapper className="text-white">
+                <Mic size={24} strokeWidth={2.5} className="text-white" />
+              </IconWrapper>
               <span className="whitespace-nowrap">Talk to {waiterName}</span>
             </motion.button>
 
@@ -56,7 +64,9 @@ export const AIAgentButtons = ({ waiterName, themeColor }: AIAgentButtonsProps) 
               className={`${colors.bg} ${colors.hover} text-white px-6 py-4 rounded-full font-bold flex items-center gap-3 shadow-2xl border-2 ${colors.border} transition-all`}
               onClick={() => alert(`Opening chat with ${waiterName}...`)}
             >
-              <MessageSquare size={24} strokeWidth={2.5} />
+              <IconWrapper className="text-white">
+                <MessageSquare size={24} strokeWidth={2.5} className="text-white" />
+              </IconWrapper>
               <span className="whitespace-nowrap">Chat to {waiterName}</span>
             </motion.button>
           </>
@@ -70,7 +80,9 @@ export const AIAgentButtons = ({ waiterName, themeColor }: AIAgentButtonsProps) 
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Bot size={32} strokeWidth={2.5} />
+        <IconWrapper className="text-white">
+          <Bot size={32} strokeWidth={2.5} className="text-white" />
+        </IconWrapper>
       </motion.button>
     </div>
   );
