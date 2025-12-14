@@ -577,7 +577,7 @@ export const Rouge = () => {
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
               className="fixed right-0 top-0 h-full w-full md:w-[450px] bg-stone-50 border-l-4 border-amber-700 z-50 flex flex-col shadow-2xl"
             >
-              <div className="p-6 border-b-2 border-amber-700/30 flex items-center justify-between bg-red-950">
+              <div className="p-6 border-b-2 border-amber-700/30 flex items-center justify-between bg-red-950 shrink-0">
                 <h3 className="text-2xl font-bold text-amber-100" style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}>
                   Your Order
                 </h3>
@@ -589,99 +589,101 @@ export const Rouge = () => {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6">
-                {cartItems.length === 0 ? (
-                  <div className="text-center py-12">
+              {cartItems.length === 0 ? (
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="text-center">
                     <ShoppingCart size={48} className="mx-auto text-stone-400 mb-4" />
                     <p className="text-stone-600">Your cart is empty</p>
                   </div>
-                ) : (
-                  <div className="space-y-4">
-                    {cartItems.map((item) => (
-                      <div
-                        key={item.id}
-                        className="bg-white border-2 border-stone-200 p-4 flex items-center gap-4 shadow-sm"
-                      >
-                        {item.image && (
-                          <OptimizedImage
-                            src={item.image}
-                            alt={item.name}
-                            className="w-16 h-16 object-cover"
-                            priority={false}
-                            onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                            }}
-                          />
-                        )}
-
-                        <div className="flex-1">
-                          <h4 className="font-bold text-red-900 mb-1">{item.name}</h4>
-                          <p className="text-amber-700 font-bold">RM {item.price.toFixed(2)}</p>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="w-8 h-8 flex items-center justify-center border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white transition-colors"
-                          >
-                            <Minus size={16} />
-                          </button>
-
-                          <span className="w-8 text-center font-bold text-red-900">{item.quantity}</span>
-
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-8 h-8 flex items-center justify-center border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white transition-colors"
-                          >
-                            <Plus size={16} />
-                          </button>
-                        </div>
-
-                        <button
-                          onClick={() => removeFromCart(item.id)}
-                          className="text-red-600 hover:text-red-800 transition-colors"
-                        >
-                          <X size={20} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {cartItems.length > 0 && (
-                <div className="border-t-2 border-amber-700/30 p-6 bg-white">
-                  <div className="space-y-2 mb-4">
-                    <div className="flex justify-between text-stone-600">
-                      <span>Subtotal</span>
-                      <span>RM {subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between text-stone-600">
-                      <span>SST (6%)</span>
-                      <span>RM {(subtotal * 0.06).toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between text-stone-600">
-                      <span>Delivery</span>
-                      <span>RM 8.00</span>
-                    </div>
-                    <div className="pt-2 border-t-2 border-stone-300 flex justify-between text-red-900 text-xl font-bold">
-                      <span>TOTAL</span>
-                      <span className="text-amber-700">RM {(subtotal * 1.06 + 8).toFixed(2)}</span>
-                    </div>
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      setIsCartOpen(false);
-                      setIsCheckoutOpen(true);
-                    }}
-                    className="w-full py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg tracking-wider transition-colors shadow-lg"
-                  >
-                    PROCEED TO CHECKOUT
-                  </motion.button>
                 </div>
+              ) : (
+                <>
+                  <div className="flex-1 overflow-y-auto p-6">
+                    <div className="space-y-4">
+                      {cartItems.map((item) => (
+                        <div
+                          key={item.id}
+                          className="bg-white border-2 border-stone-200 p-4 flex items-center gap-4 shadow-sm"
+                        >
+                          {item.image && (
+                            <OptimizedImage
+                              src={item.image}
+                              alt={item.name}
+                              className="w-16 h-16 object-cover"
+                              priority={false}
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                            />
+                          )}
+
+                          <div className="flex-1">
+                            <h4 className="font-bold text-red-900 mb-1">{item.name}</h4>
+                            <p className="text-amber-700 font-bold">RM {item.price.toFixed(2)}</p>
+                          </div>
+
+                          <div className="flex items-center gap-3">
+                            <button
+                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              className="w-8 h-8 flex items-center justify-center border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white transition-colors"
+                            >
+                              <Minus size={16} />
+                            </button>
+
+                            <span className="w-8 text-center font-bold text-red-900">{item.quantity}</span>
+
+                            <button
+                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              className="w-8 h-8 flex items-center justify-center border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white transition-colors"
+                            >
+                              <Plus size={16} />
+                            </button>
+                          </div>
+
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="text-red-600 hover:text-red-800 transition-colors"
+                          >
+                            <X size={20} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t-2 border-amber-700/30 p-6 bg-white shrink-0">
+                    <div className="space-y-2 mb-4">
+                      <div className="flex justify-between text-stone-600">
+                        <span>Subtotal</span>
+                        <span>RM {subtotal.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-stone-600">
+                        <span>SST (6%)</span>
+                        <span>RM {(subtotal * 0.06).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-stone-600">
+                        <span>Delivery</span>
+                        <span>RM 8.00</span>
+                      </div>
+                      <div className="pt-2 border-t-2 border-stone-300 flex justify-between text-red-900 text-xl font-bold">
+                        <span>TOTAL</span>
+                        <span className="text-amber-700">RM {(subtotal * 1.06 + 8).toFixed(2)}</span>
+                      </div>
+                    </div>
+
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        setIsCartOpen(false);
+                        setIsCheckoutOpen(true);
+                      }}
+                      className="w-full py-4 bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg tracking-wider transition-colors shadow-lg"
+                    >
+                      PROCEED TO CHECKOUT
+                    </motion.button>
+                  </div>
+                </>
               )}
             </motion.div>
           </>

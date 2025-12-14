@@ -609,10 +609,10 @@ export const Rimba = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-[#0a0f0a] border-l border-[#D4AF37]/20 z-50 overflow-y-auto"
+              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-[#0a0f0a] border-l border-[#D4AF37]/20 z-50 flex flex-col"
             >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-8">
+              <div className="p-6 shrink-0">
+                <div className="flex justify-between items-center">
                   <h3 className="text-2xl font-serif font-bold">Your Order</h3>
                   <motion.button
                     whileHover={{ scale: 1.1, rotate: 90 }}
@@ -623,15 +623,19 @@ export const Rimba = () => {
                     <X size={24} />
                   </motion.button>
                 </div>
+              </div>
 
-                {cartItems.length === 0 ? (
-                  <div className="text-center py-20">
+              {cartItems.length === 0 ? (
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="text-center">
                     <div className="text-6xl mb-4 opacity-20">🛒</div>
                     <p className="text-gray-500">Your cart is empty</p>
                   </div>
-                ) : (
-                  <>
-                    <div className="space-y-4 mb-8">
+                </div>
+              ) : (
+                <>
+                  <div className="flex-1 overflow-y-auto px-6">
+                    <div className="space-y-4 pb-6">
                       {cartItems.map(item => (
                         <motion.div
                           key={item.id}
@@ -684,8 +688,10 @@ export const Rimba = () => {
                         </motion.div>
                       ))}
                     </div>
+                  </div>
 
-                    <div className="border-t border-[#D4AF37]/20 pt-6 space-y-3">
+                  <div className="p-6 border-t border-[#D4AF37]/20 bg-[#0a0f0a] shrink-0">
+                    <div className="space-y-3 mb-4">
                       <div className="flex justify-between text-gray-400">
                         <span>Subtotal</span>
                         <span>RM {subtotal.toFixed(2)}</span>
@@ -722,13 +728,13 @@ export const Rimba = () => {
                         setIsCartOpen(false);
                         setIsCheckoutOpen(true);
                       }}
-                      className="w-full mt-6 py-4 bg-[#D4AF37] text-[#0a0f0a] font-bold text-lg rounded-xl hover:bg-[#c4a02f] transition-colors"
+                      className="w-full py-4 bg-[#D4AF37] text-[#0a0f0a] font-bold text-lg rounded-xl hover:bg-[#c4a02f] transition-colors"
                     >
                       Proceed to Checkout
                     </motion.button>
-                  </>
-                )}
-              </div>
+                  </div>
+                </>
+              )}
             </motion.div>
           </>
         )}

@@ -403,14 +403,14 @@ export const Gusto = () => {
 
       {isCartOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
           onClick={() => setIsCartOpen(false)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-2xl max-w-md w-full max-h-[80vh] overflow-hidden border border-stone-200 shadow-2xl"
+            className="bg-white rounded-t-2xl md:rounded-2xl max-w-md w-full max-h-[90vh] md:max-h-[80vh] flex flex-col border border-stone-200 shadow-2xl"
           >
-            <div className="p-6 border-b border-stone-200 flex items-center justify-between bg-stone-50">
+            <div className="p-6 border-b border-stone-200 flex items-center justify-between bg-stone-50 shrink-0">
               <h2 className="text-2xl font-bold text-stone-800">Your Cart</h2>
               <button
                 onClick={() => setIsCartOpen(false)}
@@ -420,7 +420,7 @@ export const Gusto = () => {
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto max-h-[50vh]">
+            <div className="p-6 overflow-y-auto flex-1">
               {cartItems.length === 0 ? (
                 <p className="text-center text-stone-600 py-8">Your cart is empty</p>
               ) : (
@@ -466,7 +466,7 @@ export const Gusto = () => {
             </div>
 
             {cartItems.length > 0 && (
-              <div className="p-6 border-t border-stone-200 bg-stone-50">
+              <div className="p-6 border-t border-stone-200 bg-stone-50 shrink-0">
                 <div className="space-y-2 mb-4 text-sm">
                   <div className="flex justify-between text-stone-700">
                     <span>Subtotal</span>

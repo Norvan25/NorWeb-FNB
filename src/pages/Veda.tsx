@@ -445,14 +445,14 @@ export const Veda = () => {
 
       {isCartOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
           onClick={() => setIsCartOpen(false)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-purple-900 rounded-2xl max-w-md w-full max-h-[80vh] overflow-hidden border-2 border-yellow-400 shadow-2xl"
+            className="bg-purple-900 rounded-t-2xl md:rounded-2xl max-w-md w-full max-h-[90vh] md:max-h-[80vh] flex flex-col border-2 border-yellow-400 shadow-2xl"
           >
-            <div className="p-6 border-b border-purple-800 flex items-center justify-between bg-purple-800">
+            <div className="p-6 border-b border-purple-800 flex items-center justify-between bg-purple-800 shrink-0">
               <h2 className="text-2xl font-bold text-yellow-400">Your Cart</h2>
               <button
                 onClick={() => setIsCartOpen(false)}
@@ -462,7 +462,7 @@ export const Veda = () => {
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto max-h-[50vh]">
+            <div className="p-6 overflow-y-auto flex-1">
               {cartItems.length === 0 ? (
                 <p className="text-center text-white py-8">Your cart is empty</p>
               ) : (
@@ -508,7 +508,7 @@ export const Veda = () => {
             </div>
 
             {cartItems.length > 0 && (
-              <div className="p-6 border-t border-purple-800 bg-purple-800">
+              <div className="p-6 border-t border-purple-800 bg-purple-800 shrink-0">
                 <div className="space-y-2 mb-4 text-sm">
                   <div className="flex justify-between text-white">
                     <span>Subtotal</span>
