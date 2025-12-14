@@ -3,8 +3,33 @@ import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';
 import { Sparkles, Moon, Calendar, Wallet, Rocket, Palette, Bot, Target, Award, Users } from 'lucide-react';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
+import { SchedulingModal } from '../components/SchedulingModal';
+import { ElevenLabsWidget } from '../components/ElevenLabsWidget';
+import { useState, useEffect } from 'react';
 
 export const LandingHub = () => {
+  const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
+  const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
+
+  const openSchedulingModal = (type: 'strategy' | 'norcast') => {
+    setSchedulingType(type);
+    setSchedulingModalOpen(true);
+  };
+
+  const triggerElevenLabsAgent = () => {
+    const elevenLabsWidget = document.querySelector('elevenlabs-convai');
+    if (elevenLabsWidget) {
+      const shadowRoot = elevenLabsWidget.shadowRoot;
+      if (shadowRoot) {
+        const button = shadowRoot.querySelector('[part="button"]') as HTMLElement;
+        if (button) {
+          button.click();
+        }
+      }
+    }
+    document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <FloatingFNBIcons />
@@ -85,7 +110,7 @@ export const LandingHub = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
-                onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={triggerElevenLabsAgent}
               >
                 Talk to Nova
               </motion.button>
@@ -274,7 +299,7 @@ export const LandingHub = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
-                  onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => openSchedulingModal('norcast')}
                 >
                   Ask Agent About NorCast
                 </motion.button>
@@ -299,7 +324,7 @@ export const LandingHub = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
-                    onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={triggerElevenLabsAgent}
                   >
                     Talk to Nova
                   </motion.button>
@@ -307,6 +332,7 @@ export const LandingHub = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
+                    onClick={() => openSchedulingModal('strategy')}
                   >
                     Schedule a Strategy Call
                   </motion.button>
@@ -343,12 +369,14 @@ export const LandingHub = () => {
                 className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-2xl p-12 backdrop-blur-sm"
                 style={{ minHeight: '400px' }}
               >
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center">
-                    <Bot className="mx-auto mb-4 text-purple-400" size={64} />
-                    <p className="text-xl text-gray-400">Agent widget loading...</p>
-                    <p className="text-sm text-gray-500 mt-2">ElevenLabs widget will be embedded here</p>
-                  </div>
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  <Bot className="mb-6 text-purple-400" size={64} />
+                  <h3 className="text-2xl font-bold text-white mb-3">Meet Nova</h3>
+                  <p className="text-gray-400 mb-8 max-w-2xl">
+                    Click the glowing button below to start a voice conversation with Nova, our AI consultant.
+                    Ask about pricing, features, implementation timelines, or anything else about NorWeb.
+                  </p>
+                  <ElevenLabsWidget />
                 </div>
               </motion.div>
             </div>
@@ -363,6 +391,12 @@ export const LandingHub = () => {
           </footer>
         </div>
       </motion.div>
+
+      <SchedulingModal
+        isOpen={schedulingModalOpen}
+        onClose={() => setSchedulingModalOpen(false)}
+        type={schedulingType}
+      />
     </div>
   );
 };
