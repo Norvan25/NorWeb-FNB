@@ -64,8 +64,8 @@ export const LandingHub = () => {
               className="text-center max-w-3xl mb-20"
             >
               <p className="text-xl text-gray-300 leading-relaxed">
-                Experience six distinctive culinary worlds, each crafted with meticulous attention to detail.
-                One platform. Six universes. Infinite possibilities.
+                Experience four distinctive culinary worlds, each crafted with meticulous attention to detail.
+                One platform. Four universes. Infinite possibilities.
               </p>
             </motion.div>
 
@@ -96,11 +96,11 @@ export const LandingHub = () => {
                 Our Brands
               </h2>
               <p className="text-gray-400 text-lg">
-                Six distinct identities, one exceptional platform
+                Four distinct identities, one exceptional platform
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {restaurants.map((restaurant, index) => (
                 <CuisineCard key={restaurant.id} restaurant={restaurant} index={index} />
               ))}
