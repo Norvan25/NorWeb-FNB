@@ -2,10 +2,26 @@ import { motion } from 'framer-motion';
 import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';
 import { Sparkles, Moon, Calendar, Wallet, Rocket, Palette, Bot, Target, Award, Users } from 'lucide-react';
+import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 
 export const LandingHub = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
+      <FloatingFNBIcons />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-6 left-6 z-50"
+      >
+        <img
+          src="/images/norvan_logo_only.svg"
+          alt="Norvan Logo"
+          className="w-16 h-16 md:w-20 md:h-20 opacity-90 hover:opacity-100 transition-opacity"
+        />
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

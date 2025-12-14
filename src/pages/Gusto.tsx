@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { gustoMenu, categories, MenuItem } from '../data/gusto-menu';
+import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
+import { motion } from 'framer-motion';
 
 export const Gusto = () => {
   const navigate = useNavigate();
@@ -62,6 +64,21 @@ export const Gusto = () => {
         '/images/gusto/gusto-hero.png',
         '/images/gusto/gusto-texture.png'
       ]} />
+      <FloatingFNBIcons />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-6 left-6 z-50"
+      >
+        <img
+          src="/images/norvan_logo_only.svg"
+          alt="Norvan Logo"
+          className="w-12 h-12 md:w-16 md:h-16 opacity-80 hover:opacity-100 transition-opacity"
+        />
+      </motion.div>
+
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-stone-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-6">

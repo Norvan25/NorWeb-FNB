@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { FloatingMandala } from '../components/Veda/FloatingMandala';
+import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
+import { motion } from 'framer-motion';
 
 export const Veda = () => {
   const navigate = useNavigate();
@@ -75,6 +77,20 @@ export const Veda = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-purple-900/50 to-purple-900/60" style={{ pointerEvents: 'none' }} />
 
       <FloatingMandala />
+      <FloatingFNBIcons />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-6 left-6 z-50"
+      >
+        <img
+          src="/images/norvan_logo_only.svg"
+          alt="Norvan Logo"
+          className="w-12 h-12 md:w-16 md:h-16 opacity-80 hover:opacity-100 transition-opacity"
+        />
+      </motion.div>
 
       <header className="sticky top-0 z-40 bg-purple-900/95 backdrop-blur-xl border-b-2 border-yellow-400/40 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">

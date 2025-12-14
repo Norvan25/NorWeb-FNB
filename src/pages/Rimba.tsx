@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { FireflyField } from '../components/Rimba/FireflyField';
+import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 
@@ -94,6 +95,20 @@ export const Rimba = () => {
         '/images/rimba/rimba-pattern.png'
       ]} />
       <FireflyField />
+      <FloatingFNBIcons />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-6 left-6 z-50"
+      >
+        <img
+          src="/images/norvan_logo_only.svg"
+          alt="Norvan Logo"
+          className="w-12 h-12 md:w-16 md:h-16 opacity-80 hover:opacity-100 transition-opacity"
+        />
+      </motion.div>
 
       <motion.nav
         initial={{ y: -100 }}
