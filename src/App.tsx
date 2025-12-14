@@ -6,7 +6,6 @@ import { Rimba } from './pages/Rimba';
 import { Rouge } from './pages/Rouge';
 import { Veda } from './pages/Veda';
 import { Gusto } from './pages/Gusto';
-import { ZenKitcho } from './pages/ZenKitcho';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Route path="/restaurant/rouge" element={<Rouge />} />
           <Route path="/restaurant/veda" element={<Veda />} />
           <Route path="/restaurant/gusto" element={<Gusto />} />
-          <Route path="/restaurant/zenkitcho" element={<ZenKitcho />} />
           <Route path="/restaurant/:id" element={<RestaurantPage />} />
         </Routes>
       </Router>

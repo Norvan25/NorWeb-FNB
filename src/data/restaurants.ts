@@ -56,33 +56,5 @@ export const restaurants: Restaurant[] = [
       gradient: 'from-green-700 via-red-600 to-amber-50'
     },
     icon: '🍝'
-  },
-  {
-    id: 'zenkitcho',
-    name: 'ZEN KITCHO',
-    cuisine: 'Japanese Cuisine',
-    tagline: 'Tranquil Precision',
-    description: 'Minimalist perfection where every element serves a purpose, celebrating the beauty of simplicity and discipline.',
-    theme: {
-      primary: '#2d2d2d',
-      secondary: '#f5f5f0',
-      accent: '#dc143c',
-      gradient: 'from-gray-900 via-gray-700 to-gray-600'
-    },
-    icon: '🍣'
-  },
-  {
-    id: 'dune',
-    name: 'DUNE',
-    cuisine: 'Middle Eastern Cuisine',
-    tagline: 'Desert Opulence',
-    description: 'Where ancient traditions meet luxury, crafting an oasis of refined Middle Eastern gastronomy.',
-    theme: {
-      primary: '#c2b280',
-      secondary: '#b8860b',
-      accent: '#8b4513',
-      gradient: 'from-amber-700 via-yellow-800 to-orange-900'
-    },
-    icon: '🏜️'
   }
 ];
