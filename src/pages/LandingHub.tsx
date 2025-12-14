@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';
-import { Sparkles, TrendingUp, Zap, Globe, Shield, Clock } from 'lucide-react';
+import { Sparkles, Moon, Calendar, Wallet, Rocket, Palette, Bot, Target, Award, Users } from 'lucide-react';
 
 export const LandingHub = () => {
   return (
@@ -36,17 +36,17 @@ export const LandingHub = () => {
                 <Sparkles className="text-yellow-400" size={48} />
               </motion.div>
 
-              <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-                NorWeb
+              <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
+                Your Restaurant. Open 24 Hours. Zero Extra Staff.
               </h1>
 
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-2xl md:text-3xl text-gray-400 font-light tracking-wide"
+                className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto"
               >
-                Universal F&B Platform
+                No more missed calls. No more DM chaos. No more 30% to delivery platforms. NorWeb handles bookings, orders, and customer questions — all inside YOUR business. Guaranteed 30% sales increase in 3 weeks.
               </motion.p>
 
               <motion.div
@@ -58,29 +58,26 @@ export const LandingHub = () => {
             </motion.div>
 
             <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.9 }}
-              className="text-center max-w-3xl mb-20"
-            >
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Experience four distinctive culinary worlds, each crafted with meticulous attention to detail.
-                One platform. Four universes. Infinite possibilities.
-              </p>
-            </motion.div>
-
-            <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.2 }}
+              transition={{ delay: 0.9 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-12 py-4 bg-white text-black text-lg font-bold rounded-full hover:bg-gray-100 transition-colors"
+                className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
+                onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Talk to Our Agent
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
                 onClick={() => document.getElementById('brands')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Explore Brands
+                See Live Demos
               </motion.button>
             </motion.div>
           </section>
@@ -93,10 +90,10 @@ export const LandingHub = () => {
               className="mb-16 text-center"
             >
               <h2 className="text-5xl md:text-6xl font-bold mb-4">
-                Our Brands
+                Don't Watch a Demo. Live It.
               </h2>
-              <p className="text-gray-400 text-lg">
-                Four distinct identities, one exceptional platform
+              <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+                Click any restaurant. Order food. Book a table. Ask questions. This is what YOUR customers will experience.
               </p>
             </motion.div>
 
@@ -117,44 +114,44 @@ export const LandingHub = () => {
                 className="text-center mb-20"
               >
                 <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                  For Restaurant Owners
+                  Still Losing Money to Third-Party Apps?
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Transform your restaurant's digital presence with our enterprise-grade platform
+                  They take 30%. They own your customer data. They call the shots. Take back control.
                 </p>
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
                   {
-                    icon: TrendingUp,
-                    title: 'Revenue Growth',
-                    description: 'Increase online orders by up to 300% with our conversion-optimized design system'
+                    icon: Moon,
+                    title: 'Orders While You Sleep',
+                    description: '3am cravings become 3am revenue. NorWeb takes orders 24/7 — no commission, no missed DMs.'
                   },
                   {
-                    icon: Zap,
-                    title: 'Lightning Fast',
-                    description: 'Sub-second load times ensure customers never wait, maximizing conversion rates'
+                    icon: Calendar,
+                    title: 'Reservations Without Chaos',
+                    description: 'No double-bookings. No phone tag. Customers book themselves. You just cook.'
                   },
                   {
-                    icon: Globe,
-                    title: 'Multi-Brand Ready',
-                    description: 'Manage multiple restaurant concepts from one unified, powerful dashboard'
+                    icon: Wallet,
+                    title: 'Keep Your 30%',
+                    description: 'Food platforms take a third. Direct orders through NorWeb? 0% commission. Your margin, your money.'
                   },
                   {
-                    icon: Shield,
-                    title: 'Enterprise Security',
-                    description: 'Bank-grade security with PCI compliance and data encryption as standard'
+                    icon: Rocket,
+                    title: 'Live in 7 Days',
+                    description: 'Not 7 weeks. Your restaurant webapp — branded and functional — in one week.'
                   },
                   {
-                    icon: Clock,
-                    title: 'Launch in Days',
-                    description: 'Go from zero to live in less than a week with our streamlined onboarding'
+                    icon: Palette,
+                    title: 'Your Brand, Not a Template',
+                    description: 'RIMBA doesn\'t look like GUSTO. Your restaurant won\'t look like your competitor\'s.'
                   },
                   {
-                    icon: Sparkles,
-                    title: 'Premium Design',
-                    description: 'Stand out with award-winning designs that reflect your brand excellence'
+                    icon: Bot,
+                    title: 'AI That Actually Helps',
+                    description: 'Voice agent answers FAQs, takes reservations, handles \'do you have parking?\' — so your staff handles customers.'
                   }
                 ].map((feature, index) => (
                   <motion.div
@@ -175,21 +172,127 @@ export const LandingHub = () => {
                   </motion.div>
                 ))}
               </div>
+            </div>
+          </section>
 
+          <section className="px-6 py-24 bg-gradient-to-b from-black to-gray-900">
+            <div className="max-w-5xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
-                className="text-center mt-16"
+                className="text-center mb-12"
               >
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  Want Full Autopilot?
+                </h2>
+                <p className="text-xl text-gray-400 mb-10">
+                  NorWeb gets customers to your door. Norvan Marketing Automation keeps them coming back.
+                </p>
+
+                <div className="flex flex-wrap justify-center gap-4 mb-10">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="px-6 py-3 bg-white/5 border border-purple-500/30 rounded-full text-gray-300 backdrop-blur-sm"
+                  >
+                    Automated Campaigns
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="px-6 py-3 bg-white/5 border border-purple-500/30 rounded-full text-gray-300 backdrop-blur-sm"
+                  >
+                    Review Collection
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="px-6 py-3 bg-white/5 border border-purple-500/30 rounded-full text-gray-300 backdrop-blur-sm"
+                  >
+                    Loyalty & Reactivation
+                  </motion.div>
+                </div>
+
+                <p className="text-gray-400 mb-6">
+                  Ask our agent about the full package.
+                </p>
+
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
+                  className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
+                  onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Schedule a Demo
+                  Ask About Marketing Automation
                 </motion.button>
+              </motion.div>
+            </div>
+          </section>
+
+          <section className="px-6 py-32 bg-gradient-to-b from-gray-900 to-black">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-12">
+                  Ready to Stop Losing Orders to Instagram DMs?
+                </h2>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
+                    onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Talk to NorWeb Agent
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
+                  >
+                    Schedule a Call
+                  </motion.button>
+                </div>
+
+                <p className="text-gray-500 text-sm">
+                  The agent knows F&B. Ask about pricing, features, or how it handles your rudest customer questions.
+                </p>
+              </motion.div>
+            </div>
+          </section>
+
+          <section id="agent" className="px-6 py-32 bg-gradient-to-b from-black via-gray-900 to-black">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  Meet Your NorWeb Consultant
+                </h2>
+                <p className="text-xl text-gray-400">
+                  AI-powered. F&B-trained. Available now.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-2xl p-12 backdrop-blur-sm"
+                style={{ minHeight: '400px' }}
+              >
+                <div className="flex items-center justify-center h-full">
+                  <div className="text-center">
+                    <Bot className="mx-auto mb-4 text-purple-400" size={64} />
+                    <p className="text-xl text-gray-400">Agent widget loading...</p>
+                    <p className="text-sm text-gray-500 mt-2">ElevenLabs widget will be embedded here</p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </section>
