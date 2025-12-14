@@ -37,7 +37,8 @@ export const LandingHub = () => {
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
-                Your Restaurant. Open 24 Hours. Zero Extra Staff.
+                Your Restaurant. Open 24 Hours.<br />
+                Zero Extra Staff.
               </h1>
 
               <motion.p
@@ -239,7 +240,8 @@ export const LandingHub = () => {
                 viewport={{ once: true }}
               >
                 <h2 className="text-4xl md:text-5xl font-bold mb-12">
-                  Ready to Stop Losing Orders to Instagram DMs?
+                  Ready to Stop Losing Orders<br />
+                  to Instagram DMs?
                 </h2>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
