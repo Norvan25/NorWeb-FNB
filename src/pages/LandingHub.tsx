@@ -53,8 +53,8 @@ export const LandingHub = () => {
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
-                Your Restaurant. Open 24 Hours.<br />
-                Zero Extra Staff.
+                Stop Donating 30% of Your Revenue.<br />
+                Automate Your Restaurant Instead.
               </h1>
 
               <motion.p
@@ -63,8 +63,8 @@ export const LandingHub = () => {
                 transition={{ delay: 0.3 }}
                 className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto"
               >
-                No more missed calls. No more DM chaos. No more 30% to delivery platforms.<br />
-                NorWeb handles bookings, orders, and customer questions — all inside YOUR business. Guaranteed 30% sales increase in 3 weeks.
+                No more missed calls. No more DM chaos. No more paying a "lazy tax" to delivery platforms.<br />
+                NorWeb handles bookings, orders, and questions 24/7 — all inside YOUR business.
               </motion.p>
 
               <motion.div
@@ -87,7 +87,7 @@ export const LandingHub = () => {
                 className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
                 onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Talk to Our Agent
+                Talk to Nova
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -107,12 +107,16 @@ export const LandingHub = () => {
               viewport={{ once: true }}
               className="mb-16 text-center"
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-4">
-                Don't Watch a Demo. Live It.
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                Don't Watch a Demo. Play the Customer.
               </h2>
-              <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-                Click any restaurant. Order food. Book a table. Ask questions.<br />
-                This is what YOUR customers will experience.
+              <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+                Experience the system in 3 ways right now:<br />
+                <span className="block mt-4 text-left max-w-2xl mx-auto">
+                  <span className="font-semibold text-white">1. Click</span> a card to browse the full menu.<br />
+                  <span className="font-semibold text-white">2. Type</span> in the chat widget to order via text.<br />
+                  <span className="font-semibold text-white">3. Talk</span> to the AI Agent to hear the magic live.
+                </span>
               </p>
             </motion.div>
 
@@ -136,8 +140,8 @@ export const LandingHub = () => {
                   Still Losing Money to Third-Party Apps?
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  They take 30%. They own your customer data. They call the shots.<br />
-                  Take back control.
+                  They take 30%. They own your data. They call the shots.<br />
+                  Take back your business.
                 </p>
               </motion.div>
 
@@ -145,33 +149,33 @@ export const LandingHub = () => {
                 {[
                   {
                     icon: Moon,
-                    title: 'Orders While You Sleep',
-                    description: '3am cravings become 3am revenue.\nNorWeb takes orders 24/7 — no commission, no missed DMs.'
+                    title: 'Revenue While You Sleep',
+                    description: '3am cravings become 3am profit.\nNorWeb takes orders 24/7 — 0% commission, 100% yours.'
                   },
                   {
                     icon: Calendar,
-                    title: 'Reservations Without Chaos',
-                    description: 'No double-bookings. No phone tag.\nCustomers book themselves. You just cook.'
+                    title: 'Reservations Without the Phone Tag',
+                    description: 'No double-bookings. No missed calls during rush hour.\nCustomers book themselves. You just cook.'
                   },
                   {
                     icon: Wallet,
                     title: 'Keep Your 30%',
-                    description: 'Food platforms take a third. Direct orders through NorWeb?\n0% commission. Your margin, your money.'
+                    description: 'Delivery apps take a third of the pie. Direct orders through NorWeb?\n0% commission. Your margin, your money.'
                   },
                   {
                     icon: Rocket,
                     title: 'Live in 7 Days',
-                    description: 'Not 7 weeks.\nYour restaurant webapp — branded and functional — in one week.'
+                    description: 'Not 7 months.\nWe build your branded, fully functional restaurant webapp in one week flat.'
                   },
                   {
                     icon: Palette,
                     title: 'Your Brand, Not a Template',
-                    description: 'RIMBA doesn\'t look like GUSTO.\nYour restaurant won\'t look like your competitor\'s.'
+                    description: 'RIMBA doesn\'t look like GUSTO.\nYour restaurant shouldn\'t look like a generic app listing.'
                   },
                   {
                     icon: Bot,
-                    title: 'AI That Actually Helps',
-                    description: 'Voice agent answers FAQs, takes reservations, handles \'do you have parking?\'\n— so your staff handles customers.'
+                    title: 'AI That Actually Sounds Human',
+                    description: 'Our Voice Agent answers FAQs, takes bookings, and handles "do you have parking?"\nso your staff can focus on the food.'
                   }
                 ].map((feature, index) => (
                   <motion.div
@@ -204,37 +208,67 @@ export const LandingHub = () => {
                 className="text-center mb-12"
               >
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  Want Full Autopilot?
+                  You Caught Them. Now Keep Them.
                 </h2>
                 <p className="text-xl text-gray-400 mb-10">
-                  NorWeb gets customers to your door.<br />
-                  Norvan Marketing Automation keeps them coming back.
+                  NorWeb gets customers to the door. <span className="font-bold text-white">NorCast</span> keeps them coming back on autopilot.
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-4 mb-10">
+                <div className="max-w-3xl mx-auto text-left space-y-6 mb-10">
                   <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="px-6 py-3 bg-white/5 border border-purple-500/30 rounded-full text-gray-300 backdrop-blur-sm"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="flex items-start gap-4"
                   >
-                    Automated Campaigns
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mt-1">
+                      <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">Automated Reactivation</h3>
+                      <p className="text-gray-400">Automatically text customers who haven't visited in 30 days.</p>
+                    </div>
                   </motion.div>
+
                   <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="px-6 py-3 bg-white/5 border border-purple-500/30 rounded-full text-gray-300 backdrop-blur-sm"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="flex items-start gap-4"
                   >
-                    Review Collection
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mt-1">
+                      <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">Review Engine</h3>
+                      <p className="text-gray-400">Turn happy diners into 5-star Google Reviews automatically.</p>
+                    </div>
                   </motion.div>
+
                   <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="px-6 py-3 bg-white/5 border border-purple-500/30 rounded-full text-gray-300 backdrop-blur-sm"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="flex items-start gap-4"
                   >
-                    Loyalty & Reactivation
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mt-1">
+                      <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">Loyalty on Autopilot</h3>
+                      <p className="text-gray-400">Fill your tables on slow Tuesdays without lifting a finger.</p>
+                    </div>
                   </motion.div>
                 </div>
-
-                <p className="text-gray-400 mb-6">
-                  Ask our agent about the full package.
-                </p>
 
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -242,7 +276,7 @@ export const LandingHub = () => {
                   className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
                   onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Ask About Marketing Automation
+                  Ask Agent About NorCast
                 </motion.button>
               </motion.div>
             </div>
@@ -267,20 +301,20 @@ export const LandingHub = () => {
                     className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
                     onClick={() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' })}
                   >
-                    Talk to NorWeb Agent
+                    Talk to Nova
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
                   >
-                    Schedule a Call
+                    Schedule a Strategy Call
                   </motion.button>
                 </div>
 
                 <p className="text-gray-500 text-sm">
                   The agent knows F&B.<br />
-                  Ask about pricing, features, or how it handles your rudest customer questions.
+                  Ask Nova about pricing, features, or see how she handles your rudest customer questions.
                 </p>
               </motion.div>
             </div>
