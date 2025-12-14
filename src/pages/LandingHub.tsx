@@ -27,7 +27,6 @@ export const LandingHub = () => {
         }
       }
     }
-    document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -346,42 +345,6 @@ export const LandingHub = () => {
             </div>
           </section>
 
-          <section id="agent" className="px-6 py-32 bg-gradient-to-b from-black via-gray-900 to-black">
-            <div className="max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  Meet Your NorWeb Consultant
-                </h2>
-                <p className="text-xl text-gray-400">
-                  AI-powered. F&B-trained. Available now.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-2xl p-12 backdrop-blur-sm"
-                style={{ minHeight: '400px' }}
-              >
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  <Bot className="mb-6 text-purple-400" size={64} />
-                  <h3 className="text-2xl font-bold text-white mb-3">Meet Nova</h3>
-                  <p className="text-gray-400 mb-8 max-w-2xl">
-                    Click the glowing button below to start a voice conversation with Nova, our AI consultant.
-                    Ask about pricing, features, implementation timelines, or anything else about NorWeb.
-                  </p>
-                  <ElevenLabsWidget />
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
           <footer className="py-12 px-6 border-t border-gray-900">
             <div className="max-w-7xl mx-auto text-center">
               <p className="text-gray-500">
@@ -397,6 +360,8 @@ export const LandingHub = () => {
         onClose={() => setSchedulingModalOpen(false)}
         type={schedulingType}
       />
+
+      <ElevenLabsWidget />
     </div>
   );
 };
