@@ -6,6 +6,7 @@ import { Rimba } from './pages/Rimba';
 import { Rouge } from './pages/Rouge';
 import { Veda } from './pages/Veda';
 import { Gusto } from './pages/Gusto';
+import { ElevenLabsWidget } from './components/ElevenLabsWidget';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/restaurant/gusto" element={<Gusto />} />
           <Route path="/restaurant/:id" element={<RestaurantPage />} />
         </Routes>
+        <ElevenLabsWidget />
       </Router>
     </CartProvider>
   );
