@@ -5,6 +5,8 @@ import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { FloatingMandala } from '../components/Veda/FloatingMandala';
 import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
+import { ImagePreloader } from '../components/ImagePreloader';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Veda = () => {
   const navigate = useNavigate();
@@ -66,6 +68,7 @@ export const Veda = () => {
         backgroundColor: '#4c1d95'
       }}
     >
+      <ImagePreloader images={['/images/veda/veda-hero.png']} />
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-purple-900/50 to-purple-900/60" style={{ pointerEvents: 'none' }} />
 
       <FloatingMandala />
@@ -200,10 +203,11 @@ export const Veda = () => {
                   }}
                 >
                   <div className="aspect-[4/3] bg-teal-950 overflow-hidden relative">
-                    <img
+                    <OptimizedImage
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      priority={false}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-transparent to-transparent opacity-60" />
                   </div>
@@ -280,10 +284,11 @@ export const Veda = () => {
                   i < 3 ? 'aspect-square' : 'aspect-[4/3]'
                 }`}
               >
-                <img
+                <OptimizedImage
                   src={item.src}
                   alt={item.label}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  priority={false}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                   <h3 className="text-xl font-bold text-yellow-400 drop-shadow-lg">{item.label}</h3>

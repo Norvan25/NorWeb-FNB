@@ -6,6 +6,8 @@ import { useCart } from '../context/CartContext';
 import { rougeMenu } from '../data/rouge-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { CherryBlossomFall } from '../components/Rouge/CherryBlossomFall';
+import { ImagePreloader } from '../components/ImagePreloader';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Rouge = () => {
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ export const Rouge = () => {
 
   return (
     <div className="min-h-screen bg-stone-50">
+      <ImagePreloader images={['/images/rouge/rouge-exterior.png']} />
       <CherryBlossomFall />
 
       <motion.header
@@ -179,10 +182,11 @@ export const Rouge = () => {
                 className="bg-stone-100/85 backdrop-blur-sm border border-amber-400/20 shadow-2xl shadow-black/30 overflow-hidden group hover:border-amber-500 hover:shadow-amber-500/20 transition-all duration-300"
               >
                 <div className="aspect-[4/5] overflow-hidden bg-stone-100">
-                  <img
+                  <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    priority={false}
                     onError={(e) => {
                       e.currentTarget.src = 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800';
                     }}
@@ -296,10 +300,11 @@ export const Rouge = () => {
                   whileHover={{ scale: 1.02, y: -8 }}
                   className="relative flex-shrink-0 w-[85vw] md:w-[70vw] lg:w-[50vw] aspect-[16/9] overflow-hidden border-4 border-amber-500/30 hover:border-amber-400 transition-all shadow-2xl shadow-black/60 snap-center"
                 >
-                  <img
+                  <OptimizedImage
                     src={item.src}
                     alt={item.label}
                     className="w-full h-full object-cover"
+                    priority={false}
                     onError={(e) => {
                       e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='675'%3E%3Crect width='1200' height='675' fill='%23991b1b'/%3E%3Ctext x='50%25' y='45%25' font-family='serif' font-size='36' fill='%23fbbf24' text-anchor='middle' dominant-baseline='middle'%3E${item.label}%3C/text%3E%3Ctext x='50%25' y='55%25' font-family='serif' font-size='24' fill='%23fcd34d' text-anchor='middle' dominant-baseline='middle'%3E${item.subtitle}%3C/text%3E%3C/svg%3E`;
                     }}
@@ -596,10 +601,11 @@ export const Rouge = () => {
                         className="bg-white border-2 border-stone-200 p-4 flex items-center gap-4 shadow-sm"
                       >
                         {item.image && (
-                          <img
+                          <OptimizedImage
                             src={item.image}
                             alt={item.name}
                             className="w-16 h-16 object-cover"
+                            priority={false}
                             onError={(e) => {
                               e.currentTarget.style.display = 'none';
                             }}

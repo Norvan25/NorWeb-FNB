@@ -6,6 +6,8 @@ import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { FireflyField } from '../components/Rimba/FireflyField';
+import { ImagePreloader } from '../components/ImagePreloader';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Rimba = () => {
   const navigate = useNavigate();
@@ -87,6 +89,7 @@ export const Rimba = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <ImagePreloader images={['/images/rimba/rimba-hero.png']} />
       <FireflyField />
 
       <motion.nav
@@ -288,10 +291,11 @@ export const Rimba = () => {
                       } ${index % 3 === 2 ? 'md:mt-16' : ''}`}
                     >
                       <div className="relative h-48 overflow-hidden bg-stone-900/50">
-                        <img
+                        <OptimizedImage
                           src={item.image}
                           alt={item.name}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          priority={false}
                           onError={(e) => {
                             e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23292524'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='24' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.name}%3C/text%3E%3C/svg%3E`;
                           }}
@@ -398,10 +402,11 @@ export const Rimba = () => {
                   i === 2 ? 'md:col-span-2 md:aspect-[21/9]' : ''
                 }`}
               >
-                <img
+                <OptimizedImage
                   src={item.src}
                   alt={item.label}
                   className="w-full h-full object-cover"
+                  priority={false}
                   onError={(e) => {
                     e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%23064e3b'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='28' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.label}%3C/text%3E%3C/svg%3E`;
                   }}

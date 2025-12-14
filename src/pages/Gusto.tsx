@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { gustoMenu, categories, MenuItem } from '../data/gusto-menu';
+import { ImagePreloader } from '../components/ImagePreloader';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Gusto = () => {
   const navigate = useNavigate();
@@ -56,6 +58,7 @@ export const Gusto = () => {
 
   return (
     <div className="min-h-screen text-stone-800 bg-stone-50">
+      <ImagePreloader images={['/images/gusto/gusto-hero.png']} />
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-stone-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -183,10 +186,11 @@ export const Gusto = () => {
                 }}
               >
                 <div className="aspect-[16/9] bg-stone-100 overflow-hidden relative">
-                  <img
+                  <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    priority={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 via-transparent to-transparent opacity-60" />
                 </div>
@@ -241,10 +245,11 @@ export const Gusto = () => {
                 key={i}
                 className="aspect-square bg-stone-200 rounded-xl overflow-hidden border border-stone-300 hover:border-stone-500 transition-all shadow-lg hover:shadow-xl hover:-translate-y-2 group"
               >
-                <img
+                <OptimizedImage
                   src={item.src}
                   alt={item.label}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  priority={false}
                 />
               </div>
             ))}
