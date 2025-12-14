@@ -46,7 +46,8 @@ export const LandingHub = () => {
                 transition={{ delay: 0.3 }}
                 className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto"
               >
-                No more missed calls. No more DM chaos. No more 30% to delivery platforms. NorWeb handles bookings, orders, and customer questions — all inside YOUR business. Guaranteed 30% sales increase in 3 weeks.
+                No more missed calls. No more DM chaos. No more 30% to delivery platforms.<br />
+                NorWeb handles bookings, orders, and customer questions — all inside YOUR business. Guaranteed 30% sales increase in 3 weeks.
               </motion.p>
 
               <motion.div
@@ -93,7 +94,8 @@ export const LandingHub = () => {
                 Don't Watch a Demo. Live It.
               </h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-                Click any restaurant. Order food. Book a table. Ask questions. This is what YOUR customers will experience.
+                Click any restaurant. Order food. Book a table. Ask questions.<br />
+                This is what YOUR customers will experience.
               </p>
             </motion.div>
 
@@ -117,7 +119,8 @@ export const LandingHub = () => {
                   Still Losing Money to Third-Party Apps?
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  They take 30%. They own your customer data. They call the shots. Take back control.
+                  They take 30%. They own your customer data. They call the shots.<br />
+                  Take back control.
                 </p>
               </motion.div>
 
@@ -126,32 +129,32 @@ export const LandingHub = () => {
                   {
                     icon: Moon,
                     title: 'Orders While You Sleep',
-                    description: '3am cravings become 3am revenue. NorWeb takes orders 24/7 — no commission, no missed DMs.'
+                    description: '3am cravings become 3am revenue.\nNorWeb takes orders 24/7 — no commission, no missed DMs.'
                   },
                   {
                     icon: Calendar,
                     title: 'Reservations Without Chaos',
-                    description: 'No double-bookings. No phone tag. Customers book themselves. You just cook.'
+                    description: 'No double-bookings. No phone tag.\nCustomers book themselves. You just cook.'
                   },
                   {
                     icon: Wallet,
                     title: 'Keep Your 30%',
-                    description: 'Food platforms take a third. Direct orders through NorWeb? 0% commission. Your margin, your money.'
+                    description: 'Food platforms take a third. Direct orders through NorWeb?\n0% commission. Your margin, your money.'
                   },
                   {
                     icon: Rocket,
                     title: 'Live in 7 Days',
-                    description: 'Not 7 weeks. Your restaurant webapp — branded and functional — in one week.'
+                    description: 'Not 7 weeks.\nYour restaurant webapp — branded and functional — in one week.'
                   },
                   {
                     icon: Palette,
                     title: 'Your Brand, Not a Template',
-                    description: 'RIMBA doesn\'t look like GUSTO. Your restaurant won\'t look like your competitor\'s.'
+                    description: 'RIMBA doesn\'t look like GUSTO.\nYour restaurant won\'t look like your competitor\'s.'
                   },
                   {
                     icon: Bot,
                     title: 'AI That Actually Helps',
-                    description: 'Voice agent answers FAQs, takes reservations, handles \'do you have parking?\' — so your staff handles customers.'
+                    description: 'Voice agent answers FAQs, takes reservations, handles \'do you have parking?\'\n— so your staff handles customers.'
                   }
                 ].map((feature, index) => (
                   <motion.div
@@ -168,7 +171,7 @@ export const LandingHub = () => {
                   >
                     <feature.icon className="text-purple-400 mb-4" size={40} />
                     <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                    <p className="text-gray-400 leading-relaxed whitespace-pre-line">{feature.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -187,7 +190,8 @@ export const LandingHub = () => {
                   Want Full Autopilot?
                 </h2>
                 <p className="text-xl text-gray-400 mb-10">
-                  NorWeb gets customers to your door. Norvan Marketing Automation keeps them coming back.
+                  NorWeb gets customers to your door.<br />
+                  Norvan Marketing Automation keeps them coming back.
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
@@ -257,7 +261,8 @@ export const LandingHub = () => {
                 </div>
 
                 <p className="text-gray-500 text-sm">
-                  The agent knows F&B. Ask about pricing, features, or how it handles your rudest customer questions.
+                  The agent knows F&B.<br />
+                  Ask about pricing, features, or how it handles your rudest customer questions.
                 </p>
               </motion.div>
             </div>
