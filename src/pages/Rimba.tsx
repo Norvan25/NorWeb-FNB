@@ -89,7 +89,10 @@ export const Rimba = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      <ImagePreloader images={['/images/rimba/rimba-hero.png']} />
+      <ImagePreloader images={[
+        '/images/rimba/rimba-hero.png',
+        '/images/rimba/rimba-pattern.png'
+      ]} />
       <FireflyField />
 
       <motion.nav
@@ -170,13 +173,11 @@ export const Rimba = () => {
 
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
-          <img
+          <OptimizedImage
             src="/images/rimba/rimba-hero.png"
-            alt=""
+            alt="Rimba Restaurant Interior"
             className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
+            priority={true}
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-neutral-900" />

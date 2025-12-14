@@ -47,7 +47,10 @@ export const Rouge = () => {
 
   return (
     <div className="min-h-screen bg-stone-50">
-      <ImagePreloader images={['/images/rouge/rouge-exterior.png']} />
+      <ImagePreloader images={[
+        '/images/rouge/rouge-exterior.png',
+        '/images/rouge/rouge-pattern.png'
+      ]} />
       <CherryBlossomFall />
 
       <motion.header
@@ -86,15 +89,14 @@ export const Rouge = () => {
       </motion.header>
 
       <section className="h-screen relative flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('/images/rouge/rouge-exterior.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        />
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/rouge/rouge-exterior.png"
+            alt="Rouge Restaurant Exterior"
+            className="w-full h-full object-cover"
+            priority={true}
+          />
+        </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
 
@@ -333,15 +335,15 @@ export const Rouge = () => {
 
       <div className="h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
 
-      <section
-        className="relative py-24 px-6 overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/rouge/rouge-wall-3.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative py-24 px-6 overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/rouge/rouge-wall-3.png"
+            alt="Background"
+            className="w-full h-full object-cover"
+            priority={false}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/75" />
 
         <div className="max-w-4xl mx-auto relative z-20">

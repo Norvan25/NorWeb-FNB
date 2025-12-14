@@ -68,7 +68,10 @@ export const Veda = () => {
         backgroundColor: '#4c1d95'
       }}
     >
-      <ImagePreloader images={['/images/veda/veda-hero.png']} />
+      <ImagePreloader images={[
+        '/images/veda/veda-hero.png',
+        '/images/veda/veda-pattern_1.png'
+      ]} />
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-purple-900/50 to-purple-900/60" style={{ pointerEvents: 'none' }} />
 
       <FloatingMandala />
@@ -105,15 +108,15 @@ export const Veda = () => {
         </div>
       </header>
 
-      <section
-        className="relative h-screen flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/veda/veda-hero.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/veda/veda-hero.png"
+            alt="Veda Restaurant Interior"
+            className="w-full h-full object-cover"
+            priority={true}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-purple-900/50 to-purple-900/70" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
@@ -129,15 +132,15 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section
-        className="relative py-20 px-6 overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/veda/veda-bg-about.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative py-20 px-6 overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/veda/veda-bg-about.png"
+            alt="Background"
+            className="w-full h-full object-cover"
+            priority={false}
+          />
+        </div>
         <div className="absolute inset-0 bg-purple-950/40" />
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -254,15 +257,15 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section
-        className="relative py-20 px-6 overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/veda/veda-bg-gallery.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative py-20 px-6 overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/veda/veda-bg-gallery.png"
+            alt="Background"
+            className="w-full h-full object-cover"
+            priority={false}
+          />
+        </div>
         <div className="absolute inset-0 bg-teal-900/60" />
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -299,15 +302,15 @@ export const Veda = () => {
         </div>
       </section>
 
-      <section
-        className="relative py-20 px-6 overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/veda/veda-bg-contact.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative py-20 px-6 overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/veda/veda-bg-contact.png"
+            alt="Background"
+            className="w-full h-full object-cover"
+            priority={false}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-purple-900/80" />
 
         <div className="max-w-4xl mx-auto relative z-10">
