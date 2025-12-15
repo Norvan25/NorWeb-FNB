@@ -1,62 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, X, ArrowLeft, Leaf, Flame, Sparkles as SparkleIcon } from 'lucide-react';
+import { Phone, PhoneOff, Send, ArrowLeft } from 'lucide-react';
 import { useCommunication } from '../context/CommunicationContext';
 import { useElevenLabs } from '../hooks/useElevenLabs';
 
-const RESTAURANT_THEMES = {
-  RIMBA: {
-    icon: Leaf,
-    color: 'from-green-600 to-emerald-700',
-    border: 'border-green-500',
-    glow: 'shadow-green-500/50',
-    name: 'Rimba Malaysian Kitchen',
-    context: 'CONTEXT: USER_SELECTED_RIMBA',
-  },
-  ROUGE: {
-    icon: Flame,
-    color: 'from-red-600 to-rose-700',
-    border: 'border-red-500',
-    glow: 'shadow-red-500/50',
-    name: 'Rouge Chinese Fine Dining',
-    context: 'CONTEXT: USER_SELECTED_ROUGE',
-  },
-  VEDA: {
-    icon: SparkleIcon,
-    color: 'from-orange-600 to-amber-700',
-    border: 'border-orange-500',
-    glow: 'shadow-orange-500/50',
-    name: 'Veda North Indian Cuisine',
-    context: 'CONTEXT: USER_SELECTED_VEDA',
-  },
-  GUSTO: {
-    icon: SparkleIcon,
-    color: 'from-yellow-600 to-amber-700',
-    border: 'border-yellow-500',
-    glow: 'shadow-yellow-500/50',
-    name: 'Gusto Italian Trattoria',
-    context: 'CONTEXT: USER_SELECTED_GUSTO',
-  },
-};
-
-const AudioVisualizer = ({ volume, isActive }: { volume: number; isActive: boolean }) => {
-  const bars = 32;
+const CircularVisualizer = ({ volume, isActive }: { volume: number; isActive: boolean }) => {
+  const dots = 12;
+  const radius = 100;
 
   return (
-    <div className="flex items-center justify-center gap-1 h-32">
-      {Array.from({ length: bars }).map((_, i) => {
-        const height = isActive ? Math.random() * volume * 100 + 10 : 5;
+    <div className="relative w-64 h-64 flex items-center justify-center">
+      {Array.from({ length: dots }).map((_, i) => {
+        const angle = (i / dots) * 2 * Math.PI;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        const scale = isActive ? 1 + (Math.random() * volume * 0.5) : 0.5;
 
         return (
           <motion.div
             key={i}
-            className="w-1.5 bg-gradient-to-t from-cyan-500 to-blue-400 rounded-full"
+            className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-orange-400 to-amber-600"
+            style={{
+              left: `calc(50% + ${x}px)`,
+              top: `calc(50% + ${y}px)`,
+            }}
             animate={{
-              height: isActive ? `${height}%` : '20%',
-              opacity: isActive ? 0.8 + Math.random() * 0.2 : 0.3,
+              scale: isActive ? scale : 0.5,
+              opacity: isActive ? 0.8 + Math.random() * 0.2 : 0.4,
             }}
             transition={{
-              duration: 0.15,
+              duration: 0.3,
               ease: 'easeInOut',
             }}
           />
@@ -67,11 +40,12 @@ const AudioVisualizer = ({ volume, isActive }: { volume: number; isActive: boole
 };
 
 export const CommunicationHUD = () => {
-  const { isOpen, mode, activeContext, activeRestaurant, closeHUD, switchMode } = useCommunication();
+  const { isOpen, activeContext, activeRestaurant, closeHUD } = useCommunication();
+  const [messageText, setMessageText] = useState('');
 
   const agentId = import.meta.env.VITE_ELEVENLABS_AGENT_ID;
 
-  const { status, isSpeaking, volume, connect, disconnect, sendContext } = useElevenLabs({
+  const { status, volume, connect, disconnect, sendContext, sendMessage } = useElevenLabs({
     agentId,
     onConnect: () => {
       if (activeContext) {
@@ -95,17 +69,7 @@ export const CommunicationHUD = () => {
     closeHUD();
   };
 
-  const handleRestaurantSelect = (restaurant: keyof typeof RESTAURANT_THEMES) => {
-    const theme = RESTAURANT_THEMES[restaurant];
-    switchMode('RESTAURANT', theme.context, restaurant);
-    sendContext(theme.context);
-  };
-
-  const handleBackToHub = () => {
-    switchMode('HUB');
-  };
-
-  const toggleMic = () => {
+  const toggleCall = () => {
     if (status === 'connected') {
       disconnect();
     } else {
@@ -113,7 +77,45 @@ export const CommunicationHUD = () => {
     }
   };
 
-  const currentTheme = activeRestaurant ? RESTAURANT_THEMES[activeRestaurant] : null;
+  const handleSendMessage = () => {
+    if (messageText.trim() && status === 'connected') {
+      sendMessage(messageText.trim());
+      setMessageText('');
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const getStatusText = () => {
+    switch (status) {
+      case 'connected':
+        return 'System Ready';
+      case 'connecting':
+        return 'Connecting...';
+      case 'error':
+        return 'Connection Error';
+      default:
+        return 'Disconnected';
+    }
+  };
+
+  const getStatusColor = () => {
+    switch (status) {
+      case 'connected':
+        return 'text-cyan-400';
+      case 'connecting':
+        return 'text-yellow-400';
+      case 'error':
+        return 'text-red-400';
+      default:
+        return 'text-gray-400';
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -123,121 +125,94 @@ export const CommunicationHUD = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90]"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90]"
             onClick={handleClose}
           />
 
           <motion.div
-            initial={{ opacity: 0, y: 100, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 100, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-0 right-0 md:bottom-8 md:right-8 w-full md:w-[480px] z-[91]"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-lg z-[91]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div
-              className={`bg-[#0D1326] border-2 ${
-                currentTheme ? currentTheme.border : 'border-cyan-500'
-              } rounded-t-3xl md:rounded-3xl shadow-2xl ${
-                currentTheme ? currentTheme.glow : 'shadow-cyan-500/50'
-              } overflow-hidden`}
-            >
-              <div className="relative bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg">
-                <button
-                  onClick={handleClose}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
-                >
-                  <X size={24} />
-                </button>
+            <div className="bg-[#1a2332] border-2 border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-8">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleClose}
+                    className="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg text-white font-semibold flex items-center gap-2 hover:from-amber-700 hover:to-orange-700 transition-all"
+                  >
+                    <ArrowLeft size={18} />
+                    Back to site
+                  </motion.button>
 
-                <div className="p-6 border-b border-gray-800">
-                  <h2 className="text-2xl font-bold mb-1">
-                    {mode === 'HUB' ? 'NorWeb Command Center' : currentTheme?.name}
-                  </h2>
-                  <p className="text-sm text-gray-400">
-                    {status === 'connected'
-                      ? isSpeaking
-                        ? 'Listening...'
-                        : 'Ready to chat'
-                      : status === 'connecting'
-                      ? 'Connecting...'
-                      : 'Click mic to start'}
-                  </p>
-                </div>
-
-                <div className="p-6">
-                  <AudioVisualizer volume={volume} isActive={status === 'connected'} />
-
-                  <div className="mt-6 flex justify-center">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={toggleMic}
-                      className={`w-20 h-20 rounded-full flex items-center justify-center transition-all ${
-                        status === 'connected'
-                          ? currentTheme
-                            ? `bg-gradient-to-br ${currentTheme.color} shadow-lg ${currentTheme.glow}`
-                            : 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/50'
-                          : 'bg-gray-800 border-2 border-gray-700'
-                      }`}
-                      disabled={status === 'connecting'}
-                    >
-                      {status === 'connected' ? (
-                        <Mic className="text-white" size={32} />
-                      ) : (
-                        <MicOff className="text-gray-400" size={32} />
-                      )}
-                    </motion.button>
-                  </div>
-                </div>
-
-                {mode === 'HUB' && (
-                  <div className="p-6 pt-0">
-                    <p className="text-sm text-gray-400 mb-4 text-center">
-                      Select a restaurant to explore:
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      {(Object.keys(RESTAURANT_THEMES) as Array<keyof typeof RESTAURANT_THEMES>).map((key) => {
-                        const theme = RESTAURANT_THEMES[key];
-                        const Icon = theme.icon;
-
-                        return (
-                          <motion.button
-                            key={key}
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={() => handleRestaurantSelect(key)}
-                            className={`p-4 bg-gradient-to-br ${theme.color} rounded-xl border ${theme.border} shadow-lg ${theme.glow} flex items-center justify-center gap-2 font-semibold text-white transition-all`}
-                          >
-                            <Icon size={20} />
-                            {key}
-                          </motion.button>
-                        );
-                      })}
+                  <div className="flex items-center gap-4">
+                    <div className="px-3 py-1 bg-gray-800/50 rounded-lg border border-gray-700 text-sm text-gray-300">
+                      us EN
+                    </div>
+                    <div className={`flex items-center gap-2 ${getStatusColor()}`}>
+                      <div className="w-2 h-2 rounded-full bg-current animate-pulse" />
+                      <span className="text-sm font-medium">{getStatusText()}</span>
                     </div>
                   </div>
-                )}
-
-                {mode === 'RESTAURANT' && (
-                  <div className="p-6 pt-0">
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={handleBackToHub}
-                      className="w-full py-3 bg-gray-800 border border-gray-700 rounded-xl font-semibold text-white flex items-center justify-center gap-2 hover:bg-gray-700 transition-all"
-                    >
-                      <ArrowLeft size={20} />
-                      Back to Command Center
-                    </motion.button>
-                  </div>
-                )}
-
-                <div className="px-6 pb-6">
-                  <p className="text-xs text-gray-500 text-center">
-                    Powered by ElevenLabs Voice AI
-                  </p>
                 </div>
+
+                <div className="relative flex items-center justify-center my-12">
+                  <CircularVisualizer volume={volume} isActive={status === 'connected'} />
+
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={toggleCall}
+                    className={`absolute w-20 h-20 rounded-full flex items-center justify-center transition-all shadow-lg ${
+                      status === 'connected'
+                        ? 'bg-gradient-to-br from-red-500 to-red-700 shadow-red-500/50'
+                        : 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-cyan-500/50'
+                    }`}
+                    disabled={status === 'connecting'}
+                  >
+                    {status === 'connected' ? (
+                      <PhoneOff className="text-white" size={32} />
+                    ) : (
+                      <Phone className="text-white" size={32} />
+                    )}
+                  </motion.button>
+                </div>
+
+                <div className="text-center mb-8">
+                  <h2 className="text-xl font-semibold text-white">
+                    {activeRestaurant ? `Talk to ${activeRestaurant}` : 'Talk To Nova'}
+                  </h2>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={messageText}
+                    onChange={(e) => setMessageText(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Send a message..."
+                    disabled={status !== 'connected'}
+                    className="flex-1 px-6 py-4 bg-gray-800/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleSendMessage}
+                    disabled={!messageText.trim() || status !== 'connected'}
+                    className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg shadow-cyan-500/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                  >
+                    <Send className="text-white" size={20} />
+                  </motion.button>
+                </div>
+
+                <p className="text-center text-gray-500 text-sm mt-4">
+                  Click the call button to start your conversation
+                </p>
               </div>
             </div>
           </motion.div>
