@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';
-import { Sparkles, Moon, Calendar, Wallet, Rocket, Palette, Bot, Target, Award, Users } from 'lucide-react';
+import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck } from 'lucide-react';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { ElevenLabsWidget } from '../components/ElevenLabsWidget';
@@ -77,8 +77,8 @@ export const LandingHub = () => {
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
-                Stop Donating 30% of Your Revenue.<br />
-                Automate Your Restaurant Instead.
+                Stop Losing Orders When<br />
+                No One Replies.
               </h1>
 
               <motion.p
@@ -87,8 +87,8 @@ export const LandingHub = () => {
                 transition={{ delay: 0.3 }}
                 className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto"
               >
-                No more missed calls. No more DM chaos. No more paying a "lazy tax" to delivery platforms.<br />
-                NorWeb handles bookings, orders, and questions 24/7 — all inside YOUR business.
+                A 24/7 digital sales manager that takes bookings, orders, and delivery automatically.<br />
+                No commissions. No missed calls.
               </motion.p>
 
               <motion.div
@@ -108,10 +108,10 @@ export const LandingHub = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
+                className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-lg font-bold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-xl shadow-cyan-500/50"
                 onClick={triggerElevenLabsAgent}
               >
-                Talk to Nova
+                Activate Free Demo
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -119,7 +119,7 @@ export const LandingHub = () => {
                 className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
                 onClick={() => document.getElementById('brands')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                See Live Demos
+                Calculate Your Savings
               </motion.button>
             </motion.div>
           </section>
@@ -161,45 +161,27 @@ export const LandingHub = () => {
                 className="text-center mb-20"
               >
                 <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                  Still Losing Money to Third-Party Apps?
+                  This is not a website.<br />
+                  It's a revenue capture system.
                 </h2>
-                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  They take 30%. They own your data. They call the shots.<br />
-                  Take back your business.
-                </p>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
                   {
-                    icon: Moon,
-                    title: 'Revenue While You Sleep',
-                    description: '3am cravings become 3am profit.\nNorWeb takes orders 24/7 — 0% commission, 100% yours.'
+                    icon: Percent,
+                    title: 'Delivery Apps Take 30%. We Take 0%.',
+                    description: 'Stop donating your margin. You keep the customer data, you keep the profit.'
                   },
                   {
-                    icon: Calendar,
-                    title: 'Reservations Without the Phone Tag',
-                    description: 'No double-bookings. No missed calls during rush hour.\nCustomers book themselves. You just cook.'
+                    icon: XCircle,
+                    title: 'Missed Calls = Missed Revenue',
+                    description: 'No more "Do you have parking?" calls interrupting your rush hour. The AI answers instantly.'
                   },
                   {
-                    icon: Wallet,
-                    title: 'Keep Your 30%',
-                    description: 'Delivery apps take a third of the pie. Direct orders through NorWeb?\n0% commission. Your margin, your money.'
-                  },
-                  {
-                    icon: Rocket,
-                    title: 'Live in 7 Days',
-                    description: 'Not 7 months.\nWe build your branded, fully functional restaurant webapp in one week flat.'
-                  },
-                  {
-                    icon: Palette,
-                    title: 'Your Brand, Not a Template',
-                    description: 'RIMBA doesn\'t look like GUSTO.\nYour restaurant shouldn\'t look like a generic app listing.'
-                  },
-                  {
-                    icon: Bot,
-                    title: 'AI That Actually Sounds Human',
-                    description: 'Our Voice Agent answers FAQs, takes bookings, and handles "do you have parking?"\nso your staff can focus on the food.'
+                    icon: AlertCircle,
+                    title: 'End WhatsApp Order Chaos',
+                    description: 'Stop deciphering screenshots and voice notes. Orders go straight to your kitchen/POS.'
                   }
                 ].map((feature, index) => (
                   <motion.div
@@ -214,7 +196,7 @@ export const LandingHub = () => {
                     }}
                     className="p-8 rounded-xl border border-gray-800 backdrop-blur-sm"
                   >
-                    <feature.icon className="text-purple-400 mb-4" size={40} />
+                    <feature.icon className="text-red-400 mb-4" size={40} />
                     <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
                     <p className="text-gray-400 leading-relaxed whitespace-pre-line">{feature.description}</p>
                   </motion.div>
@@ -223,85 +205,189 @@ export const LandingHub = () => {
             </div>
           </section>
 
-          <section className="px-6 py-24 bg-gradient-to-b from-black to-gray-900">
-            <div className="max-w-5xl mx-auto">
+          <section className="px-6 py-32 bg-gradient-to-b from-gray-900 to-black">
+            <div className="max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-12"
+                className="text-center mb-16"
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  You Caught Them. Now Keep Them.
+                <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                  From Chat to Kitchen in Seconds.
                 </h2>
-                <p className="text-xl text-gray-400 mb-10">
-                  NorWeb gets customers to the door. <span className="font-bold text-white">NorCast</span> keeps them coming back on autopilot.
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {[
+                  {
+                    icon: MessageSquare,
+                    step: '1',
+                    title: 'Customer Messages',
+                    description: 'Scan QR or Click Link'
+                  },
+                  {
+                    icon: ShoppingCart,
+                    step: '2',
+                    title: 'AI Takes Order',
+                    description: 'Upsells items automatically'
+                  },
+                  {
+                    icon: ChefHat,
+                    step: '3',
+                    title: 'POS Syncs',
+                    description: 'Kitchen gets ticket instantly'
+                  },
+                  {
+                    icon: Truck,
+                    step: '4',
+                    title: 'Delivery Dispatched',
+                    description: 'Rider assigned automatically'
+                  }
+                ].map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 }}
+                    className="relative"
+                  >
+                    <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 rounded-xl p-8 backdrop-blur-sm text-center h-full">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cyan-500/20 border-2 border-cyan-500 text-cyan-400 font-bold text-xl mb-4">
+                        {step.step}
+                      </div>
+                      <step.icon className="text-cyan-400 mx-auto mb-4" size={40} />
+                      <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                      <p className="text-gray-400 text-sm">{step.description}</p>
+                    </div>
+                    {index < 3 && (
+                      <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                        <ArrowRight className="text-cyan-500" size={24} />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="px-6 py-32 bg-gradient-to-b from-black to-gray-900">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-16"
+              >
+                <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                  Costs Less Than One Missed Table.
+                </h2>
+                <p className="text-xl text-gray-400 mb-2">
+                  One-time Setup: <span className="text-white font-bold">RM 1,500 – 3,000</span>
                 </p>
+                <p className="text-sm text-gray-500">
+                  (Includes Menu Build & Training)
+                </p>
+              </motion.div>
 
-                <div className="max-w-3xl mx-auto text-left space-y-6 mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                {[
+                  {
+                    name: 'ESSENTIALS',
+                    price: 'RM 499',
+                    period: '/ mo',
+                    features: [
+                      'Digital Menu',
+                      'Direct Ordering',
+                      '0% Commission',
+                      'Payment Gateway'
+                    ],
+                    highlighted: false
+                  },
+                  {
+                    name: 'GROWTH',
+                    price: 'RM 899',
+                    period: '/ mo',
+                    badge: 'Recommended',
+                    features: [
+                      'Everything in Essentials',
+                      'WhatsApp Automation',
+                      'Table Reservations',
+                      'Review Engine'
+                    ],
+                    highlighted: true
+                  },
+                  {
+                    name: 'AUTOPILOT',
+                    price: 'RM 1,499',
+                    period: '/ mo',
+                    features: [
+                      'Everything in Growth',
+                      'Voice AI Agent (Phone)',
+                      'Loyalty Campaigns',
+                      'Dedicated Acct Manager'
+                    ],
+                    highlighted: false
+                  }
+                ].map((tier, index) => (
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="flex items-start gap-4"
+                    transition={{ delay: index * 0.1 }}
+                    className={`relative p-8 rounded-2xl backdrop-blur-sm ${
+                      tier.highlighted
+                        ? 'bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500 shadow-xl shadow-cyan-500/20'
+                        : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700'
+                    }`}
                   >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mt-1">
-                      <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
+                    {tier.badge && (
+                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold">
+                          {tier.badge}
+                        </span>
+                      </div>
+                    )}
+                    <h3 className="text-2xl font-bold mb-4 text-center">{tier.name}</h3>
+                    <div className="text-center mb-6">
+                      <span className="text-5xl font-black">{tier.price}</span>
+                      <span className="text-gray-400 text-lg">{tier.period}</span>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">Automated Reactivation</h3>
-                      <p className="text-gray-400">Automatically text customers who haven't visited in 30 days.</p>
-                    </div>
+                    <ul className="space-y-3 mb-8">
+                      {tier.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-3">
+                          <Check className={`${tier.highlighted ? 'text-cyan-400' : 'text-green-400'} flex-shrink-0 mt-0.5`} size={20} />
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`w-full py-4 rounded-full font-bold text-lg transition-all ${
+                        tier.highlighted
+                          ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
+                          : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
+                      }`}
+                      onClick={triggerElevenLabsAgent}
+                    >
+                      Activate Free Demo
+                    </motion.button>
                   </motion.div>
+                ))}
+              </div>
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mt-1">
-                      <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">Review Engine</h3>
-                      <p className="text-gray-400">Turn happy diners into 5-star Google Reviews automatically.</p>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mt-1">
-                      <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-1">Loyalty on Autopilot</h3>
-                      <p className="text-gray-400">Fill your tables on slow Tuesdays without lifting a finger.</p>
-                    </div>
-                  </motion.div>
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
-                  onClick={() => openSchedulingModal('norcast')}
-                >
-                  Ask Agent About NorCast
-                </motion.button>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <p className="text-lg font-bold text-cyan-400">
+                  90-Day ROI Guarantee: If it doesn't pay for itself, you get your money back.
+                </p>
               </motion.div>
             </div>
           </section>
@@ -314,33 +400,17 @@ export const LandingHub = () => {
                 viewport={{ once: true }}
               >
                 <h2 className="text-4xl md:text-5xl font-bold mb-12">
-                  Ready to Stop Losing Orders<br />
-                  to Instagram DMs?
+                  Ready to Stop Losing Money?
                 </h2>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-bold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all shadow-xl shadow-purple-500/50"
-                    onClick={triggerElevenLabsAgent}
-                  >
-                    Talk to Nova
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
-                    onClick={() => openSchedulingModal('strategy')}
-                  >
-                    Schedule a Strategy Call
-                  </motion.button>
-                </div>
-
-                <p className="text-gray-500 text-sm">
-                  The agent knows F&B.<br />
-                  Ask Nova about pricing, features, or see how she handles your rudest customer questions.
-                </p>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-12 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xl font-bold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-xl shadow-cyan-500/50"
+                  onClick={triggerElevenLabsAgent}
+                >
+                  Activate Free Demo
+                </motion.button>
               </motion.div>
             </div>
           </section>
