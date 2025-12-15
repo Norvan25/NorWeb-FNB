@@ -280,7 +280,7 @@ export const CommunicationHUD = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:top-auto md:translate-x-0 md:translate-y-0 md:bottom-8 md:right-8 w-[90%] max-w-[380px] md:w-[420px] md:max-w-none max-h-[85vh] md:max-h-[90vh] z-[91]"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[380px] md:max-w-[420px] max-h-[85vh] md:max-h-[90vh] z-[91]"
             onClick={(e) => e.stopPropagation()}
           >
             <div
