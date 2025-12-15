@@ -5,7 +5,6 @@ import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCi
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
-import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -13,7 +12,7 @@ export const LandingHub = () => {
   const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
 
-  const { openHUD, openLeadCapture, showLeadCapture, closeLeadCapture } = useCommunication();
+  const { openHUD } = useCommunication();
 
   const openSchedulingModal = (type: 'strategy' | 'norcast') => {
     setSchedulingType(type);
@@ -21,10 +20,6 @@ export const LandingHub = () => {
   };
 
   const handleOpenDemo = () => {
-    openHUD('HUB');
-  };
-
-  const handleLeadCaptureSuccess = () => {
     openHUD('HUB');
   };
 
@@ -116,7 +111,7 @@ export const LandingHub = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
-                onClick={() => openLeadCapture('THE SALES MANAGER')}
+                onClick={handleOpenDemo}
               >
                 Calculate Your Savings
               </motion.button>
@@ -375,7 +370,7 @@ export const LandingHub = () => {
                           ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
                           : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                       }`}
-                      onClick={() => openLeadCapture(tier.name)}
+                      onClick={handleOpenDemo}
                     >
                       Select Plan
                     </motion.button>
@@ -471,12 +466,6 @@ export const LandingHub = () => {
         isOpen={schedulingModalOpen}
         onClose={() => setSchedulingModalOpen(false)}
         type={schedulingType}
-      />
-
-      <LeadCaptureModal
-        isOpen={showLeadCapture}
-        onClose={closeLeadCapture}
-        onSuccess={handleLeadCaptureSuccess}
       />
 
       <CommunicationHUD />
