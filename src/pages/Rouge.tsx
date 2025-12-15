@@ -7,7 +7,6 @@ import { rougeMenu } from '../data/rouge-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { CherryBlossomFall } from '../components/Rouge/CherryBlossomFall';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
-import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
@@ -762,8 +761,6 @@ export const Rouge = () => {
           setIsCheckoutOpen(false);
         }}
       />
-
-      <CommunicationHUD />
     </div>
   );
 };
