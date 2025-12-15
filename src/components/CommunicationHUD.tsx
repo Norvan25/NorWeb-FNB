@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowLeft, Leaf, Flame, Sparkles as SparkleIcon } from 'lucide-react';
 import { useCommunication } from '../context/CommunicationContext';
 import { Conversation } from '@elevenlabs/client';
+import { useNavigate } from 'react-router-dom';
 
 const RESTAURANT_THEMES = {
   RIMBA: {
@@ -127,6 +128,7 @@ const NovaOrb = ({ isActive, isListening, isSpeaking, color }: {
 
 export const CommunicationHUD = () => {
   const { isOpen, mode, activeContext, activeRestaurant, closeHUD, switchMode } = useCommunication();
+  const navigate = useNavigate();
 
   const [isConnected, setIsConnected] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -252,11 +254,9 @@ export const CommunicationHUD = () => {
   };
 
   const handleRestaurantSelect = (restaurant: keyof typeof RESTAURANT_THEMES) => {
-    const theme = RESTAURANT_THEMES[restaurant];
-    switchMode('RESTAURANT', theme.context, restaurant);
-    setTimeout(() => {
-      conversationRef.current?.sendText(theme.context);
-    }, 500);
+    const restaurantPath = `/restaurant/${restaurant.toLowerCase()}`;
+    closeHUD();
+    navigate(restaurantPath);
   };
 
   const handleBackToHub = () => {
@@ -366,7 +366,7 @@ export const CommunicationHUD = () => {
                 </div>
               </div>
 
-              {mode === 'HUB' && !isConnected && messages.length === 0 && (
+              {mode === 'HUB' && (
                 <div className="px-4 md:px-6 pb-4 flex flex-col gap-2">
                   <p className="text-xs text-gray-400 text-center mb-1">Quick options:</p>
                   <div className="grid grid-cols-2 gap-2">
