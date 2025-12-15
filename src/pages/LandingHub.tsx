@@ -275,53 +275,57 @@ export const LandingHub = () => {
                 className="text-center mb-16"
               >
                 <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                  Cheaper Than Your Worst Employee.<br />Smarter Than Your Best.
+                  Stop Paying Agencies RM 4,500 for 'Likes'.
                 </h2>
                 <p className="text-xl text-gray-400">
-                  Stop paying RM 2,500+ for staff who miss calls.<br />
-                  Hire a Digital Sales Manager that works 24/7.
+                  Hire a 24/7 Intelligence System that drives actual revenue.
                 </p>
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 {[
                   {
-                    name: 'THE FRONT DESK',
+                    name: 'THE DIGITAL HOST',
                     price: 'RM 699',
                     period: '/ mo',
+                    hook: 'For Manual Control',
                     features: [
                       { text: '24/7 WhatsApp & Web Booking', enabled: true },
                       { text: 'Digital Menu Engineering', enabled: true },
-                      { text: 'Direct Ordering (0% Commission)', enabled: true },
-                      { text: 'Payment Gateway Integration', enabled: true },
-                      { text: 'Marketing Automation', enabled: false }
+                      { text: 'Direct Ordering (Pickup/Manual)', enabled: true },
+                      { text: 'No POS Integration', enabled: false, bold: true },
+                      { text: 'No Lalamove Dispatch', enabled: false, bold: true },
+                      { text: 'No Marketing Automation', enabled: false }
                     ],
                     highlighted: false
                   },
                   {
-                    name: 'THE SALES MANAGER',
+                    name: 'THE OPS MANAGER',
                     price: 'RM 1,299',
                     period: '/ mo',
-                    badge: 'MOST POPULAR',
+                    badge: 'RECOMMENDED',
+                    hook: 'For Automated Operations',
                     features: [
-                      { text: 'Everything in Front Desk', enabled: true },
-                      { text: 'NorZ Marketing Engine (Auto-Promos)', enabled: true, bold: true },
-                      { text: 'Review Recovery System', enabled: true },
-                      { text: 'Lalamove/GrabExpress Auto-Dispatch', enabled: true },
-                      { text: 'POS Integration', enabled: true }
+                      { text: 'Everything in Digital Host', enabled: true },
+                      { text: 'POS System Integration (Direct to Kitchen)', enabled: true, bold: true },
+                      { text: 'Lalamove/Grab Auto-Dispatch (Rider Booking)', enabled: true, bold: true },
+                      { text: 'Payment Gateway Setup', enabled: true },
+                      { text: 'Marketing Add-on Available (+RM 1,000)', enabled: true, warning: true }
                     ],
                     highlighted: true
                   },
                   {
-                    name: 'THE EMPIRE',
-                    price: 'RM 2,499',
+                    name: 'THE REVENUE ENGINE',
+                    price: 'RM 2,899',
                     period: '/ mo',
+                    hook: 'Replaces Your Marketing Agency',
+                    badge2: 'ALL INCLUSIVE',
                     features: [
-                      { text: 'Everything in Sales Manager', enabled: true },
-                      { text: 'Voice AI Agent (Answers Phone Calls)', enabled: true, bold: true },
-                      { text: 'Loyalty & VIP Reactivation', enabled: true },
-                      { text: 'Dedicated Success Architect', enabled: true },
-                      { text: 'Priority Support', enabled: true }
+                      { text: 'ALL Operations Automation (POS + Delivery)', enabled: true, bold: true },
+                      { text: 'NorZ Marketing Automation (Campaigns)', enabled: true, bold: true },
+                      { text: 'Customer Reactivation ("We Miss You" Blasts)', enabled: true, bold: true },
+                      { text: 'Review Recovery Engine (Google 5-Star)', enabled: true, bold: true },
+                      { text: 'Voice AI Agent (Phone Answering)', enabled: true, bold: true }
                     ],
                     highlighted: false
                   }
@@ -345,7 +349,17 @@ export const LandingHub = () => {
                         </span>
                       </div>
                     )}
-                    <h3 className="text-2xl font-bold mb-4 text-center">{tier.name}</h3>
+                    {tier.badge2 && (
+                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-1 rounded-full text-sm font-bold">
+                          {tier.badge2}
+                        </span>
+                      </div>
+                    )}
+                    <h3 className="text-2xl font-bold mb-2 text-center">{tier.name}</h3>
+                    {tier.hook && (
+                      <p className="text-center text-gray-400 text-sm mb-4 italic">{tier.hook}</p>
+                    )}
                     <div className="text-center mb-6">
                       <span className="text-5xl font-black">{tier.price}</span>
                       <span className="text-gray-400 text-lg">{tier.period}</span>
@@ -358,7 +372,7 @@ export const LandingHub = () => {
                           ) : (
                             <XCircle className="text-red-400 flex-shrink-0 mt-0.5" size={20} />
                           )}
-                          <span className={`text-gray-300 ${feature.bold ? 'font-bold' : ''}`}>{feature.text}</span>
+                          <span className={`${feature.warning ? 'text-yellow-400' : 'text-gray-300'} ${feature.bold ? 'font-bold' : ''}`}>{feature.text}</span>
                         </li>
                       ))}
                     </ul>
@@ -385,10 +399,10 @@ export const LandingHub = () => {
                 className="text-center mb-12"
               >
                 <p className="text-lg text-gray-400">
-                  One-Time System Architecture Fee: <span className="text-white font-bold text-xl">RM 3,500</span>.
+                  One-Time System Architecture: <span className="text-white font-bold text-xl">From RM 3,500</span>
                 </p>
                 <p className="text-sm text-gray-500 mt-2">
-                  Includes full menu digitization, AI training, POS wiring, and staff handover. We build it, you own it.
+                  Includes Menu Engineering, POS Wiring, AI Training & 2 Days Dedicated Onboarding.
                 </p>
               </motion.div>
 
@@ -399,10 +413,10 @@ export const LandingHub = () => {
                 className="max-w-4xl mx-auto mt-16 p-8 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30"
               >
                 <h3 className="text-3xl font-bold mb-4 text-center">
-                  Running a Franchise or Multi-Branch Chain?
+                  Franchise or Multi-Branch?
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed text-center mb-6">
-                  We deploy 'Headquarters Intelligence' (NorOne) to manage 5+ locations from a single screen. Unified data, centralized marketing, and branch-specific AI.
+                  Ask about our <span className="font-bold text-white">HQ Command Center (NorOne)</span> for centralized control.
                 </p>
                 <div className="text-center">
                   <motion.button
