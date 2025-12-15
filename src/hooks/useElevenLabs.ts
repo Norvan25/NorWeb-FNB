@@ -120,16 +120,6 @@ export const useElevenLabs = ({
     }
   };
 
-  const sendMessage = async (text: string) => {
-    if (conversationRef.current && status === 'connected') {
-      try {
-        await conversationRef.current.sendText(text);
-      } catch (error) {
-        console.error('Failed to send message:', error);
-      }
-    }
-  };
-
   const cleanup = () => {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
@@ -159,6 +149,5 @@ export const useElevenLabs = ({
     connect,
     disconnect,
     sendContext,
-    sendMessage,
   };
 };
