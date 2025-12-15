@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, X, Minus, Plus, Home, ChevronDown } from 'lucide-react';
+import { ShoppingCart, X, Minus, Plus, Home, ChevronDown, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { gustoMenu, categories, MenuItem } from '../data/gusto-menu';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
+import { CommunicationHUD } from '../components/CommunicationHUD';
+import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { motion } from 'framer-motion';
@@ -14,6 +16,7 @@ export const Gusto = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart } = useCart();
+  const { openHUD } = useCommunication();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('gusto');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -96,18 +99,27 @@ export const Gusto = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative bg-stone-700 hover:bg-stone-800 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-3 transition-all shadow-lg hover:shadow-xl"
-          >
-            <ShoppingCart size={24} />
-            <span>CART</span>
-            {cartItems.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
-                {cartItems.length}
-              </span>
-            )}
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_GUSTO', 'GUSTO')}
+              className="bg-gradient-to-r from-yellow-600 to-amber-700 hover:from-yellow-500 hover:to-amber-600 text-white px-5 py-3 rounded-lg font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-yellow-500/40"
+            >
+              <Sparkles size={20} />
+              <span className="hidden md:inline">Talk to Nova</span>
+            </button>
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative bg-stone-700 hover:bg-stone-800 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-3 transition-all shadow-lg hover:shadow-xl"
+            >
+              <ShoppingCart size={24} />
+              <span>CART</span>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -532,6 +544,8 @@ export const Gusto = () => {
           navigate('/');
         }}
       />
+
+      <CommunicationHUD />
     </div>
   );
 };

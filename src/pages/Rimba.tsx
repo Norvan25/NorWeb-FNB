@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home, Leaf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { FireflyField } from '../components/Rimba/FireflyField';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
+import { CommunicationHUD } from '../components/CommunicationHUD';
+import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 
@@ -16,6 +18,7 @@ export const Rimba = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
+  const { openHUD } = useCommunication();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rimba');
 
@@ -166,6 +169,15 @@ export const Rimba = () => {
             ))}
           </div>
 
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
+            className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-600 text-white px-5 py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-green-500/40"
+          >
+            <Leaf size={20} />
+            <span className="hidden md:inline">Talk to Nova</span>
+          </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -770,6 +782,8 @@ export const Rimba = () => {
           setIsCheckoutOpen(false);
         }}
       />
+
+      <CommunicationHUD />
     </div>
   );
 };

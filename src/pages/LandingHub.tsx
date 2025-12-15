@@ -7,7 +7,6 @@ import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
 import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { useCommunication } from '../context/CommunicationContext';
-import { useNovaChat } from '../context/NovaChatContext';
 import { useState } from 'react';
 
 export const LandingHub = () => {
@@ -15,7 +14,6 @@ export const LandingHub = () => {
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
 
   const { openHUD, openLeadCapture, showLeadCapture, closeLeadCapture } = useCommunication();
-  const { openChat } = useNovaChat();
 
   const openSchedulingModal = (type: 'strategy' | 'norcast') => {
     setSchedulingType(type);
@@ -118,7 +116,7 @@ export const LandingHub = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
-                onClick={() => document.getElementById('brands')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => openLeadCapture('THE SALES MANAGER')}
               >
                 Calculate Your Savings
               </motion.button>
@@ -427,19 +425,11 @@ export const LandingHub = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-center mt-12 space-y-6"
+                className="text-center mt-12"
               >
                 <p className="text-2xl font-bold text-cyan-400">
                   90-Day ROI Guarantee: If it doesn't pay for itself, you get your money back.
                 </p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-base font-bold rounded-full hover:from-teal-600 hover:to-emerald-700 transition-all shadow-lg shadow-teal-500/30"
-                  onClick={openChat}
-                >
-                  🎤 Ask Nova Questions
-                </motion.button>
               </motion.div>
             </div>
           </section>

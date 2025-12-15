@@ -7,6 +7,8 @@ import { rougeMenu } from '../data/rouge-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { CherryBlossomFall } from '../components/Rouge/CherryBlossomFall';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
+import { CommunicationHUD } from '../components/CommunicationHUD';
+import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 
@@ -15,6 +17,7 @@ export const Rouge = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
+  const { openHUD } = useCommunication();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rouge');
   const { scrollY } = useScroll();
@@ -86,20 +89,31 @@ export const Rouge = () => {
             ROUGE
           </h1>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsCartOpen(true)}
-            className="relative px-4 py-2 border-2 border-amber-600 text-amber-100 hover:bg-amber-600 hover:text-white transition-all duration-300 rounded-none font-semibold tracking-wider"
-          >
-            <ShoppingCart size={20} className="inline mr-2" />
-            CART
+          <div className="flex items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_ROUGE', 'ROUGE')}
+              className="bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white px-5 py-3 rounded-none font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-red-500/40"
+            >
+              <Flame size={20} />
+              <span className="hidden md:inline">Talk to Nova</span>
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsCartOpen(true)}
+              className="relative px-4 py-2 border-2 border-amber-600 text-amber-100 hover:bg-amber-600 hover:text-white transition-all duration-300 rounded-none font-semibold tracking-wider"
+            >
+              <ShoppingCart size={20} className="inline mr-2" />
+              CART
             {cartItems.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-amber-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
                 {cartItems.length}
               </span>
             )}
-          </motion.button>
+            </motion.button>
+          </div>
         </div>
       </motion.header>
 
@@ -720,6 +734,8 @@ export const Rouge = () => {
           setIsCheckoutOpen(false);
         }}
       />
+
+      <CommunicationHUD />
     </div>
   );
 };

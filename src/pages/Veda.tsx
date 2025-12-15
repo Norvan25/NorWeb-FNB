@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Flame, X, Minus, Plus, Home } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, Home, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { FloatingMandala } from '../components/Veda/FloatingMandala';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
+import { CommunicationHUD } from '../components/CommunicationHUD';
+import { useCommunication } from '../context/CommunicationContext';
 import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
@@ -15,6 +17,7 @@ export const Veda = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart } = useCart();
+  const { openHUD } = useCommunication();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('veda');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -109,18 +112,27 @@ export const Veda = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative bg-amber-500 hover:bg-amber-600 text-purple-950 px-6 py-3 rounded-xl font-bold flex items-center gap-3 transition-all shadow-xl hover:shadow-amber-500/30"
-          >
-            <ShoppingCart size={24} />
-            <span>CART</span>
-            {cartItems.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
-                {cartItems.length}
-              </span>
-            )}
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_VEDA', 'VEDA')}
+              className="bg-gradient-to-r from-orange-600 to-amber-700 hover:from-orange-500 hover:to-amber-600 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-orange-500/40"
+            >
+              <Sparkles size={20} />
+              <span className="hidden md:inline">Talk to Nova</span>
+            </button>
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative bg-amber-500 hover:bg-amber-600 text-purple-950 px-6 py-3 rounded-xl font-bold flex items-center gap-3 transition-all shadow-xl hover:shadow-amber-500/30"
+            >
+              <ShoppingCart size={24} />
+              <span>CART</span>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -573,6 +585,8 @@ export const Veda = () => {
           navigate('/');
         }}
       />
+
+      <CommunicationHUD />
     </div>
   );
 };
