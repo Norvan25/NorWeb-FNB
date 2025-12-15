@@ -28,13 +28,6 @@ export const CommunicationProvider = ({ children }: { children: ReactNode }) => 
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   const openHUD = (newMode: CommunicationMode, context?: string, restaurant?: RestaurantName) => {
-    const hasLeadCaptured = localStorage.getItem('norweb_lead_captured') === 'true';
-
-    if (!hasLeadCaptured) {
-      setShowLeadCapture(true);
-      return;
-    }
-
     setMode(newMode);
     setActiveContext(context || null);
     setActiveRestaurant(restaurant || null);
