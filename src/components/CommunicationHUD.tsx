@@ -280,11 +280,11 @@ export const CommunicationHUD = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-0 right-0 md:bottom-8 md:right-8 w-full md:w-[420px] max-h-[90vh] z-[91]"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:top-auto md:translate-x-0 md:translate-y-0 md:bottom-8 md:right-8 w-[90%] max-w-[380px] md:w-[420px] md:max-w-none max-h-[85vh] md:max-h-[90vh] z-[91]"
             onClick={(e) => e.stopPropagation()}
           >
             <div
-              className="bg-[#0A0A0F] rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+              className="bg-[#0A0A0F] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
@@ -292,7 +292,7 @@ export const CommunicationHUD = () => {
                 boxShadow: `0 0 40px ${themeColor}40`
               }}
             >
-              <div className="flex justify-between items-center p-5 border-b border-white/10 bg-white/5">
+              <div className="flex justify-between items-center p-4 md:p-5 border-b border-white/10 bg-white/5">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">
                     {mode === 'HUB' ? '🤖' : currentTheme && <currentTheme.icon className="w-7 h-7" style={{ color: themeColor }} />}
@@ -323,7 +323,7 @@ export const CommunicationHUD = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center py-8 px-6">
+              <div className="flex flex-col items-center py-6 md:py-8 px-6">
                 <NovaOrb
                   isActive={isConnected}
                   isListening={isListening}
@@ -331,32 +331,44 @@ export const CommunicationHUD = () => {
                   color={themeColor}
                 />
 
-                <button
-                  onClick={handleCallToggle}
-                  className="mt-6 w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg"
-                  style={{
-                    background: isConnected
-                      ? 'linear-gradient(135deg, #FF6B6B, #EE5A5A)'
-                      : `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`,
-                    boxShadow: `0 0 30px ${isConnected ? '#FF6B6B' : themeColor}60`
-                  }}
-                >
-                  {isConnected ? (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                      <rect x="6" y="6" width="12" height="12" rx="2"/>
-                    </svg>
-                  ) : (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                      <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                      <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                    </svg>
+                <div className="flex flex-col items-center gap-2 mt-4">
+                  <button
+                    onClick={handleCallToggle}
+                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg"
+                    style={{
+                      background: isConnected
+                        ? 'linear-gradient(135deg, #FF6B6B, #EE5A5A)'
+                        : `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`,
+                      boxShadow: `0 0 30px ${isConnected ? '#FF6B6B' : themeColor}60`
+                    }}
+                  >
+                    {isConnected ? (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <rect x="6" y="6" width="12" height="12" rx="2"/>
+                      </svg>
+                    ) : (
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                      </svg>
+                    )}
+                  </button>
+                  {!isConnected && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="text-sm font-medium"
+                      style={{ color: themeColor }}
+                    >
+                      Talk to Nova
+                    </motion.p>
                   )}
-                </button>
+                </div>
               </div>
 
               {mode === 'HUB' && !isConnected && messages.length === 0 && (
-                <div className="px-6 pb-4 flex flex-col gap-2">
-                  <p className="text-xs text-gray-400 text-center mb-2">Quick options:</p>
+                <div className="px-4 md:px-6 pb-4 flex flex-col gap-2">
+                  <p className="text-xs text-gray-400 text-center mb-1">Quick options:</p>
                   <div className="grid grid-cols-2 gap-2">
                     {(Object.keys(RESTAURANT_THEMES) as Array<keyof typeof RESTAURANT_THEMES>).map((key) => {
                       const theme = RESTAURANT_THEMES[key];
