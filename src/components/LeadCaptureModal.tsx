@@ -88,13 +88,14 @@ export const LeadCaptureModal = ({
             onClick={onClose}
           />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-[101]"
-          >
-            <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-8 mx-4 shadow-2xl shadow-cyan-500/20">
+          <div className="fixed inset-0 flex items-center justify-center z-[101] pointer-events-none px-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="w-full max-w-md pointer-events-auto"
+            >
+            <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-8 shadow-2xl shadow-cyan-500/20 relative">
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
@@ -182,7 +183,8 @@ export const LeadCaptureModal = ({
                 </p>
               </form>
             </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

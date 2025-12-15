@@ -5,12 +5,14 @@ import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCi
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
+import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
 export const LandingHub = () => {
   const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
+  const [leadCaptureOpen, setLeadCaptureOpen] = useState(false);
 
   const { openHUD } = useCommunication();
 
@@ -21,6 +23,14 @@ export const LandingHub = () => {
 
   const handleOpenDemo = () => {
     openHUD('HUB');
+  };
+
+  const handleCalculateSavings = () => {
+    setLeadCaptureOpen(true);
+  };
+
+  const handleLeadSuccess = () => {
+    console.log('Lead captured successfully!');
   };
 
   return (
@@ -111,7 +121,7 @@ export const LandingHub = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
-                onClick={handleOpenDemo}
+                onClick={handleCalculateSavings}
               >
                 Calculate Your Savings
               </motion.button>
@@ -480,6 +490,14 @@ export const LandingHub = () => {
         isOpen={schedulingModalOpen}
         onClose={() => setSchedulingModalOpen(false)}
         type={schedulingType}
+      />
+
+      <LeadCaptureModal
+        isOpen={leadCaptureOpen}
+        onClose={() => setLeadCaptureOpen(false)}
+        onSuccess={handleLeadSuccess}
+        selectedPlan="Savings Calculator"
+        restaurantName={null}
       />
 
       <CommunicationHUD />
