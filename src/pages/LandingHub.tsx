@@ -4,29 +4,28 @@ import { restaurants } from '../data/restaurants';
 import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck } from 'lucide-react';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
-import { ElevenLabsWidget } from '../components/ElevenLabsWidget';
-import { useState, useEffect } from 'react';
+import { CommunicationHUD } from '../components/CommunicationHUD';
+import { LeadCaptureModal } from '../components/LeadCaptureModal';
+import { useCommunication } from '../context/CommunicationContext';
+import { useState } from 'react';
 
 export const LandingHub = () => {
   const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
+
+  const { openHUD, openLeadCapture, showLeadCapture, closeLeadCapture } = useCommunication();
 
   const openSchedulingModal = (type: 'strategy' | 'norcast') => {
     setSchedulingType(type);
     setSchedulingModalOpen(true);
   };
 
-  const triggerElevenLabsAgent = () => {
-    const elevenLabsWidget = document.querySelector('elevenlabs-convai');
-    if (elevenLabsWidget) {
-      const shadowRoot = elevenLabsWidget.shadowRoot;
-      if (shadowRoot) {
-        const button = shadowRoot.querySelector('[part="button"]') as HTMLElement;
-        if (button) {
-          button.click();
-        }
-      }
-    }
+  const handleOpenDemo = () => {
+    openHUD('HUB');
+  };
+
+  const handleLeadCaptureSuccess = () => {
+    openHUD('HUB');
   };
 
   return (
@@ -109,7 +108,7 @@ export const LandingHub = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-lg font-bold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-xl shadow-cyan-500/50"
-                onClick={triggerElevenLabsAgent}
+                onClick={handleOpenDemo}
               >
                 Activate Free Demo
               </motion.button>
@@ -376,9 +375,9 @@ export const LandingHub = () => {
                           ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
                           : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                       }`}
-                      onClick={triggerElevenLabsAgent}
+                      onClick={() => openLeadCapture(tier.name)}
                     >
-                      Activate Free Demo
+                      Select Plan
                     </motion.button>
                   </motion.div>
                 ))}
@@ -415,7 +414,7 @@ export const LandingHub = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-600 text-white text-lg font-bold rounded-full hover:from-purple-600 hover:to-blue-700 transition-all shadow-xl shadow-purple-500/50"
-                    onClick={triggerElevenLabsAgent}
+                    onClick={handleOpenDemo}
                   >
                     Ask Nova About Enterprise Architecture
                   </motion.button>
@@ -450,7 +449,7 @@ export const LandingHub = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-12 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xl font-bold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-xl shadow-cyan-500/50"
-                  onClick={triggerElevenLabsAgent}
+                  onClick={handleOpenDemo}
                 >
                   Activate Free Demo
                 </motion.button>
@@ -474,7 +473,13 @@ export const LandingHub = () => {
         type={schedulingType}
       />
 
-      <ElevenLabsWidget />
+      <LeadCaptureModal
+        isOpen={showLeadCapture}
+        onClose={closeLeadCapture}
+        onSuccess={handleLeadCaptureSuccess}
+      />
+
+      <CommunicationHUD />
     </div>
   );
 };

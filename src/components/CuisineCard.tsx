@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Restaurant } from '../types/restaurant';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Mic } from 'lucide-react';
+import { useCommunication } from '../context/CommunicationContext';
+import type { RestaurantName } from '../context/CommunicationContext';
 
 interface CuisineCardProps {
   restaurant: Restaurant;
@@ -10,6 +12,21 @@ interface CuisineCardProps {
 
 export const CuisineCard = ({ restaurant, index }: CuisineCardProps) => {
   const navigate = useNavigate();
+  const { openHUD } = useCommunication();
+
+  const handleTestLive = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const restaurantMap: Record<string, RestaurantName> = {
+      'rimba': 'RIMBA',
+      'rouge': 'ROUGE',
+      'veda': 'VEDA',
+      'gusto': 'GUSTO',
+    };
+    const restaurantName = restaurantMap[restaurant.id];
+    if (restaurantName) {
+      openHUD('RESTAURANT', `CONTEXT: USER_SELECTED_${restaurantName}`, restaurantName);
+    }
+  };
 
   return (
     <motion.div
@@ -67,9 +84,18 @@ export const CuisineCard = ({ restaurant, index }: CuisineCardProps) => {
           >
             "{restaurant.tagline}"
           </motion.p>
-          <p className="text-white/70 text-sm leading-relaxed">
+          <p className="text-white/70 text-sm leading-relaxed mb-4">
             {restaurant.description}
           </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleTestLive}
+            className="px-6 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white font-semibold text-sm hover:bg-white/30 transition-all flex items-center gap-2"
+          >
+            <Mic size={16} />
+            Test Live
+          </motion.button>
         </div>
       </div>
 
