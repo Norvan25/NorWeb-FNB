@@ -275,19 +275,15 @@ export const CommunicationHUD = () => {
             onClick={handleClose}
           />
 
-          <motion.div
-            initial={{ opacity: 0, y: 100, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 100, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed w-[90%] max-w-[380px] md:max-w-[420px] max-h-[85vh] md:max-h-[90vh] z-[91]"
-            style={{
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="fixed inset-0 flex items-center justify-center z-[91] pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, y: 100, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 100, scale: 0.95 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="w-[90%] max-w-[380px] md:max-w-[420px] max-h-[85vh] md:max-h-[90vh] pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
             <div
               className="bg-[#0A0A0F] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
               style={{
@@ -461,7 +457,8 @@ export const CommunicationHUD = () => {
                 Powered by NorWeb FnB
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
