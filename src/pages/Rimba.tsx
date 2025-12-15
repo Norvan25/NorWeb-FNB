@@ -169,23 +169,35 @@ export const Rimba = () => {
             ))}
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsCartOpen(true)}
-            className="relative bg-[#D4AF37]/10 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#D4AF37]/20 transition-colors"
-          >
-            <ShoppingCart size={20} />
-            {cartItems.length > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-2 -right-2 bg-[#D4AF37] text-black w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-              >
-                {cartItems.length}
-              </motion.span>
-            )}
-          </motion.button>
+          <div className="flex items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
+              className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-600 text-white px-5 py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-green-500/40"
+            >
+              <Leaf size={20} />
+              <span className="hidden md:inline">Talk to Aiman</span>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsCartOpen(true)}
+              className="relative bg-[#D4AF37]/10 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#D4AF37]/20 transition-colors"
+            >
+              <ShoppingCart size={20} />
+              {cartItems.length > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-2 -right-2 bg-[#D4AF37] text-black w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                >
+                  {cartItems.length}
+                </motion.span>
+              )}
+            </motion.button>
+          </div>
         </div>
       </motion.nav>
 
