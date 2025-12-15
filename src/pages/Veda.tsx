@@ -118,7 +118,7 @@ export const Veda = () => {
               className="bg-gradient-to-r from-orange-600 to-amber-700 hover:from-orange-500 hover:to-amber-600 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-orange-500/40"
             >
               <Sparkles size={20} />
-              <span className="hidden md:inline">Talk to Nova</span>
+              <span className="hidden md:inline">Talk to Dev</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -154,9 +154,30 @@ export const Veda = () => {
           <p className="text-3xl md:text-4xl font-serif text-amber-300 mb-8 drop-shadow-xl tracking-wide">
             The Art of Spice
           </p>
-          <p className="text-xl md:text-2xl text-white drop-shadow-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white drop-shadow-xl max-w-3xl mx-auto leading-relaxed mb-12">
             Journey through ancient culinary traditions where aromatic spices dance with mystical flavors
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.scrollTo({ top: document.getElementById('menu')?.offsetTop || window.innerHeight, behavior: 'smooth' })}
+              className="bg-amber-500 hover:bg-amber-600 text-purple-950 px-10 py-4 rounded-xl font-bold text-lg transition-colors shadow-xl hover:shadow-amber-500/30"
+            >
+              Explore Menu
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_VEDA', 'VEDA')}
+              className="bg-gradient-to-r from-orange-600 to-amber-700 hover:from-orange-500 hover:to-amber-600 text-white px-10 py-4 rounded-xl font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-orange-500/40"
+            >
+              <Sparkles size={20} />
+              Talk to Dev
+            </motion.button>
+          </div>
         </div>
       </section>
 
@@ -184,6 +205,7 @@ export const Veda = () => {
       </section>
 
       <section
+        id="menu"
         className="relative py-20 px-6 overflow-hidden"
         style={{
           backgroundImage: "url('/images/veda/veda-pattern_1.png')",

@@ -105,7 +105,7 @@ export const Gusto = () => {
               className="bg-gradient-to-r from-yellow-600 to-amber-700 hover:from-yellow-500 hover:to-amber-600 text-white px-5 py-3 rounded-lg font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-yellow-500/40"
             >
               <Sparkles size={20} />
-              <span className="hidden md:inline">Talk to Nova</span>
+              <span className="hidden md:inline">Talk to Marco</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -138,9 +138,30 @@ export const Gusto = () => {
           <h1 className="text-8xl md:text-9xl font-serif font-bold text-white mb-6 drop-shadow-2xl tracking-wider">
             GUSTO
           </h1>
-          <p className="text-3xl md:text-4xl font-serif text-stone-100 drop-shadow-xl tracking-wide">
+          <p className="text-3xl md:text-4xl font-serif text-stone-100 mb-12 drop-shadow-xl tracking-wide">
             La Dolce Vita
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.scrollTo({ top: document.getElementById('menu')?.offsetTop || window.innerHeight, behavior: 'smooth' })}
+              className="bg-stone-700 hover:bg-stone-800 text-white px-10 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg hover:shadow-xl"
+            >
+              Explore Menu
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_GUSTO', 'GUSTO')}
+              className="bg-gradient-to-r from-yellow-600 to-amber-700 hover:from-yellow-500 hover:to-amber-600 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-yellow-500/40"
+            >
+              <Sparkles size={20} />
+              Talk to Marco
+            </motion.button>
+          </div>
         </div>
 
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 animate-bounce">
@@ -169,6 +190,7 @@ export const Gusto = () => {
       </section>
 
       <section
+        id="menu"
         className="relative py-24 px-6"
         style={{
           backgroundImage: "url('/images/gusto/gusto-texture.png')",

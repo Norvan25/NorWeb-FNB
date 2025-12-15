@@ -97,7 +97,7 @@ export const Rouge = () => {
               className="bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white px-5 py-3 rounded-none font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-red-500/40"
             >
               <Flame size={20} />
-              <span className="hidden md:inline">Talk to Nova</span>
+              <span className="hidden md:inline">Talk to Ruby</span>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -159,6 +159,34 @@ export const Rouge = () => {
           >
             Contemporary Chinese Cuisine
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              className="bg-amber-600 hover:bg-amber-500 text-white px-10 py-4 rounded-none font-bold text-lg transition-colors"
+              style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}
+            >
+              Explore Menu
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_ROUGE', 'ROUGE')}
+              className="bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white px-10 py-4 rounded-none font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-red-500/40"
+              style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}
+            >
+              <Flame size={20} />
+              Talk to Ruby
+            </motion.button>
+          </motion.div>
         </div>
 
         <motion.div
