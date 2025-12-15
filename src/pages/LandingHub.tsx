@@ -383,9 +383,9 @@ export const LandingHub = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="text-center mt-6"
               >
-                <p className="text-lg font-bold text-cyan-400">
+                <p className="text-2xl font-bold text-cyan-400">
                   90-Day ROI Guarantee: If it doesn't pay for itself, you get your money back.
                 </p>
               </motion.div>
