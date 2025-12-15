@@ -172,15 +172,6 @@ export const Rimba = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
-            className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-600 text-white px-5 py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-green-500/40"
-          >
-            <Leaf size={20} />
-            <span className="hidden md:inline">Talk to Nova</span>
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={() => setIsCartOpen(true)}
             className="relative bg-[#D4AF37]/10 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] px-6 py-3 rounded-full flex items-center gap-2 hover:bg-[#D4AF37]/20 transition-colors"
           >
@@ -243,14 +234,26 @@ export const Rimba = () => {
               Experience the heritage of Malaysian cuisine in every bite.
             </p>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('menu')}
-              className="bg-[#D4AF37] text-[#0a0f0a] px-10 py-4 rounded-full font-bold text-lg hover:bg-[#c4a02f] transition-colors"
-            >
-              Explore Menu
-            </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('menu')}
+                className="bg-[#D4AF37] text-[#0a0f0a] px-10 py-4 rounded-full font-bold text-lg hover:bg-[#c4a02f] transition-colors"
+              >
+                Explore Menu
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
+                className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-600 text-white px-10 py-4 rounded-full font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-green-500/40"
+              >
+                <Leaf size={20} />
+                Talk to Aiman
+              </motion.button>
+            </div>
           </motion.div>
         </div>
 
