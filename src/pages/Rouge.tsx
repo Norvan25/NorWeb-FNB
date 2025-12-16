@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShoppingCart, X, Minus, Plus, Flame, ArrowLeft, MessageCircle, ChevronDown } from 'lucide-react';
+import { ShoppingCart, X, Minus, Plus, Flame, ArrowLeft, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rougeMenu } from '../data/rouge-menu';
@@ -596,30 +596,6 @@ export const Rouge = () => {
           </motion.div>
         </div>
       </section>
-
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-        className="fixed bottom-8 right-8 z-40"
-      >
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="relative group"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-400 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity" />
-          <div className="relative bg-gradient-to-br from-amber-600 to-amber-700 rounded-full p-4 shadow-2xl border-2 border-amber-400">
-            <MessageCircle size={28} className="text-white" />
-          </div>
-        </motion.button>
-        <div className="absolute -top-2 -left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg animate-pulse">
-          AI
-        </div>
-        <p className="text-center text-xs text-stone-700 font-semibold mt-2 whitespace-nowrap">
-          NorWeb Intelligence
-        </p>
-      </motion.div>
 
       <AnimatePresence>
         {isCartOpen && (
