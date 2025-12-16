@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, Phone, User } from 'lucide-react';
+import { X, Sparkles, Phone, User, Mail, Building2 } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -25,6 +25,8 @@ export const LeadCaptureModal = ({
 }: LeadCaptureModalProps) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [businessName, setBusinessName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,13 +34,19 @@ export const LeadCaptureModal = ({
     e.preventDefault();
     setError(null);
 
-    if (!name.trim() || !phone.trim()) {
+    if (!name.trim() || !phone.trim() || !email.trim() || !businessName.trim()) {
       setError('Please fill in all fields');
       return;
     }
 
     if (phone.length < 10) {
       setError('Please enter a valid phone number');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
       return;
     }
 
@@ -49,10 +57,11 @@ export const LeadCaptureModal = ({
         {
           name: name.trim(),
           phone: phone.trim(),
-          restaurant_name: restaurantName,
+          email: email.trim(),
+          restaurant_name: businessName.trim(),
           plan_name: selectedPlan,
           metadata: {
-            source: 'communication_hud',
+            source: 'savings_calculator',
             timestamp: new Date().toISOString(),
             user_agent: navigator.userAgent,
           },
@@ -66,6 +75,8 @@ export const LeadCaptureModal = ({
 
       setName('');
       setPhone('');
+      setEmail('');
+      setBusinessName('');
       onSuccess();
       onClose();
     } catch (err) {
@@ -112,9 +123,9 @@ export const LeadCaptureModal = ({
                   <Sparkles className="text-cyan-400" size={40} />
                 </motion.div>
 
-                <h2 className="text-3xl font-bold mb-2">Unlock Your Free Demo</h2>
+                <h2 className="text-3xl font-bold mb-2">Calculate Your Savings</h2>
                 <p className="text-gray-400">
-                  Enter your details to start a live conversation with Nova AI
+                  Enter your details and we'll show you how much you can save
                 </p>
                 {selectedPlan && (
                   <p className="text-cyan-400 font-semibold mt-2">
@@ -143,7 +154,7 @@ export const LeadCaptureModal = ({
 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Phone Number
+                    Contact Number
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
@@ -152,6 +163,40 @@ export const LeadCaptureModal = ({
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+60 12-345 6789"
+                      className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="john@restaurant.com"
+                      className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Business/Restaurant Name
+                  </label>
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                    <input
+                      type="text"
+                      value={businessName}
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      placeholder="Golden Lotus Restaurant"
                       className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
                       disabled={isSubmitting}
                     />
@@ -175,7 +220,7 @@ export const LeadCaptureModal = ({
                   disabled={isSubmitting}
                   className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg shadow-cyan-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Start Free Demo'}
+                  {isSubmitting ? 'Submitting...' : 'Get My Savings Report'}
                 </motion.button>
 
                 <p className="text-xs text-gray-500 text-center">
