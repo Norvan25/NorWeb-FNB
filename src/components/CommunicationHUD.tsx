@@ -139,6 +139,7 @@ export const CommunicationHUD = () => {
 
   const conversationRef = useRef<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isConnectingRef = useRef(false);
 
   const agentId = import.meta.env.VITE_ELEVENLABS_AGENT_ID || 'agent_6101kcewd8mvfh0tecwefhth3vwx';
   const currentTheme = activeRestaurant ? RESTAURANT_THEMES[activeRestaurant] : null;
@@ -149,7 +150,7 @@ export const CommunicationHUD = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen && !isConnected) {
+    if (isOpen && !isConnected && !isConnectingRef.current) {
       startConversation();
     } else if (!isOpen && isConnected) {
       endConversation();
@@ -158,6 +159,11 @@ export const CommunicationHUD = () => {
   }, [isOpen]);
 
   const startConversation = async () => {
+    if (isConnectingRef.current || conversationRef.current) {
+      return;
+    }
+
+    isConnectingRef.current = true;
     try {
       conversationRef.current = await Conversation.startSession({
         agentId,
@@ -167,6 +173,7 @@ export const CommunicationHUD = () => {
           },
         },
         onConnect: () => {
+          isConnectingRef.current = false;
           setIsConnected(true);
           if (activeContext) {
             setTimeout(() => {
@@ -198,6 +205,8 @@ export const CommunicationHUD = () => {
       await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (error) {
       console.error('Failed to start conversation:', error);
+      isConnectingRef.current = false;
+      conversationRef.current = null;
     }
   };
 
@@ -210,6 +219,7 @@ export const CommunicationHUD = () => {
       }
       conversationRef.current = null;
     }
+    isConnectingRef.current = false;
     setIsConnected(false);
     setIsListening(false);
     setIsSpeaking(false);

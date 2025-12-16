@@ -28,6 +28,7 @@ export const CommunicationProvider = ({ children }: { children: ReactNode }) => 
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   const openHUD = (newMode: CommunicationMode, context?: string, restaurant?: RestaurantName) => {
+    if (isOpen) return;
     setMode(newMode);
     setActiveContext(context || null);
     setActiveRestaurant(restaurant || null);
