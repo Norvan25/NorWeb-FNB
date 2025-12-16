@@ -174,10 +174,13 @@ export const Rimba = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
-              className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-600 text-white px-5 py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-green-500/40"
+              className="relative bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 hover:from-green-400 hover:via-emerald-400 hover:to-green-500 text-white px-5 py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.8),0_0_60px_rgba(16,185,129,0.6),0_0_90px_rgba(16,185,129,0.4)] animate-pulse"
+              style={{
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+              }}
             >
               <Leaf size={20} />
-              <span className="hidden md:inline">Talk to Aiman</span>
+              <span className="hidden md:inline">Activate Free Demo</span>
             </motion.button>
 
             <motion.button
@@ -260,10 +263,13 @@ export const Rimba = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
-                className="bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-500 hover:to-emerald-600 text-white px-10 py-4 rounded-full font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-green-500/40"
+                className="relative bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 hover:from-green-400 hover:via-emerald-400 hover:to-green-500 text-white px-10 py-4 rounded-full font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.8),0_0_60px_rgba(16,185,129,0.6),0_0_90px_rgba(16,185,129,0.4)] animate-pulse"
+                style={{
+                  animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                }}
               >
                 <Leaf size={20} />
-                Talk to Aiman
+                Activate Free Demo
               </motion.button>
             </div>
           </motion.div>

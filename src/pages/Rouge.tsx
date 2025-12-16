@@ -93,10 +93,13 @@ export const Rouge = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_ROUGE', 'ROUGE')}
-              className="bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white px-5 py-3 rounded-none font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-red-500/40"
+              className="relative bg-gradient-to-r from-red-500 via-rose-500 to-red-600 hover:from-red-400 hover:via-rose-400 hover:to-red-500 text-white px-5 py-3 rounded-none font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(239,68,68,0.6),0_0_40px_rgba(239,68,68,0.4),0_0_60px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.8),0_0_60px_rgba(239,68,68,0.6),0_0_90px_rgba(239,68,68,0.4)] animate-pulse"
+              style={{
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+              }}
             >
               <Flame size={20} />
-              <span className="hidden md:inline">Talk to Ruby</span>
+              <span className="hidden md:inline">Activate Free Demo</span>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -179,11 +182,14 @@ export const Rouge = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_ROUGE', 'ROUGE')}
-              className="bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white px-10 py-4 rounded-none font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-red-500/40"
-              style={{ fontFamily: "'ZCOOL XiaoWei', serif" }}
+              className="relative bg-gradient-to-r from-red-500 via-rose-500 to-red-600 hover:from-red-400 hover:via-rose-400 hover:to-red-500 text-white px-10 py-4 rounded-none font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(239,68,68,0.6),0_0_40px_rgba(239,68,68,0.4),0_0_60px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.8),0_0_60px_rgba(239,68,68,0.6),0_0_90px_rgba(239,68,68,0.4)] animate-pulse"
+              style={{
+                fontFamily: "'ZCOOL XiaoWei', serif",
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+              }}
             >
               <Flame size={20} />
-              Talk to Ruby
+              Activate Free Demo
             </motion.button>
           </motion.div>
         </div>

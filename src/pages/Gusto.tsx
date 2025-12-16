@@ -102,10 +102,13 @@ export const Gusto = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_GUSTO', 'GUSTO')}
-              className="bg-gradient-to-r from-yellow-600 to-amber-700 hover:from-yellow-500 hover:to-amber-600 text-white px-5 py-3 rounded-lg font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-yellow-500/40"
+              className="relative bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-400 hover:via-amber-400 hover:to-yellow-500 text-white px-5 py-3 rounded-lg font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.6),0_0_40px_rgba(234,179,8,0.4),0_0_60px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.8),0_0_60px_rgba(234,179,8,0.6),0_0_90px_rgba(234,179,8,0.4)] animate-pulse"
+              style={{
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+              }}
             >
               <Sparkles size={20} />
-              <span className="hidden md:inline">Talk to Marco</span>
+              <span className="hidden md:inline">Activate Free Demo</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -156,10 +159,13 @@ export const Gusto = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_GUSTO', 'GUSTO')}
-              className="bg-gradient-to-r from-yellow-600 to-amber-700 hover:from-yellow-500 hover:to-amber-600 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-yellow-500/40"
+              className="relative bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-400 hover:via-amber-400 hover:to-yellow-500 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.6),0_0_40px_rgba(234,179,8,0.4),0_0_60px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.8),0_0_60px_rgba(234,179,8,0.6),0_0_90px_rgba(234,179,8,0.4)] animate-pulse"
+              style={{
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+              }}
             >
               <Sparkles size={20} />
-              Talk to Marco
+              Activate Free Demo
             </motion.button>
           </div>
         </div>
