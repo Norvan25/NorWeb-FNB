@@ -282,7 +282,6 @@ export const CommunicationHUD = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90]"
-            onClick={handleClose}
           />
 
           <div className="fixed inset-0 flex items-center justify-center z-[91] pointer-events-none">
@@ -292,7 +291,6 @@ export const CommunicationHUD = () => {
               exit={{ opacity: 0, y: 100, scale: 0.95 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="w-[90%] max-w-[380px] md:max-w-[420px] max-h-[85vh] md:max-h-[90vh] pointer-events-auto"
-              onClick={(e) => e.stopPropagation()}
             >
             <div
               className="bg-[#0A0A0F] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
