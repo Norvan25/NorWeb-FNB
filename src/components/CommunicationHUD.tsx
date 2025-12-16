@@ -136,7 +136,6 @@ export const CommunicationHUD = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [language, setLanguage] = useState('en');
-  const [interactionMode, setInteractionMode] = useState<'NONE' | 'TEXT_ONLY' | 'VOICE'>('NONE');
 
   const conversationRef = useRef<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -151,10 +150,11 @@ export const CommunicationHUD = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (!isOpen && isConnected) {
+    if (isOpen && !isConnected && !isConnectingRef.current) {
+      startConversation();
+    } else if (!isOpen && isConnected) {
       endConversation();
       setMessages([]);
-      setInteractionMode('NONE');
     }
   }, [isOpen]);
 
@@ -175,7 +175,7 @@ export const CommunicationHUD = () => {
         onConnect: () => {
           isConnectingRef.current = false;
           setIsConnected(true);
-          if (activeContext && interactionMode === 'VOICE') {
+          if (activeContext) {
             setTimeout(() => {
               conversationRef.current?.sendText(activeContext);
             }, 500);
@@ -229,9 +229,6 @@ export const CommunicationHUD = () => {
     if (isConnected) {
       await endConversation();
     } else {
-      if (interactionMode === 'NONE') {
-        setInteractionMode('VOICE');
-      }
       await startConversation();
     }
   };
@@ -247,38 +244,10 @@ export const CommunicationHUD = () => {
     }
   };
 
-  const handleSendText = async () => {
+  const handleSendText = () => {
     if (inputText.trim()) {
-      const textToSend = inputText;
+      sendTextMessage(inputText);
       setInputText('');
-
-      if (interactionMode === 'NONE' && !isConnected) {
-        setInteractionMode('TEXT_ONLY');
-        if (!conversationRef.current) {
-          await startConversation();
-          setTimeout(() => {
-            if (activeContext) {
-              sendTextMessage(activeContext);
-              setTimeout(() => {
-                sendTextMessage(textToSend);
-              }, 300);
-            } else {
-              sendTextMessage(textToSend);
-            }
-          }, 1000);
-        } else {
-          sendTextMessage(textToSend);
-        }
-      } else {
-        if (!conversationRef.current) {
-          await startConversation();
-          setTimeout(() => {
-            sendTextMessage(textToSend);
-          }, 1000);
-        } else {
-          sendTextMessage(textToSend);
-        }
-      }
     }
   };
 
@@ -291,7 +260,6 @@ export const CommunicationHUD = () => {
 
   const handleClose = () => {
     endConversation();
-    setInteractionMode('NONE');
     closeHUD();
   };
 
@@ -375,8 +343,7 @@ export const CommunicationHUD = () => {
                 <div className="flex flex-col items-center gap-2 mt-4">
                   <button
                     onClick={handleCallToggle}
-                    disabled={interactionMode === 'TEXT_ONLY'}
-                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg"
                     style={{
                       background: isConnected
                         ? 'linear-gradient(135deg, #FF6B6B, #EE5A5A)'
@@ -400,9 +367,9 @@ export const CommunicationHUD = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       className="text-sm font-medium"
-                      style={{ color: interactionMode === 'TEXT_ONLY' ? '#666' : themeColor }}
+                      style={{ color: themeColor }}
                     >
-                      {interactionMode === 'TEXT_ONLY' ? 'Text-Only Mode' : 'Talk to Nova'}
+                      Talk to Nova
                     </motion.p>
                   )}
                 </div>
