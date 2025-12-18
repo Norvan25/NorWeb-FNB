@@ -119,7 +119,7 @@ export const useElevenLabs = ({
   const sendContext = async (text: string) => {
     if (conversationRef.current && status === 'connected') {
       try {
-        await conversationRef.current.sendText(text);
+        await conversationRef.current.sendUserMessage(text);
       } catch (error) {
         console.error('Failed to send context:', error);
       }

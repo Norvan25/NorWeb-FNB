@@ -199,7 +199,7 @@ export const CommunicationHUD = () => {
           setIsConnected(true);
           if (activeContext) {
             setTimeout(() => {
-              conversationRef.current?.sendText(activeContext);
+              conversationRef.current?.sendUserMessage(activeContext);
             }, 500);
           }
         },
@@ -286,7 +286,7 @@ export const CommunicationHUD = () => {
 
     try {
       console.log('Sending text to ElevenLabs:', text);
-      await conversationRef.current.sendText(text);
+      await conversationRef.current.sendUserMessage(text);
       console.log('Text sent successfully to ElevenLabs');
     } catch (error) {
       console.error('Failed to send message to ElevenLabs:', error);
