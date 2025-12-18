@@ -433,29 +433,36 @@ export const CommunicationHUD = () => {
                 </div>
               )}
 
-              <div className="p-4 border-t border-white/10 bg-white/5 pointer-events-auto">
-                <div className="flex gap-2">
+              <div className="relative z-50 p-4 border-t border-white/10 bg-white/5 pointer-events-auto">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSendText();
+                  }}
+                  className="flex gap-2"
+                >
                   <input
                     type="text"
                     className="flex-1 bg-[#141419] border border-white/10 rounded-full px-4 py-3 text-white text-sm outline-none focus:border-white/30 transition-colors pointer-events-auto"
                     placeholder="Type a message..."
                     value={inputText}
                     onChange={e => setInputText(e.target.value)}
-                    onKeyDown={handleKeyPress}
+                    style={{ pointerEvents: 'auto' }}
                   />
                   <button
-                    onClick={handleSendText}
+                    type="submit"
                     disabled={!inputText.trim()}
                     className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-30 pointer-events-auto"
                     style={{
-                      background: `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`
+                      background: `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`,
+                      pointerEvents: 'auto'
                     }}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
                       <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                     </svg>
                   </button>
-                </div>
+                </form>
               </div>
 
               {mode === 'RESTAURANT' && (
