@@ -296,46 +296,45 @@ export const LandingHub = () => {
                 {[
                   {
                     name: 'THE DIGITAL HOST',
-                    price: 'RM 699',
+                    price: 'RM 799',
                     period: '/ mo',
-                    hook: 'For Manual Control',
+                    hook: 'Your 24/7 Front Desk',
                     features: [
-                      { text: '24/7 WhatsApp & Web Booking', enabled: true },
+                      { text: 'AI Agent (WhatsApp + Website)', enabled: true },
+                      { text: 'Online Booking & Order Handling', enabled: true },
                       { text: 'Digital Menu Engineering', enabled: true },
-                      { text: 'Direct Ordering (Pickup/Manual)', enabled: true },
-                      { text: 'No POS Integration', enabled: false, bold: true },
-                      { text: 'No Lalamove Dispatch', enabled: false, bold: true },
-                      { text: 'No Marketing Automation', enabled: false }
+                      { text: 'Human Handoff for Order Processing', enabled: true }
                     ],
                     highlighted: false
                   },
                   {
                     name: 'THE OPS MANAGER',
-                    price: 'RM 1,299',
+                    price: 'RM 1,499',
                     period: '/ mo',
                     badge: 'RECOMMENDED',
-                    hook: 'For Automated Operations',
+                    hook: 'Operations on Autopilot',
                     features: [
                       { text: 'Everything in Digital Host', enabled: true },
-                      { text: 'POS System Integration (Direct to Kitchen)', enabled: true, bold: true },
-                      { text: 'Lalamove/Grab Auto-Dispatch (Rider Booking)', enabled: true, bold: true },
-                      { text: 'Payment Gateway Setup', enabled: true },
-                      { text: 'Marketing Add-on Available (+RM 1,000)', enabled: true, warning: true }
+                      { text: 'POS Integration (Direct to Kitchen)', enabled: true, bold: true },
+                      { text: 'Delivery Dispatch (Lalamove/Grab)', enabled: true, bold: true },
+                      { text: 'Voice AI Agent (Phone Answering)', enabled: true, bold: true },
+                      { text: 'Omnichannel Inbox (WA, FB, IG, Web)', enabled: true, bold: true }
                     ],
                     highlighted: true
                   },
                   {
                     name: 'THE REVENUE ENGINE',
-                    price: 'RM 2,899',
+                    price: 'RM 3,299',
                     period: '/ mo',
-                    hook: 'Replaces Your Marketing Agency',
+                    hook: 'Your Marketing Machine',
                     badge2: 'ALL INCLUSIVE',
                     features: [
-                      { text: 'ALL Operations Automation (POS + Delivery)', enabled: true, bold: true },
-                      { text: 'NorZ Marketing Automation (Campaigns)', enabled: true, bold: true },
-                      { text: 'Customer Reactivation ("We Miss You" Blasts)', enabled: true, bold: true },
-                      { text: 'Review Recovery Engine (Google 5-Star)', enabled: true, bold: true },
-                      { text: 'Voice AI Agent (Phone Answering)', enabled: true, bold: true }
+                      { text: 'Everything in Ops Manager', enabled: true },
+                      { text: 'Social Media Content Generator', enabled: true, bold: true },
+                      { text: 'Automated Posting & Scheduling', enabled: true, bold: true },
+                      { text: 'Campaign Automation', enabled: true, bold: true },
+                      { text: 'Customer Reactivation Blasts', enabled: true, bold: true },
+                      { text: 'Review Recovery Engine (Google 5-Star)', enabled: true, bold: true }
                     ],
                     highlighted: false
                   }
@@ -409,10 +408,13 @@ export const LandingHub = () => {
                 className="text-center mb-12"
               >
                 <p className="text-lg text-gray-400">
-                  One-Time System Architecture: <span className="text-white font-bold text-xl">From RM 3,500</span>
+                  One-Time Setup: <span className="text-white font-bold text-xl">From RM 3,799</span> <span className="text-sm text-gray-500">(T&C applies)</span>
                 </p>
                 <p className="text-sm text-gray-500 mt-2">
                   Includes Menu Engineering, POS Wiring, AI Training & 2 Days Dedicated Onboarding.
+                </p>
+                <p className="text-xs text-gray-600 mt-3 italic">
+                  * AI token usage billed based on consumption
                 </p>
               </motion.div>
 
