@@ -12,6 +12,7 @@ const RESTAURANT_THEMES = {
     secondary: '#059669',
     name: 'Rimba Malaysian Kitchen',
     context: 'CONTEXT: USER_SELECTED_RIMBA',
+    agentId: import.meta.env.VITE_ELEVENLABS_RIMBA_AGENT_ID,
   },
   ROUGE: {
     icon: Flame,
@@ -19,6 +20,7 @@ const RESTAURANT_THEMES = {
     secondary: '#B91C1C',
     name: 'Rouge Chinese Fine Dining',
     context: 'CONTEXT: USER_SELECTED_ROUGE',
+    agentId: import.meta.env.VITE_ELEVENLABS_ROUGE_AGENT_ID,
   },
   VEDA: {
     icon: SparkleIcon,
@@ -26,6 +28,7 @@ const RESTAURANT_THEMES = {
     secondary: '#C2410C',
     name: 'Veda North Indian Cuisine',
     context: 'CONTEXT: USER_SELECTED_VEDA',
+    agentId: import.meta.env.VITE_ELEVENLABS_VEDA_AGENT_ID,
   },
   GUSTO: {
     icon: SparkleIcon,
@@ -33,6 +36,7 @@ const RESTAURANT_THEMES = {
     secondary: '#A16207',
     name: 'Gusto Italian Trattoria',
     context: 'CONTEXT: USER_SELECTED_GUSTO',
+    agentId: import.meta.env.VITE_ELEVENLABS_GUSTO_AGENT_ID,
   },
 };
 
@@ -142,9 +146,13 @@ export const CommunicationHUD = () => {
   const isConnectingRef = useRef(false);
   const isConversationReadyRef = useRef(false);
 
-  const agentId = import.meta.env.VITE_ELEVENLABS_AGENT_ID || 'agent_6101kcewd8mvfh0tecwefhth3vwx';
+  const hubAgentId = import.meta.env.VITE_ELEVENLABS_HUB_AGENT_ID || 'agent_6101kcewd8mvfh0tecwefhth3vwx';
   const currentTheme = activeRestaurant ? RESTAURANT_THEMES[activeRestaurant] : null;
   const themeColor = currentTheme?.primary || '#00D4AA';
+
+  const agentId = mode === 'RESTAURANT' && currentTheme?.agentId
+    ? currentTheme.agentId
+    : hubAgentId;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
