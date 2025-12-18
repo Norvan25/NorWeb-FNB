@@ -528,37 +528,7 @@ export const CommunicationHUD = () => {
                 </div>
               )}
 
-              <div className="relative z-50 p-4 border-t border-white/10 bg-white/5 pointer-events-auto">
-                <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    await handleSendText();
-                  }}
-                  className="flex gap-2"
-                >
-                  <input
-                    type="text"
-                    className="flex-1 bg-[#141419] border border-white/10 rounded-full px-4 py-3 text-white text-sm outline-none focus:border-white/30 transition-colors pointer-events-auto"
-                    placeholder="Type a message..."
-                    value={inputText}
-                    onChange={e => setInputText(e.target.value)}
-                    style={{ pointerEvents: 'auto' }}
-                  />
-                  <button
-                    type="submit"
-                    disabled={!inputText.trim()}
-                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-30 pointer-events-auto"
-                    style={{
-                      background: `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`,
-                      pointerEvents: 'auto'
-                    }}
-                  >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </svg>
-                  </button>
-                </form>
-              </div>
+              <div className="h-16" />
 
               {mode === 'RESTAURANT' && (
                 <div className="px-4 pb-4">
@@ -579,6 +549,63 @@ export const CommunicationHUD = () => {
             </motion.div>
           </div>
         </>
+      )}
+
+      {isOpen && (
+        <div
+          className="fixed bottom-4 right-4 w-96 z-[9999]"
+          style={{ pointerEvents: 'auto', isolation: 'isolate' }}
+        >
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              console.log('FORM SUBMITTED:', inputText);
+              if (inputText.trim()) {
+                await handleSendText();
+              }
+            }}
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center gap-2 bg-black/80 backdrop-blur-xl rounded-full p-2 shadow-2xl"
+            style={{
+              borderWidth: '2px',
+              borderStyle: 'solid',
+              borderColor: themeColor,
+              boxShadow: `0 0 40px ${themeColor}40`
+            }}
+          >
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => {
+                console.log('INPUT CHANGED:', e.target.value);
+                setInputText(e.target.value);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log('INPUT CLICKED');
+              }}
+              onFocus={() => console.log('INPUT FOCUSED')}
+              placeholder="Type a message..."
+              autoComplete="off"
+              className="flex-1 bg-transparent border-none px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+            />
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log('BUTTON CLICKED');
+              }}
+              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all hover:scale-110"
+              style={{
+                background: `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </form>
+        </div>
       )}
     </AnimatePresence>
   );
