@@ -244,10 +244,19 @@ export const CommunicationHUD = () => {
     }
   };
 
-  const handleSendText = () => {
+  const handleSendText = async () => {
     if (inputText.trim()) {
-      sendTextMessage(inputText);
+      const textToSend = inputText;
       setInputText('');
+
+      if (!isConnected) {
+        await startConversation();
+        setTimeout(() => {
+          sendTextMessage(textToSend);
+        }, 1000);
+      } else {
+        sendTextMessage(textToSend);
+      }
     }
   };
 
