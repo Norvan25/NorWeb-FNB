@@ -166,8 +166,27 @@ export const CommunicationHUD = () => {
 
     isConnectingRef.current = true;
     try {
+      console.log('Fetching signed URL from backend...');
+      const signedUrlResponse = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-auth`,
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+        }
+      );
+
+      if (!signedUrlResponse.ok) {
+        const errorData = await signedUrlResponse.json();
+        throw new Error(errorData.error || 'Failed to get signed URL');
+      }
+
+      const { signedUrl } = await signedUrlResponse.json();
+      console.log('Got signed URL, starting conversation...');
+
       conversationRef.current = await Conversation.startSession({
-        agentId,
+        signedUrl,
         overrides: {
           agent: {
             language: language,
@@ -219,6 +238,10 @@ export const CommunicationHUD = () => {
       console.error('Failed to start conversation:', error);
       isConnectingRef.current = false;
       conversationRef.current = null;
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        text: `Connection error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      }]);
     }
   };
 
@@ -278,10 +301,16 @@ export const CommunicationHUD = () => {
 
     const textToSend = inputText;
     setInputText('');
-    setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
+
+    console.log('=== SENDING TEXT MESSAGE ===');
+    console.log('Text:', textToSend);
+    console.log('Conversation ready:', isConversationReadyRef.current);
+    console.log('Conversation ref exists:', !!conversationRef.current);
+    console.log('Is connected:', isConnected);
 
     if (!isConversationReadyRef.current) {
       console.log('Conversation not ready, starting...');
+      setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
       await startConversation();
 
       const maxWaitTime = 10000;
@@ -295,11 +324,12 @@ export const CommunicationHUD = () => {
         console.log('Connection established and ready, sending message');
         try {
           await sendTextMessage(textToSend);
+          console.log('✓ Message sent successfully');
         } catch (error) {
-          console.error('Error sending message:', error);
+          console.error('✗ Error sending message:', error);
           setMessages(prev => [...prev, {
             role: 'assistant',
-            text: 'Sorry, I couldn\'t process that message. Please try again.'
+            text: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
           }]);
         }
       } else {
@@ -310,13 +340,16 @@ export const CommunicationHUD = () => {
         }]);
       }
     } else {
+      setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
       try {
+        console.log('Attempting to send message...');
         await sendTextMessage(textToSend);
+        console.log('✓ Message sent successfully');
       } catch (error) {
-        console.error('Error sending message:', error);
+        console.error('✗ Error sending message:', error);
         setMessages(prev => [...prev, {
           role: 'assistant',
-          text: 'Sorry, I couldn\'t process that message. Please try again.'
+          text: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
         }]);
       }
     }
