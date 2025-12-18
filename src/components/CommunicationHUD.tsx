@@ -482,7 +482,7 @@ export const CommunicationHUD = () => {
                       className="text-sm font-medium"
                       style={{ color: themeColor }}
                     >
-                      Talk to Nova
+                      {mode === 'HUB' ? 'Talk to Nova' : `Talk to ${activeRestaurant}`}
                     </motion.p>
                   )}
                 </div>
