@@ -385,13 +385,14 @@ export const CommunicationHUD = () => {
       {isOpen && (
         <>
           <motion.div
+            key="hud-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90]"
           />
 
-          <div className="fixed inset-0 flex items-center justify-center z-[91] pointer-events-none">
+          <div key="hud-modal" className="fixed inset-0 flex items-center justify-center z-[91] pointer-events-none">
             <motion.div
               initial={{ opacity: 0, y: 100, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -559,6 +560,7 @@ export const CommunicationHUD = () => {
 
       {isOpen && (
         <div
+          key="hud-input"
           className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-[9999]"
           style={{ pointerEvents: 'auto', isolation: 'isolate' }}
         >
