@@ -406,37 +406,38 @@ export const CommunicationHUD = () => {
               }}
             >
               <div className="flex justify-between items-center p-4 md:p-5 border-b border-white/10 bg-white/5">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">
-                    {mode === 'HUB' ? '🤖' : currentTheme && <currentTheme.icon className="w-7 h-7" style={{ color: themeColor }} />}
+                <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+                  <span className="text-2xl md:text-3xl flex-shrink-0">
+                    {mode === 'HUB' ? '🤖' : currentTheme && <currentTheme.icon className="w-6 h-6 md:w-7 md:h-7" style={{ color: themeColor }} />}
                   </span>
-                  <div>
-                    <h3 className="text-white font-semibold text-base">
-                      {mode === 'HUB' ? 'Nova AI Assistant' : currentTheme?.name}
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-white font-semibold text-sm md:text-base truncate">
+                      {mode === 'HUB' ? 'Nova AI' : currentTheme?.name.split(' ')[0]}
                     </h3>
-                    <span className="text-xs text-gray-400">
-                      {isConnected ? (isSpeaking ? '🗣️ Speaking...' : isListening ? '👂 Listening...' : '✓ Connected') : 'Tap to talk'}
+                    <span className="text-xs text-gray-400 truncate block">
+                      {isConnected ? (isSpeaking ? '🗣️ Speaking' : isListening ? '👂 Listening' : '✓ Connected') : 'Tap to talk'}
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
                   <select
                     value={language}
                     onChange={e => setLanguage(e.target.value)}
                     disabled={isConnected}
-                    className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-sm text-white outline-none disabled:opacity-40 pointer-events-auto"
+                    className="bg-white/10 border border-white/20 rounded-lg px-1.5 md:px-2 py-1 text-xs md:text-sm text-white outline-none disabled:opacity-40 pointer-events-auto"
                   >
-                    <option value="en">🇺🇸 EN</option>
-                    <option value="ms">🇲🇾 MS</option>
-                    <option value="zh">🇨🇳 ZH</option>
+                    <option value="en">🇺🇸</option>
+                    <option value="ms">🇲🇾</option>
+                    <option value="zh">🇨🇳</option>
                   </select>
                   <button onClick={handleClose} className="text-gray-400 hover:text-white transition-colors pointer-events-auto">
-                    <X size={22} />
+                    <X size={20} className="md:hidden" />
+                    <X size={22} className="hidden md:block" />
                   </button>
                 </div>
               </div>
 
-              <div className="flex flex-col items-center py-6 md:py-8 px-6">
+              <div className="flex flex-col items-center py-4 md:py-6 px-4 md:px-6">
                 <NovaOrb
                   isActive={isConnected}
                   isListening={isListening}
@@ -444,10 +445,10 @@ export const CommunicationHUD = () => {
                   color={themeColor}
                 />
 
-                <div className="flex flex-col items-center gap-2 mt-4">
+                <div className="flex flex-col items-center gap-2 mt-3 md:mt-4">
                   <button
                     onClick={handleCallToggle}
-                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg pointer-events-auto"
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all shadow-lg pointer-events-auto"
                     style={{
                       background: isConnected
                         ? 'linear-gradient(135deg, #FF6B6B, #EE5A5A)'
@@ -480,7 +481,7 @@ export const CommunicationHUD = () => {
               </div>
 
               {mode === 'HUB' && (
-                <div className="px-4 md:px-6 pb-4 flex flex-col gap-2">
+                <div className="px-3 md:px-6 pb-3 md:pb-4 flex flex-col gap-2">
                   <p className="text-xs text-gray-400 text-center mb-1">Quick options:</p>
                   <div className="grid grid-cols-2 gap-2">
                     {(Object.keys(RESTAURANT_THEMES) as Array<keyof typeof RESTAURANT_THEMES>).map((key) => {
@@ -490,13 +491,14 @@ export const CommunicationHUD = () => {
                         <button
                           key={key}
                           onClick={() => handleRestaurantSelect(key)}
-                          className="px-3 py-2 rounded-lg text-white text-sm font-medium flex items-center justify-center gap-2 transition-all hover:scale-105 pointer-events-auto"
+                          className="px-2 md:px-3 py-2 rounded-lg text-white text-xs md:text-sm font-medium flex items-center justify-center gap-1.5 md:gap-2 transition-all hover:scale-105 pointer-events-auto"
                           style={{
                             background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
                             boxShadow: `0 4px 15px ${theme.primary}40`
                           }}
                         >
-                          <Icon size={16} />
+                          <Icon size={14} className="md:hidden" />
+                          <Icon size={16} className="hidden md:block" />
                           {key}
                         </button>
                       );
@@ -506,14 +508,14 @@ export const CommunicationHUD = () => {
               )}
 
               {messages.length > 0 && (
-                <div className="flex-1 overflow-y-auto px-6 pb-4 max-h-[200px] space-y-3">
+                <div className="flex-1 overflow-y-auto px-3 md:px-6 pb-3 md:pb-4 max-h-[200px] space-y-2 md:space-y-3">
                   {messages.map((msg, idx) => (
-                    <div key={idx} className={`flex gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                      <span className="text-lg flex-shrink-0">
+                    <div key={idx} className={`flex gap-1.5 md:gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <span className="text-base md:text-lg flex-shrink-0">
                         {msg.role === 'assistant' ? '🤖' : '👤'}
                       </span>
                       <div
-                        className="px-4 py-2 rounded-2xl max-w-[75%] text-sm"
+                        className="px-3 md:px-4 py-2 rounded-2xl max-w-[80%] md:max-w-[75%] text-xs md:text-sm break-words"
                         style={{
                           background: msg.role === 'user' ? `${themeColor}20` : '#141419',
                           border: msg.role === 'user' ? `1px solid ${themeColor}40` : '1px solid rgba(255,255,255,0.06)',
@@ -531,18 +533,19 @@ export const CommunicationHUD = () => {
               <div className="h-16" />
 
               {mode === 'RESTAURANT' && (
-                <div className="px-4 pb-4">
+                <div className="px-3 md:px-4 pb-3 md:pb-4">
                   <button
                     onClick={handleBackToHub}
-                    className="w-full py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm font-medium flex items-center justify-center gap-2 hover:bg-gray-700/50 transition-all pointer-events-auto"
+                    className="w-full py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-xs md:text-sm font-medium flex items-center justify-center gap-2 hover:bg-gray-700/50 transition-all pointer-events-auto"
                   >
-                    <ArrowLeft size={16} />
-                    Back to Main Menu
+                    <ArrowLeft size={14} className="md:hidden" />
+                    <ArrowLeft size={16} className="hidden md:block" />
+                    <span className="truncate">Back to Main Menu</span>
                   </button>
                 </div>
               )}
 
-              <div className="text-center py-2 text-xs text-gray-500 border-t border-white/5">
+              <div className="text-center py-2 text-[10px] md:text-xs text-gray-500 border-t border-white/5">
                 Powered by NorWeb FnB
               </div>
             </div>
@@ -553,7 +556,7 @@ export const CommunicationHUD = () => {
 
       {isOpen && (
         <div
-          className="fixed bottom-4 right-4 w-96 z-[9999]"
+          className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-[9999]"
           style={{ pointerEvents: 'auto', isolation: 'isolate' }}
         >
           <form
@@ -565,7 +568,7 @@ export const CommunicationHUD = () => {
               }
             }}
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-2 bg-black/80 backdrop-blur-xl rounded-full p-2 shadow-2xl"
+            className="flex items-center gap-2 bg-black/80 backdrop-blur-xl rounded-full p-2 shadow-2xl w-full"
             style={{
               borderWidth: '2px',
               borderStyle: 'solid',
@@ -587,7 +590,7 @@ export const CommunicationHUD = () => {
               onFocus={() => console.log('INPUT FOCUSED')}
               placeholder="Type a message..."
               autoComplete="off"
-              className="flex-1 bg-transparent border-none px-4 py-3 text-white placeholder-gray-400 focus:outline-none"
+              className="flex-1 bg-transparent border-none px-3 md:px-4 py-2.5 md:py-3 text-sm md:text-base text-white placeholder-gray-400 focus:outline-none min-w-0"
             />
             <button
               type="submit"
@@ -595,12 +598,15 @@ export const CommunicationHUD = () => {
                 e.stopPropagation();
                 console.log('BUTTON CLICKED');
               }}
-              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all hover:scale-110"
+              className="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 transition-all hover:scale-110"
               style={{
                 background: `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`
               }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white" className="md:hidden">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white" className="hidden md:block">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
               </svg>
             </button>
