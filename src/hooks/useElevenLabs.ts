@@ -64,8 +64,14 @@ export const useElevenLabs = ({
     setStatus('connecting');
 
     try {
+      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
+      if (!apiKey) {
+        throw new Error('ElevenLabs API key not found');
+      }
+
       const conversation = await Conversation.startSession({
         agentId,
+        apiKey,
         onConnect: () => {
           setStatus('connected');
           onConnect?.();
