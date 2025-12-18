@@ -140,6 +140,7 @@ export const CommunicationHUD = () => {
   const conversationRef = useRef<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isConnectingRef = useRef(false);
+  const isConversationReadyRef = useRef(false);
 
   const agentId = import.meta.env.VITE_ELEVENLABS_AGENT_ID || 'agent_6101kcewd8mvfh0tecwefhth3vwx';
   const currentTheme = activeRestaurant ? RESTAURANT_THEMES[activeRestaurant] : null;
@@ -173,7 +174,9 @@ export const CommunicationHUD = () => {
           },
         },
         onConnect: () => {
+          console.log('ElevenLabs connected successfully');
           isConnectingRef.current = false;
+          isConversationReadyRef.current = true;
           setIsConnected(true);
           if (activeContext) {
             setTimeout(() => {
@@ -182,13 +185,22 @@ export const CommunicationHUD = () => {
           }
         },
         onDisconnect: () => {
+          console.log('ElevenLabs disconnected');
+          isConversationReadyRef.current = false;
           setIsConnected(false);
           setIsListening(false);
           setIsSpeaking(false);
         },
         onMessage: (message: any) => {
+          console.log('ElevenLabs message:', message);
           if (message.type === 'user_transcript') {
-            setMessages(prev => [...prev, { role: 'user', text: message.message }]);
+            setMessages(prev => {
+              const lastMessage = prev[prev.length - 1];
+              if (lastMessage?.role === 'user' && lastMessage.text === message.message) {
+                return prev;
+              }
+              return [...prev, { role: 'user', text: message.message }];
+            });
           } else if (message.type === 'agent_response') {
             setMessages(prev => [...prev, { role: 'assistant', text: message.message }]);
           }
@@ -220,6 +232,7 @@ export const CommunicationHUD = () => {
       conversationRef.current = null;
     }
     isConnectingRef.current = false;
+    isConversationReadyRef.current = false;
     setIsConnected(false);
     setIsListening(false);
     setIsSpeaking(false);
@@ -236,7 +249,12 @@ export const CommunicationHUD = () => {
   const sendTextMessage = async (text: string) => {
     if (!conversationRef.current) {
       console.error('Cannot send message: conversation not initialized');
-      return;
+      throw new Error('Conversation not initialized');
+    }
+
+    if (!isConversationReadyRef.current) {
+      console.error('Cannot send message: conversation not ready');
+      throw new Error('Conversation not ready');
     }
 
     if (!text.trim()) {
@@ -249,10 +267,7 @@ export const CommunicationHUD = () => {
       console.log('Text sent successfully to ElevenLabs');
     } catch (error) {
       console.error('Failed to send message to ElevenLabs:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        text: 'Sorry, I couldn\'t send that message. Please try again.'
-      }]);
+      throw error;
     }
   };
 
@@ -263,30 +278,47 @@ export const CommunicationHUD = () => {
 
     const textToSend = inputText;
     setInputText('');
+    setMessages(prev => [...prev, { role: 'user', text: textToSend }]);
 
-    if (!isConnected) {
-      console.log('Not connected, starting conversation first...');
+    if (!isConversationReadyRef.current) {
+      console.log('Conversation not ready, starting...');
       await startConversation();
 
-      const maxWaitTime = 5000;
+      const maxWaitTime = 10000;
       const startTime = Date.now();
 
-      while (!isConnected && Date.now() - startTime < maxWaitTime) {
-        await new Promise(resolve => setTimeout(resolve, 100));
+      while (!isConversationReadyRef.current && Date.now() - startTime < maxWaitTime) {
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
 
-      if (isConnected && conversationRef.current) {
-        console.log('Connection established, sending message');
-        await sendTextMessage(textToSend);
+      if (isConversationReadyRef.current && conversationRef.current) {
+        console.log('Connection established and ready, sending message');
+        try {
+          await sendTextMessage(textToSend);
+        } catch (error) {
+          console.error('Error sending message:', error);
+          setMessages(prev => [...prev, {
+            role: 'assistant',
+            text: 'Sorry, I couldn\'t process that message. Please try again.'
+          }]);
+        }
       } else {
-        console.error('Failed to connect within timeout');
+        console.error('Failed to connect within timeout. Ready:', isConversationReadyRef.current, 'Ref:', !!conversationRef.current);
         setMessages(prev => [...prev, {
           role: 'assistant',
           text: 'Could not connect to voice agent. Please try again.'
         }]);
       }
     } else {
-      await sendTextMessage(textToSend);
+      try {
+        await sendTextMessage(textToSend);
+      } catch (error) {
+        console.error('Error sending message:', error);
+        setMessages(prev => [...prev, {
+          role: 'assistant',
+          text: 'Sorry, I couldn\'t process that message. Please try again.'
+        }]);
+      }
     }
   };
 
