@@ -320,13 +320,13 @@ export const CommunicationHUD = () => {
                     value={language}
                     onChange={e => setLanguage(e.target.value)}
                     disabled={isConnected}
-                    className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-sm text-white outline-none disabled:opacity-40"
+                    className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-sm text-white outline-none disabled:opacity-40 pointer-events-auto"
                   >
                     <option value="en">🇺🇸 EN</option>
                     <option value="ms">🇲🇾 MS</option>
                     <option value="zh">🇨🇳 ZH</option>
                   </select>
-                  <button onClick={handleClose} className="text-gray-400 hover:text-white transition-colors">
+                  <button onClick={handleClose} className="text-gray-400 hover:text-white transition-colors pointer-events-auto">
                     <X size={22} />
                   </button>
                 </div>
@@ -343,7 +343,7 @@ export const CommunicationHUD = () => {
                 <div className="flex flex-col items-center gap-2 mt-4">
                   <button
                     onClick={handleCallToggle}
-                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg"
+                    className="w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg pointer-events-auto"
                     style={{
                       background: isConnected
                         ? 'linear-gradient(135deg, #FF6B6B, #EE5A5A)'
@@ -386,7 +386,7 @@ export const CommunicationHUD = () => {
                         <button
                           key={key}
                           onClick={() => handleRestaurantSelect(key)}
-                          className="px-3 py-2 rounded-lg text-white text-sm font-medium flex items-center justify-center gap-2 transition-all hover:scale-105"
+                          className="px-3 py-2 rounded-lg text-white text-sm font-medium flex items-center justify-center gap-2 transition-all hover:scale-105 pointer-events-auto"
                           style={{
                             background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
                             boxShadow: `0 4px 15px ${theme.primary}40`
@@ -424,20 +424,20 @@ export const CommunicationHUD = () => {
                 </div>
               )}
 
-              <div className="p-4 border-t border-white/10 bg-white/5">
+              <div className="p-4 border-t border-white/10 bg-white/5 pointer-events-auto">
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    className="flex-1 bg-[#141419] border border-white/10 rounded-full px-4 py-3 text-white text-sm outline-none focus:border-white/30 transition-colors"
+                    className="flex-1 bg-[#141419] border border-white/10 rounded-full px-4 py-3 text-white text-sm outline-none focus:border-white/30 transition-colors pointer-events-auto"
                     placeholder="Type a message..."
                     value={inputText}
                     onChange={e => setInputText(e.target.value)}
-                    onKeyPress={handleKeyPress}
+                    onKeyDown={handleKeyPress}
                   />
                   <button
                     onClick={handleSendText}
                     disabled={!inputText.trim()}
-                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-30"
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-30 pointer-events-auto"
                     style={{
                       background: `linear-gradient(135deg, ${themeColor}, ${currentTheme?.secondary || '#00A888'})`
                     }}
@@ -453,7 +453,7 @@ export const CommunicationHUD = () => {
                 <div className="px-4 pb-4">
                   <button
                     onClick={handleBackToHub}
-                    className="w-full py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm font-medium flex items-center justify-center gap-2 hover:bg-gray-700/50 transition-all"
+                    className="w-full py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm font-medium flex items-center justify-center gap-2 hover:bg-gray-700/50 transition-all pointer-events-auto"
                   >
                     <ArrowLeft size={16} />
                     Back to Main Menu
