@@ -174,9 +174,9 @@ export const CommunicationHUD = () => {
 
     isConnectingRef.current = true;
     try {
-      console.log('Fetching signed URL from backend...');
+      console.log('Fetching signed URL from backend for agent:', agentId);
       const signedUrlResponse = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-auth`,
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-auth?agent_id=${agentId}`,
         {
           method: 'GET',
           headers: {
@@ -201,15 +201,10 @@ export const CommunicationHUD = () => {
           },
         },
         onConnect: () => {
-          console.log('ElevenLabs connected successfully');
+          console.log('ElevenLabs connected successfully to agent:', agentId);
           isConnectingRef.current = false;
           isConversationReadyRef.current = true;
           setIsConnected(true);
-          if (activeContext) {
-            setTimeout(() => {
-              conversationRef.current?.sendUserMessage(activeContext);
-            }, 500);
-          }
         },
         onDisconnect: () => {
           console.log('ElevenLabs disconnected');

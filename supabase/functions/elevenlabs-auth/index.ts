@@ -15,8 +15,14 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
+    const url = new URL(req.url);
+    const agentId = url.searchParams.get("agent_id");
+
+    if (!agentId) {
+      throw new Error("agent_id parameter is required");
+    }
+
     const elevenLabsApiKey = Deno.env.get("ELEVENLABS_API_KEY");
-    const agentId = Deno.env.get("VITE_ELEVENLABS_AGENT_ID") || "agent_6101kcewd8mvfh0tecwefhth3vwx";
 
     if (!elevenLabsApiKey) {
       throw new Error("ELEVENLABS_API_KEY not configured");
