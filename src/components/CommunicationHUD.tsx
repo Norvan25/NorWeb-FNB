@@ -234,29 +234,59 @@ export const CommunicationHUD = () => {
   };
 
   const sendTextMessage = async (text: string) => {
-    if (conversationRef.current && text.trim()) {
-      setMessages(prev => [...prev, { role: 'user', text }]);
-      try {
-        await conversationRef.current.sendText(text);
-      } catch (error) {
-        console.error('Failed to send message:', error);
-      }
+    if (!conversationRef.current) {
+      console.error('Cannot send message: conversation not initialized');
+      return;
+    }
+
+    if (!text.trim()) {
+      return;
+    }
+
+    try {
+      console.log('Sending text to ElevenLabs:', text);
+      await conversationRef.current.sendText(text);
+      console.log('Text sent successfully to ElevenLabs');
+    } catch (error) {
+      console.error('Failed to send message to ElevenLabs:', error);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        text: 'Sorry, I couldn\'t send that message. Please try again.'
+      }]);
     }
   };
 
   const handleSendText = async () => {
-    if (inputText.trim()) {
-      const textToSend = inputText;
-      setInputText('');
+    if (!inputText.trim()) {
+      return;
+    }
 
-      if (!isConnected) {
-        await startConversation();
-        setTimeout(() => {
-          sendTextMessage(textToSend);
-        }, 1000);
-      } else {
-        sendTextMessage(textToSend);
+    const textToSend = inputText;
+    setInputText('');
+
+    if (!isConnected) {
+      console.log('Not connected, starting conversation first...');
+      await startConversation();
+
+      const maxWaitTime = 5000;
+      const startTime = Date.now();
+
+      while (!isConnected && Date.now() - startTime < maxWaitTime) {
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
+
+      if (isConnected && conversationRef.current) {
+        console.log('Connection established, sending message');
+        await sendTextMessage(textToSend);
+      } else {
+        console.error('Failed to connect within timeout');
+        setMessages(prev => [...prev, {
+          role: 'assistant',
+          text: 'Could not connect to voice agent. Please try again.'
+        }]);
+      }
+    } else {
+      await sendTextMessage(textToSend);
     }
   };
 
@@ -435,9 +465,9 @@ export const CommunicationHUD = () => {
 
               <div className="relative z-50 p-4 border-t border-white/10 bg-white/5 pointer-events-auto">
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
-                    handleSendText();
+                    await handleSendText();
                   }}
                   className="flex gap-2"
                 >
