@@ -7,6 +7,7 @@ import { Rimba } from './pages/Rimba';
 import { Rouge } from './pages/Rouge';
 import { Veda } from './pages/Veda';
 import { Gusto } from './pages/Gusto';
+import { FloatingContactButton } from './components/FloatingContactButton';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
             <Route path="/restaurant/gusto" element={<Gusto />} />
             <Route path="/restaurant/:id" element={<RestaurantPage />} />
           </Routes>
+          {/* Global Floating Contact Button - available on all pages */}
+          <FloatingContactButton />
         </Router>
       </CommunicationProvider>
     </CartProvider>

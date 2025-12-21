@@ -6,6 +6,7 @@ import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
 import { LeadCaptureModal } from '../components/LeadCaptureModal';
+import { Footer } from '../components/Footer';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -478,13 +479,7 @@ export const LandingHub = () => {
             </div>
           </section>
 
-          <footer className="py-12 px-6 border-t border-gray-900">
-            <div className="max-w-7xl mx-auto text-center">
-              <p className="text-gray-500">
-                NorWeb Universal F&B Platform &copy; 2025. All rights reserved.
-              </p>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </motion.div>
 
