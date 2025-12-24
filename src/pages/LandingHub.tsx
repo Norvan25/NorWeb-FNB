@@ -11,6 +11,7 @@ import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
 import { ROICalculator } from '../components/ROICalculator';
 import { FAQSection } from '../components/FAQSection';
 import { SocialProofSection } from '../components/SocialProofSection';
+import { LeadCaptureSection } from '../components/LeadCaptureSection';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -743,6 +744,9 @@ export const LandingHub = () => {
               </motion.div>
             </div>
           </section>
+
+          {/* Lead Capture Section */}
+          <LeadCaptureSection />
 
           <Footer />
         </div>
