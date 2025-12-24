@@ -7,6 +7,7 @@ import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
 import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { Footer } from '../components/Footer';
+import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -643,10 +644,13 @@ export const LandingHub = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-center text-gray-500 text-sm"
+                className="text-center text-gray-500 text-sm mb-16"
               >
                 No hidden fees. No per-message charges. Cancel anytime.
               </motion.p>
+
+              {/* Feature Comparison Table */}
+              <FeatureComparisonTable />
             </div>
           </section>
 
