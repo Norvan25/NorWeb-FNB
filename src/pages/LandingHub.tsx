@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';
-import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck } from 'lucide-react';
+import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck, PhoneOff, Clock, CalendarX, BadgePercent } from 'lucide-react';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
@@ -127,6 +127,96 @@ export const LandingHub = () => {
                 Calculate Your Savings
               </motion.button>
             </motion.div>
+          </section>
+
+          {/* The Problem Section */}
+          <section className="px-6 py-24 bg-gradient-to-b from-black via-[#0a0f1a] to-black">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-16"
+              >
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+                  Every Day You Wait, You Lose Money
+                </h2>
+                <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
+                  These problems are costing Malaysian restaurants thousands every month
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {[
+                  {
+                    icon: PhoneOff,
+                    stat: 'RM 6,000/month',
+                    title: 'Lost to Missed Calls',
+                    description: '20-40% of calls go unanswered during peak hours. Each missed call = lost booking.'
+                  },
+                  {
+                    icon: Clock,
+                    stat: '2-4 hours/day',
+                    title: 'Wasted on Repetitive Questions',
+                    description: 'Your staff answers "What time you close?" 50 times a day instead of serving customers.'
+                  },
+                  {
+                    icon: CalendarX,
+                    stat: '10-20% no-shows',
+                    title: 'Empty Tables, Lost Revenue',
+                    description: 'No automated reminders = customers forget. Empty tables on busy nights.'
+                  },
+                  {
+                    icon: BadgePercent,
+                    stat: '30-35% commission',
+                    title: 'Paid to Platforms',
+                    description: 'Grab and FoodPanda take nearly a third. Your customers, their profit.'
+                  }
+                ].map((card, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: '0 0 30px rgba(0, 212, 170, 0.3)'
+                    }}
+                    className="p-6 md:p-8 rounded-2xl border border-gray-800 hover:border-cyan-500/50 transition-all duration-300"
+                    style={{ backgroundColor: '#132238' }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                        <card.icon className="w-6 h-6 text-cyan-400" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-3xl md:text-4xl font-bold text-white mb-2">
+                          {card.stat}
+                        </p>
+                        <h3 className="text-xl font-semibold text-white mb-2">
+                          {card.title}
+                        </h3>
+                        <p className="text-gray-400 leading-relaxed">
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <p className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  NorWeb solves all four. Automatically. 24/7.
+                </p>
+              </motion.div>
+            </div>
           </section>
 
           <section id="brands" className="px-6 py-20 max-w-7xl mx-auto">
