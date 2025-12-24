@@ -669,25 +669,76 @@ export const LandingHub = () => {
           {/* FAQ Section */}
           <FAQSection />
 
-          <section className="px-6 py-32 bg-gradient-to-b from-black to-gray-900">
-            <div className="max-w-4xl mx-auto text-center">
+          {/* Final CTA Section */}
+          <section className="px-6 py-24 relative overflow-hidden">
+            {/* Background with gradient and pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-[#0a1525] to-black" />
+            <div 
+              className="absolute inset-0 opacity-5"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }}
+            />
+            
+            <div className="relative z-10 max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-12">
-                  Ready to Stop Losing Money?
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+                  Ready to Stop Losing Revenue?
                 </h2>
+                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                  Join the first wave of Malaysian restaurants with AI-powered service
+                </p>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-12 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xl font-bold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-xl shadow-cyan-500/50"
-                  onClick={handleOpenDemo}
+                {/* Two CTA buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      document.getElementById('brands')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="px-8 py-4 rounded-full font-bold text-lg border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 transition-all w-full sm:w-auto"
+                  >
+                    Try Live Demo
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="px-8 py-4 rounded-full font-bold text-lg text-white shadow-lg shadow-orange-500/30 w-full sm:w-auto"
+                    style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
+                  >
+                    Get Started — 15% Off
+                  </motion.button>
+                </div>
+
+                {/* Benefits line */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm md:text-base"
                 >
-                  Activate Free Demo
-                </motion.button>
+                  <span className="text-gray-300">
+                    <span className="text-lg mr-1">🚀</span> Early Bird: Up to 6 months FREE
+                  </span>
+                  <span className="hidden md:inline text-gray-600">|</span>
+                  <span className="text-gray-300">
+                    <span className="text-lg mr-1">✅</span> 3-Month Guarantee
+                  </span>
+                  <span className="hidden md:inline text-gray-600">|</span>
+                  <span className="text-gray-300">
+                    <span className="text-lg mr-1">📞</span> Setup in 7 days
+                  </span>
+                </motion.div>
               </motion.div>
             </div>
           </section>
