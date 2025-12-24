@@ -41,9 +41,10 @@ const malaysiaStates = [
 ];
 
 interface FormData {
-  your_full_name: string;
+  firstname: string;
+  lastname: string;
   email: string;
-  mobilephone: string;
+  phone: string;
   your_restaurant_name: string;
   restaurant_type: string;
   state_region: string;
@@ -51,9 +52,10 @@ interface FormData {
 
 export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => {
   const [formData, setFormData] = useState<FormData>({
-    your_full_name: '',
+    firstname: '',
+    lastname: '',
     email: '',
-    mobilephone: '',
+    phone: '',
     your_restaurant_name: '',
     restaurant_type: '',
     state_region: '',
@@ -89,9 +91,10 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
         onClose();
         // Reset form after close
         setFormData({
-          your_full_name: '',
+          firstname: '',
+          lastname: '',
           email: '',
-          mobilephone: '',
+          phone: '',
           your_restaurant_name: '',
           restaurant_type: '',
           state_region: '',
@@ -128,9 +131,10 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
           },
           body: JSON.stringify({
             fields: [
-              { name: 'your_full_name', value: formData.your_full_name },
+              { name: 'firstname', value: formData.firstname },
+              { name: 'lastname', value: formData.lastname },
               { name: 'email', value: formData.email },
-              { name: 'mobilephone', value: formData.mobilephone },
+              { name: 'phone', value: formData.phone },
               { name: 'your_restaurant_name', value: formData.your_restaurant_name },
               { name: 'restaurant_type', value: formData.restaurant_type },
               { name: 'state_region', value: formData.state_region },
@@ -246,21 +250,38 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Full Name */}
-                  <div>
-                    <label htmlFor="your_full_name" className={labelClasses}>
-                      Your full name *
-                    </label>
-                    <input
-                      type="text"
-                      id="your_full_name"
-                      name="your_full_name"
-                      value={formData.your_full_name}
-                      onChange={handleInputChange}
-                      placeholder="Ahmad bin Abdullah"
-                      required
-                      className={inputClasses}
-                    />
+                  {/* First Name & Last Name - Side by side */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="firstname" className={labelClasses}>
+                        First name *
+                      </label>
+                      <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        value={formData.firstname}
+                        onChange={handleInputChange}
+                        placeholder="Ahmad"
+                        required
+                        className={inputClasses}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="lastname" className={labelClasses}>
+                        Last name *
+                      </label>
+                      <input
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        value={formData.lastname}
+                        onChange={handleInputChange}
+                        placeholder="Abdullah"
+                        required
+                        className={inputClasses}
+                      />
+                    </div>
                   </div>
 
                   {/* Email */}
@@ -282,14 +303,14 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
 
                   {/* Phone */}
                   <div>
-                    <label htmlFor="mobilephone" className={labelClasses}>
+                    <label htmlFor="phone" className={labelClasses}>
                       Your contact number *
                     </label>
                     <input
                       type="tel"
-                      id="mobilephone"
-                      name="mobilephone"
-                      value={formData.mobilephone}
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="+60 12 345 6789"
                       required
