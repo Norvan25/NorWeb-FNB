@@ -232,26 +232,29 @@ export const LandingHub = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mb-16 text-center"
+              className="mb-12 text-center"
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                Don't Watch a Demo. Play the Customer.
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                Try It Yourself — Live Demos
               </h2>
-              <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
-                Experience the system in 3 ways right now:<br />
-                <span className="block mt-4 text-left max-w-2xl mx-auto">
-                  <span className="font-semibold text-white">1. Click</span> a card to browse the full menu.<br />
-                  <span className="font-semibold text-white">2. Type</span> in the chat widget to order via text.<br />
-                  <span className="font-semibold text-white">3. Talk</span> to the AI Agent to hear the magic live.
-                </span>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                Chat with our AI. See how it handles real restaurant questions.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* 3 cards in a row - horizontal scroll on mobile */}
+            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
               {restaurants.map((restaurant, index) => (
-                <CuisineCard key={restaurant.id} restaurant={restaurant} index={index} />
+                <div key={restaurant.id} className="flex-shrink-0 w-[85vw] md:w-auto snap-center">
+                  <CuisineCard restaurant={restaurant} index={index} />
+                </div>
               ))}
             </div>
+            
+            {/* Mobile scroll hint */}
+            <p className="md:hidden text-center text-gray-500 text-sm mt-4">
+              ← Swipe to see more demos →
+            </p>
           </section>
 
           <section className="px-6 py-32 bg-gradient-to-b from-black via-gray-900 to-black">
