@@ -14,6 +14,7 @@ export const LandingHub = () => {
   const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
   const [leadCaptureOpen, setLeadCaptureOpen] = useState(false);
+  const [isAnnualBilling, setIsAnnualBilling] = useState(true);
 
   const { openHUD } = useCommunication();
 
@@ -367,182 +368,285 @@ export const LandingHub = () => {
             </div>
           </section>
 
-          <section className="px-6 py-32 bg-gradient-to-b from-black to-gray-900">
+          {/* Pricing Section */}
+          <section id="pricing" className="px-6 py-32 bg-gradient-to-b from-black via-gray-900 to-black">
             <div className="max-w-7xl mx-auto">
+              {/* Header */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-center mb-16"
-              >
-                <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                  Stop Paying Agencies RM 4,500 for 'Likes'.
-                </h2>
-                <p className="text-xl text-gray-400">
-                  Hire a 24/7 Intelligence System that drives actual revenue.
-                </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                {[
-                  {
-                    name: 'THE DIGITAL HOST',
-                    price: 'RM 799',
-                    period: '/ mo',
-                    hook: 'Your 24/7 Front Desk',
-                    features: [
-                      { text: 'AI Agent (WhatsApp + Website)', enabled: true },
-                      { text: 'Online Booking & Order Handling', enabled: true },
-                      { text: 'Digital Menu Engineering', enabled: true },
-                      { text: 'Human Handoff for Order Processing', enabled: true }
-                    ],
-                    highlighted: false
-                  },
-                  {
-                    name: 'THE OPS MANAGER',
-                    price: 'RM 1,499',
-                    period: '/ mo',
-                    badge: 'RECOMMENDED',
-                    hook: 'Operations on Autopilot',
-                    features: [
-                      { text: 'Everything in Digital Host', enabled: true },
-                      { text: 'POS Integration (Direct to Kitchen)', enabled: true, bold: true },
-                      { text: 'Delivery Dispatch (Lalamove/Grab)', enabled: true, bold: true },
-                      { text: 'Voice AI Agent (Phone Answering)', enabled: true, bold: true },
-                      { text: 'Omnichannel Inbox (WA, FB, IG, Web)', enabled: true, bold: true }
-                    ],
-                    highlighted: true
-                  },
-                  {
-                    name: 'THE REVENUE ENGINE',
-                    price: 'RM 3,299',
-                    period: '/ mo',
-                    hook: 'Your Marketing Machine',
-                    badge2: 'ALL INCLUSIVE',
-                    features: [
-                      { text: 'Everything in Ops Manager', enabled: true },
-                      { text: 'Social Media Content Generator', enabled: true, bold: true },
-                      { text: 'Automated Posting & Scheduling', enabled: true, bold: true },
-                      { text: 'Campaign Automation', enabled: true, bold: true },
-                      { text: 'Customer Reactivation Blasts', enabled: true, bold: true },
-                      { text: 'Review Recovery Engine (Google 5-Star)', enabled: true, bold: true }
-                    ],
-                    highlighted: false
-                  }
-                ].map((tier, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className={`relative p-8 rounded-2xl backdrop-blur-sm ${
-                      tier.highlighted
-                        ? 'bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500 shadow-xl shadow-cyan-500/20'
-                        : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700'
-                    }`}
-                  >
-                    {tier.badge && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold">
-                          {tier.badge}
-                        </span>
-                      </div>
-                    )}
-                    {tier.badge2 && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-1 rounded-full text-sm font-bold">
-                          {tier.badge2}
-                        </span>
-                      </div>
-                    )}
-                    <h3 className="text-2xl font-bold mb-2 text-center">{tier.name}</h3>
-                    {tier.hook && (
-                      <p className="text-center text-gray-400 text-sm mb-4 italic">{tier.hook}</p>
-                    )}
-                    <div className="text-center mb-6">
-                      <span className="text-5xl font-black">{tier.price}</span>
-                      <span className="text-gray-400 text-lg">{tier.period}</span>
-                    </div>
-                    <ul className="space-y-3 mb-8">
-                      {tier.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-3">
-                          {feature.enabled ? (
-                            <Check className={`${tier.highlighted ? 'text-cyan-400' : 'text-green-400'} flex-shrink-0 mt-0.5`} size={20} />
-                          ) : (
-                            <XCircle className="text-red-400 flex-shrink-0 mt-0.5" size={20} />
-                          )}
-                          <span className={`${feature.warning ? 'text-yellow-400' : 'text-gray-300'} ${feature.bold ? 'font-bold' : ''}`}>{feature.text}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`w-full py-4 rounded-full font-bold text-lg transition-all ${
-                        tier.highlighted
-                          ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/50'
-                          : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
-                      }`}
-                      onClick={handleOpenDemo}
-                    >
-                      Select Plan
-                    </motion.button>
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 className="text-center mb-12"
               >
-                <p className="text-lg text-gray-400">
-                  One-Time Setup: <span className="text-white font-bold text-xl">From RM 3,799</span> <span className="text-sm text-gray-500">(T&C applies)</span>
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Includes Menu Engineering, POS Wiring, AI Training & 2 Days Dedicated Onboarding.
-                </p>
-                <p className="text-xs text-gray-600 mt-3 italic">
-                  * AI token usage billed based on consumption
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                  Simple Pricing. Serious Results.
+                </h2>
+                <p className="text-xl text-gray-400">
+                  Choose your plan. Get your AI running in 7 days.
                 </p>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="max-w-4xl mx-auto mt-16 p-8 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30"
-              >
-                <h3 className="text-3xl font-bold mb-4 text-center">
-                  Franchise or Multi-Branch?
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed text-center mb-6">
-                  Ask about our <span className="font-bold text-white">HQ Command Center (NorOne)</span> for centralized control.
-                </p>
-                <div className="text-center">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-600 text-white text-lg font-bold rounded-full hover:from-purple-600 hover:to-blue-700 transition-all shadow-xl shadow-purple-500/50"
-                    onClick={handleOpenDemo}
-                  >
-                    Ask Nova About Enterprise Architecture
-                  </motion.button>
-                </div>
-              </motion.div>
-
+              {/* Billing Toggle */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-center mt-12"
+                className="flex items-center justify-center gap-4 mb-12"
               >
-                <p className="text-2xl font-bold text-cyan-400">
-                  90-Day ROI Guarantee: If it doesn't pay for itself, you get your money back.
+                <span className={`text-lg font-medium transition-colors ${!isAnnualBilling ? 'text-white' : 'text-gray-500'}`}>
+                  Monthly
+                </span>
+                <button
+                  onClick={() => setIsAnnualBilling(!isAnnualBilling)}
+                  className={`relative w-16 h-8 rounded-full transition-colors ${
+                    isAnnualBilling ? 'bg-cyan-500' : 'bg-gray-600'
+                  }`}
+                >
+                  <motion.div
+                    animate={{ x: isAnnualBilling ? 32 : 4 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    className="absolute top-1 w-6 h-6 bg-white rounded-full shadow-md"
+                  />
+                </button>
+                <span className={`text-lg font-medium transition-colors ${isAnnualBilling ? 'text-white' : 'text-gray-500'}`}>
+                  Annual
+                </span>
+                {isAnnualBilling && (
+                  <span className="px-3 py-1 bg-green-500/20 text-green-400 text-sm font-bold rounded-full">
+                    Save 15%
+                  </span>
+                )}
+              </motion.div>
+
+              {/* Pricing Cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 items-stretch">
+                
+                {/* Starter Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0 }}
+                  className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-cyan-500/50 transition-all"
+                >
+                  {/* Early Bird Badge */}
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="px-4 py-1.5 rounded-full text-sm font-bold text-white" style={{ backgroundColor: '#F28500' }}>
+                      EARLY BIRD
+                    </span>
+                  </div>
+
+                  <div className="pt-4">
+                    <h3 className="text-2xl font-bold text-white mb-1">Starter</h3>
+                    <p className="text-gray-400 text-sm mb-6">Your AI Front Desk</p>
+
+                    <div className="mb-4">
+                      {isAnnualBilling ? (
+                        <>
+                          <span className="text-gray-500 line-through text-xl">RM 219/mo</span>
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-4xl font-black text-white">RM 186</span>
+                            <span className="text-gray-400">/mo</span>
+                          </div>
+                          <p className="text-sm text-gray-500">billed annually</p>
+                        </>
+                      ) : (
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl font-black text-white">RM 219</span>
+                          <span className="text-gray-400">/mo</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <p className="text-green-400 text-sm font-medium mb-6">
+                      {isAnnualBilling ? '+ 6 months FREE' : '+ 1 month FREE'}
+                    </p>
+
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        'Custom AI-powered website',
+                        'AI chatbot (WhatsApp + Web)',
+                        'Menu display with photos',
+                        'Online booking system',
+                        'Basic analytics dashboard',
+                        'Email support'
+                      ].map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Check className="text-green-400 flex-shrink-0 mt-0.5" size={18} />
+                          <span className="text-gray-300 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={handleOpenDemo}
+                      className="w-full py-4 rounded-full font-bold text-lg text-white transition-all"
+                      style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
+                    >
+                      Get Started
+                    </motion.button>
+                  </div>
+                </motion.div>
+
+                {/* Growth Card (Popular) */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="relative p-8 rounded-2xl bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500 shadow-2xl shadow-cyan-500/20 lg:scale-105 lg:-my-4"
+                >
+                  {/* Most Popular Badge */}
+                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                    <span className="px-6 py-2 rounded-full text-base font-bold text-white shadow-lg" style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}>
+                      MOST POPULAR
+                    </span>
+                  </div>
+
+                  <div className="pt-6">
+                    <h3 className="text-2xl font-bold text-white mb-1">Growth</h3>
+                    <p className="text-gray-400 text-sm mb-6">Full Operations Suite</p>
+
+                    <div className="mb-4">
+                      {isAnnualBilling ? (
+                        <>
+                          <span className="text-gray-500 line-through text-xl">RM 549/mo</span>
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-5xl font-black text-white">RM 499</span>
+                            <span className="text-gray-400">/mo</span>
+                          </div>
+                          <p className="text-sm text-gray-500">billed annually</p>
+                        </>
+                      ) : (
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-5xl font-black text-white">RM 549</span>
+                          <span className="text-gray-400">/mo</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <p className="text-green-400 text-sm font-medium mb-6">
+                      {isAnnualBilling ? '+ 6 months FREE' : ''}
+                    </p>
+
+                    <p className="text-cyan-400 text-sm font-medium mb-4">Everything in Starter, plus:</p>
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        'AI Voice Agent (answers phone calls)',
+                        'Delivery platform integration',
+                        'Full CRM with customer history',
+                        'Automated review collection',
+                        'WhatsApp broadcast marketing',
+                        'Priority support'
+                      ].map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Check className="text-cyan-400 flex-shrink-0 mt-0.5" size={18} />
+                          <span className="text-gray-200 text-sm font-medium">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={handleOpenDemo}
+                      className="w-full py-4 rounded-full font-bold text-lg text-white transition-all shadow-lg shadow-orange-500/30"
+                      style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
+                    >
+                      Get Started
+                    </motion.button>
+                  </div>
+                </motion.div>
+
+                {/* Enterprise Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 hover:border-purple-500/50 transition-all"
+                >
+                  <div className="pt-4">
+                    <h3 className="text-2xl font-bold text-white mb-1">Enterprise</h3>
+                    <p className="text-gray-400 text-sm mb-6">Complete Marketing Machine</p>
+
+                    <div className="mb-4">
+                      <span className="text-4xl font-black text-white">Custom</span>
+                    </div>
+
+                    <p className="text-gray-400 text-sm mb-6">
+                      For restaurant groups and ambitious brands
+                    </p>
+
+                    <p className="text-purple-400 text-sm font-medium mb-4">Everything in Growth, plus:</p>
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        'Full social media management',
+                        'Content creation & posting',
+                        'Influencer coordination',
+                        'Monthly strategy sessions',
+                        'Dedicated account manager',
+                        'Multi-location support'
+                      ].map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Check className="text-purple-400 flex-shrink-0 mt-0.5" size={18} />
+                          <span className="text-gray-300 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={handleOpenDemo}
+                      className="w-full py-4 rounded-full font-bold text-lg text-white border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all"
+                    >
+                      Contact Us
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Setup Fee */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-center mb-8"
+              >
+                <p className="text-lg text-gray-400">
+                  Setup from <span className="text-gray-500 line-through">RM 3,500</span>{' '}
+                  <span className="text-white font-bold text-xl">RM 2,975</span>{' '}
+                  <span className="text-orange-400 font-medium">(Early Bird 15% off)</span>
                 </p>
               </motion.div>
+
+              {/* Guarantee Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex justify-center mb-6"
+              >
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-green-500/10 border border-green-500/30 rounded-full">
+                  <span className="text-green-400 text-lg">✅</span>
+                  <span className="text-green-400 font-semibold">
+                    3-Month ROI Guarantee — 50 bookings or full setup refund
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Trust Line */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-center text-gray-500 text-sm"
+              >
+                No hidden fees. No per-message charges. Cancel anytime.
+              </motion.p>
             </div>
           </section>
 
