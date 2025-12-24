@@ -86,7 +86,7 @@ export const Veda = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
+        className="fixed top-16 right-6 z-50"
       >
         <img
           src="/images/norvan_logo_only.svg"
@@ -261,14 +261,15 @@ export const Veda = () => {
                     transform: `rotate(${index % 2 === 0 ? -0.5 : 0.5}deg)`,
                   }}
                 >
-                  <div className="aspect-[4/3] bg-teal-950 overflow-hidden relative">
+                  <div className="aspect-[4/5] bg-purple-950/80 overflow-hidden relative flex items-center justify-center">
                     <OptimizedImage
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
+                      objectPosition="center"
                       priority={false}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-transparent to-transparent opacity-60" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-950/60 via-transparent to-transparent pointer-events-none" />
                   </div>
 
                   <div className="p-6 bg-gradient-to-b from-teal-900/95 to-teal-950/95">

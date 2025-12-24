@@ -22,7 +22,7 @@ export const gustoMenu: MenuItem[] = [
     description: 'Mozzarella, gorgonzola, parmigiano, fontina with black truffle oil',
     price: 35,
     category: 'Pizza',
-    image: '/images/gusto/gusto-pizza.png'
+    image: '/images/gusto/gusto-quattro-formaggi.png'
   },
   {
     id: 'gusto-3',
@@ -30,7 +30,7 @@ export const gustoMenu: MenuItem[] = [
     description: 'Parma ham, wild arugula, shaved parmesan, balsamic reduction',
     price: 38,
     category: 'Pizza',
-    image: '/images/gusto/gusto-pizza.png'
+    image: '/images/gusto/gusto-prosciutto-rucola.png'
   },
   {
     id: 'gusto-4',
@@ -54,7 +54,7 @@ export const gustoMenu: MenuItem[] = [
     description: 'Wide ribbon pasta with slow-braised Tuscan beef and pork ragù',
     price: 42,
     category: 'Pasta',
-    image: '/images/gusto/gusto-carbonara.png'
+    image: '/images/gusto/gusto-pappardelle.png'
   },
   {
     id: 'gusto-7',
@@ -62,7 +62,7 @@ export const gustoMenu: MenuItem[] = [
     description: 'Fresh egg pasta with black truffle cream sauce and parmigiano',
     price: 48,
     category: 'Pasta',
-    image: '/images/gusto/gusto-carbonara.png'
+    image: '/images/gusto/gusto-tartufo.png'
   },
   {
     id: 'gusto-8',
@@ -78,7 +78,7 @@ export const gustoMenu: MenuItem[] = [
     description: 'Oven-roasted Mediterranean sea bass with lemon, capers, and herbs',
     price: 58,
     category: 'Mains',
-    image: '/images/gusto/gusto-ossobuco.png'
+    image: '/images/gusto/gusto-branzino.png'
   },
   {
     id: 'gusto-10',
@@ -94,7 +94,7 @@ export const gustoMenu: MenuItem[] = [
     description: 'Vanilla cream with berry compote and amaretti crumble',
     price: 16,
     category: 'Dessert',
-    image: '/images/gusto/gusto-tiramisu.png'
+    image: '/images/gusto/gusto-panna-cotta.png'
   },
   {
     id: 'gusto-12',

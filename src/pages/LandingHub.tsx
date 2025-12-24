@@ -42,7 +42,7 @@ export const LandingHub = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
+        className="fixed top-16 right-6 z-50"
       >
         <img
           src="/images/norvan_logo_only.svg"

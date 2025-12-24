@@ -131,7 +131,7 @@ const NovaOrb = ({ isActive, isListening, isSpeaking, color }: {
 };
 
 export const CommunicationHUD = () => {
-  const { isOpen, mode, activeContext, activeRestaurant, closeHUD, switchMode } = useCommunication();
+  const { isOpen, mode, activeContext, activeRestaurant, closeHUD, switchMode, setAgentActive, isAgentActive } = useCommunication();
   const navigate = useNavigate();
 
   const [isConnected, setIsConnected] = useState(false);
@@ -168,11 +168,19 @@ export const CommunicationHUD = () => {
   }, [isOpen]);
 
   const startConversation = async () => {
-    if (isConnectingRef.current || conversationRef.current) {
+    // Prevent multiple simultaneous connections
+    if (isConnectingRef.current || conversationRef.current || isAgentActive) {
+      console.log('Cannot start conversation: already connecting or active', { 
+        isConnecting: isConnectingRef.current, 
+        hasConversation: !!conversationRef.current,
+        isAgentActive 
+      });
       return;
     }
 
     isConnectingRef.current = true;
+    setAgentActive(true); // Mark agent as active immediately
+    
     try {
       console.log('Fetching signed URL from backend for agent:', agentId);
       const signedUrlResponse = await fetch(
@@ -205,6 +213,7 @@ export const CommunicationHUD = () => {
           isConnectingRef.current = false;
           isConversationReadyRef.current = true;
           setIsConnected(true);
+          setAgentActive(true);
         },
         onDisconnect: () => {
           console.log('ElevenLabs disconnected');
@@ -212,6 +221,7 @@ export const CommunicationHUD = () => {
           setIsConnected(false);
           setIsListening(false);
           setIsSpeaking(false);
+          setAgentActive(false);
         },
         onMessage: (message: any) => {
           console.log('ElevenLabs message:', message);
@@ -233,6 +243,7 @@ export const CommunicationHUD = () => {
         },
         onError: (error: any) => {
           console.error('ElevenLabs error:', error);
+          setAgentActive(false);
         },
       });
 
@@ -241,6 +252,7 @@ export const CommunicationHUD = () => {
       console.error('Failed to start conversation:', error);
       isConnectingRef.current = false;
       conversationRef.current = null;
+      setAgentActive(false); // Reset agent active state on error
       setMessages(prev => [...prev, {
         role: 'assistant',
         text: `Connection error: ${error instanceof Error ? error.message : 'Unknown error'}`
@@ -249,6 +261,7 @@ export const CommunicationHUD = () => {
   };
 
   const endConversation = async () => {
+    console.log('Ending conversation...');
     if (conversationRef.current) {
       try {
         await conversationRef.current.endSession();
@@ -262,6 +275,7 @@ export const CommunicationHUD = () => {
     setIsConnected(false);
     setIsListening(false);
     setIsSpeaking(false);
+    setAgentActive(false); // Reset agent active state
   };
 
   const handleCallToggle = async () => {

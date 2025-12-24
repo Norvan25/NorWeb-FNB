@@ -61,7 +61,7 @@ export const Rouge = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
+        className="fixed top-16 right-6 z-50"
       >
         <img
           src="/images/norvan_logo_only.svg"
@@ -245,11 +245,12 @@ export const Rouge = () => {
                 }}
                 className="bg-stone-100/85 backdrop-blur-sm border border-amber-400/20 shadow-2xl shadow-black/30 overflow-hidden group hover:border-amber-500 hover:shadow-amber-500/20 transition-all duration-300"
               >
-                <div className="aspect-[4/5] overflow-hidden bg-stone-100">
+                <div className="aspect-[4/5] overflow-hidden bg-red-950/20 flex items-center justify-center">
                   <OptimizedImage
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                    objectPosition="center"
                     priority={false}
                     onError={(e) => {
                       e.currentTarget.src = 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800';

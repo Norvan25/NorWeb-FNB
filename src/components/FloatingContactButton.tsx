@@ -7,9 +7,15 @@ const NORVAN_NOUS_WHATSAPP = '60111634364‌6';
 
 export const FloatingContactButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { openHUD } = useCommunication();
+  const { openHUD, isAgentActive, isOpen } = useCommunication();
 
   const handleCallAI = () => {
+    // Don't allow if an agent is already active
+    if (isAgentActive || isOpen) {
+      console.log('Cannot open HUD: agent already active or HUD open');
+      setIsExpanded(false);
+      return;
+    }
     setIsExpanded(false);
     openHUD('HUB');
   };
@@ -18,6 +24,11 @@ export const FloatingContactButton = () => {
     setIsExpanded(false);
     window.open(`https://wa.me/${NORVAN_NOUS_WHATSAPP}`, '_blank');
   };
+
+  // Hide the button when HUD is open or agent is active
+  if (isOpen || isAgentActive) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-3">

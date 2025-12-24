@@ -6,6 +6,7 @@ interface OptimizedImageProps {
   className?: string;
   priority?: boolean;
   aspectRatio?: string;
+  objectPosition?: string;
   onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
 }
 
@@ -15,6 +16,7 @@ export const OptimizedImage = ({
   className = '',
   priority = false,
   aspectRatio,
+  objectPosition = 'center',
   onError
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,6 +51,7 @@ export const OptimizedImage = ({
         src={src}
         alt={alt}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+        style={{ objectPosition }}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         onLoad={handleLoad}

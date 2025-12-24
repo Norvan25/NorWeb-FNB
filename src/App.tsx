@@ -8,12 +8,16 @@ import { Rouge } from './pages/Rouge';
 import { Veda } from './pages/Veda';
 import { Gusto } from './pages/Gusto';
 import { FloatingContactButton } from './components/FloatingContactButton';
+import { AnnouncementBanner } from './components/AnnouncementBanner';
 
 function App() {
   return (
     <CartProvider>
       <CommunicationProvider>
         <Router>
+          {/* Global Announcement Banner - top of all pages */}
+          <AnnouncementBanner />
+          
           <Routes>
             <Route path="/" element={<LandingHub />} />
             <Route path="/restaurant/rimba" element={<Rimba />} />
@@ -22,6 +26,7 @@ function App() {
             <Route path="/restaurant/gusto" element={<Gusto />} />
             <Route path="/restaurant/:id" element={<RestaurantPage />} />
           </Routes>
+          
           {/* Global Floating Contact Button - available on all pages */}
           <FloatingContactButton />
         </Router>

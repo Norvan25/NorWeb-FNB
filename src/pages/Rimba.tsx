@@ -104,7 +104,7 @@ export const Rimba = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
+        className="fixed top-16 right-6 z-50"
       >
         <img
           src="/images/norvan_logo_only.svg"
@@ -339,17 +339,18 @@ export const Rimba = () => {
                         index % 3 === 1 ? 'md:mt-8' : ''
                       } ${index % 3 === 2 ? 'md:mt-16' : ''}`}
                     >
-                      <div className="relative h-48 overflow-hidden bg-stone-900/50">
+                      <div className="relative aspect-[4/5] overflow-hidden bg-stone-900/80 flex items-center justify-center">
                         <OptimizedImage
                           src={item.image}
                           alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                          objectPosition="center"
                           priority={false}
                           onError={(e) => {
-                            e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23292524'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='24' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.name}%3C/text%3E%3C/svg%3E`;
+                            e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect width='400' height='500' fill='%23292524'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='24' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.name}%3C/text%3E%3C/svg%3E`;
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                         {item.spiceLevel && (
                           <div className="absolute top-3 right-3 flex gap-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">

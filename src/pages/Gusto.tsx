@@ -73,7 +73,7 @@ export const Gusto = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
+        className="fixed top-16 right-6 z-50"
       >
         <img
           src="/images/norvan_logo_only.svg"
@@ -245,14 +245,15 @@ export const Gusto = () => {
                   e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
                 }}
               >
-                <div className="aspect-[16/9] bg-stone-100 overflow-hidden relative">
+                <div className="aspect-[4/5] bg-stone-50 overflow-hidden relative flex items-center justify-center">
                   <OptimizedImage
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    objectPosition="center"
                     priority={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/30 via-transparent to-transparent pointer-events-none" />
                 </div>
 
                 <div className="p-6">
