@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Flame, X, Minus, Plus, Home, Sparkles } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
@@ -100,10 +100,9 @@ export const Veda = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors"
+              className="text-gray-400 hover:text-white text-xs sm:text-sm font-medium transition-colors hover:underline"
             >
-              <Home size={28} />
-              <span className="text-sm font-semibold tracking-wider">HUB</span>
+              ← Back to NorWeb
             </button>
 
             <div>

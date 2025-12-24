@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, X, Minus, Plus, Home, ChevronDown, Sparkles } from 'lucide-react';
+import { ShoppingCart, X, Minus, Plus, ChevronDown, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
@@ -87,10 +87,9 @@ export const Gusto = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-stone-600 hover:text-stone-800 transition-colors"
+              className="text-stone-500 hover:text-stone-700 text-xs sm:text-sm font-medium transition-colors hover:underline"
             >
-              <Home size={24} />
-              <span className="text-sm font-semibold tracking-wider">HUB</span>
+              ← Back to NorWeb
             </button>
 
             <div>

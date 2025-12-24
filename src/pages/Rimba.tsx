@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home, Leaf } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Leaf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
@@ -121,13 +121,12 @@ export const Rimba = () => {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ x: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors group"
+              className="text-gray-400 hover:text-white text-xs sm:text-sm font-medium transition-colors hover:underline"
             >
-              <Home size={28} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-semibold tracking-wider hidden sm:block">HUB</span>
+              ← Back to NorWeb
             </motion.button>
 
             <motion.div
