@@ -10,6 +10,7 @@ import { Footer } from '../components/Footer';
 import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
 import { ROICalculator } from '../components/ROICalculator';
 import { FAQSection } from '../components/FAQSection';
+import { SocialProofSection } from '../components/SocialProofSection';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -658,6 +659,9 @@ export const LandingHub = () => {
               <FeatureComparisonTable />
             </div>
           </section>
+
+          {/* Social Proof Section */}
+          <SocialProofSection />
 
           {/* FAQ Section */}
           <FAQSection />
