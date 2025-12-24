@@ -8,6 +8,7 @@ import { CommunicationHUD } from '../components/CommunicationHUD';
 import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { Footer } from '../components/Footer';
 import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
+import { ROICalculator } from '../components/ROICalculator';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -220,6 +221,9 @@ export const LandingHub = () => {
               </motion.div>
             </div>
           </section>
+
+          {/* ROI Calculator Section */}
+          <ROICalculator />
 
           <section id="brands" className="px-6 py-20 max-w-7xl mx-auto">
             <motion.div
