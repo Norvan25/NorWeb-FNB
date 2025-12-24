@@ -116,7 +116,7 @@ export const Rimba = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-xl border-b border-[#D4AF37]/20 shadow-2xl"
+        className="sticky top-0 left-0 right-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-xl border-b border-[#D4AF37]/20 shadow-2xl"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -124,7 +124,7 @@ export const Rimba = () => {
               whileHover={{ x: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/')}
-              className="text-gray-400 hover:text-white text-xs sm:text-sm font-medium transition-colors hover:underline"
+              className="text-cyan-400 hover:text-cyan-300 text-lg sm:text-2xl font-semibold transition-colors hover:underline"
             >
               ← Back to NorWeb
             </motion.button>
@@ -203,7 +203,7 @@ export const Rimba = () => {
         </div>
       </motion.nav>
 
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <OptimizedImage
             src="/images/rimba/rimba-hero.png"

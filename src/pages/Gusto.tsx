@@ -87,7 +87,7 @@ export const Gusto = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={() => navigate('/')}
-              className="text-stone-500 hover:text-stone-700 text-xs sm:text-sm font-medium transition-colors hover:underline"
+              className="text-cyan-500 hover:text-cyan-400 text-lg sm:text-2xl font-semibold transition-colors hover:underline"
             >
               ← Back to NorWeb
             </button>

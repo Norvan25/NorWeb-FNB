@@ -100,7 +100,7 @@ export const Veda = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={() => navigate('/')}
-              className="text-gray-400 hover:text-white text-xs sm:text-sm font-medium transition-colors hover:underline"
+              className="text-cyan-400 hover:text-cyan-300 text-lg sm:text-2xl font-semibold transition-colors hover:underline"
             >
               ← Back to NorWeb
             </button>
