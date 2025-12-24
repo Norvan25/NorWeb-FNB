@@ -166,27 +166,11 @@ export const LeadCaptureSection = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleWhatsApp}
-              className="flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full transition-colors shadow-lg shadow-green-500/30 mb-6"
+              className="flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full transition-colors shadow-lg shadow-green-500/30"
             >
               <MessageCircle className="w-5 h-5" />
               Chat on WhatsApp
             </motion.button>
-
-            <p className="text-gray-500 text-sm mb-8">
-              Trusted by restaurant owners across Malaysia
-            </p>
-
-            {/* Logo Placeholders */}
-            <div className="flex flex-wrap gap-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="w-20 h-10 rounded-lg bg-gray-800/50 border border-gray-700 flex items-center justify-center"
-                >
-                  <span className="text-gray-600 text-xs">Logo</span>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Right Column - Form */}
