@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';
-import { Sparkles, Wallet, Phone, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck, PhoneOff, Clock, CalendarX, BadgePercent } from 'lucide-react';
+import { Sparkles, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck, PhoneOff, Clock, CalendarX, BadgePercent } from 'lucide-react';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { CommunicationHUD } from '../components/CommunicationHUD';
-import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { Footer } from '../components/Footer';
 import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
 import { ROICalculator } from '../components/ROICalculator';
@@ -18,10 +17,9 @@ import { useState } from 'react';
 export const LandingHub = () => {
   const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
-  const [leadCaptureOpen, setLeadCaptureOpen] = useState(false);
   const [isAnnualBilling, setIsAnnualBilling] = useState(true);
 
-  const { openHUD } = useCommunication();
+  const { openHUD, openLeadCapture } = useCommunication();
 
   const openSchedulingModal = (type: 'strategy' | 'norcast') => {
     setSchedulingType(type);
@@ -32,12 +30,8 @@ export const LandingHub = () => {
     openHUD('HUB');
   };
 
-  const handleCalculateSavings = () => {
-    setLeadCaptureOpen(true);
-  };
-
-  const handleLeadSuccess = () => {
-    console.log('Lead captured successfully!');
+  const handleGetStarted = (plan?: string) => {
+    openLeadCapture(plan);
   };
 
   return (
@@ -129,7 +123,7 @@ export const LandingHub = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 text-lg font-bold rounded-full hover:bg-cyan-400/10 transition-all"
-                onClick={handleCalculateSavings}
+                onClick={() => handleGetStarted()}
               >
                 Calculate Your Savings
               </motion.button>
@@ -493,7 +487,7 @@ export const LandingHub = () => {
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
-                      onClick={handleOpenDemo}
+                      onClick={() => handleGetStarted('Starter')}
                       className="w-full py-4 rounded-full font-bold text-lg text-white transition-all"
                       style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
                     >
@@ -563,7 +557,7 @@ export const LandingHub = () => {
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
-                      onClick={handleOpenDemo}
+                      onClick={() => handleGetStarted('Growth')}
                       className="w-full py-4 rounded-full font-bold text-lg text-white transition-all shadow-lg shadow-orange-500/30"
                       style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
                     >
@@ -612,7 +606,7 @@ export const LandingHub = () => {
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
-                      onClick={handleOpenDemo}
+                      onClick={() => handleGetStarted('Enterprise')}
                       className="w-full py-4 rounded-full font-bold text-lg text-white border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all"
                     >
                       Contact Us
@@ -711,9 +705,7 @@ export const LandingHub = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                    onClick={() => handleGetStarted()}
                     className="px-8 py-4 rounded-full font-bold text-lg text-white shadow-lg shadow-orange-500/30 w-full sm:w-auto"
                     style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
                   >
@@ -756,14 +748,6 @@ export const LandingHub = () => {
         isOpen={schedulingModalOpen}
         onClose={() => setSchedulingModalOpen(false)}
         type={schedulingType}
-      />
-
-      <LeadCaptureModal
-        isOpen={leadCaptureOpen}
-        onClose={() => setLeadCaptureOpen(false)}
-        onSuccess={handleLeadSuccess}
-        selectedPlan="Savings Calculator"
-        restaurantName={null}
       />
 
       <CommunicationHUD />

@@ -1,236 +1,412 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, Phone, User, Mail, Building2 } from 'lucide-react';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+import { X, Check, AlertCircle, MessageCircle } from 'lucide-react';
 
 interface LeadCaptureModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: () => void;
   selectedPlan?: string | null;
-  restaurantName?: string | null;
 }
 
-export const LeadCaptureModal = ({
-  isOpen,
-  onClose,
-  onSuccess,
-  selectedPlan,
-  restaurantName,
-}: LeadCaptureModalProps) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [businessName, setBusinessName] = useState('');
+const HUBSPOT_PORTAL_ID = '244263164';
+const HUBSPOT_FORM_ID = '3feb8a47-f70d-427a-89ed-dfc098282d7d';
+
+const restaurantTypes = [
+  'Fine Dining',
+  'Casual Dining',
+  'Cafe',
+  'Fast Food/QSR',
+  'Cloud Kitchen',
+  'Bar/Pub',
+  'Catering',
+  'Other',
+];
+
+const malaysiaStates = [
+  'Kuala Lumpur',
+  'Selangor',
+  'Penang',
+  'Johor',
+  'Melaka',
+  'Perak',
+  'Negeri Sembilan',
+  'Pahang',
+  'Kedah',
+  'Kelantan',
+  'Terengganu',
+  'Perlis',
+  'Sabah',
+  'Sarawak',
+  'Labuan',
+];
+
+interface FormData {
+  your_full_name: string;
+  email: string;
+  mobilephone: string;
+  your_restaurant_name: string;
+  restaurant_type: string;
+  state_region: string;
+}
+
+export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => {
+  const [formData, setFormData] = useState<FormData>({
+    your_full_name: '',
+    email: '',
+    mobilephone: '',
+    your_restaurant_name: '',
+    restaurant_type: '',
+    state_region: '',
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  // Reset form when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setSubmitStatus('idle');
+      setErrorMessage('');
+    }
+  }, [isOpen]);
+
+  // Auto close after success
+  useEffect(() => {
+    if (submitStatus === 'success') {
+      const timer = setTimeout(() => {
+        onClose();
+        // Reset form after close
+        setFormData({
+          your_full_name: '',
+          email: '',
+          mobilephone: '',
+          your_restaurant_name: '',
+          restaurant_type: '',
+          state_region: '',
+        });
+        setSubmitStatus('idle');
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus, onClose]);
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-
-    if (!name.trim() || !phone.trim() || !email.trim() || !businessName.trim()) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    if (phone.length < 10) {
-      setError('Please enter a valid phone number');
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address');
-      return;
-    }
-
     setIsSubmitting(true);
+    setErrorMessage('');
 
     try {
-      const { error: insertError } = await supabase.from('leads').insert([
+      const response = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
         {
-          name: name.trim(),
-          phone: phone.trim(),
-          email: email.trim(),
-          restaurant_name: businessName.trim(),
-          plan_name: selectedPlan,
-          metadata: {
-            source: 'savings_calculator',
-            timestamp: new Date().toISOString(),
-            user_agent: navigator.userAgent,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        },
-      ]);
+          body: JSON.stringify({
+            fields: [
+              { name: 'your_full_name', value: formData.your_full_name },
+              { name: 'email', value: formData.email },
+              { name: 'mobilephone', value: formData.mobilephone },
+              { name: 'your_restaurant_name', value: formData.your_restaurant_name },
+              { name: 'restaurant_type', value: formData.restaurant_type },
+              { name: 'state_region', value: formData.state_region },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: 'NorWeb FnB Landing Page',
+            },
+          }),
+        }
+      );
 
-      if (insertError) throw insertError;
-
-      localStorage.setItem('norweb_lead_captured', 'true');
-      localStorage.setItem('norweb_lead_name', name.trim());
-
-      setName('');
-      setPhone('');
-      setEmail('');
-      setBusinessName('');
-      onSuccess();
-      onClose();
-    } catch (err) {
-      console.error('Failed to capture lead:', err);
-      setError('Failed to submit. Please try again.');
+      if (response.ok) {
+        setSubmitStatus('success');
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      setErrorMessage('Something went wrong. Please try again or WhatsApp us directly.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const inputClasses = `
+    w-full px-4 py-3 rounded-md
+    bg-[#0D1326] border border-[#2A2F40]
+    text-white placeholder-white/40
+    focus:outline-none focus:border-[#66D3FA]
+    transition-colors duration-200
+  `;
+
+  const labelClasses = 'block text-white/70 text-sm font-medium mb-1.5';
+
+  const selectClasses = `
+    ${inputClasses}
+    appearance-none cursor-pointer
+    bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2366D3FA%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')]
+    bg-no-repeat bg-[right_12px_center] bg-[length:20px]
+  `;
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={handleBackdropClick}
+          className="fixed inset-0 z-[10000] flex items-center justify-center p-4"
+          style={{
+            backgroundColor: 'rgba(13, 19, 38, 0.9)',
+            backdropFilter: 'blur(4px)',
+          }}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100]"
-            onClick={onClose}
-          />
-
-          <div className="fixed inset-0 flex items-center justify-center z-[101] pointer-events-none px-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="w-full max-w-md pointer-events-auto"
+            ref={modalRef}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="relative w-full max-w-[500px] max-h-[90vh] overflow-y-auto rounded-xl p-8"
+            style={{
+              backgroundColor: '#132238',
+              border: '1px solid rgba(102, 211, 250, 0.2)',
+            }}
+          >
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2 text-[#66D3FA] hover:brightness-125 transition-all"
             >
-            <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-500/30 rounded-2xl p-8 shadow-2xl shadow-cyan-500/20 relative">
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              <X className="w-6 h-6" />
+            </button>
+
+            {submitStatus === 'success' ? (
+              /* Success State */
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center py-8"
               >
-                <X size={24} />
-              </button>
-
-              <div className="text-center mb-6">
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  className="inline-block mb-4"
-                >
-                  <Sparkles className="text-cyan-400" size={40} />
-                </motion.div>
-
-                <h2 className="text-3xl font-bold mb-2">Calculate Your Savings</h2>
-                <p className="text-gray-400">
-                  Enter your details and we'll show you how much you can save
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <Check className="w-10 h-10 text-green-400" />
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-3">You're in! 🎉</h3>
+                <p className="text-gray-400 text-lg">
+                  We'll WhatsApp you within 24 hours to schedule your demo.
                 </p>
-                {selectedPlan && (
-                  <p className="text-cyan-400 font-semibold mt-2">
-                    Selected Plan: {selectedPlan}
+              </motion.div>
+            ) : (
+              /* Form State */
+              <>
+                {/* Header */}
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    Get Your AI Restaurant Assistant
+                  </h2>
+                  <p className="text-gray-400">
+                    Fill in your details. We'll set up your free demo within 24 hours.
                   </p>
-                )}
-              </div>
+                  
+                  {/* Early Bird Badge */}
+                  <div className="inline-flex items-center mt-4 px-4 py-2 rounded-full text-sm font-semibold text-white"
+                    style={{ backgroundColor: '#F28500' }}
+                  >
+                    🚀 Early Bird: 15% off setup + up to 6 months FREE
+                  </div>
+                </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Full Name
-                  </label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Full Name */}
+                  <div>
+                    <label htmlFor="your_full_name" className={labelClasses}>
+                      Your full name *
+                    </label>
                     <input
                       type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="John Tan"
-                      className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      disabled={isSubmitting}
+                      id="your_full_name"
+                      name="your_full_name"
+                      value={formData.your_full_name}
+                      onChange={handleInputChange}
+                      placeholder="Ahmad bin Abdullah"
+                      required
+                      className={inputClasses}
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Contact Number
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                    <input
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+60 12-345 6789"
-                      className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Email Address
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className={labelClasses}>
+                      Your email *
+                    </label>
                     <input
                       type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="john@restaurant.com"
-                      className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      disabled={isSubmitting}
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="ahmad@restaurant.com"
+                      required
+                      className={inputClasses}
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Business/Restaurant Name
-                  </label>
-                  <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                  {/* Phone */}
+                  <div>
+                    <label htmlFor="mobilephone" className={labelClasses}>
+                      Your contact number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="mobilephone"
+                      name="mobilephone"
+                      value={formData.mobilephone}
+                      onChange={handleInputChange}
+                      placeholder="+60 12 345 6789"
+                      required
+                      className={inputClasses}
+                    />
+                  </div>
+
+                  {/* Restaurant Name */}
+                  <div>
+                    <label htmlFor="your_restaurant_name" className={labelClasses}>
+                      Your Restaurant Name *
+                    </label>
                     <input
                       type="text"
-                      value={businessName}
-                      onChange={(e) => setBusinessName(e.target.value)}
-                      placeholder="Golden Lotus Restaurant"
-                      className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                      disabled={isSubmitting}
+                      id="your_restaurant_name"
+                      name="your_restaurant_name"
+                      value={formData.your_restaurant_name}
+                      onChange={handleInputChange}
+                      placeholder="Warung Makan Sedap"
+                      required
+                      className={inputClasses}
                     />
                   </div>
-                </div>
 
-                {error && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-red-400 text-sm"
+                  {/* Restaurant Type */}
+                  <div>
+                    <label htmlFor="restaurant_type" className={labelClasses}>
+                      Restaurant Type *
+                    </label>
+                    <select
+                      id="restaurant_type"
+                      name="restaurant_type"
+                      value={formData.restaurant_type}
+                      onChange={handleInputChange}
+                      required
+                      className={selectClasses}
+                    >
+                      <option value="" disabled>Select restaurant type</option>
+                      {restaurantTypes.map(type => (
+                        <option key={type} value={type}>{type}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* State */}
+                  <div>
+                    <label htmlFor="state_region" className={labelClasses}>
+                      State *
+                    </label>
+                    <select
+                      id="state_region"
+                      name="state_region"
+                      value={formData.state_region}
+                      onChange={handleInputChange}
+                      required
+                      className={selectClasses}
+                    >
+                      <option value="" disabled>Select state</option>
+                      {malaysiaStates.map(state => (
+                        <option key={state} value={state}>{state}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Error Message */}
+                  {submitStatus === 'error' && (
+                    <div className="flex items-center gap-2 p-3 rounded-md bg-red-500/10 border border-red-500/30">
+                      <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                      <p className="text-red-400 text-sm">{errorMessage}</p>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 rounded-md font-semibold text-white transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                    style={{
+                      backgroundColor: isSubmitting ? '#c46a00' : '#F28500',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSubmitting) e.currentTarget.style.backgroundColor = '#FF9500';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSubmitting) e.currentTarget.style.backgroundColor = '#F28500';
+                    }}
                   >
-                    {error}
-                  </motion.p>
-                )}
+                    {isSubmitting ? 'Submitting...' : 'Get Your Free Demo →'}
+                  </button>
 
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg shadow-cyan-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Get My Savings Report'}
-                </motion.button>
+                  {/* Consent Text */}
+                  <p className="text-center text-white/50 text-xs">
+                    By submitting, you agree to receive communications from NorWeb.
+                  </p>
 
-                <p className="text-xs text-gray-500 text-center">
-                  By submitting, you agree to receive updates about NorWeb.
-                </p>
-              </form>
-            </div>
-            </motion.div>
-          </div>
-        </>
+                  {/* Trust Line */}
+                  <p className="text-center text-white/60 text-[13px]">
+                    ✅ No credit card required • ✅ Free consultation • ✅ 3-month guarantee
+                  </p>
+
+                  {/* WhatsApp Alternative */}
+                  <div className="text-center pt-2">
+                    <a
+                      href="https://wa.me/60196069033"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#66D3FA] text-sm hover:underline"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      Prefer to chat? WhatsApp us directly
+                    </a>
+                  </div>
+                </form>
+              </>
+            )}
+          </motion.div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

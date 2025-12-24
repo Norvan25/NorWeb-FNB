@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Globe, Clock, Rocket, Building2, MapPin } from 'lucide-react';
+import { useCommunication } from '../context/CommunicationContext';
 
 const stats = [
   {
@@ -33,8 +34,10 @@ const trustBadges = [
 ];
 
 export const SocialProofSection = () => {
-  const scrollToPricing = () => {
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+  const { openLeadCapture } = useCommunication();
+
+  const handleClaimEarlyBird = () => {
+    openLeadCapture('Early Bird');
   };
 
   return (
@@ -175,7 +178,7 @@ export const SocialProofSection = () => {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            onClick={scrollToPricing}
+            onClick={handleClaimEarlyBird}
             className="px-8 py-4 rounded-full font-bold text-lg text-white shadow-lg shadow-orange-500/30"
             style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
           >

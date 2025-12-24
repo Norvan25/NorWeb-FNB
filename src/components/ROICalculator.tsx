@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { PhoneOff, CalendarX, TrendingUp, ArrowRight, Sparkles } from 'lucide-react';
+import { useCommunication } from '../context/CommunicationContext';
 
 export const ROICalculator = () => {
   const [missedCalls, setMissedCalls] = useState(5);
   const [avgOrderValue, setAvgOrderValue] = useState(50);
   const [noShows, setNoShows] = useState(5);
+  const { openLeadCapture } = useCommunication();
 
   const calculations = useMemo(() => {
     const missedCallsLoss = missedCalls * avgOrderValue * 30;
@@ -37,11 +39,8 @@ export const ROICalculator = () => {
     }).format(value);
   };
 
-  const scrollToPricing = () => {
-    const pricingSection = document.getElementById('pricing');
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleStopLosingMoney = () => {
+    openLeadCapture();
   };
 
   return (
@@ -250,7 +249,7 @@ export const ROICalculator = () => {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={scrollToPricing}
+              onClick={handleStopLosingMoney}
               className="w-full py-4 rounded-full font-bold text-lg text-white flex items-center justify-center gap-2 transition-all shadow-lg shadow-orange-500/30"
               style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
             >

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useCommunication } from '../context/CommunicationContext';
 
 const BANNER_STORAGE_KEY = 'norvan_banner_dismissed';
 
 export const AnnouncementBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { openLeadCapture } = useCommunication();
 
   useEffect(() => {
     // Check if banner was dismissed in this session
@@ -21,17 +23,7 @@ export const AnnouncementBanner = () => {
   };
 
   const handleClaimOffer = () => {
-    // Find the pricing section by looking for the pricing cards
-    const sections = document.querySelectorAll('section');
-    for (const section of sections) {
-      if (section.textContent?.includes('RM 799') || section.textContent?.includes('THE DIGITAL HOST')) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
-    }
-    
-    // Fallback: scroll down a significant amount to pricing area
-    window.scrollTo({ top: window.innerHeight * 3, behavior: 'smooth' });
+    openLeadCapture('Early Bird');
   };
 
   return (
