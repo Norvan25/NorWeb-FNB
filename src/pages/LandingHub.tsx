@@ -9,6 +9,7 @@ import { LeadCaptureModal } from '../components/LeadCaptureModal';
 import { Footer } from '../components/Footer';
 import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
 import { ROICalculator } from '../components/ROICalculator';
+import { FAQSection } from '../components/FAQSection';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -658,7 +659,10 @@ export const LandingHub = () => {
             </div>
           </section>
 
-          <section className="px-6 py-32 bg-gradient-to-b from-gray-900 to-black">
+          {/* FAQ Section */}
+          <FAQSection />
+
+          <section className="px-6 py-32 bg-gradient-to-b from-black to-gray-900">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
