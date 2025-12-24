@@ -118,7 +118,8 @@ export const LandingHub = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-lg font-bold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-xl shadow-cyan-500/50"
+                className="px-10 py-4 text-white text-lg font-bold rounded-full transition-all shadow-xl shadow-orange-500/40"
+                style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
                 onClick={handleOpenDemo}
               >
                 Activate Free Demo
@@ -126,7 +127,7 @@ export const LandingHub = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-bold rounded-full hover:bg-white hover:text-black transition-all"
+                className="px-10 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 text-lg font-bold rounded-full hover:bg-cyan-400/10 transition-all"
                 onClick={handleCalculateSavings}
               >
                 Calculate Your Savings
@@ -422,7 +423,7 @@ export const LandingHub = () => {
                   Annual
                 </span>
                 {isAnnualBilling && (
-                  <span className="px-3 py-1 bg-green-500/20 text-green-400 text-sm font-bold rounded-full">
+                  <span className="px-3 py-1 text-sm font-bold rounded-full text-white" style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}>
                     Save 15%
                   </span>
                 )}
@@ -468,8 +469,8 @@ export const LandingHub = () => {
                       )}
                     </div>
 
-                    <p className="text-green-400 text-sm font-medium mb-6">
-                      {isAnnualBilling ? '+ 6 months FREE' : '+ 1 month FREE'}
+                    <p className="text-sm font-medium mb-6" style={{ color: '#F28500' }}>
+                      {isAnnualBilling ? '🔥 + 6 months FREE' : '🔥 + 1 month FREE'}
                     </p>
 
                     <ul className="space-y-3 mb-8">
@@ -537,8 +538,8 @@ export const LandingHub = () => {
                       )}
                     </div>
 
-                    <p className="text-green-400 text-sm font-medium mb-6">
-                      {isAnnualBilling ? '+ 6 months FREE' : ''}
+                    <p className="text-sm font-medium mb-6" style={{ color: '#F28500' }}>
+                      {isAnnualBilling ? '🔥 + 6 months FREE' : '\u00A0'}
                     </p>
 
                     <p className="text-cyan-400 text-sm font-medium mb-4">Everything in Starter, plus:</p>
@@ -629,7 +630,7 @@ export const LandingHub = () => {
                 <p className="text-lg text-gray-400">
                   Setup from <span className="text-gray-500 line-through">RM 3,500</span>{' '}
                   <span className="text-white font-bold text-xl">RM 2,975</span>{' '}
-                  <span className="text-orange-400 font-medium">(Early Bird 15% off)</span>
+                  <span className="font-bold" style={{ color: '#F28500' }}>(Early Bird 15% off)</span>
                 </p>
               </motion.div>
 

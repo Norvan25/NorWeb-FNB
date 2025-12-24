@@ -114,14 +114,24 @@ export const FloatingContactButton = () => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full"
+          className="absolute inset-0 rounded-full"
+          style={{ background: 'linear-gradient(135deg, #F28500, #FF6B35)' }}
         />
         
         {/* Glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity" />
+        <div 
+          className="absolute inset-0 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity"
+          style={{ background: 'linear-gradient(135deg, #F28500, #FF6B35)' }}
+        />
         
         {/* Button */}
-        <div className="relative w-16 h-16 bg-gradient-to-br from-purple-500 via-violet-500 to-cyan-500 rounded-full flex items-center justify-center shadow-2xl shadow-purple-500/30 group-hover:shadow-purple-500/50 transition-all">
+        <div 
+          className="relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all"
+          style={{ 
+            background: 'linear-gradient(135deg, #F28500, #FF6B35)',
+            boxShadow: '0 10px 40px rgba(242, 133, 0, 0.4)'
+          }}
+        >
           <AnimatePresence mode="wait">
             {isExpanded ? (
               <motion.div
@@ -144,8 +154,8 @@ export const FloatingContactButton = () => {
               >
                 <Phone className="w-7 h-7 text-white" />
                 {/* Notification dot */}
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-purple-500">
-                  <span className="absolute inset-0 bg-green-400 rounded-full animate-ping" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full border-2 border-orange-500">
+                  <span className="absolute inset-0 bg-cyan-400 rounded-full animate-ping" />
                 </span>
               </motion.div>
             )}
