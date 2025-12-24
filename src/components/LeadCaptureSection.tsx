@@ -20,10 +20,21 @@ const states = [
   'Selangor',
   'Penang',
   'Johor',
+  'Melaka',
+  'Perak',
+  'Negeri Sembilan',
+  'Pahang',
+  'Kedah',
+  'Kelantan',
+  'Terengganu',
+  'Perlis',
   'Sabah',
   'Sarawak',
-  'Other',
+  'Labuan',
 ];
+
+const HUBSPOT_PORTAL_ID = '244263164';
+const HUBSPOT_FORM_ID = '3feb8a47-f70d-427a-89ed-dfc098282d7d';
 
 const trustItems = [
   { icon: Target, text: 'Easy setup for anyone' },
@@ -32,22 +43,24 @@ const trustItems = [
 ];
 
 interface FormData {
-  fullName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   phone: string;
-  restaurantName: string;
-  restaurantType: string;
-  state: string;
+  your_restaurant_name: string;
+  restaurant_type: string;
+  state_region: string;
 }
 
 export const LeadCaptureSection = () => {
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     phone: '',
-    restaurantName: '',
-    restaurantType: '',
-    state: '',
+    your_restaurant_name: '',
+    restaurant_type: '',
+    state_region: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -64,32 +77,53 @@ export const LeadCaptureSection = () => {
     setError(null);
 
     try {
-      // For now, store to localStorage and log to console
-      // Later: Connect to CRM or Formspree
-      const leadData = {
-        ...formData,
-        phone: `+60${formData.phone}`,
-        submittedAt: new Date().toISOString(),
-      };
+      // Format phone with +60 prefix
+      const formattedPhone = formData.phone.startsWith('+60') 
+        ? formData.phone 
+        : `+60${formData.phone}`;
 
-      console.log('Lead captured:', leadData);
-      
-      // Store in localStorage
-      const existingLeads = JSON.parse(localStorage.getItem('norweb_leads') || '[]');
-      existingLeads.push(leadData);
-      localStorage.setItem('norweb_leads', JSON.stringify(existingLeads));
+      // Submit to HubSpot
+      const response = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fields: [
+              { name: 'firstname', value: formData.firstname },
+              { name: 'lastname', value: formData.lastname },
+              { name: 'email', value: formData.email },
+              { name: 'phone', value: formattedPhone },
+              { name: 'your_restaurant_name', value: formData.your_restaurant_name },
+              { name: 'restaurant_type', value: formData.restaurant_type },
+              { name: 'state_region', value: formData.state_region },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: 'NorWeb FnB Landing Page - Lead Capture Section',
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
 
       setIsSubmitted(true);
       setFormData({
-        fullName: '',
+        firstname: '',
+        lastname: '',
         email: '',
         phone: '',
-        restaurantName: '',
-        restaurantType: '',
-        state: '',
+        your_restaurant_name: '',
+        restaurant_type: '',
+        state_region: '',
       });
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError('Something went wrong. Please try again or WhatsApp us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -188,20 +222,36 @@ export const LeadCaptureSection = () => {
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Full Name */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Your full name *
-                      </label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900"
-                        placeholder="Ahmad bin Abdullah"
-                      />
+                    {/* First Name & Last Name - Side by side */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          First name *
+                        </label>
+                        <input
+                          type="text"
+                          name="firstname"
+                          value={formData.firstname}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900"
+                          placeholder="Ahmad"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Last name *
+                        </label>
+                        <input
+                          type="text"
+                          name="lastname"
+                          value={formData.lastname}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900"
+                          placeholder="Abdullah"
+                        />
+                      </div>
                     </div>
 
                     {/* Email */}
@@ -249,8 +299,8 @@ export const LeadCaptureSection = () => {
                       </label>
                       <input
                         type="text"
-                        name="restaurantName"
-                        value={formData.restaurantName}
+                        name="your_restaurant_name"
+                        value={formData.your_restaurant_name}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900"
@@ -264,8 +314,8 @@ export const LeadCaptureSection = () => {
                         Restaurant type *
                       </label>
                       <select
-                        name="restaurantType"
-                        value={formData.restaurantType}
+                        name="restaurant_type"
+                        value={formData.restaurant_type}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900 bg-white"
@@ -285,8 +335,8 @@ export const LeadCaptureSection = () => {
                         State *
                       </label>
                       <select
-                        name="state"
-                        value={formData.state}
+                        name="state_region"
+                        value={formData.state_region}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900 bg-white"
