@@ -131,7 +131,7 @@ const NovaOrb = ({ isActive, isListening, isSpeaking, color }: {
 };
 
 export const CommunicationHUD = () => {
-  const { isOpen, mode, activeContext, activeRestaurant, closeHUD, switchMode } = useCommunication();
+  const { isOpen, mode, activeContext, activeRestaurant, closeHUD, switchMode, setAgentActive, isAgentActive } = useCommunication();
   const navigate = useNavigate();
 
   const [isConnected, setIsConnected] = useState(false);
@@ -161,18 +161,39 @@ export const CommunicationHUD = () => {
   useEffect(() => {
     if (isOpen && !isConnected && !isConnectingRef.current) {
       startConversation();
-    } else if (!isOpen && isConnected) {
+    } else if (!isOpen) {
+      // Always end conversation when modal closes, regardless of isConnected state
       endConversation();
       setMessages([]);
     }
   }, [isOpen]);
 
+  // Cleanup on unmount - ensure conversation is always ended
+  useEffect(() => {
+    return () => {
+      if (conversationRef.current) {
+        console.log('Component unmounting, ending conversation...');
+        conversationRef.current.endSession().catch(console.error);
+        conversationRef.current = null;
+        setAgentActive(false);
+      }
+    };
+  }, []);
+
   const startConversation = async () => {
-    if (isConnectingRef.current || conversationRef.current) {
+    // Prevent multiple simultaneous connections
+    if (isConnectingRef.current || conversationRef.current || isAgentActive) {
+      console.log('Cannot start conversation: already connecting or active', { 
+        isConnecting: isConnectingRef.current, 
+        hasConversation: !!conversationRef.current,
+        isAgentActive 
+      });
       return;
     }
 
     isConnectingRef.current = true;
+    setAgentActive(true); // Mark agent as active immediately
+    
     try {
       console.log('Fetching signed URL from backend for agent:', agentId);
       const signedUrlResponse = await fetch(
@@ -205,6 +226,7 @@ export const CommunicationHUD = () => {
           isConnectingRef.current = false;
           isConversationReadyRef.current = true;
           setIsConnected(true);
+          setAgentActive(true);
         },
         onDisconnect: () => {
           console.log('ElevenLabs disconnected');
@@ -212,6 +234,7 @@ export const CommunicationHUD = () => {
           setIsConnected(false);
           setIsListening(false);
           setIsSpeaking(false);
+          setAgentActive(false);
         },
         onMessage: (message: any) => {
           console.log('ElevenLabs message:', message);
@@ -233,6 +256,7 @@ export const CommunicationHUD = () => {
         },
         onError: (error: any) => {
           console.error('ElevenLabs error:', error);
+          setAgentActive(false);
         },
       });
 
@@ -241,6 +265,7 @@ export const CommunicationHUD = () => {
       console.error('Failed to start conversation:', error);
       isConnectingRef.current = false;
       conversationRef.current = null;
+      setAgentActive(false); // Reset agent active state on error
       setMessages(prev => [...prev, {
         role: 'assistant',
         text: `Connection error: ${error instanceof Error ? error.message : 'Unknown error'}`
@@ -249,6 +274,7 @@ export const CommunicationHUD = () => {
   };
 
   const endConversation = async () => {
+    console.log('Ending conversation...');
     if (conversationRef.current) {
       try {
         await conversationRef.current.endSession();
@@ -262,6 +288,7 @@ export const CommunicationHUD = () => {
     setIsConnected(false);
     setIsListening(false);
     setIsSpeaking(false);
+    setAgentActive(false); // Reset agent active state
   };
 
   const handleCallToggle = async () => {
@@ -365,9 +392,18 @@ export const CommunicationHUD = () => {
     }
   };
 
-  const handleClose = () => {
-    endConversation();
+  const handleClose = async () => {
+    // Always end conversation first, then close
+    await endConversation();
     closeHUD();
+  };
+
+  const handleBackdropClick = () => {
+    // Only allow backdrop close if NO active call
+    if (!isConnected && !isConnectingRef.current) {
+      handleClose();
+    }
+    // If call is active, do nothing - user must end call first
   };
 
   const handleRestaurantSelect = (restaurant: keyof typeof RESTAURANT_THEMES) => {
@@ -389,7 +425,10 @@ export const CommunicationHUD = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90]"
+            onClick={handleBackdropClick}
+            className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] ${
+              isConnected || isConnectingRef.current ? 'cursor-not-allowed' : 'cursor-pointer'
+            }`}
           />
 
           <div key="hud-modal" className="fixed inset-0 flex items-center justify-center z-[91] pointer-events-none">
@@ -434,9 +473,18 @@ export const CommunicationHUD = () => {
                     <option value="ms">🇲🇾</option>
                     <option value="zh">🇨🇳</option>
                   </select>
-                  <button onClick={handleClose} className="text-gray-400 hover:text-white transition-colors pointer-events-auto">
+                  <button 
+                    onClick={handleClose} 
+                    className="text-gray-400 hover:text-white transition-colors pointer-events-auto relative group"
+                    title={isConnected ? "End call and close" : "Close"}
+                  >
                     <X size={20} className="md:hidden" />
                     <X size={22} className="hidden md:block" />
+                    {isConnected && (
+                      <span className="absolute -bottom-8 right-0 text-[10px] text-red-400 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                        End call to close
+                      </span>
+                    )}
                   </button>
                 </div>
               </div>

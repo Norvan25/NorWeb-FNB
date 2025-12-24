@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Home, Leaf } from 'lucide-react';
+import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Leaf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
@@ -104,7 +104,7 @@ export const Rimba = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
+        className="fixed top-16 right-6 z-50"
       >
         <img
           src="/images/norvan_logo_only.svg"
@@ -116,18 +116,17 @@ export const Rimba = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-xl border-b border-[#D4AF37]/20 shadow-2xl"
+        className="sticky top-0 left-0 right-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-xl border-b border-[#D4AF37]/20 shadow-2xl"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ x: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors group"
+              className="text-cyan-400 hover:text-cyan-300 text-lg sm:text-2xl font-semibold transition-colors hover:underline"
             >
-              <Home size={28} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-semibold tracking-wider hidden sm:block">HUB</span>
+              ← Back to NorWeb
             </motion.button>
 
             <motion.div
@@ -204,7 +203,7 @@ export const Rimba = () => {
         </div>
       </motion.nav>
 
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <OptimizedImage
             src="/images/rimba/rimba-hero.png"
@@ -339,17 +338,18 @@ export const Rimba = () => {
                         index % 3 === 1 ? 'md:mt-8' : ''
                       } ${index % 3 === 2 ? 'md:mt-16' : ''}`}
                     >
-                      <div className="relative h-48 overflow-hidden bg-stone-900/50">
+                      <div className="relative aspect-[4/5] overflow-hidden bg-stone-900/80 flex items-center justify-center">
                         <OptimizedImage
                           src={item.image}
                           alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                          objectPosition="center"
                           priority={false}
                           onError={(e) => {
-                            e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23292524'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='24' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.name}%3C/text%3E%3C/svg%3E`;
+                            e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect width='400' height='500' fill='%23292524'/%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='24' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3E${item.name}%3C/text%3E%3C/svg%3E`;
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                         {item.spiceLevel && (
                           <div className="absolute top-3 right-3 flex gap-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">

@@ -16,20 +16,6 @@ export const restaurants: Restaurant[] = [
     icon: '🌿'
   },
   {
-    id: 'rouge',
-    name: 'ROUGE',
-    cuisine: 'Chinese Cuisine',
-    tagline: 'Shanghai After Dark',
-    description: 'Step into a cinematic world where Shanghai noir meets contemporary Chinese culinary excellence.',
-    theme: {
-      primary: '#8b0000',
-      secondary: '#1a1a1a',
-      accent: '#c41e3a',
-      gradient: 'from-red-950 via-black to-red-900'
-    },
-    icon: '🏮'
-  },
-  {
     id: 'veda',
     name: 'VEDA',
     cuisine: 'Indian Cuisine',
