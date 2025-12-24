@@ -414,7 +414,7 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
                   {/* WhatsApp Alternative */}
                   <div className="text-center pt-2">
                     <a
-                      href="https://wa.me/60196069033"
+                      href="https://wa.me/601116343646"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-[#66D3FA] text-sm hover:underline"

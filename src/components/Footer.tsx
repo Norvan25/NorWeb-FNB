@@ -154,7 +154,7 @@ export const Footer = () => {
               <ContactNumber 
                 number="+60 11 1634 3646" 
                 label="NORVAN NOUS"
-                whatsappNumber="+60111634364‌6"
+                whatsappNumber="601116343646"
               />
               <ContactNumber 
                 number="+60 19 606 9033" 
@@ -185,7 +185,7 @@ export const Footer = () => {
                 Contact Us
               </motion.a>
               <motion.a
-                href={`https://wa.me/60111634364‌6`}
+                href="https://wa.me/601116343646"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}

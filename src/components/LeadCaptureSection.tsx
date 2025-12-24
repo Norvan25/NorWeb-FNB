@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Target, Lock, Link2, Check } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '60196069033';
+const WHATSAPP_NUMBER = '601116343646';
 
 const restaurantTypes = [
   'Fine Dining',

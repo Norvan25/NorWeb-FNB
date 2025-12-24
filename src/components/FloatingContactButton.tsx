@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Phone, X, Headphones } from 'lucide-react';
 import { useCommunication } from '../context/CommunicationContext';
 
-const NORVAN_NOUS_WHATSAPP = '60111634364‌6';
+const NORVAN_NOUS_WHATSAPP = '601116343646';
 
 export const FloatingContactButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
