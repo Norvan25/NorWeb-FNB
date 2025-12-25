@@ -1,13 +1,27 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Phone, X, Headphones } from 'lucide-react';
-import { useCommunication } from '../context/CommunicationContext';
+import { useCommunication, RestaurantName } from '../context/CommunicationContext';
+import { useLocation } from 'react-router-dom';
 
 const NORVAN_NOUS_WHATSAPP = '601116343646';
+
+// Route to agent mapping
+const ROUTE_AGENT_CONFIG: Record<string, { mode: 'HUB' | 'RESTAURANT'; restaurant?: RestaurantName; agentName: string }> = {
+  '/': { mode: 'HUB', agentName: 'Nova' },
+  '/restaurant/rimba': { mode: 'RESTAURANT', restaurant: 'RIMBA', agentName: 'Aiman' },
+  '/restaurant/veda': { mode: 'RESTAURANT', restaurant: 'VEDA', agentName: 'Dev' },
+  '/restaurant/gusto': { mode: 'RESTAURANT', restaurant: 'GUSTO', agentName: 'Marco' },
+  '/restaurant/rouge': { mode: 'RESTAURANT', restaurant: 'ROUGE', agentName: 'Rouge AI' },
+};
 
 export const FloatingContactButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { openHUD, isAgentActive, isOpen } = useCommunication();
+  const location = useLocation();
+
+  // Get the agent config for current route
+  const currentConfig = ROUTE_AGENT_CONFIG[location.pathname] || ROUTE_AGENT_CONFIG['/'];
 
   const handleCallAI = () => {
     // Don't allow if an agent is already active
@@ -17,7 +31,13 @@ export const FloatingContactButton = () => {
       return;
     }
     setIsExpanded(false);
-    openHUD('HUB');
+    
+    // Open HUD with correct mode and restaurant based on current route
+    if (currentConfig.mode === 'RESTAURANT' && currentConfig.restaurant) {
+      openHUD('RESTAURANT', undefined, currentConfig.restaurant);
+    } else {
+      openHUD('HUB');
+    }
   };
 
   const handleWhatsApp = () => {
@@ -81,7 +101,7 @@ export const FloatingContactButton = () => {
                 transition={{ delay: 0.05 }}
                 className="px-4 py-2 bg-gray-900/95 backdrop-blur-sm border border-gray-700 rounded-full text-sm font-medium text-white shadow-xl whitespace-nowrap"
               >
-                Talk to AI Agent
+                Talk to {currentConfig.agentName}
               </motion.span>
               
               {/* Icon Button */}
