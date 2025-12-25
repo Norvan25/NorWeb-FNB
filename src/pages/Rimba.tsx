@@ -228,7 +228,7 @@ export const Rimba = () => {
               🌿
             </motion.div>
 
-            <h1 className="text-7xl md:text-9xl font-serif font-bold mb-6 tracking-tight leading-none">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-serif font-bold mb-6 tracking-tight leading-none">
               Warisan <span className="text-[#D4AF37]">Rimba</span>
             </h1>
 
@@ -298,7 +298,7 @@ export const Rimba = () => {
             viewport={{ once: true }}
             className="text-center mb-20 relative z-10"
           >
-            <h2 className="text-6xl font-serif font-bold mb-4 text-amber-400">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 text-amber-400">
               Our <span className="text-[#D4AF37]">Menu</span>
             </h2>
             <p className="text-gray-200 text-lg">
@@ -426,7 +426,7 @@ export const Rimba = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-6xl font-serif font-bold mb-4 text-amber-400">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 text-amber-400">
               The <span className="text-[#D4AF37]">Experience</span>
             </h2>
             <p className="text-gray-200 text-lg">
@@ -484,7 +484,7 @@ export const Rimba = () => {
             viewport={{ once: true }}
             className="text-center mb-12 relative z-10"
           >
-            <h2 className="text-5xl md:text-6xl font-serif font-bold mb-4 text-amber-400">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 text-amber-400">
               Reserve Your <span className="text-[#D4AF37]">Table</span>
             </h2>
             <p className="text-gray-200 text-lg">

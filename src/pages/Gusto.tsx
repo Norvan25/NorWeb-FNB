@@ -185,7 +185,7 @@ export const Gusto = () => {
         </div>
         <div className="absolute inset-0 bg-white/80" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-6xl font-serif font-bold text-stone-800 mb-8">About GUSTO</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-stone-800 mb-8">About GUSTO</h2>
           <p className="text-xl text-stone-700 leading-relaxed">
             At GUSTO, we celebrate the rustic elegance of authentic Italian cuisine. Each dish is crafted
             with passion, honoring centuries-old traditions while embracing the simple beauty of fresh,
@@ -207,7 +207,7 @@ export const Gusto = () => {
       >
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-stone-700 mb-6">Our Menu</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-stone-700 mb-6">Our Menu</h2>
             <p className="text-xl text-stone-600">
               Authentic flavors from the heart of Italy
             </p>
@@ -292,7 +292,7 @@ export const Gusto = () => {
       <section className="relative py-24 px-6 bg-stone-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-stone-700 mb-4">Gallery</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-stone-700 mb-4">Gallery</h2>
             <p className="text-xl text-stone-600">Rustic charm meets Italian elegance</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -329,7 +329,7 @@ export const Gusto = () => {
         <div className="absolute inset-0 bg-black/40" />
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-white mb-6 drop-shadow-2xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 drop-shadow-2xl">
               Reserve Your Table
             </h2>
             <p className="text-white text-xl drop-shadow-lg">
@@ -448,7 +448,7 @@ export const Gusto = () => {
 
       <section style={{ backgroundColor: '#55704a' }} className="py-20 px-6 text-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-6xl font-serif font-bold mb-8">Contact Us</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-8">Contact Us</h2>
           <div className="space-y-3 text-lg">
             <p>456 Mediterranean Avenue, Kuala Lumpur</p>
             <p>Phone: +60 3-2345-6789</p>

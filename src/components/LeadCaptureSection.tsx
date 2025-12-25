@@ -145,7 +145,7 @@ export const LeadCaptureSection = () => {
             viewport={{ once: true }}
             className="lg:sticky lg:top-24"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
               NorWeb's AI-powered system is built for restaurants that want to grow
             </h2>
 
@@ -206,8 +206,8 @@ export const LeadCaptureSection = () => {
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* First Name & Last Name - Side by side */}
-                    <div className="grid grid-cols-2 gap-3">
+                    {/* First Name & Last Name - Side by side on sm+ */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           First name *

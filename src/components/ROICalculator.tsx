@@ -53,7 +53,7 @@ export const ROICalculator = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
             Calculate Your Hidden Losses
           </h2>
           <p className="text-xl text-gray-400">
@@ -163,17 +163,23 @@ export const ROICalculator = () => {
               </h3>
               
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between items-center py-2 border-b border-gray-800/50">
-                  <span className="text-gray-400">Missed calls</span>
-                  <span className="text-red-400 font-medium">
-                    {missedCalls} × RM {avgOrderValue} × 30 = <span className="font-bold">RM {formatCurrency(calculations.missedCallsLoss)}</span>
-                  </span>
+                <div className="py-2 border-b border-gray-800/50">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Missed calls</span>
+                    <span className="text-red-400 font-bold">RM {formatCurrency(calculations.missedCallsLoss)}</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {missedCalls} calls × RM {avgOrderValue} × 30 days
+                  </p>
                 </div>
-                <div className="flex justify-between items-center py-2 border-b border-gray-800/50">
-                  <span className="text-gray-400">No-shows</span>
-                  <span className="text-orange-400 font-medium">
-                    {noShows} × RM {avgOrderValue} × 4 = <span className="font-bold">RM {formatCurrency(calculations.noShowsLoss)}</span>
-                  </span>
+                <div className="py-2 border-b border-gray-800/50">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">No-shows</span>
+                    <span className="text-orange-400 font-bold">RM {formatCurrency(calculations.noShowsLoss)}</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {noShows} bookings × RM {avgOrderValue} × 4 weeks
+                  </p>
                 </div>
               </div>
 

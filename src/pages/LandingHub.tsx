@@ -81,7 +81,7 @@ export const LandingHub = () => {
                 <Sparkles className="text-yellow-400" size={48} />
               </motion.div>
 
-              <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
                 Stop Losing Orders When<br />
                 No One Replies.
               </h1>
@@ -113,7 +113,7 @@ export const LandingHub = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 text-white text-lg font-bold rounded-full transition-all shadow-xl shadow-orange-500/40"
+                className="px-6 sm:px-10 py-3 sm:py-4 text-white text-base sm:text-lg font-bold rounded-full transition-all shadow-xl shadow-orange-500/40 w-full sm:w-auto"
                 style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
                 onClick={handleOpenDemo}
               >
@@ -122,7 +122,7 @@ export const LandingHub = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 text-lg font-bold rounded-full hover:bg-cyan-400/10 transition-all"
+                className="px-6 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 text-base sm:text-lg font-bold rounded-full hover:bg-cyan-400/10 transition-all w-full sm:w-auto"
                 onClick={() => handleGetStarted()}
               >
                 Calculate Your Savings
@@ -139,7 +139,7 @@ export const LandingHub = () => {
                 viewport={{ once: true }}
                 className="text-center mb-16"
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
                   Every Day You Wait, You Lose Money
                 </h2>
                 <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
@@ -230,7 +230,7 @@ export const LandingHub = () => {
               viewport={{ once: true }}
               className="mb-12 text-center"
             >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                 Try It Yourself — Live Demos
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -262,7 +262,7 @@ export const LandingHub = () => {
                 transition={{ duration: 0.6 }}
                 className="text-center mb-20"
               >
-                <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                   This is not a website.<br />
                   It's a revenue capture system.
                 </h2>
@@ -315,7 +315,7 @@ export const LandingHub = () => {
                 viewport={{ once: true }}
                 className="text-center mb-16"
               >
-                <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                   From Chat to Kitchen in Seconds.
                 </h2>
               </motion.div>
@@ -384,7 +384,7 @@ export const LandingHub = () => {
                 viewport={{ once: true }}
                 className="text-center mb-12"
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                   Simple Pricing. Serious Results.
                 </h2>
                 <p className="text-xl text-gray-400">
@@ -636,9 +636,9 @@ export const LandingHub = () => {
                 viewport={{ once: true }}
                 className="flex justify-center mb-6"
               >
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-green-500/10 border border-green-500/30 rounded-full">
+                <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 bg-green-500/10 border border-green-500/30 rounded-full text-center">
                   <span className="text-green-400 text-lg">✅</span>
-                  <span className="text-green-400 font-semibold">
+                  <span className="text-green-400 font-semibold text-sm sm:text-base">
                     3-Month ROI Guarantee — 50 bookings or full setup refund
                   </span>
                 </div>
@@ -682,7 +682,7 @@ export const LandingHub = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
                   Ready to Stop Losing Revenue?
                 </h2>
                 <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">

@@ -150,7 +150,7 @@ export const Veda = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-purple-900/50 to-purple-900/70" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
-          <h1 className="text-7xl md:text-9xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-2xl tracking-wider">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-2xl tracking-wider">
             VEDA
           </h1>
           <p className="text-3xl md:text-4xl font-serif text-amber-300 mb-8 drop-shadow-xl tracking-wide">
@@ -199,7 +199,7 @@ export const Veda = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">About VEDA</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">About VEDA</h2>
             <p className="text-xl text-white max-w-3xl mx-auto drop-shadow-lg leading-relaxed">
               Experience authentic Indian cuisine crafted with traditional recipes passed down through generations.
               Each dish tells a story of centuries-old culinary heritage, where every spice is carefully selected
@@ -224,7 +224,7 @@ export const Veda = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">Royal Menu</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">Royal Menu</h2>
             <p className="text-xl text-white drop-shadow-lg">
               Crafted with centuries-old recipes and the finest spices
             </p>
@@ -326,7 +326,7 @@ export const Veda = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-4 drop-shadow-xl">Gallery</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-yellow-400 mb-4 drop-shadow-xl">Gallery</h2>
             <p className="text-xl text-white drop-shadow-lg">Glimpses of our royal heritage and culinary artistry</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -371,7 +371,7 @@ export const Veda = () => {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-yellow-400 mb-6 drop-shadow-xl">
               Reserve Your <span className="text-amber-400">Table</span>
             </h2>
             <p className="text-white text-xl drop-shadow-lg">
@@ -489,7 +489,7 @@ export const Veda = () => {
 
       <section className="py-20 px-6 bg-purple-950">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-6xl font-serif font-bold text-yellow-400 mb-8">Contact Us</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-yellow-400 mb-8">Contact Us</h2>
           <div className="text-white space-y-3 text-lg">
             <p>123 Spice Street, Kuala Lumpur</p>
             <p>Phone: +60 3-1234-5678</p>

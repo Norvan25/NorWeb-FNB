@@ -124,7 +124,7 @@ export const FAQSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-gray-400 text-lg">

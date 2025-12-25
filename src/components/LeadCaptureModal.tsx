@@ -250,8 +250,8 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* First Name & Last Name - Side by side */}
-                  <div className="grid grid-cols-2 gap-3">
+                  {/* First Name & Last Name - Side by side on sm+ */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label htmlFor="firstname" className={labelClasses}>
                         First name *
