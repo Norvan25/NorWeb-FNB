@@ -64,7 +64,7 @@ export const Gusto = () => {
   return (
     <div className="min-h-screen text-stone-800 bg-stone-50">
       <ImagePreloader images={[
-        '/images/gusto/gusto-hero.png',
+        '/images/gusto/gusto-hero-bg.jpg',
         '/images/gusto/gusto-texture.png'
       ]} />
       <FloatingFNBIcons />
@@ -125,16 +125,16 @@ export const Gusto = () => {
         </div>
       </header>
 
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <OptimizedImage
-            src="/images/gusto/gusto-hero.png"
-            alt="Gusto Restaurant"
-            className="w-full h-full object-cover"
-            priority={true}
+          <img
+            src="/images/gusto/gusto-hero-bg.jpg"
+            alt="Gusto Restaurant Interior"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
           <h1 className="text-8xl md:text-9xl font-serif font-bold text-white mb-6 drop-shadow-2xl tracking-wider">
