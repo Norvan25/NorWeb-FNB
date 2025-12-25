@@ -7,16 +7,16 @@ import { rougeMenu } from '../data/rouge-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { CherryBlossomFall } from '../components/Rouge/CherryBlossomFall';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
-import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
+import { useVoice } from '../context/VoiceContext';
 
 export const Rouge = () => {
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
-  const { openHUD } = useCommunication();
+  const { triggerCall } = useVoice();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rouge');
   const { scrollY } = useScroll();
@@ -92,7 +92,7 @@ export const Rouge = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_ROUGE', 'ROUGE')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-red-500 via-rose-500 to-red-600 hover:from-red-400 hover:via-rose-400 hover:to-red-500 text-white px-5 py-3 rounded-none font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(239,68,68,0.6),0_0_40px_rgba(239,68,68,0.4),0_0_60px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.8),0_0_60px_rgba(239,68,68,0.6),0_0_90px_rgba(239,68,68,0.4)] animate-pulse"
               style={{
                 animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
@@ -181,7 +181,7 @@ export const Rouge = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_ROUGE', 'ROUGE')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-red-500 via-rose-500 to-red-600 hover:from-red-400 hover:via-rose-400 hover:to-red-500 text-white px-10 py-4 rounded-none font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(239,68,68,0.6),0_0_40px_rgba(239,68,68,0.4),0_0_60px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.8),0_0_60px_rgba(239,68,68,0.6),0_0_90px_rgba(239,68,68,0.4)] animate-pulse"
               style={{
                 fontFamily: "'ZCOOL XiaoWei', serif",

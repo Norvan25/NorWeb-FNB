@@ -1,0 +1,152 @@
+/* Voice HUD Production Styles */
+
+/* Safe bottom area for mobile devices with home indicator */
+.h-safe-bottom {
+  height: env(safe-area-inset-bottom, 0px);
+}
+
+/* Mobile bottom sheet behavior */
+@media (max-width: 768px) {
+  .voice-hud-compact {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 16px 16px 0 0;
+    max-height: 30vh;
+  }
+}
+
+/* Smooth animations */
+.voice-hud * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch targets minimum 44px */
+.voice-hud button {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Prevent text selection during drag */
+.voice-hud-draggable {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+/* Waveform animation performance */
+.voice-waveform-bar {
+  will-change: height, opacity;
+  transform: translateZ(0);
+}
+
+/* Pulse animation */
+@keyframes voice-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
+.voice-pulse {
+  animation: voice-pulse 2s ease-in-out infinite;
+}
+
+/* Speaking animation */
+@keyframes voice-speaking {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.voice-speaking {
+  animation: voice-speaking 0.5s ease-in-out infinite;
+}
+
+/* Connection indicator */
+@keyframes voice-connecting {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.voice-connecting {
+  animation: voice-connecting 1.5s ease-in-out infinite;
+}
+
+/* Glass morphism effect */
+.voice-glass {
+  background: rgba(19, 34, 56, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Shadow improvements */
+.voice-shadow-cyan {
+  box-shadow: 0 4px 20px rgba(102, 211, 250, 0.4);
+}
+
+.voice-shadow-orange {
+  box-shadow: 0 4px 20px rgba(242, 133, 0, 0.4);
+}
+
+.voice-shadow-green {
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .voice-hud-idle-button {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+  
+  .voice-hud-compact-panel {
+    width: 100%;
+    margin: 0 16px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .voice-pulse,
+  .voice-speaking,
+  .voice-connecting {
+    animation: none;
+  }
+  
+  .voice-waveform-bar {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .voice-glass {
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid white;
+  }
+}
+
+/* Dark mode optimizations (already dark, but for consistency) */
+@media (prefers-color-scheme: dark) {
+  .voice-hud {
+    color-scheme: dark;
+  }
+}
+

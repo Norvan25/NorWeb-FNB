@@ -1,15 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { CommunicationProvider, useCommunication } from './context/CommunicationContext';
+import { VoiceProvider } from './context/VoiceContext';
 import { LandingHub } from './pages/LandingHub';
 import { RestaurantPage } from './pages/RestaurantPage';
 import { Rimba } from './pages/Rimba';
 import { Rouge } from './pages/Rouge';
 import { Veda } from './pages/Veda';
 import { Gusto } from './pages/Gusto';
-import { FloatingContactButton } from './components/FloatingContactButton';
+import { VoiceHUD } from './components/voice/VoiceHUD';
 import { AnnouncementBanner } from './components/AnnouncementBanner';
 import { LeadCaptureModal } from './components/LeadCaptureModal';
+import './components/voice/voice-hud.css';
 
 function AppContent() {
   const { showLeadCapture, closeLeadCapture, selectedPlan } = useCommunication();
@@ -19,17 +21,20 @@ function AppContent() {
       {/* Global Announcement Banner - top of all pages */}
       <AnnouncementBanner />
       
-      <Routes>
-        <Route path="/" element={<LandingHub />} />
-        <Route path="/restaurant/rimba" element={<Rimba />} />
-        <Route path="/restaurant/rouge" element={<Rouge />} />
-        <Route path="/restaurant/veda" element={<Veda />} />
-        <Route path="/restaurant/gusto" element={<Gusto />} />
-        <Route path="/restaurant/:id" element={<RestaurantPage />} />
-      </Routes>
+      {/* Main content with scroll support */}
+      <main className="content-scrollable">
+        <Routes>
+          <Route path="/" element={<LandingHub />} />
+          <Route path="/restaurant/rimba" element={<Rimba />} />
+          <Route path="/restaurant/rouge" element={<Rouge />} />
+          <Route path="/restaurant/veda" element={<Veda />} />
+          <Route path="/restaurant/gusto" element={<Gusto />} />
+          <Route path="/restaurant/:id" element={<RestaurantPage />} />
+        </Routes>
+      </main>
       
-      {/* Global Floating Contact Button - available on all pages */}
-      <FloatingContactButton />
+      {/* Production Voice HUD - route-aware agent selection */}
+      <VoiceHUD />
       
       {/* Global Lead Capture Modal */}
       <LeadCaptureModal 
@@ -45,7 +50,9 @@ function App() {
   return (
     <CartProvider>
       <CommunicationProvider>
-        <AppContent />
+        <VoiceProvider>
+          <AppContent />
+        </VoiceProvider>
       </CommunicationProvider>
     </CartProvider>
   );

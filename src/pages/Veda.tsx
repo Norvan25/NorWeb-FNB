@@ -5,19 +5,18 @@ import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { FloatingMandala } from '../components/Veda/FloatingMandala';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
-import { CommunicationHUD } from '../components/CommunicationHUD';
-import { useCommunication } from '../context/CommunicationContext';
 import { vedaMenu, categories, MenuItem } from '../data/veda-menu';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { motion } from 'framer-motion';
+import { useVoice } from '../context/VoiceContext';
 
 export const Veda = () => {
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart } = useCart();
-  const { openHUD } = useCommunication();
+  const { triggerCall } = useVoice();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('veda');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -113,7 +112,7 @@ export const Veda = () => {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_VEDA', 'VEDA')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-400 hover:via-amber-400 hover:to-orange-500 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(251,146,60,0.6),0_0_40px_rgba(251,146,60,0.4),0_0_60px_rgba(251,146,60,0.2)] hover:shadow-[0_0_30px_rgba(251,146,60,0.8),0_0_60px_rgba(251,146,60,0.6),0_0_90px_rgba(251,146,60,0.4)] animate-pulse"
               style={{
                 animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
@@ -173,7 +172,7 @@ export const Veda = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_VEDA', 'VEDA')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-400 hover:via-amber-400 hover:to-orange-500 text-white px-10 py-4 rounded-xl font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(251,146,60,0.6),0_0_40px_rgba(251,146,60,0.4),0_0_60px_rgba(251,146,60,0.2)] hover:shadow-[0_0_30px_rgba(251,146,60,0.8),0_0_60px_rgba(251,146,60,0.6),0_0_90px_rgba(251,146,60,0.4)] animate-pulse"
               style={{
                 animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
@@ -614,7 +613,6 @@ export const Veda = () => {
         }}
       />
 
-      <CommunicationHUD />
     </div>
   );
 };

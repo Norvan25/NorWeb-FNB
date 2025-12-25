@@ -4,7 +4,6 @@ import { restaurants } from '../data/restaurants';
 import { Sparkles, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck, PhoneOff, Clock, CalendarX, BadgePercent } from 'lucide-react';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { SchedulingModal } from '../components/SchedulingModal';
-import { CommunicationHUD } from '../components/CommunicationHUD';
 import { Footer } from '../components/Footer';
 import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
 import { ROICalculator } from '../components/ROICalculator';
@@ -12,6 +11,7 @@ import { FAQSection } from '../components/FAQSection';
 import { SocialProofSection } from '../components/SocialProofSection';
 import { LeadCaptureSection } from '../components/LeadCaptureSection';
 import { useCommunication } from '../context/CommunicationContext';
+import { useVoice } from '../context/VoiceContext';
 import { useState } from 'react';
 
 export const LandingHub = () => {
@@ -19,7 +19,8 @@ export const LandingHub = () => {
   const [schedulingType, setSchedulingType] = useState<'strategy' | 'norcast'>('strategy');
   const [isAnnualBilling, setIsAnnualBilling] = useState(true);
 
-  const { openHUD, openLeadCapture } = useCommunication();
+  const { openLeadCapture } = useCommunication();
+  const { triggerCall } = useVoice();
 
   const openSchedulingModal = (type: 'strategy' | 'norcast') => {
     setSchedulingType(type);
@@ -27,7 +28,7 @@ export const LandingHub = () => {
   };
 
   const handleOpenDemo = () => {
-    openHUD('HUB');
+    triggerCall();
   };
 
   const handleGetStarted = (plan?: string) => {

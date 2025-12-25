@@ -72,3 +72,18 @@
 .animate-mandala-float {
   animation: mandala-float ease-in-out infinite;
 }
+
+/* Content scrollable area - ensures menu can scroll behind Voice HUD */
+.content-scrollable {
+  min-height: 100vh;
+  padding-bottom: 100px; /* Space for Voice HUD */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Safe area for iOS devices with home indicator */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .content-scrollable {
+    padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  }
+}

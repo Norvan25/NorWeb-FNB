@@ -7,10 +7,9 @@ import { rimbaMenu, categories, MenuItem } from '../data/rimba-menu';
 import CheckoutModal from '../components/CheckoutModal';
 import { FireflyField } from '../components/Rimba/FireflyField';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
-import { CommunicationHUD } from '../components/CommunicationHUD';
-import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
+import { useVoice } from '../context/VoiceContext';
 
 export const Rimba = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export const Rimba = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart, clearCart } = useCart();
-  const { openHUD } = useCommunication();
+  const { triggerCall } = useVoice();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('rimba');
 
@@ -172,7 +171,7 @@ export const Rimba = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 hover:from-green-400 hover:via-emerald-400 hover:to-green-500 text-white px-5 py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.8),0_0_60px_rgba(16,185,129,0.6),0_0_90px_rgba(16,185,129,0.4)] animate-pulse"
               style={{
                 animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
@@ -261,7 +260,7 @@ export const Rimba = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_RIMBA', 'RIMBA')}
+                onClick={() => triggerCall()}
                 className="relative bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 hover:from-green-400 hover:via-emerald-400 hover:to-green-500 text-white px-10 py-4 rounded-full font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.6),0_0_40px_rgba(16,185,129,0.4),0_0_60px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.8),0_0_60px_rgba(16,185,129,0.6),0_0_90px_rgba(16,185,129,0.4)] animate-pulse"
                 style={{
                   animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
@@ -804,7 +803,6 @@ export const Rimba = () => {
         }}
       />
 
-      <CommunicationHUD />
     </div>
   );
 };

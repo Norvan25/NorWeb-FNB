@@ -5,18 +5,17 @@ import { useCart } from '../context/CartContext';
 import CheckoutModal from '../components/CheckoutModal';
 import { gustoMenu, categories, MenuItem } from '../data/gusto-menu';
 import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
-import { CommunicationHUD } from '../components/CommunicationHUD';
-import { useCommunication } from '../context/CommunicationContext';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { motion } from 'framer-motion';
+import { useVoice } from '../context/VoiceContext';
 
 export const Gusto = () => {
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const { addToCart, getCartByRestaurant, updateQuantity, removeFromCart } = useCart();
-  const { openHUD } = useCommunication();
+  const { triggerCall } = useVoice();
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
   const cartItems = getCartByRestaurant('gusto');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -100,7 +99,7 @@ export const Gusto = () => {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_GUSTO', 'GUSTO')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-400 hover:via-amber-400 hover:to-yellow-500 text-white px-5 py-3 rounded-lg font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.6),0_0_40px_rgba(234,179,8,0.4),0_0_60px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.8),0_0_60px_rgba(234,179,8,0.6),0_0_90px_rgba(234,179,8,0.4)] animate-pulse"
               style={{
                 animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
@@ -157,7 +156,7 @@ export const Gusto = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => openHUD('RESTAURANT', 'CONTEXT: USER_SELECTED_GUSTO', 'GUSTO')}
+              onClick={() => triggerCall()}
               className="relative bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-400 hover:via-amber-400 hover:to-yellow-500 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.6),0_0_40px_rgba(234,179,8,0.4),0_0_60px_rgba(234,179,8,0.2)] hover:shadow-[0_0_30px_rgba(234,179,8,0.8),0_0_60px_rgba(234,179,8,0.6),0_0_90px_rgba(234,179,8,0.4)] animate-pulse"
               style={{
                 animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
