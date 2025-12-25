@@ -57,10 +57,11 @@ export const LandingHub = () => {
         transition={{ duration: 1 }}
         className="relative"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black" />
-
         <div className="relative z-10">
-          <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
+          {/* Hero Section */}
+          <section className="min-h-[100svh] flex flex-col items-center justify-center px-6 py-16 sm:py-20 relative overflow-hidden bg-black">
+            {/* Hero Background */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/40 via-purple-900/10 to-transparent" />
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
