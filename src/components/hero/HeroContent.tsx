@@ -13,7 +13,7 @@ export const HeroContent = ({ onScrollTo }: HeroContentProps) => {
       initial={{ opacity: 0, x: -30 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col gap-5 max-w-xl"
+      className="flex flex-col gap-3 sm:gap-4 max-w-xl"
     >
       {/* First-in-Malaysia Badge */}
       <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 rounded-full px-4 py-1.5 w-fit">
@@ -21,8 +21,8 @@ export const HeroContent = ({ onScrollTo }: HeroContentProps) => {
         <span className="text-amber-200 text-sm font-medium">FIRST IN MALAYSIA</span>
       </div>
 
-      {/* Headline */}
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+      {/* Headline - sized for above-fold fit */}
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
         Your Restaurant.
         <br />
         Open 24 Hours.
@@ -33,7 +33,7 @@ export const HeroContent = ({ onScrollTo }: HeroContentProps) => {
       </h1>
 
       {/* Sub-headline */}
-      <p className="text-lg sm:text-xl text-gray-300">
+      <p className="text-base sm:text-lg text-gray-300">
         AI that takes bookings, orders & calls on{' '}
         <span className="text-white font-medium">Website</span>,{' '}
         <span className="text-white font-medium">WhatsApp</span> &{' '}

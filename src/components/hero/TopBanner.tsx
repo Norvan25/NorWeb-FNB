@@ -35,10 +35,10 @@ export const TopBanner = () => {
           className="bg-gradient-to-r from-orange-500 to-rose-500 text-white overflow-hidden"
         >
           <div className="container mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
-            {/* Left: Offer text */}
+            {/* Left: Offer text - ACCURATE offer */}
             <p className="text-sm font-medium flex-1 text-center md:text-left">
               <span className="hidden sm:inline">🎉 EARLY BIRD — First 50 restaurants get 15% off setup + 3 months free</span>
-              <span className="sm:hidden">🎉 15% off + 3 months free!</span>
+              <span className="sm:hidden">🎉 15% off + 3 mo free!</span>
             </p>
 
             {/* Right: CTA + Close */}

@@ -9,7 +9,6 @@ import { Rouge } from './pages/Rouge';
 import { Veda } from './pages/Veda';
 import { Gusto } from './pages/Gusto';
 import { VoiceHUD } from './components/voice/VoiceHUD';
-import { AnnouncementBanner } from './components/AnnouncementBanner';
 import { LeadCaptureModal } from './components/LeadCaptureModal';
 import './components/voice/voice-hud.css';
 
@@ -18,10 +17,7 @@ function AppContent() {
   
   return (
     <Router>
-      {/* Global Announcement Banner - top of all pages */}
-      <AnnouncementBanner />
-      
-      {/* Main content with scroll support */}
+      {/* Main content */}
       <main className="content-scrollable">
         <Routes>
           <Route path="/" element={<LandingHub />} />

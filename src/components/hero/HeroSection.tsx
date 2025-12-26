@@ -19,21 +19,23 @@ export const HeroSection = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-      {/* Top Banner */}
+      {/* Top Banner - single, accurate offer */}
       <TopBanner />
 
       {/* Navigation */}
       <Navbar onScrollTo={scrollToSection} />
 
-      {/* Main Hero Content */}
-      <div className="container mx-auto px-4 pt-6 pb-4">
-        {/* Hero Grid: Content + Mockup */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-8">
+      {/* Main Hero Content - reduced padding for above-fold fit */}
+      <div className="container mx-auto px-4 pt-4 pb-2">
+        {/* Hero Grid: Content + Mockup - reduced gap */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center mb-4">
           <HeroContent onScrollTo={scrollToSection} />
-          <HeroMockup />
+          <div className="hidden lg:block">
+            <HeroMockup />
+          </div>
         </div>
 
-        {/* Demo Cards */}
+        {/* Demo Cards - compact, all buttons visible */}
         <DemoCards />
 
         {/* Scroll Indicator */}
