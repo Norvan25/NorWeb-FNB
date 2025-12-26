@@ -147,7 +147,12 @@ export const LandingHub = () => {
                     </span>
                     <span className="text-[#4B5563]">/mo</span>
                   </div>
-                  {isAnnualBilling && <p className="text-sm text-[#4B5563]">billed annually</p>}
+                  {isAnnualBilling && (
+                    <>
+                      <p className="text-sm text-[#22C55E] font-medium">RM 2,232/year</p>
+                      <p className="text-xs text-[#4B5563]">billed annually</p>
+                    </>
+                  )}
                 </div>
 
                 <ul className="space-y-3 mb-8">
@@ -201,7 +206,12 @@ export const LandingHub = () => {
                     </span>
                     <span className="text-[#4B5563]">/mo</span>
                   </div>
-                  {isAnnualBilling && <p className="text-sm text-[#4B5563]">billed annually</p>}
+                  {isAnnualBilling && (
+                    <>
+                      <p className="text-sm text-[#22C55E] font-medium">RM 5,988/year</p>
+                      <p className="text-xs text-[#4B5563]">billed annually</p>
+                    </>
+                  )}
                 </div>
 
                 <ul className="space-y-3 mb-8">

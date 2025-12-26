@@ -99,6 +99,27 @@
   animation: mandala-float ease-in-out infinite;
 }
 
+/* Subtle pulse animation for CTA buttons */
+@keyframes subtle-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+  50% { 
+    transform: scale(1.02); 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.chat-button-pulse {
+  animation: subtle-pulse 2.5s ease-in-out infinite;
+}
+
+.chat-button-pulse:hover {
+  animation: none;
+  transform: scale(1.02);
+}
+
 /* Content scrollable area - ensures menu can scroll behind Voice HUD */
 .content-scrollable {
   min-height: 100vh;

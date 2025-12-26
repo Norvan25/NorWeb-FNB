@@ -195,13 +195,13 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
         </div>
       </div>
 
-      {/* Character */}
-      <div className="relative h-44 flex items-end justify-center bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      {/* Character - Large and prominent */}
+      <div className="relative h-56 flex items-end justify-center bg-gradient-to-b from-gray-50 via-gray-50/50 to-white overflow-visible">
         <motion.img
-          whileHover={{ scale: 1.05, y: -5 }}
+          whileHover={{ scale: 1.08, y: -8 }}
           src={specialist.image}
           alt={specialist.name}
-          className="h-40 w-auto object-contain object-bottom"
+          className="h-52 w-auto object-contain object-bottom -mt-4 drop-shadow-lg"
         />
       </div>
 
@@ -240,9 +240,10 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
         <div className="space-y-3">
           <button
             onClick={handleVisitWebsite}
-            className="w-full flex items-center justify-center gap-2 text-white py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all"
+            className="w-full flex items-center justify-center gap-2 text-white py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all chat-button-pulse"
             style={{
               background: `linear-gradient(135deg, ${specialist.gradientFrom}, ${specialist.gradientTo})`,
+              ['--button-glow' as string]: specialist.gradientFrom,
             }}
           >
             <Globe size={18} />
