@@ -1,3 +1,4 @@
+import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, X, Minus, Plus, ChevronDown, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +64,7 @@ export const Gusto = () => {
   return (
     <div className="min-h-screen text-stone-800 bg-stone-50">
       <ImagePreloader images={[
-        '/images/gusto/gusto-hero-bg.jpg',
+        '/images/gusto/gusto-hero-bg.png',
         '/images/gusto/gusto-texture.png'
       ]} />
       <FloatingFNBIcons />
@@ -127,7 +128,7 @@ export const Gusto = () => {
       <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/gusto/gusto-hero-bg.jpg"
+            src="/images/gusto/gusto-hero-bg.png"
             alt="Gusto Restaurant Interior"
             className="w-full h-full object-cover object-center"
             loading="eager"

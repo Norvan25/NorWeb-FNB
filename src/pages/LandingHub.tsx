@@ -1,3 +1,4 @@
+import { CommunicationHUD } from '../components/CommunicationHUD';
 import { motion } from 'framer-motion';
 import { CuisineCard } from '../components/CuisineCard';
 import { restaurants } from '../data/restaurants';

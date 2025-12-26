@@ -325,10 +325,10 @@ export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => 
     }
   }, [showWhatsApp, handleStartCall]);
 
-  // Don't render if no agent ID configured
+  // Don't render button if no agent ID configured, but don't break the app
   if (!agent.agentId) {
     console.warn('No agent ID configured for path:', location.pathname);
-    return null;
+    return <></>;
   }
 
   return (

@@ -1,3 +1,4 @@
+import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Flame, X, Minus, Plus, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

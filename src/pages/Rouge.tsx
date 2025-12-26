@@ -32,7 +32,6 @@ export const Rouge = () => {
       name: item.name,
       price: item.price,
       restaurantId: 'rouge',
-      quantity: 1,
       image: item.image
     });
 

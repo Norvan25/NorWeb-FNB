@@ -1,3 +1,4 @@
+import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Leaf } from 'lucide-react';
