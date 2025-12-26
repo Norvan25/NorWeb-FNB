@@ -156,31 +156,52 @@ function HeroPhoneMockup() {
                 </motion.div>
               </div>
 
-              {/* Characters at Bottom */}
-              <div className="h-32 relative bg-gradient-to-t from-white to-transparent">
-                <div className="absolute bottom-0 left-0 right-0 flex justify-around items-end px-2">
+              {/* Characters at Bottom - Popping out effect */}
+              <div className="h-32 relative bg-gradient-to-t from-white via-white/90 to-transparent">
+                <div className="absolute -bottom-8 left-0 right-0 flex justify-center items-end gap-0">
                   {/* Aiman */}
-                  <motion.div whileHover={{ scale: 1.1, y: -5 }} className="w-16 h-20">
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 1.3 }}
+                    whileHover={{ scale: 1.08, y: -6 }} 
+                    className="w-[72px] h-[90px] relative z-10 -mr-2"
+                  >
                     <img
                       src="/images/AIMAN.png"
                       alt="Aiman"
-                      className="w-full h-full object-contain object-bottom"
+                      className="w-full h-full object-contain object-bottom drop-shadow-xl"
+                      style={{ filter: 'drop-shadow(0 8px 12px rgba(0,0,0,0.25))' }}
                     />
                   </motion.div>
-                  {/* Dev */}
-                  <motion.div whileHover={{ scale: 1.1, y: -5 }} className="w-16 h-20">
+                  {/* Dev - Taller in center, overlapping */}
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 1.4 }}
+                    whileHover={{ scale: 1.08, y: -6 }} 
+                    className="w-[80px] h-[100px] relative z-30"
+                  >
                     <img
                       src="/images/DEV.png"
                       alt="Dev"
                       className="w-full h-full object-contain object-bottom"
+                      style={{ filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.3))' }}
                     />
                   </motion.div>
                   {/* Marco */}
-                  <motion.div whileHover={{ scale: 1.1, y: -5 }} className="w-16 h-20">
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 1.5 }}
+                    whileHover={{ scale: 1.08, y: -6 }} 
+                    className="w-[72px] h-[90px] relative z-10 -ml-2"
+                  >
                     <img
                       src="/images/MARCO.png"
                       alt="Marco"
-                      className="w-full h-full object-contain object-bottom"
+                      className="w-full h-full object-contain object-bottom drop-shadow-xl"
+                      style={{ filter: 'drop-shadow(0 8px 12px rgba(0,0,0,0.25))' }}
                     />
                   </motion.div>
                 </div>
