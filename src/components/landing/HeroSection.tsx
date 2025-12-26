@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useVoice } from '../../context/VoiceContext';
 
 interface HeroSectionProps {
   onScrollTo: (sectionId: string) => void;
@@ -93,6 +94,7 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
 
 function HeroPhoneMockup() {
   const { t } = useTranslation();
+  const { triggerCall } = useVoice();
 
   return (
     <div className="relative">
@@ -157,8 +159,8 @@ function HeroPhoneMockup() {
               </div>
 
               {/* Characters at Bottom - Popping out effect */}
-              <div className="h-32 relative bg-gradient-to-t from-white via-white/90 to-transparent">
-                <div className="absolute -bottom-8 left-0 right-0 flex justify-center items-end gap-0">
+              <div className="h-28 relative bg-gradient-to-t from-white via-white/90 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 flex justify-center items-end gap-0">
                   {/* Aiman */}
                   <motion.div 
                     initial={{ y: 20, opacity: 0 }}
@@ -207,11 +209,16 @@ function HeroPhoneMockup() {
                 </div>
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button - Triggers Nova voice agent */}
               <div className="p-4">
-                <button className="w-full bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white py-3 rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg">
+                <motion.button 
+                  onClick={() => triggerCall()}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white py-3 rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                >
                   {t('hero.phone_cta')} 👋
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
