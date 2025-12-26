@@ -292,8 +292,10 @@ export const LandingHub = () => {
       </section>
 
       {/* Feature Comparison Table */}
-      <div className="bg-[#F3F4F6] py-12">
-        <FeatureComparisonTable />
+      <div className="bg-[#0A1628] py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <FeatureComparisonTable />
+        </div>
       </div>
 
       {/* Social Proof Section */}

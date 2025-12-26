@@ -68,11 +68,11 @@ const comparisonData: Category[] = [
 ];
 
 const FeatureCell = ({ enabled, isGrowth }: { enabled: boolean; isGrowth?: boolean }) => (
-  <td className={`py-3 px-4 text-center ${isGrowth ? 'bg-cyan-500/5' : ''}`}>
+  <td className={`py-3 px-2 md:px-4 text-center ${isGrowth ? 'bg-[#F28500]/5' : ''}`}>
     {enabled ? (
-      <Check className="w-5 h-5 text-cyan-400 mx-auto" />
+      <Check className="w-5 h-5 text-[#22C55E] mx-auto" />
     ) : (
-      <Minus className="w-5 h-5 text-gray-600 mx-auto" />
+      <Minus className="w-5 h-5 text-gray-500 mx-auto" />
     )}
   </td>
 );
@@ -88,13 +88,13 @@ export const FeatureComparisonTable = () => {
       className="mt-16"
     >
       {/* Header with Toggle for Mobile */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 gap-4">
         <h3 className="text-2xl md:text-3xl font-bold text-white">Compare Plans</h3>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="lg:hidden flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-full text-gray-300 hover:bg-gray-700 transition-colors"
+          className="lg:hidden flex items-center gap-2 px-4 py-2 bg-[#132238] border border-gray-700 rounded-full text-gray-300 hover:bg-[#1e3a5f] transition-colors flex-shrink-0"
         >
-          <span className="text-sm font-medium">{isExpanded ? 'Hide' : 'Show'} Details</span>
+          <span className="text-sm font-medium">{isExpanded ? 'Hide' : 'Show'}</span>
           {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
         </button>
       </div>
@@ -109,18 +109,18 @@ export const FeatureComparisonTable = () => {
           }}
           className={`overflow-hidden ${!isExpanded ? 'hidden lg:block' : 'block'}`}
         >
-          <div className="overflow-x-auto rounded-xl border border-gray-800">
-            <table className="w-full min-w-[600px]">
+          <div className="overflow-x-auto rounded-xl border border-gray-700 max-w-full">
+            <table className="w-full" style={{ minWidth: '600px' }}>
               {/* Sticky Header */}
               <thead className="sticky top-0 z-10">
-                <tr className="bg-gray-900 border-b border-gray-800">
-                  <th className="py-4 px-6 text-left text-gray-400 font-medium text-sm w-1/2">Feature</th>
-                  <th className="py-4 px-4 text-center text-gray-300 font-semibold">Starter</th>
-                  <th className="py-4 px-4 text-center text-cyan-400 font-semibold bg-cyan-500/10 border-x border-cyan-500/20">
+                <tr className="bg-[#132238] border-b border-gray-700">
+                  <th className="py-4 px-3 md:px-6 text-left text-gray-300 font-medium text-sm">Feature</th>
+                  <th className="py-4 px-2 md:px-4 text-center text-white font-semibold text-sm md:text-base">Starter</th>
+                  <th className="py-4 px-2 md:px-4 text-center text-[#F28500] font-semibold bg-[#F28500]/10 border-x border-[#F28500]/20 text-sm md:text-base">
                     Growth
-                    <span className="block text-xs text-cyan-500 font-normal">Popular</span>
+                    <span className="block text-xs text-[#FF9A1F] font-normal">Popular</span>
                   </th>
-                  <th className="py-4 px-4 text-center text-gray-300 font-semibold">Enterprise</th>
+                  <th className="py-4 px-2 md:px-4 text-center text-white font-semibold text-sm md:text-base">Enterprise</th>
                 </tr>
               </thead>
 
@@ -128,8 +128,8 @@ export const FeatureComparisonTable = () => {
                 {comparisonData.map((category, catIdx) => (
                   <>
                     {/* Category Header Row */}
-                    <tr key={`cat-${catIdx}`} className="bg-gray-800/80">
-                      <td colSpan={4} className="py-3 px-6 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <tr key={`cat-${catIdx}`} className="bg-[#0A1628]">
+                      <td colSpan={4} className="py-3 px-3 md:px-6 text-xs font-bold text-[#F28500] uppercase tracking-wider">
                         {category.name}
                       </td>
                     </tr>
@@ -138,9 +138,9 @@ export const FeatureComparisonTable = () => {
                     {category.features.map((feature, featIdx) => (
                       <tr 
                         key={`feat-${catIdx}-${featIdx}`} 
-                        className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors"
+                        className="border-b border-gray-700/50 hover:bg-[#132238]/50 transition-colors bg-[#132238]/30"
                       >
-                        <td className="py-3 px-6 text-gray-300 text-sm">{feature.name}</td>
+                        <td className="py-3 px-3 md:px-6 text-white text-sm">{feature.name}</td>
                         <FeatureCell enabled={feature.starter} />
                         <FeatureCell enabled={feature.growth} isGrowth />
                         <FeatureCell enabled={feature.enterprise} />
@@ -156,8 +156,8 @@ export const FeatureComparisonTable = () => {
 
       {/* Mobile hint when collapsed */}
       {!isExpanded && (
-        <p className="lg:hidden text-center text-gray-500 text-sm mt-4">
-          Tap "Show Details" to compare all features
+        <p className="lg:hidden text-center text-gray-400 text-sm mt-4">
+          Tap "Show" to compare all features
         </p>
       )}
     </motion.div>
