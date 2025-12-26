@@ -152,28 +152,31 @@ function HeroPhoneMockup() {
               </div>
 
               {/* Characters at Bottom */}
-              <div className="h-28 relative bg-gradient-to-t from-white to-transparent">
-                <div className="absolute bottom-2 left-0 right-0 flex justify-around items-end px-4">
+              <div className="h-32 relative bg-gradient-to-t from-white to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 flex justify-around items-end px-2">
                   {/* Aiman */}
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-16 h-16 bg-gradient-to-br from-[#22C55E]/20 to-[#22C55E]/40 rounded-full flex items-center justify-center text-3xl border-2 border-[#22C55E]/50 shadow-lg"
-                  >
-                    👨‍🍳
+                  <motion.div whileHover={{ scale: 1.1, y: -5 }} className="w-16 h-20">
+                    <img
+                      src="/images/AIMAN.png"
+                      alt="Aiman"
+                      className="w-full h-full object-contain object-bottom"
+                    />
                   </motion.div>
                   {/* Dev */}
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-16 h-16 bg-gradient-to-br from-[#F97316]/20 to-[#F97316]/40 rounded-full flex items-center justify-center text-3xl border-2 border-[#F97316]/50 shadow-lg"
-                  >
-                    👨‍🍳
+                  <motion.div whileHover={{ scale: 1.1, y: -5 }} className="w-16 h-20">
+                    <img
+                      src="/images/DEV.png"
+                      alt="Dev"
+                      className="w-full h-full object-contain object-bottom"
+                    />
                   </motion.div>
                   {/* Marco */}
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-16 h-16 bg-gradient-to-br from-[#EF4444]/20 to-[#EF4444]/40 rounded-full flex items-center justify-center text-3xl border-2 border-[#EF4444]/50 shadow-lg"
-                  >
-                    👨‍🍳
+                  <motion.div whileHover={{ scale: 1.1, y: -5 }} className="w-16 h-20">
+                    <img
+                      src="/images/MARCO.png"
+                      alt="Marco"
+                      className="w-full h-full object-contain object-bottom"
+                    />
                   </motion.div>
                 </div>
               </div>

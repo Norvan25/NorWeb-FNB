@@ -61,11 +61,13 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
 
         {/* Nova CTA */}
         <div className="flex items-center gap-3">
-          {/* Nova Character (placeholder) */}
+          {/* Nova Character */}
           <div className="hidden lg:flex items-center">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center text-xl border-2 border-orange-300">
-              👩‍💼
-            </div>
+            <img
+              src="/images/NOVA.png"
+              alt="Nova - AI Manager"
+              className="w-12 h-12 object-contain object-bottom"
+            />
           </div>
 
           <button

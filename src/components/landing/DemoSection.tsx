@@ -19,7 +19,7 @@ interface Specialist {
   prompts: string[];
   route: string;
   whatsappNumber: string;
-  emoji: string;
+  image: string;
 }
 
 const specialists: Specialist[] = [
@@ -39,7 +39,7 @@ const specialists: Specialist[] = [
     prompts: ['Is the Sambal spicy?', 'Do you deliver to Damansara?', "What's your best seller?"],
     route: '/restaurant/rimba',
     whatsappNumber: '601116343646',
-    emoji: '👨‍🍳',
+    image: '/images/AIMAN.png',
   },
   {
     id: 'dev',
@@ -57,7 +57,7 @@ const specialists: Specialist[] = [
     prompts: ['Is the Paneer vegetarian?', 'What do you recommend for kids?', 'How spicy is the Vindaloo?'],
     route: '/restaurant/veda',
     whatsappNumber: '601116343646',
-    emoji: '👨‍🍳',
+    image: '/images/DEV.png',
   },
   {
     id: 'marco',
@@ -79,7 +79,7 @@ const specialists: Specialist[] = [
     ],
     route: '/restaurant/gusto',
     whatsappNumber: '601116343646',
-    emoji: '👨‍🍳',
+    image: '/images/MARCO.png',
   },
 ];
 
@@ -128,8 +128,12 @@ export const DemoSection = () => {
             onClick={() => triggerCall()}
             className="inline-flex items-center gap-4 bg-white border-2 border-[#0A1628]/10 rounded-2xl p-4 pr-6 hover:border-[#F28500]/50 hover:shadow-xl transition-all cursor-pointer group"
           >
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F28500]/10 to-[#FF9A1F]/20 flex items-center justify-center text-3xl border-2 border-[#F28500]/30">
-              👩‍💼
+            <div className="w-16 h-20 flex items-end justify-center">
+              <img
+                src="/images/NOVA.png"
+                alt="Nova"
+                className="h-16 w-auto object-contain object-bottom"
+              />
             </div>
             <div className="text-left">
               <p className="font-bold text-[#0A1628]">I'm Nova.</p>
@@ -192,17 +196,13 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
       </div>
 
       {/* Character */}
-      <div className="relative h-36 flex items-center justify-center pt-4 bg-gradient-to-b from-gray-50 to-white">
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          className="w-24 h-24 rounded-full flex items-center justify-center text-5xl shadow-xl border-4"
-          style={{
-            background: `linear-gradient(135deg, ${specialist.gradientFrom}20, ${specialist.gradientTo}40)`,
-            borderColor: `${specialist.color}50`,
-          }}
-        >
-          {specialist.emoji}
-        </motion.div>
+      <div className="relative h-44 flex items-end justify-center bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <motion.img
+          whileHover={{ scale: 1.05, y: -5 }}
+          src={specialist.image}
+          alt={specialist.name}
+          className="h-40 w-auto object-contain object-bottom"
+        />
       </div>
 
       {/* Content */}

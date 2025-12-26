@@ -139,9 +139,13 @@ export const NovaDomainSection = () => {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, type: 'spring' }}
-                className="absolute -bottom-6 -right-6 w-28 h-28 bg-gradient-to-br from-[#F28500]/20 to-[#FF9A1F]/40 rounded-full flex items-center justify-center text-6xl shadow-xl border-4 border-[#0A1628]"
+                className="absolute -bottom-4 -right-4 w-32 h-40"
               >
-                👩‍💼
+                <img
+                  src="/images/NOVA.png"
+                  alt="Nova - AI Manager"
+                  className="w-full h-full object-contain object-bottom drop-shadow-2xl"
+                />
               </motion.div>
 
               {/* Glow effect */}
