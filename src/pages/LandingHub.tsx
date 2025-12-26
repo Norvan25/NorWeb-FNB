@@ -7,7 +7,7 @@ import { ROICalculator } from '../components/ROICalculator';
 import { FAQSection } from '../components/FAQSection';
 import { SocialProofSection } from '../components/SocialProofSection';
 import { LeadCaptureSection } from '../components/LeadCaptureSection';
-import { HeroSection } from '../components/hero';
+import { HeroSection, DemoSection } from '../components/hero';
 import { useCommunication } from '../context/CommunicationContext';
 import { useState } from 'react';
 
@@ -29,8 +29,11 @@ export const LandingHub = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* New Hero Section with TopBanner, Navbar, Hero Content, Demo Cards */}
+      {/* Hero Section - Banner, Nav, Headline, Mockup */}
       <HeroSection />
+
+      {/* Demo Section - Separate section with full cards */}
+      <DemoSection />
 
       <div className="relative z-10">
           {/* The Problem Section */}
