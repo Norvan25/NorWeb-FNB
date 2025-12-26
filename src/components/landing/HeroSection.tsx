@@ -20,11 +20,16 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F28500]/10 to-[#FF9A1F]/10 border border-[#F28500]/30 px-4 py-2 rounded-full text-sm font-medium text-[#F28500]">
-              <span>🇲🇾</span>
+            {/* Eyebrow - More prominent */}
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] px-5 py-2.5 rounded-full text-base font-bold text-white shadow-lg shadow-orange-500/30"
+            >
+              <span className="text-lg">🇲🇾</span>
               <span>{t('hero.eyebrow')}</span>
-            </div>
+            </motion.div>
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A1628] leading-tight">
