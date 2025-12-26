@@ -1,27 +1,27 @@
 import { motion } from 'framer-motion';
-
-const novaFeatures = [
-  {
-    iconEmoji: '🛡️',
-    title: 'The Reputation Guard',
-    description:
-      'Customer complains to Marco? Nova flags it instantly — you fix it before they post on Google.',
-  },
-  {
-    iconEmoji: '🧠',
-    title: 'The Silent CRM',
-    description:
-      "Nova remembers every birthday, allergy, and favorite dish. Your regulars feel like royalty — without training staff.",
-  },
-  {
-    iconEmoji: '🚀',
-    title: 'The Marketing Autopilot',
-    description:
-      "Slow Tuesday? Nova blasts a promo to your top 100 customers. No visit in 30 days? Nova sends a 'We Miss You' voucher.",
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 export const NovaDomainSection = () => {
+  const { t } = useTranslation();
+
+  const novaFeatures = [
+    {
+      iconEmoji: '🛡️',
+      titleKey: 'nova_section.feature1_title',
+      descKey: 'nova_section.feature1_desc',
+    },
+    {
+      iconEmoji: '🧠',
+      titleKey: 'nova_section.feature2_title',
+      descKey: 'nova_section.feature2_desc',
+    },
+    {
+      iconEmoji: '🚀',
+      titleKey: 'nova_section.feature3_title',
+      descKey: 'nova_section.feature3_desc',
+    },
+  ];
+
   return (
     <section id="features" className="py-20 px-4 bg-[#0A1628] text-white">
       <div className="max-w-7xl mx-auto">
@@ -33,15 +33,14 @@ export const NovaDomainSection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              You Can't Be Everywhere.{' '}
+              {t('nova_section.headline')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
-                Nova Can.
+                {t('nova_section.headline_highlight')}
               </span>
             </h2>
 
             <p className="text-xl text-gray-300 mb-10">
-              Having a friendly face is great. Having a ruthless sales manager is better. Nova is the
-              brain behind the boys.
+              {t('nova_section.subheadline')}
             </p>
 
             <div className="space-y-8">
@@ -58,8 +57,8 @@ export const NovaDomainSection = () => {
                     {feature.iconEmoji}
                   </div>
                   <div>
-                    <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-white">{feature.title}</h3>
-                    <p className="text-sm sm:text-base text-gray-400">{feature.description}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-white">{t(feature.titleKey)}</h3>
+                    <p className="text-sm sm:text-base text-gray-400">{t(feature.descKey)}</p>
                   </div>
                 </motion.div>
               ))}

@@ -1,42 +1,40 @@
 import { motion } from 'framer-motion';
-import { PhoneOff, Clock, CalendarX, Percent } from 'lucide-react';
-
-const painPoints = [
-  {
-    icon: PhoneOff,
-    emoji: '📞',
-    stat: 'RM 6,000/month',
-    title: 'Lost to Missed Calls',
-    description: '20-40% of calls go unanswered during peak hours. Each missed call = lost booking.',
-    color: '#EF4444',
-  },
-  {
-    icon: Clock,
-    emoji: '⏰',
-    stat: '2-4 hours/day',
-    title: 'Wasted on Repetitive Questions',
-    description: 'Your staff answers "What time you close?" 50 times a day instead of serving customers.',
-    color: '#F97316',
-  },
-  {
-    icon: CalendarX,
-    emoji: '🪑',
-    stat: '10-20% no-shows',
-    title: 'Empty Tables, Lost Revenue',
-    description: 'No automated reminders = customers forget. Empty tables on busy nights.',
-    color: '#EAB308',
-  },
-  {
-    icon: Percent,
-    emoji: '💸',
-    stat: '30-35% commission',
-    title: 'Paid to Platforms',
-    description: 'Grab and FoodPanda take nearly a third. Your customers, their profit.',
-    color: '#8B5CF6',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 export const PainPointsSection = () => {
+  const { t } = useTranslation();
+
+  const painPoints = [
+    {
+      emoji: '📞',
+      statKey: 'pain.stat1',
+      titleKey: 'pain.title1',
+      descKey: 'pain.desc1',
+      color: '#EF4444',
+    },
+    {
+      emoji: '⏰',
+      statKey: 'pain.stat2',
+      titleKey: 'pain.title2',
+      descKey: 'pain.desc2',
+      color: '#F97316',
+    },
+    {
+      emoji: '🪑',
+      statKey: 'pain.stat3',
+      titleKey: 'pain.title3',
+      descKey: 'pain.desc3',
+      color: '#EAB308',
+    },
+    {
+      emoji: '💸',
+      statKey: 'pain.stat4',
+      titleKey: 'pain.title4',
+      descKey: 'pain.desc4',
+      color: '#8B5CF6',
+    },
+  ];
+
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -47,10 +45,10 @@ export const PainPointsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A1628] mb-4">
-            Every Day You Wait, You Lose Money
+            {t('pain.headline')}
           </h2>
           <p className="text-lg md:text-xl text-[#4B5563] max-w-2xl mx-auto">
-            These problems are costing Malaysian restaurants thousands every month
+            {t('pain.subheadline')}
           </p>
         </motion.div>
 
@@ -80,10 +78,10 @@ export const PainPointsSection = () => {
                     className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 break-words"
                     style={{ color: point.color }}
                   >
-                    {point.stat}
+                    {t(point.statKey)}
                   </p>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#0A1628] mb-2">{point.title}</h3>
-                  <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{point.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0A1628] mb-2">{t(point.titleKey)}</h3>
+                  <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{t(point.descKey)}</p>
                 </div>
               </div>
             </motion.div>
@@ -97,7 +95,7 @@ export const PainPointsSection = () => {
           className="text-center"
         >
           <p className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
-            NorWeb solves all four. Automatically. 24/7.
+            {t('pain.closing')}
           </p>
         </motion.div>
       </div>
@@ -106,4 +104,3 @@ export const PainPointsSection = () => {
 };
 
 export default PainPointsSection;
-

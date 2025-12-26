@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useCommunication } from '../../context/CommunicationContext';
 
 export const FinalCTASection = () => {
+  const { t } = useTranslation();
   const { openLeadCapture } = useCommunication();
 
   return (
@@ -19,12 +21,10 @@ export const FinalCTASection = () => {
         viewport={{ once: true }}
         className="max-w-4xl mx-auto text-center text-white relative z-10"
       >
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">Get Your Life Back.</h2>
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">{t('cta.headline')}</h2>
 
         <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10 leading-relaxed">
-          Imagine a Friday night where the phone doesn't ring because Marco answered it. Imagine waking
-          up to RM2,000 in bookings that Nova secured while you slept. Imagine a staff member who never
-          asks for leave, never has a bad attitude, and loves your customers 24/7.
+          {t('cta.body')}
         </p>
 
         <motion.button
@@ -33,20 +33,20 @@ export const FinalCTASection = () => {
           onClick={() => openLeadCapture('Final CTA')}
           className="bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-10 md:px-14 py-5 md:py-6 rounded-full text-xl md:text-2xl font-bold hover:shadow-2xl transition-all shadow-lg shadow-[#F28500]/30"
         >
-          Hire Your AI Team Today
+          {t('cta.button')}
         </motion.button>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm md:text-base text-gray-400">
           <span className="inline-flex items-center gap-2">
-            <span>🚀</span> Founding Member Pricing
+            <span>🚀</span> {t('cta.badge1')}
           </span>
           <span className="hidden sm:inline text-gray-600">•</span>
           <span className="inline-flex items-center gap-2">
-            <span>⚡</span> 48-Hour Setup
+            <span>⚡</span> {t('cta.badge2')}
           </span>
           <span className="hidden sm:inline text-gray-600">•</span>
           <span className="inline-flex items-center gap-2">
-            <span>✓</span> No Long-Term Contract
+            <span>✓</span> {t('cta.badge3')}
           </span>
         </div>
       </motion.div>

@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 interface HeroSectionProps {
   onScrollTo: (sectionId: string) => void;
 }
 
 export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
+  const { t } = useTranslation();
+
   return (
     <section className="pt-12 pb-16 md:pt-20 md:pb-24 px-4 bg-gradient-to-b from-[#FFF7ED] to-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -19,22 +22,22 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F28500]/10 to-[#FF9A1F]/10 border border-[#F28500]/30 px-4 py-2 rounded-full text-sm font-medium text-[#F28500]">
               <span>🇲🇾</span>
-              <span>Malaysia's First AI Restaurant Team</span>
+              <span>{t('hero.eyebrow')}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A1628] leading-tight">
-              Finally. An AI Team That Has{' '}
+              {t('hero.headline')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
-                Soul.
+                {t('hero.headline_highlight')}
               </span>
             </h1>
 
             {/* Subhead */}
             <p className="text-lg md:text-xl text-[#4B5563] leading-relaxed">
-              Stop hiring staff that quit in 3 months. Meet{' '}
-              <span className="font-semibold text-[#0A1628]">Aiman, Dev, and Marco</span> — your AI
-              workforce that answers every call, charms every customer, and fills your tables 24/7.
+              {t('hero.subheadline')}{' '}
+              <span className="font-semibold text-[#0A1628]">{t('hero.subheadline_names')}</span>
+              {t('hero.subheadline_end')}
             </p>
 
             {/* CTAs */}
@@ -45,7 +48,7 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
                 onClick={() => onScrollTo('demo')}
                 className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-xl transition-all w-full sm:w-auto"
               >
-                Meet Your New Team
+                {t('hero.cta_primary')}
                 <span>→</span>
               </motion.button>
               <motion.button
@@ -55,20 +58,20 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
                 className="inline-flex items-center justify-center gap-2 border-2 border-[#0A1628]/20 text-[#0A1628] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:border-[#F28500] hover:bg-[#FFF7ED] transition-all w-full sm:w-auto"
               >
                 <span>▶️</span>
-                Watch Demo
+                {t('hero.cta_secondary')}
               </motion.button>
             </div>
 
             {/* Trust badges */}
             <div className="flex flex-wrap gap-4 md:gap-6 pt-4 text-sm text-[#4B5563]">
               <span className="flex items-center gap-2">
-                <span className="text-[#22C55E]">✓</span> Fluent in BM & English
+                <span className="text-[#22C55E]">✓</span> {t('hero.badge_language')}
               </span>
               <span className="flex items-center gap-2">
-                <span className="text-[#22C55E]">✓</span> 0% Sick Days
+                <span className="text-[#22C55E]">✓</span> {t('hero.badge_sick')}
               </span>
               <span className="flex items-center gap-2">
-                <span className="text-[#22C55E]">✓</span> 100% Malaysian Hospitality
+                <span className="text-[#22C55E]">✓</span> {t('hero.badge_hospitality')}
               </span>
             </div>
           </motion.div>
@@ -89,6 +92,8 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
 };
 
 function HeroPhoneMockup() {
+  const { t } = useTranslation();
+
   return (
     <div className="relative">
       {/* Floating animation wrapper */}
@@ -109,8 +114,8 @@ function HeroPhoneMockup() {
             <div className="h-[520px] bg-gradient-to-b from-[#FFF7ED] to-white flex flex-col">
               {/* Header */}
               <div className="bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white p-4 text-center">
-                <h3 className="font-bold text-lg">Your AI Team</h3>
-                <p className="text-sm opacity-90">Ready to serve 24/7</p>
+                <h3 className="font-bold text-lg">{t('hero.phone_header')}</h3>
+                <p className="text-sm opacity-90">{t('hero.phone_subheader')}</p>
               </div>
 
               {/* Chat Area */}
@@ -184,7 +189,7 @@ function HeroPhoneMockup() {
               {/* CTA Button */}
               <div className="p-4">
                 <button className="w-full bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white py-3 rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg">
-                  Talk to us! 👋
+                  {t('hero.phone_cta')} 👋
                 </button>
               </div>
             </div>

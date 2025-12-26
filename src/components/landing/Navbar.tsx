@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useVoice } from '../../context/VoiceContext';
+import { LanguageSwitcher } from '../LanguageSwitcher';
 
 interface NavbarProps {
   onScrollTo: (sectionId: string) => void;
 }
 
 export const Navbar = ({ onScrollTo }: NavbarProps) => {
+  const { t } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { triggerCall } = useVoice();
@@ -20,10 +23,10 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
   }, []);
 
   const navLinks = [
-    { label: 'Meet The Team', sectionId: 'demo' },
-    { label: 'Features', sectionId: 'features' },
-    { label: 'Pricing', sectionId: 'pricing' },
-    { label: 'FAQ', sectionId: 'faq' },
+    { labelKey: 'nav.meet_team', sectionId: 'demo' },
+    { labelKey: 'nav.features', sectionId: 'features' },
+    { labelKey: 'nav.pricing', sectionId: 'pricing' },
+    { labelKey: 'nav.faq', sectionId: 'faq' },
   ];
 
   const handleNavClick = (sectionId: string) => {
@@ -54,13 +57,16 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
               onClick={() => handleNavClick(link.sectionId)}
               className="text-[#4B5563] hover:text-[#0A1628] transition-colors font-medium"
             >
-              {link.label}
+              {t(link.labelKey)}
             </button>
           ))}
         </div>
 
-        {/* Nova CTA */}
-        <div className="flex items-center gap-3">
+        {/* Right Side: Language + Nova CTA */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Language Switcher */}
+          <LanguageSwitcher variant="navbar" />
+
           {/* Nova Character */}
           <div className="hidden lg:flex items-center">
             <img
@@ -75,7 +81,7 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
             className="flex items-center gap-2 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-4 sm:px-5 py-2.5 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all text-sm sm:text-base"
           >
             <Phone size={16} />
-            <span className="hidden sm:inline">Talk to Nova</span>
+            <span className="hidden sm:inline">{t('nav.talk_to_nova')}</span>
             <span className="sm:hidden">Nova</span>
           </button>
 
@@ -98,7 +104,7 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
               onClick={() => handleNavClick(link.sectionId)}
               className="block w-full text-left text-[#4B5563] hover:text-[#0A1628] py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors font-medium"
             >
-              {link.label}
+              {t(link.labelKey)}
             </button>
           ))}
         </div>

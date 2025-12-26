@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { useCommunication } from '../../context/CommunicationContext';
 
 export const TopBanner = () => {
+  const { t } = useTranslation();
   const { openLeadCapture } = useCommunication();
 
   const handleClaimSpot = () => {
@@ -12,15 +14,15 @@ export const TopBanner = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 md:gap-4 text-white text-sm">
         <span className="hidden sm:inline text-lg">🎉</span>
         <span className="font-medium text-center text-xs sm:text-sm">
-          <span className="font-bold">EARLY BIRD</span>
-          <span className="hidden sm:inline"> — First 50 restaurants get 15% off setup + 3 months free</span>
-          <span className="sm:hidden"> — 15% off + 3mo free</span>
+          <span className="font-bold">{t('banner.early_bird')}</span>
+          <span className="hidden sm:inline"> — {t('banner.offer_full')}</span>
+          <span className="sm:hidden"> — {t('banner.offer_short')}</span>
         </span>
         <button
           onClick={handleClaimSpot}
           className="bg-[#0A1628] text-white px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold hover:bg-[#132238] transition-colors flex-shrink-0 whitespace-nowrap"
         >
-          Claim Your Spot
+          {t('banner.claim_spot')}
         </button>
         {/* NO CLOSE BUTTON - This is intentional */}
       </div>

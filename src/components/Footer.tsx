@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MessageCircle, MapPin, Building2, FileText } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface ContactNumberProps {
   number: string;
@@ -47,6 +48,8 @@ const ContactNumber = ({ number, label, whatsappNumber }: ContactNumberProps) =>
 };
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="relative bg-gradient-to-b from-gray-900 via-black to-black border-t border-gray-800/50">
       {/* Decorative gradient overlay */}
@@ -74,7 +77,7 @@ export const Footer = () => {
               </h3>
             </div>
             <p className="text-gray-400 leading-relaxed mb-6">
-              Dimensional intelligence architecture for businesses that refuse to stay ordinary.
+              {t('footer.tagline')}
             </p>
             <a
               href="mailto:info@norvan.io"
@@ -94,7 +97,7 @@ export const Footer = () => {
           >
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="w-5 h-5 text-purple-400" />
-              <h4 className="text-lg font-bold text-white">Dubai Office</h4>
+              <h4 className="text-lg font-bold text-white">{t('footer.dubai_office')}</h4>
             </div>
             
             <div className="space-y-3 text-gray-400 mb-6">
@@ -130,7 +133,7 @@ export const Footer = () => {
           >
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="w-5 h-5 text-cyan-400" />
-              <h4 className="text-lg font-bold text-white">Malaysia Office</h4>
+              <h4 className="text-lg font-bold text-white">{t('footer.malaysia_office')}</h4>
             </div>
             
             <div className="space-y-3 text-gray-400 mb-6">
@@ -171,9 +174,9 @@ export const Footer = () => {
             transition={{ delay: 0.3 }}
             className="flex flex-col"
           >
-            <h4 className="text-lg font-bold text-white mb-4">Get Started</h4>
+            <h4 className="text-lg font-bold text-white mb-4">{t('footer.get_started')}</h4>
             <p className="text-gray-400 text-sm mb-6">
-              Ready to transform your business with dimensional intelligence?
+              {t('footer.get_started_text')}
             </p>
             <div className="space-y-3">
               <motion.a
@@ -182,7 +185,7 @@ export const Footer = () => {
                 whileTap={{ scale: 0.98 }}
                 className="block w-full py-3 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-center font-semibold rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg shadow-cyan-500/20"
               >
-                Contact Us
+                {t('footer.contact_us')}
               </motion.a>
               <motion.a
                 href="https://wa.me/601116343646"

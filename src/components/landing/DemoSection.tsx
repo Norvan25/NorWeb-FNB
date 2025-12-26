@@ -1,22 +1,23 @@
 import { motion } from 'framer-motion';
 import { Globe, MessageCircle, Phone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useVoice } from '../../context/VoiceContext';
 
 interface Specialist {
   id: string;
   name: string;
-  title: string;
+  titleKey: string;
   restaurant: string;
-  cuisine: string;
+  cuisineKey: string;
   flag: string;
   color: string;
   gradientFrom: string;
   gradientTo: string;
   bgLight: string;
   textDark: string;
-  role: string;
-  prompts: string[];
+  roleKey: string;
+  promptKeys: string[];
   route: string;
   whatsappNumber: string;
   image: string;
@@ -26,17 +27,17 @@ const specialists: Specialist[] = [
   {
     id: 'aiman',
     name: 'AIMAN',
-    title: 'The Friendly Mamak Legend',
+    titleKey: 'demo.aiman_title',
     restaurant: 'RIMBA Kitchen',
-    cuisine: 'Malay Cuisine',
+    cuisineKey: 'demo.malay_cuisine',
     flag: '🇲🇾',
     color: '#22C55E',
     gradientFrom: '#22C55E',
     gradientTo: '#16A34A',
     bgLight: 'bg-green-50',
     textDark: 'text-green-800',
-    role: "You're craving Nasi Lemak. Challenge Aiman.",
-    prompts: ['Is the Sambal spicy?', 'Do you deliver to Damansara?', "What's your best seller?"],
+    roleKey: 'demo.aiman_role',
+    promptKeys: ['demo.aiman_prompt1', 'demo.aiman_prompt2', 'demo.aiman_prompt3'],
     route: '/restaurant/rimba',
     whatsappNumber: '601116343646',
     image: '/images/AIMAN.png',
@@ -44,17 +45,17 @@ const specialists: Specialist[] = [
   {
     id: 'dev',
     name: 'DEV',
-    title: 'The Spice Master',
+    titleKey: 'demo.dev_title',
     restaurant: 'VEDA Spice',
-    cuisine: 'Indian Cuisine',
+    cuisineKey: 'demo.indian_cuisine',
     flag: '🇮🇳',
     color: '#F97316',
     gradientFrom: '#F97316',
     gradientTo: '#EA580C',
     bgLight: 'bg-orange-50',
     textDark: 'text-orange-800',
-    role: "You have dietary restrictions. Test Dev's knowledge.",
-    prompts: ['Is the Paneer vegetarian?', 'What do you recommend for kids?', 'How spicy is the Vindaloo?'],
+    roleKey: 'demo.dev_role',
+    promptKeys: ['demo.dev_prompt1', 'demo.dev_prompt2', 'demo.dev_prompt3'],
     route: '/restaurant/veda',
     whatsappNumber: '601116343646',
     image: '/images/DEV.png',
@@ -62,21 +63,17 @@ const specialists: Specialist[] = [
   {
     id: 'marco',
     name: 'MARCO',
-    title: 'The Italian Purist',
+    titleKey: 'demo.marco_title',
     restaurant: 'GUSTO Italiano',
-    cuisine: 'Italian Cuisine',
+    cuisineKey: 'demo.italian_cuisine',
     flag: '🇮🇹',
     color: '#EF4444',
     gradientFrom: '#EF4444',
     gradientTo: '#DC2626',
     bgLight: 'bg-red-50',
     textDark: 'text-red-800',
-    role: 'You want a romantic dinner. See how Marco handles it.',
-    prompts: [
-      'I need a quiet table for two tonight.',
-      "What's your signature pasta?",
-      'Do you have wine pairing?',
-    ],
+    roleKey: 'demo.marco_role',
+    promptKeys: ['demo.marco_prompt1', 'demo.marco_prompt2', 'demo.marco_prompt3'],
     route: '/restaurant/gusto',
     whatsappNumber: '601116343646',
     image: '/images/MARCO.png',
@@ -84,6 +81,7 @@ const specialists: Specialist[] = [
 ];
 
 export const DemoSection = () => {
+  const { t } = useTranslation();
   const { triggerCall } = useVoice();
 
   return (
@@ -97,16 +95,16 @@ export const DemoSection = () => {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A1628] mb-4">
-            Don't Trust Us.{' '}
+            {t('demo.headline')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
-              Test Us.
+              {t('demo.headline_highlight')}
             </span>
           </h2>
           <p className="text-lg md:text-xl text-[#4B5563]">
-            For the next 60 seconds,{' '}
-            <span className="font-semibold text-[#0A1628]">forget you're a business owner</span>.
-            Pretend you're hungry. Pick a restaurant.{' '}
-            <span className="font-semibold text-[#0A1628]">Be the customer.</span>
+            {t('demo.subheadline_start')}{' '}
+            <span className="font-semibold text-[#0A1628]">{t('demo.subheadline_bold1')}</span>
+            {t('demo.subheadline_mid')}{' '}
+            <span className="font-semibold text-[#0A1628]">{t('demo.subheadline_bold2')}</span>
           </p>
         </motion.div>
 
@@ -136,13 +134,13 @@ export const DemoSection = () => {
               />
             </div>
             <div className="text-center sm:text-left">
-              <p className="font-bold text-[#0A1628]">I'm Nova.</p>
+              <p className="font-bold text-[#0A1628]">{t('demo.nova_intro')}</p>
               <p className="text-sm text-[#4B5563]">
-                I manage the backend. Want to see how I handle the data?
+                {t('demo.nova_description')}
               </p>
             </div>
             <div className="sm:ml-4 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-5 py-2.5 rounded-full text-sm font-semibold group-hover:shadow-lg transition-all w-full sm:w-auto text-center">
-              Talk to Nova
+              {t('demo.talk_to_nova')}
             </div>
           </button>
         </motion.div>
@@ -152,6 +150,7 @@ export const DemoSection = () => {
 };
 
 function SpecialistCard({ specialist, index }: { specialist: Specialist; index: number }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { triggerCall } = useVoice();
 
@@ -188,7 +187,7 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
       >
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm opacity-90 font-medium">{specialist.cuisine}</p>
+            <p className="text-sm opacity-90 font-medium">{t(specialist.cuisineKey)}</p>
             <h3 className="text-xl font-bold">{specialist.restaurant}</h3>
           </div>
           <span className="text-3xl">{specialist.flag}</span>
@@ -209,8 +208,8 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
       <div className="p-6 space-y-4">
         {/* Name & Title */}
         <div className="text-center">
-          <h4 className="text-xl font-bold text-[#0A1628]">Meet {specialist.name}</h4>
-          <p className="text-[#4B5563] italic">"{specialist.title}"</p>
+          <h4 className="text-xl font-bold text-[#0A1628]">{t('demo.meet')} {specialist.name}</h4>
+          <p className="text-[#4B5563] italic">"{t(specialist.titleKey)}"</p>
         </div>
 
         {/* Role Play Prompt */}
@@ -218,18 +217,18 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
           <div className="flex items-start gap-2">
             <span className="text-lg">🎭</span>
             <p className={`text-sm ${specialist.textDark} font-medium`}>
-              <span className="font-bold">YOUR ROLE:</span> {specialist.role}
+              <span className="font-bold">{t('demo.your_role')}</span> {t(specialist.roleKey)}
             </p>
           </div>
 
           <div className="space-y-2">
             <p className="text-xs text-gray-500 uppercase font-bold flex items-center gap-1">
-              💬 TRY ASKING:
+              💬 {t('demo.try_asking')}
             </p>
             <ul className="space-y-1">
-              {specialist.prompts.map((prompt, i) => (
+              {specialist.promptKeys.map((promptKey, i) => (
                 <li key={i} className="text-sm text-gray-600 pl-4">
-                  • "{prompt}"
+                  • "{t(promptKey)}"
                 </li>
               ))}
             </ul>
@@ -247,7 +246,7 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
             }}
           >
             <Globe size={18} />
-            Chat with {specialist.name}
+            {t('demo.chat_with')} {specialist.name}
           </button>
 
           <div className="grid grid-cols-2 gap-3">
@@ -256,14 +255,14 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
               className="flex items-center justify-center gap-2 bg-[#25D366] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#20BD5A] transition-colors"
             >
               <MessageCircle size={16} />
-              WhatsApp
+              {t('demo.whatsapp')}
             </button>
             <button
               onClick={handleVoiceCall}
               className="flex items-center justify-center gap-2 bg-[#0A1628] text-white py-2.5 rounded-xl text-sm font-semibold hover:bg-[#132238] transition-colors"
             >
               <Phone size={16} />
-              Call
+              {t('demo.call')}
             </button>
           </div>
         </div>
