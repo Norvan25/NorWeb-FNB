@@ -36,19 +36,19 @@ export const FinalCTASection = () => {
           Hire Your AI Team Today
         </motion.button>
 
-        <p className="mt-8 text-sm md:text-base text-gray-400">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm md:text-base text-gray-400">
           <span className="inline-flex items-center gap-2">
-            <span>🚀</span> Founding Member Pricing Available
+            <span>🚀</span> Founding Member Pricing
           </span>
-          <span className="mx-2 md:mx-4">•</span>
+          <span className="hidden sm:inline text-gray-600">•</span>
           <span className="inline-flex items-center gap-2">
             <span>⚡</span> 48-Hour Setup
           </span>
-          <span className="mx-2 md:mx-4">•</span>
+          <span className="hidden sm:inline text-gray-600">•</span>
           <span className="inline-flex items-center gap-2">
             <span>✓</span> No Long-Term Contract
           </span>
-        </p>
+        </div>
       </motion.div>
     </section>
   );

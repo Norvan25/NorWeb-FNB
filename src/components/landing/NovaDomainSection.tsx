@@ -52,14 +52,14 @@ export const NovaDomainSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex gap-4 p-4 rounded-xl bg-[#132238] border border-[#1e3a5f] hover:border-[#F28500]/50 transition-colors"
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-4 rounded-xl bg-[#132238] border border-[#1e3a5f] hover:border-[#F28500]/50 transition-colors"
                 >
-                  <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-[#F28500]/20 to-[#FF9A1F]/20 border border-[#F28500]/30 rounded-xl flex items-center justify-center text-2xl">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#F28500]/20 to-[#FF9A1F]/20 border border-[#F28500]/30 rounded-xl flex items-center justify-center text-xl sm:text-2xl">
                     {feature.iconEmoji}
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.description}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-white">{feature.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-400">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}

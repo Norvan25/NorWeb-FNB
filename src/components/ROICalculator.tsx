@@ -184,18 +184,18 @@ export const ROICalculator = () => {
               </div>
 
               <div className="pt-4 border-t border-red-500/20">
-                <div className="flex justify-between items-center">
-                  <span className="text-xl font-bold text-white">TOTAL LOSS:</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                  <span className="text-lg sm:text-xl font-bold text-white">TOTAL LOSS:</span>
                   <motion.span
                     key={calculations.totalLoss}
                     initial={{ scale: 1.2 }}
                     animate={{ scale: 1 }}
-                    className="text-4xl md:text-5xl font-black text-red-500"
+                    className="text-3xl sm:text-4xl md:text-5xl font-black text-red-500"
                   >
                     RM {formatCurrency(calculations.totalLoss)}
                   </motion.span>
                 </div>
-                <p className="text-gray-500 text-sm mt-1 text-right">per month</p>
+                <p className="text-gray-500 text-sm mt-1 sm:text-right">per month</p>
               </div>
             </div>
 
@@ -217,18 +217,18 @@ export const ROICalculator = () => {
               </ul>
 
               <div className="pt-4 border-t border-cyan-500/20">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-lg font-bold text-white">You recover:</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2">
+                  <span className="text-base sm:text-lg font-bold text-white">You recover:</span>
                   <motion.span
                     key={calculations.totalRecovered}
                     initial={{ scale: 1.2 }}
                     animate={{ scale: 1 }}
-                    className="text-3xl md:text-4xl font-black text-green-400"
+                    className="text-2xl sm:text-3xl md:text-4xl font-black text-green-400"
                   >
                     RM {formatCurrency(calculations.totalRecovered)}
                   </motion.span>
                 </div>
-                <p className="text-gray-500 text-sm text-right">per month</p>
+                <p className="text-gray-500 text-sm sm:text-right">per month</p>
               </div>
             </div>
 
@@ -237,16 +237,16 @@ export const ROICalculator = () => {
               key={calculations.roi}
               initial={{ scale: 0.95 }}
               animate={{ scale: 1 }}
-              className="p-6 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-center"
+              className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-center"
             >
               <div className="flex items-center justify-center gap-3">
-                <TrendingUp className="w-8 h-8 text-white" />
+                <TrendingUp className="w-6 sm:w-8 h-6 sm:h-8 text-white flex-shrink-0" />
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Return on Investment</p>
-                  <p className="text-4xl md:text-5xl font-black text-white">
+                  <p className="text-white/80 text-xs sm:text-sm font-medium">Return on Investment</p>
+                  <p className="text-3xl sm:text-4xl md:text-5xl font-black text-white">
                     {calculations.roi}x
                   </p>
-                  <p className="text-white/70 text-sm">your subscription cost</p>
+                  <p className="text-white/70 text-xs sm:text-sm">your subscription cost</p>
                 </div>
               </div>
             </motion.div>

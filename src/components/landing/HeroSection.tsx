@@ -38,12 +38,12 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onScrollTo('demo')}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:shadow-xl transition-all w-full sm:w-auto"
               >
                 Meet Your New Team
                 <span>→</span>
@@ -52,7 +52,7 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onScrollTo('demo')}
-                className="inline-flex items-center gap-2 border-2 border-[#0A1628]/20 text-[#0A1628] px-8 py-4 rounded-full font-semibold text-lg hover:border-[#F28500] hover:bg-[#FFF7ED] transition-all"
+                className="inline-flex items-center justify-center gap-2 border-2 border-[#0A1628]/20 text-[#0A1628] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:border-[#F28500] hover:bg-[#FFF7ED] transition-all w-full sm:w-auto"
               >
                 <span>▶️</span>
                 Watch Demo

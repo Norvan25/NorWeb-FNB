@@ -122,26 +122,26 @@ export const DemoSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 flex justify-center"
+          className="mt-12 flex justify-center px-4"
         >
           <button
             onClick={() => triggerCall()}
-            className="inline-flex items-center gap-4 bg-white border-2 border-[#0A1628]/10 rounded-2xl p-4 pr-6 hover:border-[#F28500]/50 hover:shadow-xl transition-all cursor-pointer group"
+            className="flex flex-col sm:flex-row items-center gap-4 bg-white border-2 border-[#0A1628]/10 rounded-2xl p-4 sm:pr-6 hover:border-[#F28500]/50 hover:shadow-xl transition-all cursor-pointer group w-full sm:w-auto max-w-md sm:max-w-none"
           >
-            <div className="w-16 h-20 flex items-end justify-center">
+            <div className="w-16 h-20 flex items-end justify-center flex-shrink-0">
               <img
                 src="/images/NOVA.png"
                 alt="Nova"
                 className="h-16 w-auto object-contain object-bottom"
               />
             </div>
-            <div className="text-left">
+            <div className="text-center sm:text-left">
               <p className="font-bold text-[#0A1628]">I'm Nova.</p>
               <p className="text-sm text-[#4B5563]">
                 I manage the backend. Want to see how I handle the data?
               </p>
             </div>
-            <div className="ml-4 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-5 py-2.5 rounded-full text-sm font-semibold group-hover:shadow-lg transition-all">
+            <div className="sm:ml-4 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-5 py-2.5 rounded-full text-sm font-semibold group-hover:shadow-lg transition-all w-full sm:w-auto text-center">
               Talk to Nova
             </div>
           </button>

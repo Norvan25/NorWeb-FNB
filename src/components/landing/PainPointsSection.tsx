@@ -68,22 +68,22 @@ export const PainPointsSection = () => {
               }}
               className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-lg hover:border-[#F28500]/30 transition-all"
             >
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col sm:flex-row items-start gap-4">
                 <div
-                  className="p-4 rounded-xl text-3xl"
+                  className="p-3 sm:p-4 rounded-xl text-2xl sm:text-3xl flex-shrink-0"
                   style={{ backgroundColor: `${point.color}15` }}
                 >
                   {point.emoji}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p
-                    className="text-3xl md:text-4xl font-black mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 break-words"
                     style={{ color: point.color }}
                   >
                     {point.stat}
                   </p>
-                  <h3 className="text-xl font-bold text-[#0A1628] mb-2">{point.title}</h3>
-                  <p className="text-[#4B5563] leading-relaxed">{point.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0A1628] mb-2">{point.title}</h3>
+                  <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">{point.description}</p>
                 </div>
               </div>
             </motion.div>

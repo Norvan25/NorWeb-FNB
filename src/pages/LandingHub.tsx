@@ -92,10 +92,10 @@ export const LandingHub = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center gap-4 mb-12"
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12"
           >
             <span
-              className={`text-lg font-medium transition-colors ${
+              className={`text-sm sm:text-lg font-medium transition-colors ${
                 !isAnnualBilling ? 'text-[#0A1628]' : 'text-[#4B5563]'
               }`}
             >
@@ -103,25 +103,25 @@ export const LandingHub = () => {
             </span>
             <button
               onClick={() => setIsAnnualBilling(!isAnnualBilling)}
-              className={`relative w-16 h-8 rounded-full transition-colors ${
+              className={`relative w-14 sm:w-16 h-7 sm:h-8 rounded-full transition-colors flex-shrink-0 ${
                 isAnnualBilling ? 'bg-gradient-to-r from-[#F28500] to-[#FF9A1F]' : 'bg-gray-300'
               }`}
             >
               <motion.div
-                animate={{ x: isAnnualBilling ? 32 : 4 }}
+                animate={{ x: isAnnualBilling ? 26 : 4 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                className="absolute top-1 w-6 h-6 bg-white rounded-full shadow-md"
+                className="absolute top-0.5 sm:top-1 w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full shadow-md"
               />
             </button>
             <span
-              className={`text-lg font-medium transition-colors ${
+              className={`text-sm sm:text-lg font-medium transition-colors ${
                 isAnnualBilling ? 'text-[#0A1628]' : 'text-[#4B5563]'
               }`}
             >
               Annually
             </span>
             {isAnnualBilling && (
-              <span className="px-3 py-1 text-sm font-bold rounded-full text-white bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
+              <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-bold rounded-full text-white bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
                 Save 15%
               </span>
             )}
@@ -141,8 +141,8 @@ export const LandingHub = () => {
                 <p className="text-[#4B5563] text-sm mb-6">AI Front Desk</p>
 
                 <div className="mb-4">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-4xl md:text-5xl font-black text-[#0A1628]">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
                       RM {isAnnualBilling ? '186' : '219'}
                     </span>
                     <span className="text-[#4B5563]">/mo</span>
@@ -195,8 +195,8 @@ export const LandingHub = () => {
                 <p className="text-[#4B5563] text-sm mb-6">Full Operations Suite</p>
 
                 <div className="mb-4">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-4xl md:text-5xl font-black text-[#0A1628]">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
                       RM {isAnnualBilling ? '499' : '549'}
                     </span>
                     <span className="text-[#4B5563]">/mo</span>
@@ -245,7 +245,7 @@ export const LandingHub = () => {
                 <p className="text-[#4B5563] text-sm mb-6">Complete Marketing Machine</p>
 
                 <div className="mb-4">
-                  <span className="text-4xl md:text-5xl font-black text-[#0A1628]">Custom</span>
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">Custom</span>
                 </div>
 
                 <ul className="space-y-3 mb-8">
