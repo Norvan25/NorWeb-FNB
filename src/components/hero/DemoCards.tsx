@@ -72,51 +72,57 @@ const DemoCard = ({ name, cuisine, flag, image, route, whatsappNumber, index }: 
       transition={{ delay: 0.1 * index }}
       className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-orange-500/50 transition-all group"
     >
-      {/* Restaurant image - compact */}
-      <div className="h-20 sm:h-24 bg-slate-800 overflow-hidden">
+      {/* Restaurant image - SHORT */}
+      <div className="h-16 sm:h-20 bg-slate-800 overflow-hidden">
         <img
           src={image}
           alt={name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
             e.currentTarget.src = '/images/norvan_logo_only.svg';
-            e.currentTarget.className = 'w-full h-full object-contain p-4 opacity-30';
+            e.currentTarget.className = 'w-full h-full object-contain p-3 opacity-30';
           }}
         />
       </div>
 
-      {/* Restaurant info - tight spacing */}
-      <div className="p-3">
-        <div className="flex items-center justify-between mb-1">
-          <h3 className="text-base font-bold text-white">{name}</h3>
-          <span className="text-xl">{flag}</span>
+      {/* Restaurant info - COMPACT */}
+      <div className="p-2 sm:p-3">
+        {/* Name + Flag row */}
+        <div className="flex items-center justify-between mb-2">
+          <div>
+            <h3 className="text-sm sm:text-base font-bold text-white">{name}</h3>
+            <p className="text-gray-400 text-[10px] sm:text-xs">{cuisine}</p>
+          </div>
+          <span className="text-lg sm:text-xl">{flag}</span>
         </div>
-        <p className="text-gray-400 text-xs mb-3">{cuisine} Cuisine</p>
 
-        {/* Action buttons - compact */}
-        <div className="space-y-1.5">
+        {/* Action buttons - HORIZONTAL ROW */}
+        <div className="flex gap-1.5">
           <button
             onClick={handleVisitWebsite}
-            className="w-full flex items-center justify-center gap-1.5 bg-slate-700 hover:bg-slate-600 text-white py-2 rounded-lg transition-colors text-xs font-medium"
+            className="flex-1 flex items-center justify-center gap-1 bg-slate-700 hover:bg-slate-600 text-white py-1.5 sm:py-2 rounded-lg transition-colors text-[10px] sm:text-xs font-medium"
           >
-            <Globe className="w-3.5 h-3.5" />
-            Visit Website
+            <Globe className="w-3 h-3" />
+            <span className="hidden sm:inline">Visit</span>
+            <span className="sm:hidden">🌐</span>
           </button>
 
           <button
             onClick={handleWhatsApp}
-            className="w-full flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-500 text-white py-2 rounded-lg transition-colors text-xs font-medium"
+            className="flex-1 flex items-center justify-center gap-1 bg-green-600 hover:bg-green-500 text-white py-1.5 sm:py-2 rounded-lg transition-colors text-[10px] sm:text-xs font-medium"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            WhatsApp
+            <MessageCircle className="w-3 h-3" />
+            <span className="hidden sm:inline">Chat</span>
+            <span className="sm:hidden">💬</span>
           </button>
 
           <button
             onClick={handleVoiceCall}
-            className="w-full flex items-center justify-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-2 rounded-lg transition-colors text-xs font-medium"
+            className="flex-1 flex items-center justify-center gap-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-1.5 sm:py-2 rounded-lg transition-colors text-[10px] sm:text-xs font-medium"
           >
-            <Phone className="w-3.5 h-3.5" />
-            Call AI
+            <Phone className="w-3 h-3" />
+            <span className="hidden sm:inline">Call</span>
+            <span className="sm:hidden">📞</span>
           </button>
         </div>
       </div>
