@@ -1,9 +1,5 @@
-import { CommunicationHUD } from '../components/CommunicationHUD';
 import { motion } from 'framer-motion';
-import { CuisineCard } from '../components/CuisineCard';
-import { restaurants } from '../data/restaurants';
-import { Sparkles, MessageSquare, ArrowRight, Check, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck, PhoneOff, Clock, CalendarX, BadgePercent } from 'lucide-react';
-import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
+import { PhoneOff, Clock, CalendarX, BadgePercent, Check, ArrowRight, MessageSquare, Percent, XCircle, AlertCircle, ShoppingCart, ChefHat, Truck } from 'lucide-react';
 import { SchedulingModal } from '../components/SchedulingModal';
 import { Footer } from '../components/Footer';
 import { FeatureComparisonTable } from '../components/FeatureComparisonTable';
@@ -11,8 +7,8 @@ import { ROICalculator } from '../components/ROICalculator';
 import { FAQSection } from '../components/FAQSection';
 import { SocialProofSection } from '../components/SocialProofSection';
 import { LeadCaptureSection } from '../components/LeadCaptureSection';
+import { HeroSection } from '../components/hero';
 import { useCommunication } from '../context/CommunicationContext';
-import { useVoice } from '../context/VoiceContext';
 import { useState } from 'react';
 
 export const LandingHub = () => {
@@ -21,15 +17,10 @@ export const LandingHub = () => {
   const [isAnnualBilling, setIsAnnualBilling] = useState(true);
 
   const { openLeadCapture } = useCommunication();
-  const { triggerCall } = useVoice();
 
   const openSchedulingModal = (type: 'strategy' | 'norcast') => {
     setSchedulingType(type);
     setSchedulingModalOpen(true);
-  };
-
-  const handleOpenDemo = () => {
-    triggerCall();
   };
 
   const handleGetStarted = (plan?: string) => {
@@ -38,101 +29,10 @@ export const LandingHub = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      <FloatingFNBIcons />
+      {/* New Hero Section with TopBanner, Navbar, Hero Content, Demo Cards */}
+      <HeroSection />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-16 right-6 z-50"
-      >
-        <img
-          src="/images/norvan_logo_only.svg"
-          alt="Norvan Logo"
-          className="w-16 h-16 md:w-20 md:h-20 opacity-90 hover:opacity-100 transition-opacity"
-        />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative"
-      >
-        <div className="relative z-10">
-          {/* Hero Section */}
-          <section className="min-h-[100svh] flex flex-col items-center justify-center px-6 py-16 sm:py-20 relative overflow-hidden bg-black">
-            {/* Hero Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/40 via-purple-900/10 to-transparent" />
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-center mb-16"
-            >
-              <motion.div
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                className="inline-block mb-6"
-              >
-                <Sparkles className="text-yellow-400" size={48} />
-              </motion.div>
-
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-6 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent leading-tight">
-                Stop Losing Orders When<br />
-                No One Replies.
-              </h1>
-
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed max-w-4xl mx-auto"
-              >
-                A 24/7 digital sales manager that takes bookings, orders, and delivery automatically.<br />
-                No commissions. No missed calls.
-              </motion.p>
-
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-8"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.9 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-10 py-3 sm:py-4 text-white text-base sm:text-lg font-bold rounded-full transition-all shadow-xl shadow-orange-500/40 w-full sm:w-auto"
-                style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
-                onClick={handleOpenDemo}
-              >
-                Activate Free Demo
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 text-base sm:text-lg font-bold rounded-full hover:bg-cyan-400/10 transition-all w-full sm:w-auto"
-                onClick={() => handleGetStarted()}
-              >
-                Calculate Your Savings
-              </motion.button>
-            </motion.div>
-          </section>
-
+      <div className="relative z-10">
           {/* The Problem Section */}
           <section className="px-6 py-24 bg-gradient-to-b from-black via-[#0a0f1a] to-black">
             <div className="max-w-6xl mx-auto">
@@ -226,37 +126,8 @@ export const LandingHub = () => {
           {/* ROI Calculator Section */}
           <ROICalculator />
 
-          <section id="brands" className="px-6 py-20 max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="mb-12 text-center"
-            >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Try It Yourself — Live Demos
-              </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Chat with our AI. See how it handles real restaurant questions.
-              </p>
-            </motion.div>
-
-            {/* 3 cards in a row - horizontal scroll on mobile */}
-            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
-              {restaurants.map((restaurant, index) => (
-                <div key={restaurant.id} className="flex-shrink-0 w-[85vw] md:w-auto snap-center">
-                  <CuisineCard restaurant={restaurant} index={index} />
-                </div>
-              ))}
-            </div>
-            
-            {/* Mobile scroll hint */}
-            <p className="md:hidden text-center text-gray-500 text-sm mt-4">
-              ← Swipe to see more demos →
-            </p>
-          </section>
-
-          <section className="px-6 py-32 bg-gradient-to-b from-black via-gray-900 to-black">
+          {/* Features Section */}
+          <section id="features" className="px-6 py-32 bg-gradient-to-b from-black via-gray-900 to-black">
             <div className="max-w-7xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -745,15 +616,12 @@ export const LandingHub = () => {
 
           <Footer />
         </div>
-      </motion.div>
 
       <SchedulingModal
         isOpen={schedulingModalOpen}
         onClose={() => setSchedulingModalOpen(false)}
         type={schedulingType}
       />
-
-      <CommunicationHUD />
     </div>
   );
 };
