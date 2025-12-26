@@ -3,15 +3,21 @@ import { motion } from 'framer-motion';
 const revealData = [
   {
     soul: 'Aiman joked about the Sambal.',
+    soulEmoji: '💚',
     brain: 'Nova captured your phone number for SMS marketing.',
+    brainEmoji: '📊',
   },
   {
     soul: 'Dev suggested the Palak Paneer.',
+    soulEmoji: '🧡',
     brain: 'Nova upsold a high-margin item automatically.',
+    brainEmoji: '📈',
   },
   {
     soul: 'Marco confirmed your booking.',
-    brain: 'Nova collected a deposit to prevent No-Show.',
+    soulEmoji: '❤️',
+    brain: 'Nova collected a deposit to prevent no-shows.',
+    brainEmoji: '💳',
   },
 ];
 
@@ -26,87 +32,88 @@ export const RevealSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A1628] mb-4">
             That Charm You Just Felt?{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-rose-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
               That Was Engineered Revenue.
             </span>
           </h2>
-          <p className="text-xl text-gray-600">
-            While you were chatting with the boys,{' '}
-            <span className="font-semibold">Nova (your AI Sales Manager)</span> was working in the
-            background.
+          <p className="text-lg md:text-xl text-[#4B5563]">
+            While you were chatting,{' '}
+            <span className="font-semibold text-[#0A1628]">Nova (your AI Sales Manager)</span> was
+            working behind the scenes.
           </p>
         </motion.div>
 
-        {/* The Table */}
+        {/* Two-Column Comparison */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-br from-gray-50 to-orange-50 rounded-3xl p-6 md:p-12"
+          className="bg-gradient-to-br from-[#F3F4F6] to-[#FFF7ED] rounded-3xl p-6 md:p-10 overflow-hidden"
         >
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Soul Column */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
+          {/* Headers */}
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
+              <div className="flex items-center justify-center gap-3">
                 <span className="text-3xl">❤️</span>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900">The "Soul" Moment</h3>
-                  <p className="text-gray-600">What You Felt</p>
+                  <h3 className="text-lg font-bold text-[#0A1628]">The "Soul" Moment</h3>
+                  <p className="text-sm text-[#4B5563]">What You Felt</p>
                 </div>
               </div>
-              <div className="space-y-4">
-                {revealData.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm"
-                  >
-                    <p className="text-gray-700">{item.soul}</p>
-                  </motion.div>
-                ))}
-              </div>
             </div>
-
-            {/* Brain Column */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
+            <div className="bg-gradient-to-r from-[#F28500] to-[#FF9A1F] rounded-2xl p-4 text-center shadow-lg">
+              <div className="flex items-center justify-center gap-3">
                 <span className="text-3xl">🧠</span>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900">The "Brain" Reality</h3>
-                  <p className="text-gray-600">What You Earned</p>
+                  <h3 className="text-lg font-bold text-white">The "Brain" Reality</h3>
+                  <p className="text-sm text-white/80">What You Earned</p>
                 </div>
               </div>
-              <div className="space-y-4">
-                {revealData.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-gradient-to-r from-orange-500 to-rose-500 rounded-xl p-4 text-white shadow-lg"
-                  >
-                    <p className="font-medium">{item.brain}</p>
-                  </motion.div>
-                ))}
-              </div>
             </div>
+          </div>
+
+          {/* Rows */}
+          <div className="space-y-4">
+            {revealData.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="grid md:grid-cols-2 gap-4"
+              >
+                {/* Soul */}
+                <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex items-center gap-3">
+                  <span className="text-2xl">{item.soulEmoji}</span>
+                  <p className="text-[#4B5563] font-medium">{item.soul}</p>
+                </div>
+                {/* Brain */}
+                <div className="bg-[#0A1628] rounded-xl p-4 shadow-lg flex items-center gap-3">
+                  <span className="text-2xl">{item.brainEmoji}</span>
+                  <p className="text-white font-medium">{item.brain}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
           {/* Tagline */}
-          <div className="text-center mt-10 pt-8 border-t border-gray-200">
-            <p className="text-xl font-semibold text-gray-900">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="text-center mt-10 pt-8 border-t border-gray-200"
+          >
+            <p className="text-xl md:text-2xl font-bold text-[#0A1628]">
               You didn't just have a conversation. You entered a{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-rose-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
                 Revenue Capture System.
               </span>
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -114,4 +121,3 @@ export const RevealSection = () => {
 };
 
 export default RevealSection;
-

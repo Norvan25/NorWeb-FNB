@@ -1,8 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Playfair+Display:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* NorWeb Brand Colors */
+:root {
+  --navy: #0A1628;
+  --navy-light: #132238;
+  --orange: #F28500;
+  --orange-light: #FF9A1F;
+  --white: #FFFFFF;
+  --gray-100: #F3F4F6;
+  --gray-600: #4B5563;
+  
+  /* Character accent colors */
+  --aiman-green: #22C55E;
+  --dev-orange: #F97316;
+  --marco-red: #EF4444;
+}
 
 @layer base {
   * {

@@ -5,5 +5,5 @@ export { DemoSection } from './DemoSection';
 export { RevealSection } from './RevealSection';
 export { NovaDomainSection } from './NovaDomainSection';
 export { ComparisonSection } from './ComparisonSection';
+export { PainPointsSection } from './PainPointsSection';
 export { FinalCTASection } from './FinalCTASection';
-

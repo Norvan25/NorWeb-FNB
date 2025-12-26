@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { useVoice } from '../../context/VoiceContext';
 
@@ -8,7 +8,16 @@ interface NavbarProps {
 
 export const Navbar = ({ onScrollTo }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { triggerCall } = useVoice();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { label: 'Meet The Team', sectionId: 'demo' },
@@ -23,12 +32,18 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
   };
 
   return (
-    <nav className="sticky top-11 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <nav
+      className={`sticky top-11 z-40 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'
+      } border-b border-gray-100`}
+    >
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2">
           <span className="text-2xl">🍽️</span>
-          <span className="text-xl font-bold text-gray-900">NorWeb</span>
+          <span className="text-xl font-bold text-[#0A1628]">
+            Nor<span className="text-[#F28500]">Web</span>
+          </span>
         </div>
 
         {/* Nav Links (Desktop) */}
@@ -37,7 +52,7 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
             <button
               key={link.sectionId}
               onClick={() => handleNavClick(link.sectionId)}
-              className="text-gray-600 hover:text-gray-900 transition-colors font-medium"
+              className="text-[#4B5563] hover:text-[#0A1628] transition-colors font-medium"
             >
               {link.label}
             </button>
@@ -46,9 +61,16 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
 
         {/* Nova CTA */}
         <div className="flex items-center gap-3">
+          {/* Nova Character (placeholder) */}
+          <div className="hidden lg:flex items-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center text-xl border-2 border-orange-300">
+              👩‍💼
+            </div>
+          </div>
+
           <button
             onClick={() => triggerCall()}
-            className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-5 py-2.5 rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all"
+            className="flex items-center gap-2 bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-4 sm:px-5 py-2.5 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all text-sm sm:text-base"
           >
             <Phone size={16} />
             <span className="hidden sm:inline">Talk to Nova</span>
@@ -58,7 +80,7 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            className="md:hidden p-2 text-[#4B5563] hover:text-[#0A1628]"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -67,12 +89,12 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 py-4 px-4 space-y-2">
+        <div className="md:hidden bg-white border-t border-gray-100 py-4 px-4 space-y-2 shadow-lg">
           {navLinks.map((link) => (
             <button
               key={link.sectionId}
               onClick={() => handleNavClick(link.sectionId)}
-              className="block w-full text-left text-gray-600 hover:text-gray-900 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+              className="block w-full text-left text-[#4B5563] hover:text-[#0A1628] py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors font-medium"
             >
               {link.label}
             </button>
@@ -84,4 +106,3 @@ export const Navbar = ({ onScrollTo }: NavbarProps) => {
 };
 
 export default Navbar;
-
