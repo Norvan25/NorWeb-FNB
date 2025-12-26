@@ -5,12 +5,14 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import enTranslations from './locales/en.json';
 import msTranslations from './locales/ms.json';
 import zhTranslations from './locales/zh.json';
+import ruTranslations from './locales/ru.json';
 
 // Supported languages
 export const supportedLanguages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'ms', name: 'Bahasa Malaysia', flag: '🇲🇾' },
   { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
 ] as const;
 
 export type SupportedLanguage = typeof supportedLanguages[number]['code'];
@@ -36,9 +38,10 @@ i18n
       en: { translation: enTranslations },
       ms: { translation: msTranslations },
       zh: { translation: zhTranslations },
+      ru: { translation: ruTranslations },
     },
     fallbackLng: 'en',
-    supportedLngs: ['en', 'ms', 'zh'],
+    supportedLngs: ['en', 'ms', 'zh', 'ru'],
     
     // Language detection configuration
     detection: detectionOptions,

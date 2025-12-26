@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],
-        sans: ['Lato', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Noto Sans', 'system-ui', 'sans-serif'],
       },
     },
   },
