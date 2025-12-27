@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { SchedulingModal } from '../components/SchedulingModal';
@@ -9,6 +9,7 @@ import { FAQSection } from '../components/FAQSection';
 import { SocialProofSection } from '../components/SocialProofSection';
 import { LeadCaptureSection } from '../components/LeadCaptureSection';
 import { useCommunication } from '../context/CommunicationContext';
+import { trackPricingView, trackCTAClick } from '../lib/tracking';
 
 // New landing components
 import {
@@ -31,8 +32,31 @@ export const LandingHub = () => {
   const { openLeadCapture } = useCommunication();
 
   const handleGetStarted = (plan?: string) => {
+    if (plan) {
+      trackPricingView(plan);
+      trackCTAClick('start_free_trial', `pricing_${plan.toLowerCase()}`);
+    }
     openLeadCapture(plan);
   };
+
+  // Track pricing section view
+  useEffect(() => {
+    const pricingSection = document.getElementById('pricing');
+    if (!pricingSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          trackPricingView('section_viewed');
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(pricingSection);
+
+    return () => observer.disconnect();
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });

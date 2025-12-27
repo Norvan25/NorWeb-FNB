@@ -1,4 +1,3 @@
-import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, X, Minus, Plus, ChevronDown, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { motion } from 'framer-motion';
 import { useVoice } from '../context/VoiceContext';
+import { RestaurantFloatingBubble } from '../components/RestaurantFloatingBubble';
 
 export const Gusto = () => {
   const navigate = useNavigate();
@@ -107,7 +107,7 @@ export const Gusto = () => {
               }}
             >
               <Sparkles size={20} />
-              <span className="hidden md:inline">Activate Free Demo</span>
+              <span className="hidden md:inline">Meet Chef Marco</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -164,7 +164,7 @@ export const Gusto = () => {
               }}
             >
               <Sparkles size={20} />
-              Activate Free Demo
+              Meet Chef Marco
             </motion.button>
           </div>
         </div>
@@ -573,7 +573,9 @@ export const Gusto = () => {
         }}
       />
 
-      <CommunicationHUD />
+      {/* Marco Character Bubble - Bottom Right */}
+      <RestaurantFloatingBubble character="marco" />
+
     </div>
   );
 };

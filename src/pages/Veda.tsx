@@ -1,4 +1,3 @@
-import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Flame, X, Minus, Plus, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +10,7 @@ import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { motion } from 'framer-motion';
 import { useVoice } from '../context/VoiceContext';
+import { RestaurantFloatingBubble } from '../components/RestaurantFloatingBubble';
 
 export const Veda = () => {
   const navigate = useNavigate();
@@ -120,7 +120,7 @@ export const Veda = () => {
               }}
             >
               <Sparkles size={20} />
-              <span className="hidden md:inline">Activate Free Demo</span>
+              <span className="hidden md:inline">Let Dev Guide You</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -180,7 +180,7 @@ export const Veda = () => {
               }}
             >
               <Sparkles size={20} />
-              Activate Free Demo
+              Let Dev Guide You
             </motion.button>
           </div>
         </div>
@@ -613,6 +613,9 @@ export const Veda = () => {
           navigate('/');
         }}
       />
+
+      {/* Dev Character Bubble - Bottom Right */}
+      <RestaurantFloatingBubble character="dev" />
 
     </div>
   );

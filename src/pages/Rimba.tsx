@@ -1,4 +1,3 @@
-import { CommunicationHUD } from '../components/CommunicationHUD';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Flame, X, Minus, Plus, ChevronDown, Leaf } from 'lucide-react';
@@ -11,6 +10,7 @@ import { FloatingFNBIcons } from '../components/FloatingFNBIcons';
 import { ImagePreloader } from '../components/ImagePreloader';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { useVoice } from '../context/VoiceContext';
+import { RestaurantFloatingBubble } from '../components/RestaurantFloatingBubble';
 
 export const Rimba = () => {
   const navigate = useNavigate();
@@ -179,7 +179,7 @@ export const Rimba = () => {
               }}
             >
               <Leaf size={20} />
-              <span className="hidden md:inline">Activate Free Demo</span>
+              <span className="hidden md:inline">Let Aiman Serve You</span>
             </motion.button>
 
             <motion.button
@@ -268,7 +268,7 @@ export const Rimba = () => {
                 }}
               >
                 <Leaf size={20} />
-                Activate Free Demo
+                Let Aiman Serve You
               </motion.button>
             </div>
           </motion.div>
@@ -803,6 +803,9 @@ export const Rimba = () => {
           setIsCheckoutOpen(false);
         }}
       />
+
+      {/* Aiman Character Bubble - Bottom Right */}
+      <RestaurantFloatingBubble character="aiman" />
 
     </div>
   );

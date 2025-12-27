@@ -22,6 +22,23 @@ const restaurantTypes = [
   'Other',
 ];
 
+const branchOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+  { value: '5', label: '5' },
+  { value: '6-10', label: '6-10' },
+  { value: 'more_than_10', label: 'More than 10' },
+];
+
+const menuSizeOptions = [
+  { value: 'less_than_30', label: 'Less than 30' },
+  { value: '30-50', label: '30-50' },
+  { value: '50-100', label: '50-100' },
+  { value: 'more_than_100', label: 'More than 100' },
+];
+
 const malaysiaStates = [
   'Kuala Lumpur',
   'Selangor',
@@ -47,6 +64,8 @@ interface FormData {
   phone: string;
   your_restaurant_name: string;
   restaurant_type: string;
+  num_branches: string;
+  menu_size: string;
   state_region: string;
 }
 
@@ -58,6 +77,8 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
     phone: '',
     your_restaurant_name: '',
     restaurant_type: '',
+    num_branches: '',
+    menu_size: '',
     state_region: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -97,6 +118,8 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
           phone: '',
           your_restaurant_name: '',
           restaurant_type: '',
+          num_branches: '',
+          menu_size: '',
           state_region: '',
         });
         setSubmitStatus('idle');
@@ -137,6 +160,8 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
               { name: 'phone', value: formData.phone },
               { name: 'your_restaurant_name', value: formData.your_restaurant_name },
               { name: 'restaurant_type', value: formData.restaurant_type },
+              { name: 'num_branches', value: formData.num_branches },
+              { name: 'menu_size', value: formData.menu_size },
               { name: 'state_region', value: formData.state_region },
             ],
             context: {
@@ -355,6 +380,46 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
                     </select>
                   </div>
 
+                  {/* Number of Branches */}
+                  <div>
+                    <label htmlFor="num_branches" className={labelClasses}>
+                      Number of Branches *
+                    </label>
+                    <select
+                      id="num_branches"
+                      name="num_branches"
+                      value={formData.num_branches}
+                      onChange={handleInputChange}
+                      required
+                      className={selectClasses}
+                    >
+                      <option value="" disabled>Select number of branches...</option>
+                      {branchOptions.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Menu Size */}
+                  <div>
+                    <label htmlFor="menu_size" className={labelClasses}>
+                      How many items on your menu? *
+                    </label>
+                    <select
+                      id="menu_size"
+                      name="menu_size"
+                      value={formData.menu_size}
+                      onChange={handleInputChange}
+                      required
+                      className={selectClasses}
+                    >
+                      <option value="" disabled>Select menu size...</option>
+                      {menuSizeOptions.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
                   {/* State */}
                   <div>
                     <label htmlFor="state_region" className={labelClasses}>
@@ -398,7 +463,7 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
                       if (!isSubmitting) e.currentTarget.style.backgroundColor = '#F28500';
                     }}
                   >
-                    {isSubmitting ? 'Submitting...' : 'Get Your Free Demo →'}
+                    {isSubmitting ? 'Submitting...' : 'Get Your Custom Quote →'}
                   </button>
 
                   {/* Consent Text */}

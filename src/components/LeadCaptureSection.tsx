@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Target, Lock, Link2, Check } from 'lucide-react';
+import { trackFormStart, trackFormSubmit, trackFormView, getStoredUTMParams, trackWhatsAppClick } from '../lib/tracking';
 
 const WHATSAPP_NUMBER = '601116343646';
 
@@ -13,6 +14,23 @@ const restaurantTypes = [
   'Bar / Pub',
   'Catering',
   'Other',
+];
+
+const branchOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+  { value: '5', label: '5' },
+  { value: '6-10', label: '6-10' },
+  { value: 'more_than_10', label: 'More than 10' },
+];
+
+const menuSizeOptions = [
+  { value: 'less_than_30', label: 'Less than 30' },
+  { value: '30-50', label: '30-50' },
+  { value: '50-100', label: '50-100' },
+  { value: 'more_than_100', label: 'More than 100' },
 ];
 
 const states = [
@@ -31,6 +49,7 @@ const states = [
   'Sabah',
   'Sarawak',
   'Labuan',
+  'Putrajaya',
 ];
 
 const HUBSPOT_PORTAL_ID = '244263164';
@@ -49,6 +68,8 @@ interface FormData {
   phone: string;
   your_restaurant_name: string;
   restaurant_type: string;
+  num_branches: string;
+  menu_size: string;
   state_region: string;
 }
 
@@ -60,14 +81,25 @@ export const LeadCaptureSection = () => {
     phone: '',
     your_restaurant_name: '',
     restaurant_type: '',
+    num_branches: '',
+    menu_size: '',
     state_region: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    trackFormView();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    if (!hasStarted) {
+      setHasStarted(true);
+      trackFormStart();
+    }
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
@@ -75,6 +107,9 @@ export const LeadCaptureSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
+
+    // Get UTM params
+    const utmParams = getStoredUTMParams();
 
     try {
       // Format phone with +60 prefix
@@ -98,7 +133,13 @@ export const LeadCaptureSection = () => {
               { name: 'phone', value: formattedPhone },
               { name: 'your_restaurant_name', value: formData.your_restaurant_name },
               { name: 'restaurant_type', value: formData.restaurant_type },
+              { name: 'num_branches', value: formData.num_branches },
+              { name: 'menu_size', value: formData.menu_size },
               { name: 'state_region', value: formData.state_region },
+              // UTM fields (if configured in HubSpot)
+              ...(utmParams.utm_source ? [{ name: 'utm_source', value: utmParams.utm_source }] : []),
+              ...(utmParams.utm_medium ? [{ name: 'utm_medium', value: utmParams.utm_medium }] : []),
+              ...(utmParams.utm_campaign ? [{ name: 'utm_campaign', value: utmParams.utm_campaign }] : []),
             ],
             context: {
               pageUri: window.location.href,
@@ -112,6 +153,15 @@ export const LeadCaptureSection = () => {
         throw new Error('Submission failed');
       }
 
+      // Track successful submission
+      trackFormSubmit({
+        restaurant_type: formData.restaurant_type,
+        num_branches: formData.num_branches,
+        menu_size: formData.menu_size,
+        state: formData.state_region,
+        ...utmParams,
+      });
+
       setIsSubmitted(true);
       setFormData({
         firstname: '',
@@ -120,6 +170,8 @@ export const LeadCaptureSection = () => {
         phone: '',
         your_restaurant_name: '',
         restaurant_type: '',
+        num_branches: '',
+        menu_size: '',
         state_region: '',
       });
     } catch (err) {
@@ -130,11 +182,12 @@ export const LeadCaptureSection = () => {
   };
 
   const handleWhatsApp = () => {
+    trackWhatsAppClick('nova', 'lead_capture_section');
     window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank');
   };
 
   return (
-    <section className="px-6 py-24 bg-gradient-to-b from-black via-gray-900/50 to-gray-900">
+    <section id="contact" className="px-6 py-24 bg-gradient-to-b from-black via-gray-900/50 to-gray-900">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           
@@ -159,6 +212,13 @@ export const LeadCaptureSection = () => {
                   <span className="text-gray-300 text-sm font-medium">{item.text}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Early Bird Banner */}
+            <div className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 rounded-xl p-4 mb-6">
+              <p className="text-orange-400 font-semibold text-sm md:text-base">
+                🎉 Early Bird: 15% off setup + FREE custom AI character for first 50 restaurants
+              </p>
             </div>
 
             {/* WhatsApp Button */}
@@ -313,6 +373,48 @@ export const LeadCaptureSection = () => {
                       </select>
                     </div>
 
+                    {/* Number of Branches */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Number of Branches *
+                      </label>
+                      <select
+                        name="num_branches"
+                        value={formData.num_branches}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900 bg-white"
+                      >
+                        <option value="">Select number of branches...</option>
+                        {branchOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Menu Size */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        How many items on your menu? *
+                      </label>
+                      <select
+                        name="menu_size"
+                        value={formData.menu_size}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all text-gray-900 bg-white"
+                      >
+                        <option value="">Select menu size...</option>
+                        {menuSizeOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
                     {/* State */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -347,7 +449,7 @@ export const LeadCaptureSection = () => {
                       className="w-full py-4 rounded-lg font-bold text-lg text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ background: 'linear-gradient(90deg, #F28500, #FF6B35)' }}
                     >
-                      {isSubmitting ? 'Submitting...' : 'Get Your Free Demo'}
+                      {isSubmitting ? 'Submitting...' : 'Get Your Custom Quote →'}
                     </motion.button>
 
                     <p className="text-xs text-gray-500 text-center">
@@ -363,4 +465,3 @@ export const LeadCaptureSection = () => {
     </section>
   );
 };
-

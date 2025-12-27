@@ -3,6 +3,7 @@ import { Globe, MessageCircle, Phone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useVoice } from '../../context/VoiceContext';
+import { trackDemoClick, trackWhatsAppClick, trackVoiceStart } from '../../lib/tracking';
 
 interface Specialist {
   id: string;
@@ -155,10 +156,12 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
   const { triggerCall } = useVoice();
 
   const handleVisitWebsite = () => {
+    trackDemoClick(specialist.id);
     navigate(specialist.route);
   };
 
   const handleWhatsApp = () => {
+    trackWhatsAppClick(specialist.id, 'demo_section');
     window.open(
       `https://wa.me/${specialist.whatsappNumber}?text=Hi%20${specialist.name}!%20I%20want%20to%20test%20NorWeb`,
       '_blank'
@@ -166,6 +169,7 @@ function SpecialistCard({ specialist, index }: { specialist: Specialist; index: 
   };
 
   const handleVoiceCall = () => {
+    trackVoiceStart(specialist.id);
     navigate(specialist.route);
     setTimeout(() => triggerCall(), 500);
   };

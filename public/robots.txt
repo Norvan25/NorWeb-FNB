@@ -1,0 +1,11 @@
+# robots.txt for norweb-fnb.norvan.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://norweb-fnb.norvan.io/sitemap.xml
+
+# Crawl-delay (optional, be nice to bots)
+Crawl-delay: 1
+

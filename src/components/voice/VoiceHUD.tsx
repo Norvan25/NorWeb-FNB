@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { Phone, Mic, MicOff, X, Minus, ChevronUp, MessageCircle } from 'lucide-react';
+import { Phone, Mic, MicOff, X, Minus, ChevronUp } from 'lucide-react';
 import { useElevenLabsConversation } from '../../hooks/useElevenLabsConversation';
 import { getAgentForPath, AgentConfig } from '../../config/agents';
 import { useVoice } from '../../context/VoiceContext';
@@ -47,45 +47,6 @@ const VoiceWaveform = ({ isActive, isSpeaking, color }: { isActive: boolean; isS
     </div>
   );
 };
-
-// Idle state button
-const IdleButton = ({ 
-  agent, 
-  onClick, 
-  isConnecting 
-}: { 
-  agent: AgentConfig; 
-  onClick: () => void; 
-  isConnecting: boolean;
-}) => (
-  <motion.button
-    onClick={onClick}
-    disabled={isConnecting}
-    className="flex items-center gap-3 px-5 py-3 rounded-full text-white font-semibold text-sm shadow-lg transition-all disabled:opacity-70 disabled:cursor-wait"
-    style={{
-      background: `linear-gradient(135deg, ${agent.themeColor} 0%, ${agent.secondaryColor} 100%)`,
-      boxShadow: `0 4px 20px ${agent.themeColor}40`,
-    }}
-    whileHover={{ scale: 1.02, y: -2 }}
-    whileTap={{ scale: 0.98 }}
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.8 }}
-  >
-    {/* Pulse ring */}
-    <motion.div
-      className="absolute inset-0 rounded-full"
-      style={{ background: `linear-gradient(135deg, ${agent.themeColor}, ${agent.secondaryColor})` }}
-      animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
-      transition={{ duration: 2, repeat: Infinity }}
-    />
-    
-    <div className="relative flex items-center gap-3">
-      <Phone size={18} />
-      <span>{isConnecting ? 'Connecting...' : `Talk to ${agent.agentName}`}</span>
-    </div>
-  </motion.button>
-);
 
 // Compact panel during call
 const CompactPanel = ({
@@ -242,27 +203,10 @@ const MiniBubble = ({
   </motion.button>
 );
 
-// WhatsApp button
-const WhatsAppButton = ({ onClick }: { onClick: () => void }) => (
-  <motion.button
-    onClick={onClick}
-    className="w-12 h-12 rounded-full flex items-center justify-center bg-green-500 shadow-lg hover:bg-green-600 transition-colors"
-    style={{ boxShadow: '0 4px 15px rgba(34, 197, 94, 0.4)' }}
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    initial={{ opacity: 0, x: 20 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: 20 }}
-  >
-    <MessageCircle size={20} className="text-white" />
-  </motion.button>
-);
-
 // Main VoiceHUD component
 export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => {
   const location = useLocation();
   const [hudState, setHudState] = useState<HUDState>('idle');
-  const [showWhatsApp, setShowWhatsApp] = useState(false);
   const { shouldStartCall, resetCallTrigger } = useVoice();
   
   // Get current agent based on route
@@ -302,28 +246,10 @@ export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => 
     }
   }, [location.pathname]);
 
-  const handleStartCall = useCallback(async () => {
-    setShowWhatsApp(false);
-    await startCall();
-  }, [startCall]);
-
   const handleEndCall = useCallback(async () => {
     await endCall();
     setHudState('idle');
   }, [endCall]);
-
-  const handleWhatsApp = useCallback(() => {
-    window.open('https://wa.me/601116343646', '_blank');
-    setShowWhatsApp(false);
-  }, []);
-
-  const handleIdleClick = useCallback(() => {
-    if (showWhatsApp) {
-      setShowWhatsApp(false);
-    } else {
-      handleStartCall();
-    }
-  }, [showWhatsApp, handleStartCall]);
 
   // Don't render button if no agent ID configured, but don't break the app
   if (!agent.agentId) {
@@ -331,21 +257,35 @@ export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => 
     return <></>;
   }
 
+  // Don't render anything in idle state - NovaFloatingBubble handles that now
+  // Only show HUD during active calls (compact/minimized states)
+  if (hudState === 'idle' && !isConnecting) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-5 right-5 z-[9999] flex flex-col items-end gap-3 md:bottom-6 md:right-6">
       <AnimatePresence mode="wait">
-        {/* WhatsApp option */}
-        {hudState === 'idle' && showWhatsApp && (
-          <WhatsAppButton onClick={handleWhatsApp} />
-        )}
-
-        {/* Main HUD states */}
-        {hudState === 'idle' && (
-          <IdleButton 
-            agent={agent} 
-            onClick={handleIdleClick}
-            isConnecting={isConnecting}
-          />
+        {/* Show connecting state */}
+        {hudState === 'idle' && isConnecting && (
+          <motion.div
+            className="flex items-center gap-3 px-5 py-3 rounded-full text-white font-semibold text-sm shadow-lg"
+            style={{
+              background: `linear-gradient(135deg, ${agent.themeColor} 0%, ${agent.secondaryColor} 100%)`,
+              boxShadow: `0 4px 20px ${agent.themeColor}40`,
+            }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            >
+              <Phone size={18} />
+            </motion.div>
+            <span>Connecting...</span>
+          </motion.div>
         )}
 
         {hudState === 'compact' && (
