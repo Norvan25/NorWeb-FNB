@@ -31,6 +31,11 @@ export const LandingHub = () => {
 
   const { openLeadCapture } = useCommunication();
 
+  // Scroll to top on page load/refresh
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleGetStarted = (plan?: string) => {
     if (plan) {
       trackPricingView(plan);
