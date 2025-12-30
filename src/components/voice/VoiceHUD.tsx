@@ -1,10 +1,46 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
-import { Phone, Mic, MicOff, X, Minus, ChevronUp } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Phone, Mic, MicOff, X, Minus, ChevronUp, FileText, Users } from 'lucide-react';
 import { useElevenLabsConversation } from '../../hooks/useElevenLabsConversation';
 import { getAgentForPath, AgentConfig } from '../../config/agents';
 import { useVoice } from '../../context/VoiceContext';
+import { useCommunication } from '../../context/CommunicationContext';
+
+// Navigation button configuration per agent/page
+interface NavButton {
+  label: string;
+  action: 'navigate' | 'quote';
+  path?: string;
+  icon?: 'users' | 'quote';
+}
+
+const NAV_BUTTONS_CONFIG: Record<string, NavButton[]> = {
+  '/': [
+    { label: 'Meet Aiman', action: 'navigate', path: '/restaurant/rimba', icon: 'users' },
+    { label: 'Meet Dev', action: 'navigate', path: '/restaurant/veda', icon: 'users' },
+    { label: 'Meet Marco', action: 'navigate', path: '/restaurant/gusto', icon: 'users' },
+    { label: 'Get Quote', action: 'quote', icon: 'quote' },
+  ],
+  '/restaurant/rimba': [
+    { label: 'Meet Dev', action: 'navigate', path: '/restaurant/veda', icon: 'users' },
+    { label: 'Meet Marco', action: 'navigate', path: '/restaurant/gusto', icon: 'users' },
+    { label: 'Talk to Nova', action: 'navigate', path: '/', icon: 'users' },
+    { label: 'Get Quote', action: 'quote', icon: 'quote' },
+  ],
+  '/restaurant/veda': [
+    { label: 'Meet Aiman', action: 'navigate', path: '/restaurant/rimba', icon: 'users' },
+    { label: 'Meet Marco', action: 'navigate', path: '/restaurant/gusto', icon: 'users' },
+    { label: 'Talk to Nova', action: 'navigate', path: '/', icon: 'users' },
+    { label: 'Get Quote', action: 'quote', icon: 'quote' },
+  ],
+  '/restaurant/gusto': [
+    { label: 'Meet Aiman', action: 'navigate', path: '/restaurant/rimba', icon: 'users' },
+    { label: 'Meet Dev', action: 'navigate', path: '/restaurant/veda', icon: 'users' },
+    { label: 'Talk to Nova', action: 'navigate', path: '/', icon: 'users' },
+    { label: 'Get Quote', action: 'quote', icon: 'quote' },
+  ],
+};
 
 type HUDState = 'idle' | 'compact' | 'minimized' | 'expanded';
 
@@ -15,6 +51,11 @@ interface VoiceHUDProps {
     phone?: string;
     name?: string;
   };
+}
+
+// Get nav buttons for current path
+function getNavButtonsForPath(pathname: string): NavButton[] {
+  return NAV_BUTTONS_CONFIG[pathname] || NAV_BUTTONS_CONFIG['/'];
 }
 
 // Waveform visualization component
@@ -48,6 +89,45 @@ const VoiceWaveform = ({ isActive, isSpeaking, color }: { isActive: boolean; isS
   );
 };
 
+// Navigation buttons component
+const NavigationButtons = ({
+  buttons,
+  themeColor,
+  onNavigate,
+  onQuote,
+}: {
+  buttons: NavButton[];
+  themeColor: string;
+  onNavigate: (path: string) => void;
+  onQuote: () => void;
+}) => {
+  return (
+    <div className="grid grid-cols-2 gap-2 px-4 py-3">
+      {buttons.map((btn, idx) => {
+        const isQuote = btn.action === 'quote';
+        return (
+          <motion.button
+            key={idx}
+            onClick={() => isQuote ? onQuote() : onNavigate(btn.path!)}
+            className={`py-2.5 px-3 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all ${
+              isQuote
+                ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
+                : 'bg-white/10 hover:bg-white/20 text-white/90'
+            }`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            style={!isQuote ? { borderColor: `${themeColor}40`, borderWidth: 1 } : {}}
+          >
+            {btn.icon === 'users' && <Users size={12} />}
+            {btn.icon === 'quote' && <FileText size={12} />}
+            {btn.label}
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+};
+
 // Compact panel during call
 const CompactPanel = ({
   agent,
@@ -55,18 +135,24 @@ const CompactPanel = ({
   isUserSpeaking,
   isMuted,
   error,
+  navButtons,
   onMinimize,
   onMute,
   onEnd,
+  onNavigate,
+  onQuote,
 }: {
   agent: AgentConfig;
   isAgentSpeaking: boolean;
   isUserSpeaking: boolean;
   isMuted: boolean;
   error: string | null;
+  navButtons: NavButton[];
   onMinimize: () => void;
   onMute: () => void;
   onEnd: () => void;
+  onNavigate: (path: string) => void;
+  onQuote: () => void;
 }) => {
   const handleDragEnd = (_: any, info: PanInfo) => {
     if (info.offset.y > 50) {
@@ -76,7 +162,7 @@ const CompactPanel = ({
 
   return (
     <motion.div
-      className="w-[300px] max-w-[calc(100vw-32px)] rounded-2xl overflow-hidden"
+      className="w-[320px] max-w-[calc(100vw-32px)] rounded-2xl overflow-hidden"
       style={{
         background: 'rgba(19, 34, 56, 0.95)',
         backdropFilter: 'blur(20px)',
@@ -118,7 +204,7 @@ const CompactPanel = ({
       </div>
 
       {/* Waveform */}
-      <div className="px-4 py-4">
+      <div className="px-4 py-3">
         <VoiceWaveform 
           isActive={true} 
           isSpeaking={isAgentSpeaking} 
@@ -137,8 +223,22 @@ const CompactPanel = ({
         </p>
       </div>
 
+      {/* Divider */}
+      <div className="h-px bg-white/10 mx-4" />
+
+      {/* Navigation Buttons */}
+      <NavigationButtons
+        buttons={navButtons}
+        themeColor={agent.themeColor}
+        onNavigate={onNavigate}
+        onQuote={onQuote}
+      />
+
+      {/* Divider */}
+      <div className="h-px bg-white/10 mx-4" />
+
       {/* Controls */}
-      <div className="flex gap-3 px-4 pb-4">
+      <div className="flex gap-3 px-4 py-3">
         <button
           onClick={onMute}
           className={`flex-1 py-3 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
@@ -206,11 +306,16 @@ const MiniBubble = ({
 // Main VoiceHUD component
 export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [hudState, setHudState] = useState<HUDState>('idle');
   const { shouldStartCall, resetCallTrigger } = useVoice();
+  const { openLeadCapture } = useCommunication();
   
   // Get current agent based on route
   const agent = getAgentForPath(location.pathname);
+  
+  // Get navigation buttons for current page
+  const navButtons = getNavButtonsForPath(location.pathname);
 
   const {
     isConnected,
@@ -250,6 +355,18 @@ export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => 
     await endCall();
     setHudState('idle');
   }, [endCall]);
+
+  // Handle navigation button click - end call and navigate
+  const handleNavigate = useCallback(async (path: string) => {
+    await endCall();
+    setHudState('idle');
+    navigate(path);
+  }, [endCall, navigate]);
+
+  // Handle Get Quote button click - open lead capture modal (call stays active)
+  const handleQuote = useCallback(() => {
+    openLeadCapture();
+  }, [openLeadCapture]);
 
   // Don't render button if no agent ID configured, but don't break the app
   if (!agent.agentId) {
@@ -295,9 +412,12 @@ export const VoiceHUD = ({ visitorContext: _visitorContext }: VoiceHUDProps) => 
             isUserSpeaking={false}
             isMuted={isMuted}
             error={error}
+            navButtons={navButtons}
             onMinimize={() => setHudState('minimized')}
             onMute={toggleMute}
             onEnd={handleEndCall}
+            onNavigate={handleNavigate}
+            onQuote={handleQuote}
           />
         )}
 
