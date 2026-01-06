@@ -2,9 +2,21 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useCommunication } from '../../context/CommunicationContext';
 
-export const FinalCTASection = () => {
+interface FinalCTASectionProps {
+  onScrollTo?: (sectionId: string) => void;
+}
+
+export const FinalCTASection = ({ onScrollTo }: FinalCTASectionProps) => {
   const { t } = useTranslation();
   const { openLeadCapture } = useCommunication();
+
+  const scrollToSection = (sectionId: string) => {
+    if (onScrollTo) {
+      onScrollTo(sectionId);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="py-20 md:py-28 px-4 bg-[#0A1628] relative overflow-hidden">
@@ -19,35 +31,84 @@ export const FinalCTASection = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-4xl mx-auto text-center text-white relative z-10"
+        className="max-w-4xl mx-auto text-center text-white relative z-10 space-y-8"
       >
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">{t('cta.headline')}</h2>
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">{t('cta.headline')}</h2>
 
-        <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10 leading-relaxed">
-          {t('cta.body')}
-        </p>
+        <div className="text-lg md:text-xl text-gray-300 leading-relaxed space-y-6">
+          <div>
+            <p className="mb-2">You can wake up tomorrow and:</p>
+            <ul className="list-disc list-inside space-y-1 text-left max-w-md mx-auto">
+              <li>Still have missed calls from last night</li>
+              <li>Still have unanswered WhatsApp messages</li>
+              <li>Still have no idea which marketing works</li>
+              <li>Still be running yourself into the ground</li>
+            </ul>
+          </div>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => openLeadCapture('Final CTA')}
-          className="bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-10 md:px-14 py-5 md:py-6 rounded-full text-xl md:text-2xl font-bold hover:shadow-2xl transition-all shadow-lg shadow-[#F28500]/30"
-        >
-          {t('cta.button')}
-        </motion.button>
+          <p className="text-3xl md:text-4xl font-bold text-white py-4">Or.</p>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm md:text-base text-gray-400">
-          <span className="inline-flex items-center gap-2">
-            <span>🚀</span> {t('cta.badge1')}
-          </span>
-          <span className="hidden sm:inline text-gray-600">•</span>
-          <span className="inline-flex items-center gap-2">
-            <span>⚡</span> {t('cta.badge2')}
-          </span>
-          <span className="hidden sm:inline text-gray-600">•</span>
-          <span className="inline-flex items-center gap-2">
-            <span>✓</span> {t('cta.badge3')}
-          </span>
+          <div>
+            <p className="mb-2">You can start the 7-day countdown to having an AI marketing department that:</p>
+            <ul className="list-disc list-inside space-y-1 text-left max-w-md mx-auto">
+              <li>Answered every call</li>
+              <li>Captured every lead</li>
+              <li>Nurtured every interested customer</li>
+              <li>Turned interest into bookings</li>
+              <li>While you slept</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-lg text-gray-300">
+            Your competitors who seem to have it figured out?
+          </p>
+          <p className="text-xl font-semibold text-white">
+            They don't work harder than you.
+          </p>
+          <p className="text-xl font-semibold text-white">
+            They just have help.
+          </p>
+        </div>
+
+        <div className="space-y-4 pt-4">
+          <p className="text-2xl font-bold text-white">
+            The dinner rush is coming.
+          </p>
+          <p className="text-2xl font-bold text-[#F28500]">
+            Will you answer the call?
+          </p>
+        </div>
+
+        <div className="space-y-2 pt-4">
+          <p className="text-xl font-semibold text-white">{t('cta.badge1')}</p>
+          <p className="text-lg text-gray-300">{t('cta.badge2')}</p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => openLeadCapture('Final CTA')}
+            className="bg-gradient-to-r from-[#F28500] to-[#FF9A1F] text-white px-8 md:px-12 py-4 rounded-full text-lg md:text-xl font-bold hover:shadow-2xl transition-all shadow-lg shadow-[#F28500]/30"
+          >
+            {t('cta.button')}
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection('pricing')}
+            className="border-2 border-white/30 text-white px-8 md:px-12 py-4 rounded-full text-lg md:text-xl font-bold hover:border-white hover:bg-white/10 transition-all"
+          >
+            View Pricing
+          </motion.button>
+        </div>
+
+        <div className="pt-6 text-gray-400">
+          <p className="mb-2">Prefer a human?</p>
+          <p>WhatsApp: +60 11-1634 3646</p>
+          <p>Email: hello@norvan.io</p>
         </div>
       </motion.div>
     </section>

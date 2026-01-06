@@ -73,12 +73,16 @@ export const HeroSection = ({ onScrollTo }: HeroSectionProps) => {
               <span className="flex items-center gap-2">
                 <span className="text-[#22C55E]">✓</span> {t('hero.badge_language')}
               </span>
-              <span className="flex items-center gap-2">
-                <span className="text-[#22C55E]">✓</span> {t('hero.badge_sick')}
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="text-[#22C55E]">✓</span> {t('hero.badge_hospitality')}
-              </span>
+              {t('hero.badge_sick') && (
+                <span className="flex items-center gap-2">
+                  <span className="text-[#22C55E]">✓</span> {t('hero.badge_sick')}
+                </span>
+              )}
+              {t('hero.badge_hospitality') && (
+                <span className="flex items-center gap-2">
+                  <span className="text-[#22C55E]">✓</span> {t('hero.badge_hospitality')}
+                </span>
+              )}
             </div>
           </motion.div>
 

@@ -9,43 +9,43 @@ interface FAQItem {
 
 const leftColumnFAQs: FAQItem[] = [
   {
-    question: "Times are tough — is NorWeb worth the cost?",
-    answer: "We get it. That's why we built NorWeb to pay for itself. Most restaurants recover their subscription cost within the first 2 weeks through saved missed calls and reduced no-shows alone. Plus, with our 3-Month ROI Guarantee, if you don't see results, you get your setup fee back. Zero risk."
+    question: "I'm not technical at all. Can I actually use this?",
+    answer: "That's exactly why we built it this way. You don't operate NorWeb — it operates for you. After setup (which we handle completely), you just check your dashboard occasionally. If you can read a WhatsApp message, you can use NorWeb."
   },
   {
-    question: "Other solutions seem cheaper — why NorWeb?",
-    answer: "Cheaper tools give you a chatbot. NorWeb gives you a complete revenue system — AI that answers calls, takes orders, sends reminders, collects reviews, and markets to your customers. One platform replacing 5-6 separate tools. When you add up what you'd pay for a website builder + booking system + WhatsApp tool + review manager + CRM, NorWeb is actually the most cost-effective option."
+    question: "Will this work with my current POS?",
+    answer: "Yes. NorWeb is POS-agnostic. We don't replace your transaction system — we handle marketing, which your POS doesn't do. They work together, not against each other. Whatever POS you use, NorWeb sits on top."
   },
   {
-    question: "What's the 3-Month ROI Guarantee?",
-    answer: "Simple: If NorWeb doesn't generate at least 50 bookings or orders in your first 3 months, we'll refund your entire setup fee. No questions asked. We're betting on our own product because we know it works."
+    question: "How long does setup take?",
+    answer: "7 days from sign-up to live. We do the heavy lifting: building your website, training the AI on your menu and policies, setting up automations. You just answer some questions about your restaurant and approve the final result."
   },
   {
-    question: "What's included in the Growth tier?",
-    answer: "Everything in Starter (AI website, chatbot, booking system) PLUS: AI Voice Agent that answers your phone 24/7, delivery platform integration (Grab, Lalamove), full CRM with customer history, automated review collection, WhatsApp broadcast marketing, and priority support. It's our most popular plan because it covers everything a growing restaurant needs."
+    question: "What if I don't like it?",
+    answer: "Cancel anytime. No lock-in contracts. We also offer a 30-day satisfaction guarantee — if you're not seeing value, we'll make it right or refund you. We're not here to trap you. We earn your business every month."
   },
   {
-    question: "What does 'AI Voice Agent' mean?",
-    answer: "It's like having a receptionist who never sleeps. When customers call your restaurant, our AI answers in a natural voice, handles reservations, answers menu questions, provides operating hours, and can even take orders. Available in English and Bahasa Malaysia. Your staff focuses on customers in the restaurant while AI handles the phone."
+    question: "Is the voice AI actually good? Or robotic?",
+    answer: "Talk to Nova right now. The button is on this page. That's your answer. Our AI uses advanced voice technology trained specifically for restaurant conversations. Most customers don't realize they're talking to AI until the booking is confirmed instantly."
   },
   {
-    question: "What does setup include?",
-    answer: "Full white-glove onboarding: We build your custom AI-powered website, configure your menu with photos, train the AI on your specific restaurant details (parking, dietary options, signature dishes), integrate with your existing systems, and provide 2 days of dedicated support to ensure everything runs smoothly. You don't lift a finger."
+    question: "Do I need to do anything after setup?",
+    answer: "Check your dashboard. See your bookings. That's it. The AI handles customer inquiries 24/7. If you have menu changes or new promotions, just tell us — we'll update the system. Otherwise, it runs itself."
   }
 ];
 
 const rightColumnFAQs: FAQItem[] = [
   {
-    question: "Are there hidden fees?",
-    answer: "No hidden fees, ever. Your subscription includes everything listed. The only variable cost is AI usage (voice minutes and messages), which is billed based on actual consumption — and for most restaurants, this is under RM 50/month. We believe in transparent pricing."
+    question: "What about walk-in customers?",
+    answer: "NorWeb handles digital and phone customers — the ones who would otherwise slip through the cracks. Your staff stays focused on serving people in front of them. If anything, service IMPROVES because they're not running to answer the phone during rush hour."
+  },
+  {
+    question: "Will customers know they're talking to AI?",
+    answer: "We can configure it either way. Most customers don't mind — they want fast, accurate answers and instant booking. What matters is they get helped immediately instead of waiting or being ignored."
   },
   {
     question: "How long until I see results?",
     answer: "Most restaurants see their first AI-handled booking within 24 hours of going live. Within the first week, you'll notice fewer missed calls and more online orders. By month 2-3, you'll have concrete data on revenue recovered. Our fastest result: a restaurant recovered RM 3,200 in their first month."
-  },
-  {
-    question: "I already use StoreHub — do I need this?",
-    answer: "StoreHub is great for POS. NorWeb handles everything before the transaction: answering inquiries, taking bookings, reducing no-shows, and bringing customers to your door. We integrate WITH your existing POS, not replace it. Think of us as your 24/7 sales and customer service team that feeds orders into StoreHub."
   },
   {
     question: "Who owns my customer data?",
@@ -53,7 +53,7 @@ const rightColumnFAQs: FAQItem[] = [
   },
   {
     question: "What's the Early Bird offer?",
-    answer: "First 50 restaurants in each area get: 15% off setup (RM 2,975 instead of RM 3,500), up to 6 months FREE on annual plans, and priority onboarding. We're building case studies and want early partners who'll grow with us. Once the 50 spots fill, prices go back to normal."
+    answer: "First 50 restaurants get 15% off for life. We're building case studies and want early partners who'll grow with us. Once the 50 spots fill, prices go back to normal."
   },
   {
     question: "Can I upgrade from Starter later?",
@@ -125,11 +125,8 @@ export const FAQSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Frequently Asked Questions
+            Questions We Get Over Teh Tarik
           </h2>
-          <p className="text-gray-400 text-lg">
-            Everything you need to know about NorWeb
-          </p>
         </motion.div>
 
         {/* 2-Column FAQ Grid */}
@@ -173,10 +170,10 @@ export const FAQSection = () => {
         >
           <p className="text-gray-400 mb-4">Still have questions?</p>
           <a
-            href="mailto:info@norvan.io"
+            href="#contact"
             className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
           >
-            Contact us at info@norvan.io
+            Talk to Nova
           </a>
         </motion.div>
       </div>

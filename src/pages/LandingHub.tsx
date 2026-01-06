@@ -21,6 +21,9 @@ import {
   NovaDomainSection,
   ComparisonSection,
   PainPointsSection,
+  CostSection,
+  HowItWorksSection,
+  POSIntegrationSection,
   FinalCTASection,
 } from '../components/landing';
 
@@ -75,25 +78,31 @@ export const LandingHub = () => {
       {/* Sticky Navbar (below banner) */}
       <Navbar onScrollTo={scrollToSection} />
 
-      {/* SECTION 3: Hero Section */}
+      {/* SECTION 1: Hero Section */}
       <HeroSection onScrollTo={scrollToSection} />
 
-      {/* SECTION 4: Demo Section - "The Undercover Boss Test" */}
-      <DemoSection />
-
-      {/* SECTION 5: The Reveal Section - Soul vs Brain */}
-      <RevealSection />
-
-      {/* SECTION 6: Nova's Domain - Features */}
-      <NovaDomainSection />
-
-      {/* SECTION 7: Comparison Table */}
-      <ComparisonSection />
-
-      {/* SECTION 8: Pain Points */}
+      {/* SECTION 2: Pain Points */}
       <PainPointsSection />
 
-      {/* SECTION 9: ROI Calculator */}
+      {/* SECTION 3: The Cost */}
+      <CostSection />
+
+      {/* SECTION 4: The Solution - Nova's Domain */}
+      <NovaDomainSection />
+
+      {/* SECTION 5: Meet The Team */}
+      <DemoSection />
+
+      {/* SECTION 6: How It Works */}
+      <HowItWorksSection />
+
+      {/* SECTION 7: Works With Your Setup */}
+      <POSIntegrationSection />
+
+      {/* SECTION 8: Comparison Table */}
+      <ComparisonSection />
+
+      {/* SECTION 9: ROI Calculator / The Math */}
       <div className="bg-[#0A1628]">
         <ROICalculator />
       </div>
@@ -167,18 +176,18 @@ export const LandingHub = () => {
             >
               <div className="pt-2">
                 <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Starter</h3>
-                <p className="text-[#4B5563] text-sm mb-6">AI Front Desk</p>
+                <p className="text-[#4B5563] text-sm mb-6">For: Small cafés, new restaurants, single outlets testing the waters</p>
 
                 <div className="mb-4">
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
-                      RM {isAnnualBilling ? '186' : '219'}
+                      RM {isAnnualBilling ? '299' : '299'}
                     </span>
                     <span className="text-[#4B5563]">/mo</span>
                   </div>
                   {isAnnualBilling && (
                     <>
-                      <p className="text-sm text-[#22C55E] font-medium">RM 2,232/year</p>
+                      <p className="text-sm text-[#22C55E] font-medium">RM 3,588/year</p>
                       <p className="text-xs text-[#4B5563]">billed annually</p>
                     </>
                   )}
@@ -186,11 +195,11 @@ export const LandingHub = () => {
 
                 <ul className="space-y-3 mb-8">
                   {[
-                    '1 AI Specialist (choose cuisine)',
-                    'WhatsApp integration',
-                    'Basic menu Q&A',
-                    'Operating hours & location',
-                    '500 conversations/month',
+                    'AI-powered website (mobile-first)',
+                    'Nova voice agent (English)',
+                    'Basic lead capture (name, phone, preferences)',
+                    'WhatsApp booking confirmations',
+                    'Basic dashboard (leads + bookings overview)',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#22C55E] flex-shrink-0 mt-0.5" size={18} />
@@ -205,7 +214,7 @@ export const LandingHub = () => {
                   onClick={() => handleGetStarted('Starter')}
                   className="w-full py-4 rounded-full font-bold text-lg text-white transition-all bg-gradient-to-r from-[#F28500] to-[#FF9A1F] hover:shadow-lg"
                 >
-                  Start Free Trial
+                  Get Started
                 </motion.button>
               </div>
             </motion.div>
@@ -226,12 +235,12 @@ export const LandingHub = () => {
 
               <div className="pt-6">
                 <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Growth</h3>
-                <p className="text-[#4B5563] text-sm mb-6">Full Operations Suite</p>
+                <p className="text-[#4B5563] text-sm mb-6">For: Busy restaurants serious about filling more tables</p>
 
                 <div className="mb-4">
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
-                      RM {isAnnualBilling ? '499' : '549'}
+                      RM {isAnnualBilling ? '499' : '499'}
                     </span>
                     <span className="text-[#4B5563]">/mo</span>
                   </div>
@@ -245,13 +254,13 @@ export const LandingHub = () => {
 
                 <ul className="space-y-3 mb-8">
                   {[
-                    'All 3 AI Specialists',
-                    'Nova (AI Manager)',
-                    'WhatsApp + Voice + Web',
-                    'Booking & reservations',
-                    'Basic CRM integration',
-                    '2,000 conversations/month',
-                    'Review management',
+                    'Everything in Starter, plus:',
+                    'Full AI team (Nova, Aiman, Marco, Dev)',
+                    'Phone call answering (never miss another call)',
+                    'Advanced lead nurturing sequences',
+                    'Automated WhatsApp follow-ups and reminders',
+                    'Detailed analytics (channel performance, repeat customers)',
+                    'Priority support and onboarding',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#F28500] flex-shrink-0 mt-0.5" size={18} />
@@ -266,7 +275,7 @@ export const LandingHub = () => {
                   onClick={() => handleGetStarted('Growth')}
                   className="w-full py-4 rounded-full font-bold text-lg text-white transition-all shadow-lg bg-gradient-to-r from-[#F28500] to-[#FF9A1F] hover:shadow-xl"
                 >
-                  Start Free Trial
+                  Start Growing
                 </motion.button>
               </div>
             </motion.div>
@@ -280,22 +289,32 @@ export const LandingHub = () => {
               className="relative p-6 md:p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-[#8B5CF6]/50 hover:shadow-xl transition-all"
             >
               <div className="pt-2">
-                <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Enterprise</h3>
-                <p className="text-[#4B5563] text-sm mb-6">Complete Marketing Machine</p>
+                <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Scale</h3>
+                <p className="text-[#4B5563] text-sm mb-6">For: Restaurant groups, franchises, multi-location brands</p>
 
                 <div className="mb-4">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">Custom</span>
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
+                      RM {isAnnualBilling ? '799' : '799'}
+                    </span>
+                    <span className="text-[#4B5563]">/mo</span>
+                  </div>
+                  {isAnnualBilling && (
+                    <>
+                      <p className="text-sm text-[#22C55E] font-medium">RM 9,588/year</p>
+                      <p className="text-xs text-[#4B5563]">billed annually</p>
+                    </>
+                  )}
                 </div>
 
                 <ul className="space-y-3 mb-8">
                   {[
-                    'Everything in Growth',
-                    'Unlimited conversations',
-                    'Full CRM + POS integration',
-                    'Automated campaigns',
-                    'Multi-location support',
-                    'Custom AI training',
+                    'Everything in Growth, plus:',
+                    'Multi-location dashboard and routing',
+                    'Custom integrations with your existing systems',
                     'Dedicated account manager',
+                    'Quarterly optimization review',
+                    'Custom voice training for your brand',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#8B5CF6] flex-shrink-0 mt-0.5" size={18} />
@@ -307,7 +326,7 @@ export const LandingHub = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => handleGetStarted('Enterprise')}
+                  onClick={() => handleGetStarted('Scale')}
                   className="w-full py-4 rounded-full font-bold text-lg text-[#0A1628] border-2 border-[#0A1628]/30 hover:border-[#0A1628] hover:bg-gray-50 transition-all"
                 >
                   Contact Sales
@@ -324,7 +343,7 @@ export const LandingHub = () => {
             className="text-center"
           >
             <p className="text-lg text-[#F28500] font-semibold">
-              + First 50 restaurants get 6 months FREE support
+              🚀 Early Bird Offer: First 50 restaurants get 15% off for life.
             </p>
           </motion.div>
         </div>
@@ -348,7 +367,7 @@ export const LandingHub = () => {
       </div>
 
       {/* SECTION 11: Final CTA */}
-      <FinalCTASection />
+      <FinalCTASection onScrollTo={scrollToSection} />
 
       {/* Lead Capture Section */}
       <div className="bg-[#F3F4F6]">

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NorWeb FnB | AI Restaurant Assistant - Internal Version</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+      line-height: 1.6; 
+      color: #0A1628;
+      background: #fff;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3, h4 { font-weight: 700; margin-bottom: 16px; }
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.25rem; }
+    h3 { font-size: 1.5rem; }
+    p { margin-bottom: 16px; color: #4B5563; }
+    a { color: #F28500; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul, ol { margin-left: 24px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; }
+    
+    /* Sections */
+    section { padding: 60px 0; }
+    .dark-section { background: #0A1628; color: #fff; }
+    .dark-section p { color: #9CA3AF; }
+    .gray-section { background: #F3F4F6; }
+    
+    /* Banner */
+    .top-banner { 
+      background: linear-gradient(90deg, #F28500, #FF9A1F); 
+      color: #fff; 
+      text-align: center; 
+      padding: 12px; 
+      font-weight: 600;
+    }
+    
+    /* Hero */
+    .hero { 
+      background: linear-gradient(135deg, #0A1628 0%, #1E3A5F 100%); 
+      color: #fff; 
+      padding: 100px 0;
+      text-align: center;
+    }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 24px; }
+    .hero p { color: #9CA3AF; font-size: 1.25rem; max-width: 700px; margin: 0 auto 32px; }
+    .hero-subtitle { 
+      display: inline-block; 
+      background: rgba(255,255,255,0.1); 
+      padding: 8px 24px; 
+      border-radius: 50px; 
+      margin-bottom: 24px;
+      color: #66D3FA;
+    }
+    
+    /* CTA Button */
+    .cta-btn { 
+      display: inline-block; 
+      background: linear-gradient(90deg, #F28500, #FF9A1F); 
+      color: #fff; 
+      padding: 16px 40px; 
+      border-radius: 50px; 
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      margin: 8px;
+    }
+    .cta-btn-secondary {
+      background: transparent;
+      border: 2px solid #fff;
+    }
+    
+    /* Cards Grid */
+    .cards-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 24px; 
+      margin-top: 40px;
+    }
+    .card { 
+      background: #fff; 
+      border-radius: 16px; 
+      padding: 32px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border: 1px solid #E5E7EB;
+    }
+    .dark-section .card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
+    
+    /* Character Card */
+    .character-card { text-align: center; }
+    .character-img { 
+      width: 120px; 
+      height: 120px; 
+      border-radius: 50%; 
+      background: #E5E7EB; 
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    
+    /* Pricing */
+    .pricing-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 24px; 
+      margin-top: 40px;
+    }
+    .pricing-card { 
+      background: #fff; 
+      border-radius: 24px; 
+      padding: 32px; 
+      border: 2px solid #E5E7EB;
+    }
+    .pricing-card.popular { 
+      border-color: #F28500; 
+      box-shadow: 0 8px 40px rgba(242,133,0,0.2);
+      transform: scale(1.02);
+    }
+    .popular-badge {
+      background: linear-gradient(90deg, #F28500, #FF9A1F);
+      color: #fff;
+      padding: 6px 20px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .price { font-size: 3rem; font-weight: 800; color: #0A1628; }
+    .price-period { color: #6B7280; }
+    
+    /* Feature List */
+    .feature-list { list-style: none; margin-left: 0; }
+    .feature-list li { 
+      padding: 8px 0; 
+      padding-left: 28px; 
+      position: relative;
+    }
+    .feature-list li::before { 
+      content: "✓"; 
+      position: absolute; 
+      left: 0; 
+      color: #22C55E;
+      font-weight: 700;
+    }
+    
+    /* Comparison Table */
+    .comparison-table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin-top: 32px;
+    }
+    .comparison-table th, .comparison-table td { 
+      padding: 16px; 
+      text-align: left; 
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .comparison-table th { color: #9CA3AF; font-weight: 600; }
+    
+    /* FAQ */
+    .faq-item { 
+      border-bottom: 1px solid #E5E7EB; 
+      padding: 24px 0;
+    }
+    .faq-question { font-weight: 700; color: #0A1628; margin-bottom: 12px; }
+    
+    /* Footer */
+    footer { 
+      background: #0A1628; 
+      color: #9CA3AF; 
+      padding: 60px 0 30px;
+    }
+    .footer-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-col h4 { color: #fff; margin-bottom: 16px; }
+    .footer-col a { color: #9CA3AF; display: block; margin-bottom: 8px; }
+    .footer-bottom { 
+      border-top: 1px solid rgba(255,255,255,0.1); 
+      padding-top: 24px; 
+      text-align: center;
+    }
+    
+    /* Badges */
+    .badge { 
+      display: inline-block; 
+      padding: 4px 12px; 
+      border-radius: 50px; 
+      font-size: 0.75rem; 
+      font-weight: 600;
+      background: #FEF3C7;
+      color: #92400E;
+    }
+    .badge-green { background: #D1FAE5; color: #065F46; }
+    .badge-orange { background: #FFEDD5; color: #9A3412; }
+    
+    /* Trust Bar */
+    .trust-bar { 
+      display: flex; 
+      justify-content: center; 
+      gap: 40px; 
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .trust-item { text-align: center; }
+    .trust-number { font-size: 2.5rem; font-weight: 800; color: #F28500; }
+    
+    @media print {
+      .top-banner { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .dark-section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Banner -->
+<div class="top-banner">
+  🚀 Early Bird: 15% off setup + up to 6 months FREE support for first 50 restaurants
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-subtitle">AI Restaurant Operations</div>
+    <h1>Your 24/7 AI Team That<br>Never Takes a Day Off</h1>
+    <p>Meet Nova and her AI specialists. They handle customer calls, WhatsApp messages, reservations, and menu questions while you focus on what matters — running your restaurant.</p>
+    <div>
+      <a href="#demo" class="cta-btn">Try the Demo</a>
+      <a href="#pricing" class="cta-btn cta-btn-secondary">See Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- Demo Section -->
+<section id="demo" class="dark-section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 12px;">Don't Trust Us. Test Us.</h2>
+    <p style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+      Chat with our AI restaurant assistants. Ask about the menu, make a reservation, or just say hello. This is exactly what your customers will experience.
+    </p>
+    
+    <div class="cards-grid">
+      <!-- Aiman -->
+      <div class="card character-card">
+        <div class="character-img">🧑‍🍳</div>
+        <h3>Aiman</h3>
+        <p><strong>Warung Rimba</strong><br>Malay Cuisine Specialist</p>
+        <p style="font-style: italic; font-size: 0.9rem;">"What's your best seller?"<br>"Do you deliver to Damansara?"</p>
+        <a href="https://norweb-fnb.norvan.io/restaurant/rimba" class="cta-btn" style="margin-top: 16px;">Meet Aiman</a>
+      </div>
+      
+      <!-- Dev -->
+      <div class="card character-card">
+        <div class="character-img">👨‍🍳</div>
+        <h3>Dev</h3>
+        <p><strong>Veda Kitchen</strong><br>Indian Cuisine Specialist</p>
+        <p style="font-style: italic; font-size: 0.9rem;">"How spicy is the Vindaloo?"<br>"Do you have vegan options?"</p>
+        <a href="https://norweb-fnb.norvan.io/restaurant/veda" class="cta-btn" style="margin-top: 16px;">Meet Dev</a>
+      </div>
+      
+      <!-- Marco -->
+      <div class="card character-card">
+        <div class="character-img">👨‍🍳</div>
+        <h3>Marco</h3>
+        <p><strong>Gusto Trattoria</strong><br>Italian Cuisine Specialist</p>
+        <p style="font-style: italic; font-size: 0.9rem;">"What's your signature pasta?"<br>"Do you have wine pairing?"</p>
+        <a href="https://norweb-fnb.norvan.io/restaurant/gusto" class="cta-btn" style="margin-top: 16px;">Meet Marco</a>
+      </div>
+    </div>
+    
+    <!-- Nova -->
+    <div class="card" style="max-width: 700px; margin: 40px auto 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <div class="character-img" style="margin: 0; background: linear-gradient(135deg, #66D3FA, #8B5CF6);">🤖</div>
+      <div style="flex: 1; min-width: 200px;">
+        <h4 style="margin-bottom: 4px;">Nova - Your AI Manager</h4>
+        <p style="margin-bottom: 0;">While you explore the demos, I'm collecting data for your custom quote. Ready to talk?</p>
+      </div>
+      <a href="#contact" class="cta-btn">Talk to Nova</a>
+    </div>
+  </div>
+</section>
+
+<!-- The Reveal Section -->
+<section style="background: linear-gradient(135deg, #0A1628, #1E3A5F); color: #fff;">
+  <div class="container">
+    <h2 style="text-align: center;">They Didn't Get an AI Chatbot.<br><span style="color: #F28500;">They Got a New Team Member.</span></h2>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
+      What you just experienced isn't a generic bot reading scripts. Each AI specialist is trained on real restaurant operations — they understand context, handle objections, and close reservations like your best staff would.
+    </p>
+    
+    <div class="cards-grid">
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 16px;">🧠</div>
+        <h3>The Soul</h3>
+        <p>Your brand voice, menu expertise, operating hours, special requests — everything that makes YOUR restaurant unique. This is what competitors can't copy.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 16px;">⚡</div>
+        <h3>The Brain</h3>
+        <p>Advanced AI that understands context, handles multiple languages, manages reservations, and never has a bad day. Available 24/7/365.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nova's Domain - Features -->
+<section class="gray-section">
+  <div class="container">
+    <h2 style="text-align: center;">What Nova Can Do For You</h2>
+    <p style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+      Every feature designed to save you time and capture more revenue.
+    </p>
+    
+    <div class="cards-grid">
+      <div class="card">
+        <h4>📱 WhatsApp Automation</h4>
+        <p>Instant replies to customer messages. Handle menu questions, operating hours, and directions automatically.</p>
+      </div>
+      <div class="card">
+        <h4>📞 Voice AI Agent</h4>
+        <p>Answer calls naturally, take reservations, and never put a customer on hold again.</p>
+      </div>
+      <div class="card">
+        <h4>💬 Web Chat Widget</h4>
+        <p>Engage website visitors instantly. Convert browsers into diners with intelligent conversation.</p>
+      </div>
+      <div class="card">
+        <h4>📅 Reservation Management</h4>
+        <p>AI handles booking requests, confirms availability, and sends reminders automatically.</p>
+      </div>
+      <div class="card">
+        <h4>🍽️ Menu Q&A</h4>
+        <p>Ingredients, allergens, portion sizes, recommendations — your AI knows your menu inside out.</p>
+      </div>
+      <div class="card">
+        <h4>⭐ Review Management</h4>
+        <p>Respond to reviews promptly and professionally. Turn negative feedback into opportunities.</p>
+      </div>
+      <div class="card">
+        <h4>🌐 Multi-Language Support</h4>
+        <p>Serve customers in English, Malay, Mandarin, Tamil, and more — seamlessly.</p>
+      </div>
+      <div class="card">
+        <h4>📊 Analytics Dashboard</h4>
+        <p>Track conversations, reservations, peak hours, and customer satisfaction in real-time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pain Points -->
+<section>
+  <div class="container">
+    <h2 style="text-align: center;">Sound Familiar?</h2>
+    <div class="cards-grid" style="max-width: 900px; margin: 40px auto 0;">
+      <div class="card">
+        <h4>😩 "We miss calls during rush hour"</h4>
+        <p>Every missed call is a lost reservation. Nova answers instantly, every time.</p>
+      </div>
+      <div class="card">
+        <h4>😫 "Staff waste time on repetitive questions"</h4>
+        <p>"What time do you close?" "Do you have parking?" Let AI handle the FAQ.</p>
+      </div>
+      <div class="card">
+        <h4>😤 "We can't respond to WhatsApp fast enough"</h4>
+        <p>Customers expect instant replies. Nova responds in seconds, 24/7.</p>
+      </div>
+      <div class="card">
+        <h4>😰 "We're losing customers to faster competitors"</h4>
+        <p>Speed wins. Be the restaurant that always responds first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI Calculator Preview -->
+<section class="dark-section">
+  <div class="container" style="text-align: center;">
+    <h2>Calculate Your ROI</h2>
+    <p style="max-width: 600px; margin: 0 auto 24px;">
+      See exactly how much revenue you're leaving on the table with missed calls and slow responses.
+    </p>
+    <div class="trust-bar">
+      <div class="trust-item">
+        <div class="trust-number">30%</div>
+        <p>Calls missed during rush hour</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">RM 500</div>
+        <p>Average lost per missed booking</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">RM 15K+</div>
+        <p>Monthly revenue recovered</p>
+      </div>
+    </div>
+    <a href="https://norweb-fnb.norvan.io/#calculator" class="cta-btn" style="margin-top: 32px;">Calculate Your Savings</a>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing">
+  <div class="container">
+    <h2 style="text-align: center;">Hire Your AI Team</h2>
+    <p style="text-align: center; margin-bottom: 40px;">No contracts. Cancel anytime. Start in 48 hours.</p>
+    
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p style="color: #6B7280; margin-bottom: 16px;">AI Front Desk</p>
+        <div class="price">RM 186<span class="price-period">/mo</span></div>
+        <p style="font-size: 0.875rem; color: #22C55E;">RM 2,232/year (billed annually)</p>
+        
+        <ul class="feature-list" style="margin-top: 24px;">
+          <li>1 AI Specialist (choose cuisine)</li>
+          <li>WhatsApp integration</li>
+          <li>Basic menu Q&A</li>
+          <li>Operating hours & location</li>
+          <li>500 conversations/month</li>
+        </ul>
+        
+        <a href="#contact" class="cta-btn" style="display: block; text-align: center; margin-top: 24px;">Start Free Trial</a>
+      </div>
+      
+      <!-- Growth (Popular) -->
+      <div class="pricing-card popular">
+        <span class="popular-badge">MOST POPULAR</span>
+        <h3>Growth</h3>
+        <p style="color: #6B7280; margin-bottom: 16px;">Full Operations Suite</p>
+        <div class="price">RM 499<span class="price-period">/mo</span></div>
+        <p style="font-size: 0.875rem; color: #22C55E;">RM 5,988/year (billed annually)</p>
+        
+        <ul class="feature-list" style="margin-top: 24px;">
+          <li>All 3 AI Specialists</li>
+          <li>Nova (AI Manager)</li>
+          <li>WhatsApp + Voice + Web</li>
+          <li>Booking & reservations</li>
+          <li>Basic CRM integration</li>
+          <li>2,000 conversations/month</li>
+          <li>Review management</li>
+        </ul>
+        
+        <a href="#contact" class="cta-btn" style="display: block; text-align: center; margin-top: 24px;">Start Free Trial</a>
+      </div>
+      
+      <!-- Enterprise -->
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p style="color: #6B7280; margin-bottom: 16px;">Complete Marketing Machine</p>
+        <div class="price">Custom</div>
+        <p style="font-size: 0.875rem; color: #6B7280;">Contact us for pricing</p>
+        
+        <ul class="feature-list" style="margin-top: 24px;">
+          <li>Everything in Growth</li>
+          <li>Unlimited conversations</li>
+          <li>Full CRM + POS integration</li>
+          <li>Automated campaigns</li>
+          <li>Multi-location support</li>
+          <li>Custom AI training</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        
+        <a href="#contact" class="cta-btn" style="display: block; text-align: center; margin-top: 24px; background: transparent; border: 2px solid #0A1628; color: #0A1628;">Contact Sales</a>
+      </div>
+    </div>
+    
+    <p style="text-align: center; color: #F28500; font-weight: 600; margin-top: 32px;">
+      + First 50 restaurants get 6 months FREE support
+    </p>
+  </div>
+</section>
+
+<!-- Feature Comparison Table -->
+<section class="dark-section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 32px;">Feature Comparison</h2>
+    <div style="overflow-x: auto;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Starter</th>
+            <th>Growth</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI Specialists</td>
+            <td>1</td>
+            <td style="color: #F28500; font-weight: 600;">All 3 + Nova</td>
+            <td>Custom</td>
+          </tr>
+          <tr>
+            <td>WhatsApp Integration</td>
+            <td>✓</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Voice AI</td>
+            <td>—</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Web Chat</td>
+            <td>—</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Reservations</td>
+            <td>Basic</td>
+            <td>Full</td>
+            <td>Full + Custom</td>
+          </tr>
+          <tr>
+            <td>CRM Integration</td>
+            <td>—</td>
+            <td>Basic</td>
+            <td>Full</td>
+          </tr>
+          <tr>
+            <td>Conversations/mo</td>
+            <td>500</td>
+            <td>2,000</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>Multi-location</td>
+            <td>—</td>
+            <td>—</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Custom AI Training</td>
+            <td>—</td>
+            <td>—</td>
+            <td>✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Social Proof -->
+<section class="dark-section">
+  <div class="container" style="text-align: center;">
+    <h2>Trusted by Restaurant Owners</h2>
+    <div class="trust-bar" style="margin-top: 40px;">
+      <div class="trust-item">
+        <div class="trust-number">50+</div>
+        <p>Restaurants onboarding</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">10K+</div>
+        <p>Conversations handled</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">4.9★</div>
+        <p>Average rating</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">24/7</div>
+        <p>Always available</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+    
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div class="faq-item">
+        <div class="faq-question">How long does setup take?</div>
+        <p>Your NorWeb system will have a working framework within 48 hours and be fully live in less than 2 weeks. We handle all the technical setup — you just provide your menu and preferences.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What if the AI makes a mistake?</div>
+        <p>Our AI is trained to gracefully handle uncertainty. When it's not 100% sure, it will collect customer details and flag for human follow-up. You stay in control.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Do I need technical skills?</div>
+        <p>Not at all. We handle everything from setup to ongoing optimization. You just use a simple dashboard to monitor performance and update your information.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Can I customize the AI's personality?</div>
+        <p>Absolutely! Each AI specialist is trained to match your brand voice. Whether you want formal, friendly, or fun — we'll configure it to sound like your ideal team member.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What languages are supported?</div>
+        <p>Currently: English, Malay, Mandarin, Tamil, and Bahasa Indonesia. We're adding more languages every month based on customer requests.</p>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What's the cancellation policy?</div>
+        <p>No contracts, no lock-ins. Cancel anytime with 30 days notice. We believe in earning your business every month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section style="background: linear-gradient(135deg, #F28500, #FF9A1F); color: #fff; text-align: center;">
+  <div class="container">
+    <h2 style="color: #fff;">Ready to Never Miss a Customer Again?</h2>
+    <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 32px;">
+      Join 50+ restaurants already using NorWeb to capture more leads, save time, and delight customers 24/7.
+    </p>
+    <a href="#contact" class="cta-btn" style="background: #fff; color: #F28500;">Start Your Free Trial</a>
+    <a href="https://wa.me/601116343646" class="cta-btn cta-btn-secondary" style="border-color: #fff;">WhatsApp Us</a>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="gray-section">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center;">
+      <div>
+        <h2>Get a Free Consultation</h2>
+        <p>Schedule a 15-minute call with our team to see how NorWeb can transform your restaurant operations.</p>
+        <ul class="feature-list">
+          <li>Custom demo for your restaurant</li>
+          <li>ROI analysis based on your numbers</li>
+          <li>No pressure, no obligations</li>
+        </ul>
+        <div style="margin-top: 24px;">
+          <p><strong>Email:</strong> hello@norvan.io</p>
+          <p><strong>WhatsApp:</strong> +60 11-1634 3646</p>
+        </div>
+      </div>
+      <div class="card" style="background: #fff;">
+        <h3 style="margin-bottom: 24px;">Request Your Custom Quote</h3>
+        <p><strong>Form Fields:</strong></p>
+        <ul>
+          <li>First Name, Last Name</li>
+          <li>Email, Phone</li>
+          <li>Restaurant Name</li>
+          <li>Restaurant Type</li>
+          <li>Number of Branches</li>
+          <li>Menu Size (number of items)</li>
+          <li>State/Region</li>
+        </ul>
+        <a href="https://norweb-fnb.norvan.io/#contact" class="cta-btn" style="display: block; text-align: center; margin-top: 24px;">Fill Out the Form →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>NorWeb FnB</h4>
+        <p>AI-powered restaurant assistant by Norvan Intelligence. Your 24/7 team that never sleeps.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#demo">Live Demo</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Demo Restaurants</h4>
+        <a href="https://norweb-fnb.norvan.io/restaurant/rimba">Warung Rimba (Malay)</a>
+        <a href="https://norweb-fnb.norvan.io/restaurant/veda">Veda Kitchen (Indian)</a>
+        <a href="https://norweb-fnb.norvan.io/restaurant/gusto">Gusto Trattoria (Italian)</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email: hello@norvan.io</p>
+        <p>WhatsApp: +60 11-1634 3646</p>
+        <p>Website: norvan.io</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Norvan Intelligence. All rights reserved.</p>
+      <p style="margin-top: 8px;">Dimensional Intelligence Architecture</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+

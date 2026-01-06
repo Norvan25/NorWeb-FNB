@@ -7,4 +7,7 @@ export { RevealSection } from './RevealSection';
 export { NovaDomainSection } from './NovaDomainSection';
 export { ComparisonSection } from './ComparisonSection';
 export { PainPointsSection } from './PainPointsSection';
+export { CostSection } from './CostSection';
+export { HowItWorksSection } from './HowItWorksSection';
+export { POSIntegrationSection } from './POSIntegrationSection';
 export { FinalCTASection } from './FinalCTASection';

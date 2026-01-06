@@ -33,11 +33,11 @@ export function StructuredData() {
     "name": "NorWeb FnB",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web, WhatsApp, Voice",
-    "description": "AI-powered restaurant assistant for automated customer service, reservations, and menu inquiries",
+    "description": "Your restaurant's AI marketing department. Nova answers calls at 2am. Your website captures every visitor. Leads become bookings — automatically. AI-powered restaurant marketing that works while you sleep.",
     "offers": {
       "@type": "AggregateOffer",
-      "lowPrice": "186",
-      "highPrice": "2799",
+      "lowPrice": "299",
+      "highPrice": "799",
       "priceCurrency": "MYR",
       "offerCount": "3"
     },
@@ -47,12 +47,18 @@ export function StructuredData() {
       "ratingCount": "50"
     },
     "featureList": [
-      "24/7 AI Voice Agent",
-      "WhatsApp Integration",
-      "Automated Reservations",
+      "AI-Powered Website (mobile-first)",
+      "Voice AI Agents (Nova, Aiman, Marco, Dev)",
+      "24/7 Phone Call Answering",
+      "WhatsApp Automation",
+      "Automated Reservations & Bookings",
+      "Advanced Lead Nurturing",
       "Menu Q&A",
       "CRM Integration",
-      "Review Management"
+      "Review Management",
+      "Multi-language Support",
+      "POS Integration",
+      "7-Day Setup"
     ]
   };
 
@@ -62,10 +68,18 @@ export function StructuredData() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is NorWeb FnB?",
+        "name": "I'm not technical at all. Can I actually use this?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "NorWeb FnB is an AI-powered restaurant assistant that handles customer inquiries, reservations, and menu questions 24/7 via WhatsApp, voice calls, and web chat."
+          "text": "That's exactly why we built it this way. You don't operate NorWeb — it operates for you. After setup (which we handle completely), you just check your dashboard occasionally. If you can read a WhatsApp message, you can use NorWeb."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will this work with my current POS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. NorWeb is POS-agnostic. We don't replace your transaction system — we handle marketing, which your POS doesn't do. They work together, not against each other. Whatever POS you use, NorWeb sits on top."
         }
       },
       {
@@ -73,7 +87,39 @@ export function StructuredData() {
         "name": "How long does setup take?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Your NorWeb system will have a working framework within 48 hours and be fully live in less than 2 weeks."
+          "text": "7 days from sign-up to live. We do the heavy lifting: building your website, training the AI on your menu and policies, setting up automations. You just answer some questions about your restaurant and approve the final result."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I don't like it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cancel anytime. No lock-in contracts. We also offer a 30-day satisfaction guarantee — if you're not seeing value, we'll make it right or refund you. We're not here to trap you. We earn your business every month."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the voice AI actually good? Or robotic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Talk to Nova right now. The button is on this page. That's your answer. Our AI uses advanced voice technology trained specifically for restaurant conversations. Most customers don't realize they're talking to AI until the booking is confirmed instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to do anything after setup?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Check your dashboard. See your bookings. That's it. The AI handles customer inquiries 24/7. If you have menu changes or new promotions, just tell us — we'll update the system. Otherwise, it runs itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What about walk-in customers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NorWeb handles digital and phone customers — the ones who would otherwise slip through the cracks. Your staff stays focused on serving people in front of them. If anything, service IMPROVES because they're not running to answer the phone during rush hour."
         }
       },
       {
@@ -81,31 +127,7 @@ export function StructuredData() {
         "name": "How much does NorWeb cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "NorWeb offers three plans: Starter at RM186/month, Growth at RM499/month, and Enterprise with custom pricing. Setup fee starts at RM3,299 with 15% early bird discount for the first 50 restaurants."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What's the 3-Month ROI Guarantee?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "If NorWeb doesn't generate at least 50 bookings or orders in your first 3 months, we'll refund your entire setup fee. No questions asked."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What does 'AI Voice Agent' mean?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It's like having a receptionist who never sleeps. When customers call your restaurant, our AI answers in a natural voice, handles reservations, answers menu questions, provides operating hours, and can even take orders. Available in English and Bahasa Malaysia."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are there hidden fees?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No hidden fees, ever. Your subscription includes everything listed. The only variable cost is AI usage (voice minutes and messages), which is billed based on actual consumption — and for most restaurants, this is under RM50/month."
+          "text": "NorWeb offers three plans: Starter at RM299/month, Growth at RM499/month (most popular), and Scale at RM799/month. All plans include 7-day setup, no setup fees, month-to-month billing, and 30-day satisfaction guarantee. First 50 restaurants get 15% off for life."
         }
       }
     ]
@@ -114,8 +136,8 @@ export function StructuredData() {
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "NorWeb FnB - AI Restaurant Assistant",
-    "description": "Transform your restaurant with AI-powered WhatsApp, voice, and web chat. Handle reservations, answer menu questions, and capture leads automatically.",
+    "name": "NorWeb FnB - Your Restaurant's AI Marketing Department",
+    "description": "Nova answers calls at 2am. Your website captures every visitor. Leads become bookings — automatically. AI-powered restaurant marketing that works while you sleep. From RM299/month. 7-day setup. No contracts.",
     "url": "https://norweb-fnb.norvan.io",
     "publisher": {
       "@type": "Organization",
@@ -124,8 +146,72 @@ export function StructuredData() {
     "mainEntity": {
       "@type": "Product",
       "name": "NorWeb FnB",
-      "description": "AI-powered restaurant assistant"
+      "description": "Your restaurant's AI marketing department. Open 24/7. AI-powered website, voice AI agents, and automated lead nurturing that works while you sleep."
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://norweb-fnb.norvan.io"
+        }
+      ]
     }
+  };
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "AI Restaurant Marketing & Automation",
+    "provider": {
+      "@type": "Organization",
+      "name": "Norvan Intelligence"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Malaysia"
+    },
+    "description": "AI-powered restaurant marketing department that answers calls, captures leads, and turns visitors into bookings automatically. Works 24/7/365.",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Starter Plan",
+        "price": "299",
+        "priceCurrency": "MYR",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "299",
+          "priceCurrency": "MYR",
+          "unitText": "MONTH"
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Growth Plan",
+        "price": "499",
+        "priceCurrency": "MYR",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "499",
+          "priceCurrency": "MYR",
+          "unitText": "MONTH"
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Scale Plan",
+        "price": "799",
+        "priceCurrency": "MYR",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "799",
+          "priceCurrency": "MYR",
+          "unitText": "MONTH"
+        }
+      }
+    ]
   };
 
   return (
@@ -145,6 +231,10 @@ export function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
     </>
   );
