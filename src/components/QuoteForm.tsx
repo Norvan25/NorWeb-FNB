@@ -174,7 +174,7 @@ export function QuoteForm({ onSuccess, className = '' }: QuoteFormProps) {
     <form onSubmit={handleSubmit} className={`bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-slate-700 ${className}`}>
       {/* Early Bird Banner */}
       <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-center py-3 px-4 rounded-xl mb-6 font-medium text-sm md:text-base">
-        🎉 Early Bird: 15% off setup + FREE custom AI character
+        🚀 EARLY BIRD — 50% off setup | ROI guaranteed or money back | First 50 restaurants
       </div>
 
       <h3 className="text-xl md:text-2xl font-bold text-white mb-2 text-center">

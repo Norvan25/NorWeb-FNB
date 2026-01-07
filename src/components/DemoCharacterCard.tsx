@@ -19,7 +19,7 @@ const config = {
     cuisineType: 'Malay Cuisine',
     image: '/images/AIMAN.png',
     demoUrl: '/restaurant/rimba',
-    buttonText: 'Welcome to Rimba',
+    buttonText: 'Demo Rimba Site',
     gradient: 'from-green-500 to-emerald-600',
     glowColor: 'rgba(34, 197, 94, 0.4)',
     sampleQuestions: [
@@ -33,7 +33,7 @@ const config = {
     cuisineType: 'Indian Cuisine',
     image: '/images/DEV.png',
     demoUrl: '/restaurant/veda',
-    buttonText: 'Enter Veda Kitchen',
+    buttonText: 'Demo Veda Site',
     gradient: 'from-amber-500 to-orange-600',
     glowColor: 'rgba(251, 191, 36, 0.4)',
     sampleQuestions: [
@@ -47,7 +47,7 @@ const config = {
     cuisineType: 'Italian Cuisine',
     image: '/images/MARCO.png',
     demoUrl: '/restaurant/gusto',
-    buttonText: 'Visit Gusto',
+    buttonText: 'Demo Gusto Site',
     gradient: 'from-red-500 to-rose-600',
     glowColor: 'rgba(239, 68, 68, 0.4)',
     sampleQuestions: [
@@ -102,7 +102,7 @@ export function DemoCharacterCard({ character }: DemoCharacterCardProps) {
         onClick={handleClick}
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className={`bg-gradient-to-r ${c.gradient} text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow`}
+        className={`bg-gradient-to-r ${c.gradient} text-white font-bold py-3 px-6 sm:px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow w-auto sm:w-[200px]`}
       >
         {c.buttonText}
       </motion.button>

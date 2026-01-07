@@ -269,7 +269,7 @@ export const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => 
                   <div className="inline-flex items-center mt-4 px-4 py-2 rounded-full text-sm font-semibold text-white"
                     style={{ backgroundColor: '#F28500' }}
                   >
-                    🚀 Early Bird: 15% off setup + up to 6 months FREE
+                    🚀 EARLY BIRD — 50% off setup | ROI guaranteed or money back | First 50 restaurants
                   </div>
                 </div>
 

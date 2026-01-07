@@ -30,9 +30,8 @@ import {
 export const LandingHub = () => {
   const [schedulingModalOpen, setSchedulingModalOpen] = useState(false);
   const [schedulingType] = useState<'strategy' | 'norcast'>('strategy');
-  const [isAnnualBilling, setIsAnnualBilling] = useState(true);
 
-  const { openLeadCapture } = useCommunication();
+  const { openLeadCapture, openHUD } = useCommunication();
 
   // Scroll to top on page load/refresh
   useEffect(() => {
@@ -108,7 +107,7 @@ export const LandingHub = () => {
       </div>
 
       {/* SECTION 10: Pricing */}
-      <section id="pricing" className="py-20 md:py-28 px-4 bg-white">
+      <section id="pricing" className="py-20 md:py-28 px-4 bg-[#0A1628]">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
@@ -117,52 +116,12 @@ export const LandingHub = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0A1628] mb-4">
-              Hire Your AI Team
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Choose Your Marketing Department
             </h2>
-            <p className="text-lg md:text-xl text-[#4B5563]">
-              No contracts. Cancel anytime. Start in 48 hours.
+            <p className="text-lg md:text-xl text-gray-300">
+              Simple pricing. No hidden fees. No lock-in contracts.
             </p>
-          </motion.div>
-
-          {/* Billing Toggle */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12"
-          >
-            <span
-              className={`text-sm sm:text-lg font-medium transition-colors ${
-                !isAnnualBilling ? 'text-[#0A1628]' : 'text-[#4B5563]'
-              }`}
-            >
-              Monthly
-            </span>
-            <button
-              onClick={() => setIsAnnualBilling(!isAnnualBilling)}
-              className={`relative w-14 sm:w-16 h-7 sm:h-8 rounded-full transition-colors flex-shrink-0 ${
-                isAnnualBilling ? 'bg-gradient-to-r from-[#F28500] to-[#FF9A1F]' : 'bg-gray-300'
-              }`}
-            >
-              <motion.div
-                animate={{ x: isAnnualBilling ? 26 : 4 }}
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                className="absolute top-0.5 sm:top-1 w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full shadow-md"
-              />
-            </button>
-            <span
-              className={`text-sm sm:text-lg font-medium transition-colors ${
-                isAnnualBilling ? 'text-[#0A1628]' : 'text-[#4B5563]'
-              }`}
-            >
-              Annually
-            </span>
-            {isAnnualBilling && (
-              <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-bold rounded-full text-white bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
-                Save 15%
-              </span>
-            )}
           </motion.div>
 
           {/* Pricing Cards */}
@@ -172,38 +131,44 @@ export const LandingHub = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative p-6 md:p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-[#F28500]/50 hover:shadow-xl transition-all"
+              className="relative p-6 md:p-8 rounded-3xl bg-[#1A2332] border-2 border-gray-700 hover:border-[#F28500]/50 hover:shadow-xl transition-all"
             >
               <div className="pt-2">
-                <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Starter</h3>
-                <p className="text-[#4B5563] text-sm mb-6">For: Small cafés, new restaurants, single outlets testing the waters</p>
+                <h3 className="text-2xl font-bold text-white mb-1">Starter</h3>
+                <p className="text-gray-400 text-sm mb-4">Website + WhatsApp AI</p>
 
-                <div className="mb-4">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
-                      RM {isAnnualBilling ? '299' : '299'}
+                {/* Setup Price */}
+                <div className="mb-4 pb-4 border-b border-gray-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm text-gray-400 line-through">RM 2,799</span>
+                    <span className="px-2 py-0.5 text-xs font-bold rounded-full text-white bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
+                      EARLY BIRD
                     </span>
-                    <span className="text-[#4B5563]">/mo</span>
                   </div>
-                  {isAnnualBilling && (
-                    <>
-                      <p className="text-sm text-[#22C55E] font-medium">RM 3,588/year</p>
-                      <p className="text-xs text-[#4B5563]">billed annually</p>
-                    </>
-                  )}
+                  <p className="text-lg font-semibold text-white">From RM 1,399</p>
+                  <p className="text-xs text-gray-400 mt-1">One-time setup</p>
+                </div>
+
+                {/* Monthly Price */}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-white">
+                      RM 299
+                    </span>
+                    <span className="text-gray-400">/mo</span>
+                  </div>
                 </div>
 
                 <ul className="space-y-3 mb-8">
                   {[
-                    'AI-powered website (mobile-first)',
-                    'Nova voice agent (English)',
-                    'Basic lead capture (name, phone, preferences)',
-                    'WhatsApp booking confirmations',
-                    'Basic dashboard (leads + bookings overview)',
+                    'Custom branded website',
+                    'WhatsApp AI assistant',
+                    'Booking system',
+                    '7-day deployment',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#22C55E] flex-shrink-0 mt-0.5" size={18} />
-                      <span className="text-[#4B5563] text-sm">{feature}</span>
+                      <span className="text-gray-300 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -214,7 +179,7 @@ export const LandingHub = () => {
                   onClick={() => handleGetStarted('Starter')}
                   className="w-full py-4 rounded-full font-bold text-lg text-white transition-all bg-gradient-to-r from-[#F28500] to-[#FF9A1F] hover:shadow-lg"
                 >
-                  Get Started
+                  Get Quote →
                 </motion.button>
               </div>
             </motion.div>
@@ -225,46 +190,51 @@ export const LandingHub = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="relative p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#FFF7ED] to-white border-2 border-[#F28500] shadow-2xl lg:scale-105 lg:-my-4"
+              className="relative p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#1A2332] to-[#0F1720] border-2 border-[#F28500] shadow-2xl lg:scale-105 lg:-my-4"
             >
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                 <span className="px-6 py-2 rounded-full text-sm font-bold text-white shadow-lg bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
                   MOST POPULAR
                 </span>
               </div>
 
               <div className="pt-6">
-                <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Growth</h3>
-                <p className="text-[#4B5563] text-sm mb-6">For: Busy restaurants serious about filling more tables</p>
+                <h3 className="text-2xl font-bold text-white mb-1">Growth</h3>
+                <p className="text-gray-400 text-sm mb-4">Website + WhatsApp + Voice + CRM</p>
 
-                <div className="mb-4">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
-                      RM {isAnnualBilling ? '499' : '499'}
+                {/* Setup Price */}
+                <div className="mb-4 pb-4 border-b border-gray-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm text-gray-400 line-through">RM 4,799</span>
+                    <span className="px-2 py-0.5 text-xs font-bold rounded-full text-white bg-gradient-to-r from-[#F28500] to-[#FF9A1F]">
+                      EARLY BIRD
                     </span>
-                    <span className="text-[#4B5563]">/mo</span>
                   </div>
-                  {isAnnualBilling && (
-                    <>
-                      <p className="text-sm text-[#22C55E] font-medium">RM 5,988/year</p>
-                      <p className="text-xs text-[#4B5563]">billed annually</p>
-                    </>
-                  )}
+                  <p className="text-lg font-semibold text-white">From RM 2,399</p>
+                  <p className="text-xs text-gray-400 mt-1">One-time setup</p>
+                </div>
+
+                {/* Monthly Price */}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-white">
+                      RM 599
+                    </span>
+                    <span className="text-gray-400">/mo</span>
+                  </div>
                 </div>
 
                 <ul className="space-y-3 mb-8">
                   {[
                     'Everything in Starter, plus:',
-                    'Full AI team (Nova, Aiman, Marco, Dev)',
-                    'Phone call answering (never miss another call)',
-                    'Advanced lead nurturing sequences',
-                    'Automated WhatsApp follow-ups and reminders',
-                    'Detailed analytics (channel performance, repeat customers)',
-                    'Priority support and onboarding',
+                    'Voice AI (answers calls 24/7)',
+                    'CRM system',
+                    'Auto-nurture campaigns',
+                    'Staff training',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#F28500] flex-shrink-0 mt-0.5" size={18} />
-                      <span className="text-[#0A1628] text-sm font-medium">{feature}</span>
+                      <span className="text-white text-sm font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -275,50 +245,49 @@ export const LandingHub = () => {
                   onClick={() => handleGetStarted('Growth')}
                   className="w-full py-4 rounded-full font-bold text-lg text-white transition-all shadow-lg bg-gradient-to-r from-[#F28500] to-[#FF9A1F] hover:shadow-xl"
                 >
-                  Start Growing
+                  Get Quote →
                 </motion.button>
               </div>
             </motion.div>
 
-            {/* Enterprise Card */}
+            {/* Scale Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="relative p-6 md:p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-[#8B5CF6]/50 hover:shadow-xl transition-all"
+              className="relative p-6 md:p-8 rounded-3xl bg-[#1A2332] border-2 border-gray-700 hover:border-[#8B5CF6]/50 hover:shadow-xl transition-all"
             >
               <div className="pt-2">
-                <h3 className="text-2xl font-bold text-[#0A1628] mb-1">Scale</h3>
-                <p className="text-[#4B5563] text-sm mb-6">For: Restaurant groups, franchises, multi-location brands</p>
+                <h3 className="text-2xl font-bold text-white mb-1">Scale</h3>
+                <p className="text-gray-400 text-sm mb-4">Complete AI Marketing Department</p>
 
-                <div className="mb-4">
+                {/* Setup Price */}
+                <div className="mb-4 pb-4 border-b border-gray-700">
+                  <p className="text-lg font-semibold text-white">Custom</p>
+                  <p className="text-xs text-gray-400 mt-1">One-time setup</p>
+                </div>
+
+                {/* Monthly Price */}
+                <div className="mb-6">
                   <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A1628]">
-                      RM {isAnnualBilling ? '799' : '799'}
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-white">
+                      Custom
                     </span>
-                    <span className="text-[#4B5563]">/mo</span>
                   </div>
-                  {isAnnualBilling && (
-                    <>
-                      <p className="text-sm text-[#22C55E] font-medium">RM 9,588/year</p>
-                      <p className="text-xs text-[#4B5563]">billed annually</p>
-                    </>
-                  )}
                 </div>
 
                 <ul className="space-y-3 mb-8">
                   {[
                     'Everything in Growth, plus:',
-                    'Multi-location dashboard and routing',
-                    'Custom integrations with your existing systems',
-                    'Dedicated account manager',
-                    'Quarterly optimization review',
-                    'Custom voice training for your brand',
+                    'Marketing AI engine',
+                    'Social media automation',
+                    'Multi-branch dashboard',
+                    'Dedicated support',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#8B5CF6] flex-shrink-0 mt-0.5" size={18} />
-                      <span className="text-[#4B5563] text-sm">{feature}</span>
+                      <span className="text-gray-300 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -327,24 +296,46 @@ export const LandingHub = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleGetStarted('Scale')}
-                  className="w-full py-4 rounded-full font-bold text-lg text-[#0A1628] border-2 border-[#0A1628]/30 hover:border-[#0A1628] hover:bg-gray-50 transition-all"
+                  className="w-full py-4 rounded-full font-bold text-lg text-white border-2 border-gray-600 hover:border-[#8B5CF6] hover:bg-[#8B5CF6]/10 transition-all"
                 >
-                  Contact Sales
+                  Contact Sales →
                 </motion.button>
               </div>
             </motion.div>
           </div>
 
-          {/* First 50 restaurants note */}
+          {/* Trust Elements */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
           >
-            <p className="text-lg text-[#F28500] font-semibold">
-              🚀 Early Bird Offer: First 50 restaurants get 15% off for life.
-            </p>
+            {/* Trust Element 1 */}
+            <div className="text-center p-6 rounded-2xl bg-[#1A2332] border border-gray-700">
+              <div className="text-3xl mb-3">🛡️</div>
+              <h3 className="text-lg font-bold text-white mb-2">90-Day ROI Guarantee</h3>
+              <p className="text-sm text-gray-400">Doesn't pay for itself? Full setup refund.</p>
+            </div>
+
+            {/* Trust Element 2 */}
+            <div className="text-center p-6 rounded-2xl bg-[#1A2332] border border-gray-700">
+              <div className="text-3xl mb-3">🚀</div>
+              <h3 className="text-lg font-bold text-white mb-2">Early Bird: 50% Off Setup</h3>
+              <p className="text-sm text-gray-400">12-month commitment. First 50 only.</p>
+            </div>
+
+            {/* Trust Element 3 */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => openHUD('HUB')}
+              className="text-center p-6 rounded-2xl bg-[#1A2332] border border-gray-700 hover:border-[#F28500]/50 transition-all cursor-pointer w-full"
+            >
+              <div className="text-3xl mb-3">💬</div>
+              <h3 className="text-lg font-bold text-white mb-2">Not sure which tier?</h3>
+              <p className="text-sm text-gray-400">Talk to Nova. She'll help you decide.</p>
+            </motion.button>
           </motion.div>
         </div>
       </section>

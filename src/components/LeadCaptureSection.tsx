@@ -217,7 +217,7 @@ export const LeadCaptureSection = () => {
             {/* Early Bird Banner */}
             <div className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 rounded-xl p-4 mb-6">
               <p className="text-orange-400 font-semibold text-sm md:text-base">
-                🎉 Early Bird: 15% off setup + FREE custom AI character for first 50 restaurants
+                🚀 EARLY BIRD — 50% off setup | ROI guaranteed or money back | First 50 restaurants
               </p>
             </div>
 
