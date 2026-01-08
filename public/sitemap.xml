@@ -3,30 +3,36 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://fnb.norweb.app</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://fnb.norweb.app/og-image.jpg</image:loc>
-      <image:title>NorWeb FnB - Your Restaurant's AI Marketing Department</image:title>
-      <image:caption>AI-powered restaurant marketing that works while you sleep. From RM299/month.</image:caption>
+      <image:title>NorWeb-FnB | AI Marketing Department for Restaurants | Malaysia</image:title>
+      <image:caption>Malaysia's first AI marketing department for restaurants. Campaigns, customer nurturing, reputation management — running 24/7.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://fnb.norweb.app/restaurant/rimba</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fnb.norweb.app/restaurant/rouge</loc>
+    <lastmod>2025-01-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fnb.norweb.app/restaurant/veda</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fnb.norweb.app/restaurant/gusto</loc>
-    <lastmod>2025-01-07</lastmod>
+    <lastmod>2025-01-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
