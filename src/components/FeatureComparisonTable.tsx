@@ -6,7 +6,7 @@ interface Feature {
   name: string;
   starter: boolean;
   growth: boolean;
-  enterprise: boolean;
+  pro: boolean;
 }
 
 interface Category {
@@ -18,51 +18,51 @@ const comparisonData: Category[] = [
   {
     name: 'AI-POWERED WEBSITE',
     features: [
-      { name: 'Custom branded website', starter: true, growth: true, enterprise: true },
-      { name: 'Mobile optimized', starter: true, growth: true, enterprise: true },
-      { name: 'Menu with photos', starter: true, growth: true, enterprise: true },
-      { name: 'Online ordering', starter: true, growth: true, enterprise: true },
-      { name: 'SEO optimized', starter: true, growth: true, enterprise: true },
+      { name: 'Custom branded website', starter: true, growth: true, pro: true },
+      { name: 'Mobile optimized', starter: true, growth: true, pro: true },
+      { name: 'Menu with photos', starter: true, growth: true, pro: true },
+      { name: 'Online ordering', starter: true, growth: true, pro: true },
+      { name: 'SEO optimized', starter: true, growth: true, pro: true },
     ],
   },
   {
     name: 'AI FRONT DESK',
     features: [
-      { name: 'AI Chatbot (web)', starter: true, growth: true, enterprise: true },
-      { name: 'AI Chatbot (WhatsApp)', starter: true, growth: true, enterprise: true },
-      { name: 'AI Voice Agent (phone)', starter: false, growth: true, enterprise: true },
-      { name: 'After-hours handling', starter: true, growth: true, enterprise: true },
-      { name: 'Multi-language (BM/EN)', starter: true, growth: true, enterprise: true },
+      { name: 'AI Chatbot (web)', starter: true, growth: true, pro: true },
+      { name: 'AI Chatbot (WhatsApp)', starter: true, growth: true, pro: true },
+      { name: 'AI Voice Agent (phone)', starter: false, growth: true, pro: true },
+      { name: 'After-hours handling', starter: true, growth: true, pro: true },
+      { name: 'Multi-language (BM/EN)', starter: true, growth: true, pro: true },
     ],
   },
   {
     name: 'BOOKING & ORDERS',
     features: [
-      { name: 'Online reservations', starter: true, growth: true, enterprise: true },
-      { name: 'Automated confirmations', starter: true, growth: true, enterprise: true },
-      { name: 'No-show reminders', starter: false, growth: true, enterprise: true },
-      { name: 'Delivery integration', starter: false, growth: true, enterprise: true },
-      { name: 'Direct ordering (0% commission)', starter: true, growth: true, enterprise: true },
+      { name: 'Online reservations', starter: true, growth: true, pro: true },
+      { name: 'Automated confirmations', starter: true, growth: true, pro: true },
+      { name: 'No-show reminders', starter: false, growth: true, pro: true },
+      { name: 'Delivery integration', starter: false, growth: true, pro: true },
+      { name: 'Direct ordering (0% commission)', starter: true, growth: true, pro: true },
     ],
   },
   {
     name: 'MARKETING & CRM',
     features: [
-      { name: 'Basic analytics', starter: true, growth: true, enterprise: true },
-      { name: 'Customer database', starter: true, growth: true, enterprise: true },
-      { name: 'Full CRM', starter: false, growth: true, enterprise: true },
-      { name: 'Review collection', starter: false, growth: true, enterprise: true },
-      { name: 'WhatsApp broadcasts', starter: false, growth: true, enterprise: true },
-      { name: 'Social media management', starter: false, growth: false, enterprise: true },
-      { name: 'Content creation', starter: false, growth: false, enterprise: true },
+      { name: 'Basic analytics', starter: true, growth: true, pro: true },
+      { name: 'Customer database', starter: true, growth: true, pro: true },
+      { name: 'Full CRM', starter: false, growth: true, pro: true },
+      { name: 'Review collection', starter: false, growth: true, pro: true },
+      { name: 'WhatsApp broadcasts', starter: false, growth: true, pro: true },
+      { name: 'Social media management', starter: false, growth: false, pro: true },
+      { name: 'Content creation', starter: false, growth: false, pro: true },
     ],
   },
   {
     name: 'SUPPORT',
     features: [
-      { name: 'Email support', starter: true, growth: true, enterprise: true },
-      { name: 'Priority support', starter: false, growth: true, enterprise: true },
-      { name: 'Dedicated manager', starter: false, growth: false, enterprise: true },
+      { name: 'Email support', starter: true, growth: true, pro: true },
+      { name: 'Priority support', starter: false, growth: true, pro: true },
+      { name: 'Dedicated manager', starter: false, growth: false, pro: true },
     ],
   },
 ];
@@ -120,7 +120,7 @@ export const FeatureComparisonTable = () => {
                     Growth
                     <span className="block text-xs text-[#FF9A1F] font-normal">Popular</span>
                   </th>
-                  <th className="py-4 px-2 md:px-4 text-center text-white font-semibold text-sm md:text-base">Enterprise</th>
+                  <th className="py-4 px-2 md:px-4 text-center text-white font-semibold text-sm md:text-base">Pro</th>
                 </tr>
               </thead>
 
@@ -143,7 +143,7 @@ export const FeatureComparisonTable = () => {
                         <td className="py-3 px-3 md:px-6 text-white text-sm">{feature.name}</td>
                         <FeatureCell enabled={feature.starter} />
                         <FeatureCell enabled={feature.growth} isGrowth />
-                        <FeatureCell enabled={feature.enterprise} />
+                        <FeatureCell enabled={feature.pro} />
                       </tr>
                     ))}
                   </>

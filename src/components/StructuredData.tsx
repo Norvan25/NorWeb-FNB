@@ -33,7 +33,7 @@ export function StructuredData() {
     "name": "NorWeb FnB",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web, WhatsApp, Voice",
-    "description": "Your restaurant's AI marketing department. Nova answers calls at 2am. Your website captures every visitor. Leads become bookings — automatically. AI-powered restaurant marketing that works while you sleep.",
+    "description": "Malaysia's first AI marketing department for restaurants. Campaigns, customer nurturing, reputation management — running 24/7. What agencies charge RM5,000-10,000/month for. 90-day ROI guarantee.",
     "offers": {
       "@type": "AggregateOffer",
       "lowPrice": "299",
@@ -47,16 +47,18 @@ export function StructuredData() {
       "ratingCount": "50"
     },
     "featureList": [
+      "Marketing Automation Engine",
+      "Campaign Creation & Scheduling",
+      "Social Media Automation",
+      "Customer Win-Back Campaigns",
+      "Reputation & Review Management",
       "AI-Powered Website (mobile-first)",
       "Voice AI Agents (Nova, Aiman, Marco, Dev)",
       "24/7 Phone Call Answering",
       "WhatsApp Automation",
       "Automated Reservations & Bookings",
       "Advanced Lead Nurturing",
-      "Menu Q&A",
-      "CRM Integration",
-      "Review Management",
-      "Multi-language Support",
+      "Marketing Analytics Dashboard",
       "POS Integration",
       "7-Day Setup"
     ]
@@ -136,9 +138,9 @@ export function StructuredData() {
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "NorWeb FnB - Your Restaurant's AI Marketing Department",
-    "description": "Nova answers calls at 2am. Your website captures every visitor. Leads become bookings — automatically. AI-powered restaurant marketing that works while you sleep. From RM299/month. 7-day setup. No contracts.",
-    "url": "https://norweb-fnb.norvan.io",
+    "name": "NorWeb-FnB | AI Marketing Department for Restaurants | Malaysia",
+    "description": "Malaysia's first AI marketing department for restaurants. Campaigns, customer nurturing, reputation management — running 24/7. What agencies charge RM5,000-10,000/month for. 90-day ROI guarantee.",
+    "url": "https://fnb.norweb.app",
     "publisher": {
       "@type": "Organization",
       "name": "Norvan Intelligence"
@@ -155,7 +157,7 @@ export function StructuredData() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://norweb-fnb.norvan.io"
+          "item": "https://fnb.norweb.app"
         }
       ]
     }
@@ -173,7 +175,7 @@ export function StructuredData() {
       "@type": "Country",
       "name": "Malaysia"
     },
-    "description": "AI-powered restaurant marketing department that answers calls, captures leads, and turns visitors into bookings automatically. Works 24/7/365.",
+    "description": "Malaysia's first AI marketing department for restaurants. Campaigns, customer nurturing, reputation management — running 24/7. What restaurants pay agencies RM5,000-10,000/month for. Now automated.",
     "offers": [
       {
         "@type": "Offer",
@@ -201,7 +203,7 @@ export function StructuredData() {
       },
       {
         "@type": "Offer",
-        "name": "Scale Plan",
+        "name": "Pro Plan",
         "price": "799",
         "priceCurrency": "MYR",
         "priceSpecification": {

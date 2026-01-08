@@ -135,7 +135,7 @@ export const LandingHub = () => {
             >
               <div className="pt-2">
                 <h3 className="text-2xl font-bold text-white mb-1">Starter</h3>
-                <p className="text-gray-400 text-sm mb-4">Website + WhatsApp AI</p>
+                <p className="text-gray-400 text-sm mb-4">Restaurants testing AI, want to see results first</p>
 
                 {/* Setup Price */}
                 <div className="mb-4 pb-4 border-b border-gray-700">
@@ -200,7 +200,7 @@ export const LandingHub = () => {
 
               <div className="pt-6">
                 <h3 className="text-2xl font-bold text-white mb-1">Growth</h3>
-                <p className="text-gray-400 text-sm mb-4">Website + WhatsApp + Voice + CRM</p>
+                <p className="text-gray-400 text-sm mb-4">Ready for full customer capture + basic automation</p>
 
                 {/* Setup Price */}
                 <div className="mb-4 pb-4 border-b border-gray-700">
@@ -250,7 +250,7 @@ export const LandingHub = () => {
               </div>
             </motion.div>
 
-            {/* Scale Card */}
+            {/* Pro Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -259,8 +259,8 @@ export const LandingHub = () => {
               className="relative p-6 md:p-8 rounded-3xl bg-[#1A2332] border-2 border-gray-700 hover:border-[#8B5CF6]/50 hover:shadow-xl transition-all"
             >
               <div className="pt-2">
-                <h3 className="text-2xl font-bold text-white mb-1">Scale</h3>
-                <p className="text-gray-400 text-sm mb-4">Complete AI Marketing Department</p>
+                <h3 className="text-2xl font-bold text-white mb-1">Pro</h3>
+                <p className="text-gray-400 text-sm mb-4">Want AI to replace marketing team/agency</p>
 
                 {/* Setup Price */}
                 <div className="mb-4 pb-4 border-b border-gray-700">
@@ -280,10 +280,12 @@ export const LandingHub = () => {
                 <ul className="space-y-3 mb-8">
                   {[
                     'Everything in Growth, plus:',
-                    'Marketing AI engine',
+                    'Campaign creation & scheduling',
                     'Social media automation',
-                    'Multi-branch dashboard',
-                    'Dedicated support',
+                    'Customer win-back ("We miss you" campaigns)',
+                    'Reputation & review management',
+                    'Advanced auto-nurture sequences',
+                    'Marketing analytics dashboard',
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Check className="text-[#8B5CF6] flex-shrink-0 mt-0.5" size={18} />
@@ -295,7 +297,7 @@ export const LandingHub = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => handleGetStarted('Scale')}
+                  onClick={() => handleGetStarted('Pro')}
                   className="w-full py-4 rounded-full font-bold text-lg text-white border-2 border-gray-600 hover:border-[#8B5CF6] hover:bg-[#8B5CF6]/10 transition-all"
                 >
                   Contact Sales →
@@ -303,6 +305,18 @@ export const LandingHub = () => {
               </div>
             </motion.div>
           </div>
+
+          {/* Cost Comparison */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-[#F28500]/10 to-[#FF9A1F]/10 border border-[#F28500]/30"
+          >
+            <p className="text-center text-white text-lg md:text-xl">
+              <strong>Restaurants typically pay RM5,000-10,000/month for marketing teams or agencies.</strong> Pro tier gives you that for a fraction of the cost.
+            </p>
+          </motion.div>
 
           {/* Trust Elements */}
           <motion.div
