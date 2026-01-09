@@ -121,7 +121,8 @@ export function QuoteForm({ onSuccess, className = '' }: QuoteFormProps) {
 
     try {
       // Submit to Supabase edge function
-      const response = await fetch('https://qhbernarfpdwitdmvmwf.supabase.co/functions/v1/submit-quote', {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://wjcjmelphvogwgjltllg.supabase.co';
+      const response = await fetch(`${supabaseUrl}/functions/v1/submit-quote`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
